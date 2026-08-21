@@ -1,0 +1,121 @@
+import PixelWhale from '../components/PixelWhale'
+import CopyButton from '../components/CopyButton'
+import { FOOTER_GROUPS, strings, useLang, useT } from '../i18n'
+
+const INSTALL = 'npm install -g @deepseek-ai/dsh @deepseek-harness-tui/dsh-tui'
+
+const LINK_GROUPS = FOOTER_GROUPS
+
+export default function Footer() {
+  const lang = useLang()
+  const t = useT()
+  return (
+    <footer className="border-t border-line">
+      {/* CTA */}
+      <div className="grid-bg relative overflow-hidden">
+        <div
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[360px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+          style={{ background: 'radial-gradient(closest-side, var(--glow), transparent)' }}
+        />
+        <div className="relative mx-auto flex max-w-6xl flex-col items-center px-5 py-20 text-center">
+          <PixelWhale className="h-20 w-[104px]" />
+          <h2 className="mt-6 text-[26px] font-bold text-head sm:text-[32px]">
+            {t(strings['footer.cta.title'])}
+          </h2>
+          <p className="font-mono2 mt-2 text-[12.5px] text-dim">{t(strings['footer.cta.sub'])}</p>
+          <div
+            className="font-mono2 mt-7 flex w-full max-w-xl items-center gap-2 rounded-md border border-line px-4 py-3.5"
+            style={{ background: 'var(--panel)' }}
+          >
+            <span className="text-faint select-none">$</span>
+            <code className="min-w-0 flex-1 truncate text-left text-[12px] text-mist3 sm:text-[12.5px]">{INSTALL}</code>
+            <CopyButton text={INSTALL} />
+          </div>
+        </div>
+      </div>
+
+      {/* links */}
+      <div className="border-t border-soft">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:grid-cols-[1.2fr_repeat(3,1fr)]">
+          <div>
+            <div className="flex items-center gap-2.5">
+              <PixelWhale float={false} className="h-6 w-8" />
+              <span className="font-mono2 text-[14px] font-bold text-head">
+                <span className="text-mist">dsh</span>-TUI
+              </span>
+            </div>
+            <p className="mt-3 max-w-xs text-[12.5px] leading-[1.85] text-faint">
+              {lang === 'zh' ? (
+                <>
+                  DeepSeek Harness 的 Claude Code 风格终端界面插件。
+                  献给偏爱 CLI 的各位极客。
+                </>
+              ) : (
+                t(strings['footer.brand'])
+              )}
+            </p>
+          </div>
+          {LINK_GROUPS.map((g) => (
+            <div key={g.name.zh}>
+              <div className="font-mono2 mb-3 text-[11px] tracking-[0.18em] text-faint">{g.name[lang]}</div>
+              <ul className="space-y-2.5">
+                {g.links.map((l) => (
+                  <li key={l.label.zh}>
+                    <a
+                      href={l.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[13px] text-dim transition-colors hover:text-mist3"
+                    >
+                      {l.label[lang]}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Community / Contact */}
+        <div className="border-t border-soft py-8" id="contact">
+          <div className="mx-auto max-w-6xl px-5">
+            <div className="text-center mb-6">
+              <div className="font-mono2 text-[11px] tracking-[0.18em] text-mist2">{t(strings['footer.community.eyebrow'])}</div>
+              <h3 className="text-[24px] font-bold text-head mt-1">Contact / Community</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+              {([
+                { kicker: t(strings['footer.community.qq']), desc: t(strings['footer.community.qqDesc']), src: '/contact/qq-qr.png', alt: t(strings['footer.community.qqAlt']) },
+                { kicker: t(strings['footer.community.wechat']), desc: t(strings['footer.community.wechatDesc']), src: '/contact/wechat-qr.png', alt: t(strings['footer.community.wechatAlt']) },
+              ]).map((c) => (
+                <div key={c.src} className="rounded-xl border border-line p-6 text-center" style={{ background: 'var(--panel)' }}>
+                  <div className="font-mono2 text-[11px] tracking-[0.18em] text-mist2">{c.kicker}</div>
+                  <div className="text-[15px] font-semibold text-head mt-1">{t(strings['footer.community.name'])}</div>
+                  <div className="mx-auto mt-4 w-40 h-40 bg-white rounded-xl flex items-center justify-center overflow-hidden shadow-inner relative border border-line">
+                    <img
+                      src={c.src}
+                      alt={c.alt}
+                      className="w-full h-full object-contain relative z-10"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.style.display = 'none'
+                      }}
+                    />
+                    <span className="absolute inset-0 flex items-center justify-center text-[10px] text-faint font-mono2 pointer-events-none">{t(strings['footer.community.qrPending'])}</span>
+                  </div>
+                  <p className="text-[12.5px] text-dim mt-4 leading-snug">{c.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-soft">
+          <div className="font-mono2 mx-auto flex max-w-6xl flex-col gap-2 px-5 py-5 text-[11.5px] text-faint sm:flex-row sm:items-center sm:justify-between">
+            <span>© 2026 DSH-TUI Team</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}

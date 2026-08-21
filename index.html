@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN" data-route="/">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dsh-TUI：DeepSeek Harness 的 Claude Code 风格终端界面</title>
+    <meta name="description" content="dsh-TUI 是 DeepSeek Harness 的 Claude Code 风格全屏终端界面插件，支持流式 Markdown、实时 Agent 状态、会话回溯、上下文进度与 TPS 仪表。npm 一键安装，兼容 Windows、macOS 与 Linux。" />
+    <meta name="author" content="DSH-TUI Team" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="theme-color" content="#4b6fff" />
+    <meta name="color-scheme" content="light dark" />
+    <!-- canonical -->
+    <!-- alternates -->
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="./site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="dsh-TUI" />
+    <meta property="og:title" content="dsh-TUI：DeepSeek Harness 的 Claude Code 风格终端界面" />
+    <meta property="og:description" content="Claude Code 风格的 DeepSeek Harness 全屏终端界面插件：实时 Agent 状态、会话回溯、上下文进度与 TPS 仪表。" />
+    <!-- og:url -->
+    <meta property="og:image" content="https://raw.githubusercontent.com/ccch1mneyyy/dsh-TUI/main/screenshots/social-preview.png" />
+    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/ccch1mneyyy/dsh-TUI/main/screenshots/social-preview.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="640" />
+    <meta property="og:image:alt" content="dsh-TUI 像素鲸鱼与 DeepSeek Harness 终端界面预览" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="dsh-TUI：DeepSeek Harness 终端界面" />
+    <meta name="twitter:description" content="Claude Code 风格的全屏终端交互，零核心改动，npm 一键安装。" />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/ccch1mneyyy/dsh-TUI/main/screenshots/social-preview.png" />
+    <meta name="twitter:image:alt" content="dsh-TUI 像素鲸鱼与 DeepSeek Harness 终端界面预览" />
+    <script>
+      // 首屏前确定主题：默认亮色，读取本地记忆
+      try {
+        var t = localStorage.getItem('dsh-tui-theme');
+        document.documentElement.dataset.theme = t === 'dark' ? 'dark' : 'light';
+      } catch (e) {
+        document.documentElement.dataset.theme = 'light';
+      }
+    </script>
+    <link rel="preload" href="./fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <noscript><style>.reveal{opacity:1!important}</style></noscript>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "name": "dsh-TUI",
+            "inLanguage": "zh-CN",
+            "description": "DeepSeek Harness 的 Claude Code 风格全屏终端界面插件。"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "dsh-TUI",
+            "alternateName": "DeepSeek Harness Terminal Interface",
+            "applicationCategory": "DeveloperApplication",
+            "applicationSubCategory": "Terminal User Interface",
+            "operatingSystem": "Windows, macOS, Linux",
+            "description": "DeepSeek Harness 的 Claude Code 风格全屏终端界面插件，支持流式 Markdown、实时 Agent 状态、会话回溯、上下文进度与 TPS 仪表。",
+            "softwareRequirements": "Node.js ^22.19 or >=24; pnpm 10+; DeepSeek Harness",
+            "license": "https://github.com/ccch1mneyyy/dsh-TUI/blob/main/LICENSE",
+            "downloadUrl": "https://www.npmjs.com/package/@deepseek-harness-tui/dsh-tui",
+            "codeRepository": "https://github.com/ccch1mneyyy/dsh-TUI",
+            "image": "https://raw.githubusercontent.com/ccch1mneyyy/dsh-TUI/main/screenshots/social-preview.png",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "dsh-TUI 是什么？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "dsh-TUI 是 DeepSeek Harness 的 Claude Code 风格全屏终端界面插件，提供流式 Markdown、结构化工具卡、会话管理、实时 Agent 状态和终端原生交互。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "如何安装 dsh-TUI？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "准备 Node.js ^22.19 或 24 及以上版本与 pnpm 10+，全局安装官方 dsh CLI 和 dsh-TUI 插件，然后运行 dsh-tui 即可启动。运行模型还需要配置 DEEPSEEK_API_KEY。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "支持哪些操作系统？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "支持 Windows、macOS 和 Linux。不同终端对扩展键盘协议、剪贴板和 OSC 52 的支持可能有所不同。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "安装插件会修改 DeepSeek Harness 核心吗？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "不会。dsh-TUI 通过 Cordis patch 作为插件挂载，会话、模型调用、工具执行与持久化仍由现有 DSH 服务负责；卸载后不会留下核心补丁。"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

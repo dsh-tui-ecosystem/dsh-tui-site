@@ -1,0 +1,17 @@
+{
+  "name": "dsh-TUI — DeepSeek Harness 终端界面",
+  "short_name": "dsh-TUI",
+  "description": "DeepSeek Harness 的 Claude Code 风格全屏终端界面插件。",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f7f9",
+  "theme_color": "#4b6fff",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

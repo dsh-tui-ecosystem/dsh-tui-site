@@ -1,0 +1,16 @@
+name: 💡 功能建议
+description: 给官网提新功能、内容或体验建议
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: 你的想法
+      description: 想加什么功能/内容？怎么呈现？
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: 为什么需要
+      description: 使用场景是什么？解决什么问题？

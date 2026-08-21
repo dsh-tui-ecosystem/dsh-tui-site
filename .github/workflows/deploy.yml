@@ -1,0 +1,29 @@
+name: Deploy to Cloudflare Pages
+
+# 合并到 main 后自动构建并部署到 https://dshtui.com/
+# 需要先在仓库 Secrets 里配置 CLOUDFLARE_API_TOKEN（Cloudflare 后台 → My Profile → API Tokens，
+# 权限：Cloudflare Pages:Edit + Account:Read，作用域限定本账号）。
+# 也可在 Cloudflare Pages 后台直接连接本仓库（更省事，还自带 PR 预览）。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: SITE_URL=https://dshtui.com/ npm run build
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: d3ae428a9add73f2f7ac6ea0a5787733
+          command: pages deploy dist --project-name=dshtui

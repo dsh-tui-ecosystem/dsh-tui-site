@@ -1,0 +1,26 @@
+name: 🐛 Bug 反馈
+description: 报告官网的显示或功能问题
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: 问题描述
+      description: 发生了什么？你期望看到什么？
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: 页面地址
+      description: 例如 https://dshtui.com/ 或 https://dshtui.com/plugins/
+  - type: input
+    id: env
+    attributes:
+      label: 环境
+      description: 浏览器与版本、操作系统、桌面/移动端
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: 截图
+      description: 如有截图，直接粘贴
