@@ -33,4 +33,11 @@ export default defineConfig([
       'react-refresh/only-export-components': 'off',
     },
   },
+  {
+    // i18n 数据模块：同一文件导出 Provider/hooks/词典常量，fast-refresh 规则不适用
+    files: ['src/i18n.tsx'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 ])
