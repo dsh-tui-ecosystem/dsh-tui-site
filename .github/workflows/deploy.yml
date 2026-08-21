@@ -22,7 +22,6 @@ jobs:
       - run: npm ci
       - run: SITE_URL=https://dshtui.com/ npm run build
       - name: Deploy to Cloudflare Pages
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
