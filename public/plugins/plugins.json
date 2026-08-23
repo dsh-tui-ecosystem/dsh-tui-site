@@ -1,6 +1,6 @@
 {
   "$schema": "plugins 收录列表 · 作者提 PR 或经在线提交审批后更新；网站构建/运行时直接读取本文件",
-  "updatedAt": "2026-08-16",
+  "updatedAt": "2026-08-23",
   "plugins": [
     {
       "name": "dsh-tui",
@@ -9,7 +9,11 @@
       "author": "ccch1mneyyy",
       "repo": "https://github.com/ccch1mneyyy/dsh-TUI",
       "npm": "https://www.npmjs.com/package/@deepseek-harness-tui/dsh-tui",
-      "tags": ["官方", "TUI", "核心"],
+      "tags": [
+        "官方",
+        "TUI",
+        "核心"
+      ],
       "kind": "core",
       "featured": true,
       "addedAt": "2026-08-16"
@@ -21,7 +25,11 @@
       "author": "ccch1mneyyy",
       "repo": "https://github.com/ccch1mneyyy/working-activity",
       "npm": "https://www.npmjs.com/package/dsh-working-activity",
-      "tags": ["官方", "状态栏", "工作行"],
+      "tags": [
+        "官方",
+        "状态栏",
+        "工作行"
+      ],
       "kind": "plugin",
       "featured": false,
       "addedAt": "2026-08-16"
@@ -33,7 +41,10 @@
       "author": "dsh-tui-ecosystem",
       "repo": "https://github.com/dsh-tui-ecosystem/plugin-template",
       "npm": null,
-      "tags": ["模板", "官方"],
+      "tags": [
+        "模板",
+        "官方"
+      ],
       "kind": "template",
       "featured": false,
       "addedAt": "2026-08-16"
@@ -45,7 +56,10 @@
       "author": "ayuanwong",
       "repo": "https://github.com/ayuanwong/deepseek-harness-ux",
       "npm": null,
-      "tags": ["UI", "可观测"],
+      "tags": [
+        "UI",
+        "可观测"
+      ],
       "kind": "plugin",
       "featured": false,
       "addedAt": "2026-08-16"
@@ -57,7 +71,10 @@
       "author": "huiliyi37",
       "repo": "https://github.com/huiliyi37/dsh-tianshu-tui",
       "npm": null,
-      "tags": ["TUI", "主题"],
+      "tags": [
+        "TUI",
+        "主题"
+      ],
       "kind": "plugin",
       "featured": false,
       "addedAt": "2026-08-16"
@@ -69,7 +86,10 @@
       "author": "omdsh-dev",
       "repo": "https://github.com/omdsh-dev/dsh-data-agent",
       "npm": null,
-      "tags": ["数据库", "Agent"],
+      "tags": [
+        "数据库",
+        "Agent"
+      ],
       "kind": "plugin",
       "featured": false,
       "addedAt": "2026-08-16"
@@ -81,7 +101,10 @@
       "author": "btspoony",
       "repo": "https://github.com/omdsh-dev/dsh-advisor",
       "npm": "dsh-advisor",
-      "tags": ["Advisor", "Agent"],
+      "tags": [
+        "Advisor",
+        "Agent"
+      ],
       "kind": "plugin",
       "featured": false,
       "addedAt": "2026-08-16"
@@ -93,7 +116,13 @@
       "author": "btspoony",
       "repo": "https://github.com/omdsh-dev/dsh-llm-fallbacks",
       "npm": "dsh-llm-fallbacks",
-      "tags": ["Fallbacks", "Roles", "Subgent", "角色", "降级链"],
+      "tags": [
+        "Fallbacks",
+        "Roles",
+        "Subgent",
+        "角色",
+        "降级链"
+      ],
       "kind": "plugin",
       "featured": false,
       "addedAt": "2026-08-16"
@@ -105,10 +134,283 @@
       "author": "platonai",
       "repo": "https://github.com/platonai/dsh-browser4",
       "npm": null,
-      "tags": ["agent-browser", "ai-browser", "browser-os", "web-mining", "web-scraping", "crawler"],
+      "tags": [
+        "agent-browser",
+        "ai-browser",
+        "browser-os",
+        "web-mining",
+        "web-scraping",
+        "crawler"
+      ],
       "kind": "plugin",
       "featured": false,
       "addedAt": "2026-08-16"
+    },
+    {
+      "name": "dsh-mini-tui",
+      "displayName": "dsh-mini-tui",
+      "description": "DeepSeek Harness 的独立极简终端界面插件：保留完整 Agent 与工具能力，默认隐藏冗长执行过程，并支持在任意目录右键启动。",
+      "author": "boxeryao",
+      "repo": "https://github.com/boxeryao/dsh-mini-tui",
+      "npm": null,
+      "tags": [
+        "TUI",
+        "UI",
+        "Agent",
+        "Windows",
+        "终端",
+        "极简"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-16"
+    },
+    {
+      "name": "dsh-tui-checkpoints",
+      "displayName": "dsh-tui-checkpoints",
+      "description": "为 dsh-TUI 补上文件级真回溯：每轮自动把工作区快照进影子 git 仓库，用 /checkpoints 浏览并按轮恢复文件，配合内置对话回溯实现两段式对齐。安装：dsh plugin add dsh-tui-checkpoints",
+      "author": "FUSU123fusu",
+      "repo": "https://github.com/FUSU123fusu/dsh-tui-checkpoints",
+      "npm": null,
+      "tags": [
+        "TUI",
+        "回溯"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-17"
+    },
+    {
+      "name": "dsh-tui-jobs",
+      "displayName": "dsh-tui-jobs",
+      "description": "为 dsh-TUI 补齐后台任务列表面板：`/jobs` 实时查看、读取终态输出、安全取消运行中任务。安装：`dsh plugin --profile <你的profile> add dsh-tui-jobs`",
+      "author": "FUSU123fusu",
+      "repo": "https://github.com/FUSU123fusu/dsh-tui-jobs",
+      "npm": null,
+      "tags": [
+        "TUI"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-17"
+    },
+    {
+      "name": "dsh-tui-remote",
+      "displayName": "dsh-TUI Remote",
+      "description": "面向 dsh-TUI 的 Live + Daemon 双模式远程控制插件；当前已交付 Live MVP，支持连接管理、主机监控、远端 workspace 与命令执行，Daemon mode 按 roadmap 推进。",
+      "author": "GeekCmore",
+      "repo": "https://github.com/GeekCmore/dsh-tui-remote",
+      "npm": null,
+      "tags": [
+        "TUI",
+        "SSH",
+        "远程开发",
+        "Live Mode",
+        "Daemon Mode",
+        "Workspace"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-17"
+    },
+    {
+      "name": "dsh-tui-cron",
+      "displayName": "dsh-tui-cron",
+      "description": "为 dsh-TUI 添加定时任务能力：用 /cron 设定标准 5 段 cron 计划，到点自动将提示词作为后续用户消息发入当前会话，不打断正在运行的轮次。安装：dsh plugin add dsh-tui-cron",
+      "author": "FUSU123fusu",
+      "repo": "https://github.com/FUSU123fusu/dsh-tui-cron",
+      "npm": null,
+      "tags": [
+        "TUI",
+        "定时任务"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-17"
+    },
+    {
+      "name": "dsh-tui-feishu",
+      "displayName": "dsh-tui-feishu",
+      "description": "通过飞书远程遥控 dsh-TUI agent：扫码建机器人，私聊映射持久会话，流式回传回复与图片互传（入站图片经附件服务给视觉模型、出站远程图转 img_key），高险工具调用一键审批，并可停止运行。安装：`dsh plugin add dsh-tui-feishu`。",
+      "author": "Easyhoov",
+      "repo": "https://github.com/Easyhoov/dsh-tui-feishu",
+      "npm": null,
+      "tags": [
+        "TUI",
+        "飞书",
+        "远程",
+        "图片"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-19"
+    },
+    {
+      "name": "dsh-tui-market",
+      "displayName": "dsh-tui-market",
+      "description": "在 dsh-TUI 内直接用 /market 浏览精选或全网插件、搜索、安装与移除，不用离开终端；安装：dsh plugin add dsh-tui-market。",
+      "author": "FUSU123fusu",
+      "repo": "https://github.com/FUSU123fusu/dsh-tui-market",
+      "npm": null,
+      "tags": [
+        "TUI",
+        "市场"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-20"
+    },
+    {
+      "name": "dsh-tui-subagents",
+      "displayName": "dsh-tui-subagents",
+      "description": "装上后可用 /subagents 实时跟踪子 agent 思考、工具调用与回复，支持轨迹回看、发消息纠偏和中断当前轮。安装：dsh plugin add dsh-tui-subagents",
+      "author": "FUSU123fusu",
+      "repo": "https://github.com/FUSU123fusu/dsh-tui-subagents",
+      "npm": null,
+      "tags": [
+        "TUI",
+        "Agent"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-20"
+    },
+    {
+      "name": "dsh-tui-keys",
+      "displayName": "dsh-tui-keys",
+      "description": "装上 dsh-tui-keys，即可用 /keys 打开全屏、分组、可搜索的 dsh-TUI 快捷键速查表，覆盖输入编辑、会话历史、视图面板等操作；安装：dsh plugin add dsh-tui-keys。",
+      "author": "FUSU123fusu",
+      "repo": "https://github.com/FUSU123fusu/dsh-tui-keys",
+      "npm": null,
+      "tags": [
+        "TUI",
+        "密钥"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-20"
+    },
+    {
+      "name": "dsh-music-player-tui",
+      "displayName": "dsh-music-player-tui",
+      "description": "为 dsh-TUI 添加本地音乐播放场景：/music 全屏操作，扫描常见音频格式，支持搜索、排序、循环、删除，退出场景音乐不中断。安装：dsh plugin add dsh-music-player-tui",
+      "author": "heshuren371",
+      "repo": "https://github.com/heshuren371/dsh-music-player-tui",
+      "npm": null,
+      "tags": [
+        "TUI",
+        "音乐"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-20"
+    },
+    {
+      "name": "dsh-code-memory",
+      "displayName": "dsh-code-memory",
+      "description": "为 dsh-TUI 增加三级跨会话记忆（global/project/session），自动召回相关记忆，提供 memory_write/search/get 工具与 /memory 命令，零外部依赖。安装：dsh plugin --profile dsh-tui add dsh-code-memory",
+      "author": "CikeSeven",
+      "repo": "https://github.com/dsh-tui-ecosystem/dsh-code-memory",
+      "npm": null,
+      "tags": [
+        "TUI",
+        "记忆"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-20"
+    },
+    {
+      "name": "dsh-tui-filebrowser",
+      "displayName": "dsh-tui-filebrowser",
+      "description": "装上它你就能在 dsh-TUI 中获得全屏文件浏览：左侧文件树快照、右侧只读预览，支持 /edit 场景，纯只读不写文件，可配置忽略目录与预览上限。安装：dsh plugin add dsh-tui-filebrowser",
+      "author": "FUSU123fusu",
+      "repo": "https://github.com/FUSU123fusu/dsh-tui-filebrowser",
+      "npm": null,
+      "tags": [
+        "TUI",
+        "文件浏览"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-20"
+    },
+    {
+      "name": "dsh-session-cleanup",
+      "displayName": "dsh-session-cleanup",
+      "description": "为 dsh-TUI 用户提供交互式会话清理：安全列出并删除会话，支持 macOS 回收站，适配 dsh-tui 与 pi-tui。安装：dsh plugin add dsh-session-cleanup",
+      "author": "hyein-cbio",
+      "repo": "https://github.com/hyein-cbio/dsh-session-cleanup",
+      "npm": null,
+      "tags": [
+        "session",
+        "dsh-plugin"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-20"
+    },
+    {
+      "name": "dsh-tui-herdr",
+      "displayName": "dsh-tui-herdr",
+      "description": "将 dsh-TUI 的会话生命周期状态实时同步到 Herdr 侧边栏，让 working/blocked/done 一目了然。安装：dsh plugin --profile dsh-tui add dsh-tui-herdr",
+      "author": "FUSU123fusu",
+      "repo": "https://github.com/FUSU123fusu/dsh-tui-herdr",
+      "npm": null,
+      "tags": [
+        "TUI",
+        "herdr"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-21"
+    },
+    {
+      "name": "dsh-tui-vscode",
+      "displayName": "dsh-tui-vscode",
+      "description": "在 VS Code 中一键打开真实终端并运行 dsh-TUI，获得与 Claude Code 官方扩展几乎一致的多会话终端体验。安装：dsh plugin add dsh-tui-vscode",
+      "author": "baobaolaodie",
+      "repo": "https://github.com/baobaolaodie/dsh-tui-vscode",
+      "npm": null,
+      "tags": [
+        "dsh-plugin",
+        "dsh-tui"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-22"
+    },
+    {
+      "name": "cc-dsh-notifier",
+      "displayName": "cc-dsh-notifier",
+      "description": "为 dsh-TUI 会话提供 Windows 桌面通知，点击通知即可还原窗口，覆盖权限请求、等待输入等场景。安装：dsh plugin add cc-dsh-notifier",
+      "author": "baobaolaodie",
+      "repo": "https://github.com/baobaolaodie/cc-dsh-notifier",
+      "npm": null,
+      "tags": [
+        "dsh-plugin",
+        "dsh-tui"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-22"
+    },
+    {
+      "name": "dsh-tui-theme",
+      "displayName": "dsh-tui-theme",
+      "description": "樱花粉主题包：昼樱/夜樱/ANSI 三套全键覆盖调色板，终端背景自动跟随（OSC 11，昼樱↔夜樱自动切换），✿ 状态行（花符/时钟/轮数）与 /settings 设置面板。安装：dsh plugin add dsh-tui-theme",
+      "author": "xiaoxiaohaigui",
+      "repo": "https://github.com/xiaoxiaohaigui/dsh-tui-theme",
+      "npm": "dsh-tui-theme",
+      "tags": [
+        "主题",
+        "粉色",
+        "状态栏",
+        "TUI"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-08-23"
     }
   ]
 }

@@ -20,6 +20,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: 拉取最新插件收录数据（dsh-tui-ecosystem）
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/dsh-tui-ecosystem/dsh-tui-ecosystem/main/plugins.json -o public/plugins/plugins.json
+          node -e "const d=JSON.parse(require('fs').readFileSync('public/plugins/plugins.json','utf8')); console.log('plugins.json OK: '+d.plugins.length+' 条')"
       - run: SITE_URL=https://dshtui.com/ npm run build
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
