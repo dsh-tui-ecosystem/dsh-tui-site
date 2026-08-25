@@ -193,20 +193,20 @@ export type StringKey = keyof typeof strings
 
 /* ---------------- 结构化数据（数组类文案） ---------------- */
 
+/** 顶栏主导航：只保留首屏漏斗上的页内锚点。
+ *  快捷键 / 命令 / 架构 / 常见问题 各自有 Guides 区块的专页与页脚文档链接兜底，
+ *  放进顶栏只会把它压成一份目录。 */
 export const NAV_LINKS: { href: string; label: Pair }[] = [
   { href: '#features', label: { zh: '特性', en: 'Features' } },
   { href: '#showcase', label: { zh: '预览', en: 'Showcase' } },
   { href: '#install', label: { zh: '安装', en: 'Install' } },
-  { href: '#shortcuts', label: { zh: '快捷键', en: 'Shortcuts' } },
-  { href: '#commands', label: { zh: '命令', en: 'Commands' } },
-  { href: '#arch', label: { zh: '架构', en: 'Architecture' } },
   { href: '#guides', label: { zh: '指南', en: 'Guides' } },
-  { href: '#faq', label: { zh: '常见问题', en: 'FAQ' } },
 ]
 
-export const NAV_SECONDARY: { href: string; label: Pair }[] = [
+/** 站外目的地，和页内锚点分组渲染，不共用同一节奏。 */
+export const NAV_SECONDARY: { href: string; label: Pair; external?: boolean }[] = [
   { href: '/plugins/', label: { zh: '插件市场', en: 'Plugins' } },
-  { href: 'https://join.dshtui.com/', label: { zh: '加入生态', en: 'Join' } },
+  { href: 'https://join.dshtui.com/', label: { zh: '加入生态', en: 'Join' }, external: true },
 ]
 
 export const HERO_BADGES: { k: Pair; v: Pair }[] = [
