@@ -28,7 +28,6 @@ function Wordmark() {
     <div
       className="select-none leading-[1.6]"
       style={{ fontFamily: "'Press Start 2P', 'JetBrains Mono', monospace" }}
-      aria-label="DEEPSEEK HARNESS"
     >
       <div className="tw-line1 text-[clamp(17px,3.4vw,34px)]">DEEPSEEK&apos;</div>
       <div className="tw-line2 text-[clamp(17px,3.4vw,34px)]">HARNESS</div>
@@ -98,12 +97,12 @@ function StatusBar({ stage, thinkS }: { stage: Stage; thinkS: number }) {
           spat
         </span>
         <span className="hidden sm:inline" style={{ color: 'var(--term-faint)' }}>free</span>
-        <span style={{ color: 'var(--term-text)' }} className="whitespace-nowrap">
+        <span style={{ color: 'var(--term-text)' }} className="tnum whitespace-nowrap">
           ctx {ctx.toFixed(1)}k/1.0M <span style={{ color: 'var(--term-accent)' }}>{pct}%</span> {rest}k
         </span>
       </div>
       <div className="flex items-center justify-between gap-2">
-        <span className="truncate" style={{ color: 'var(--term-text)' }}>
+        <span className="tnum truncate" style={{ color: 'var(--term-text)' }}>
           deepseek-v4-flash <span style={{ color: 'var(--term-faint)' }}>· max ·</span> {ctx.toFixed(1)}k→190
         </span>
         <span className="whitespace-nowrap" style={{ color: 'var(--term-faint)' }}>
@@ -111,7 +110,7 @@ function StatusBar({ stage, thinkS }: { stage: Stage; thinkS: number }) {
         </span>
       </div>
       <div className="flex items-center justify-between gap-2">
-        <span style={{ color: 'var(--term-accent)' }}>
+        <span className="tnum" style={{ color: 'var(--term-accent)' }}>
           {busy
             ? t(strings['terminal.busy']).replace('{s}', String(thinkS))
             : t(strings['terminal.idle']).replace('{s}', '5')}
@@ -209,7 +208,7 @@ export default function TerminalDemo() {
         )}
 
         {thinking && (
-          <div className="chunk-in italic" style={{ color: 'var(--term-faint)' }}>
+          <div className="chunk-in tnum italic" style={{ color: 'var(--term-faint)' }}>
             ∴ Thinking · {thinkS}s (ctrl+o to expand)
           </div>
         )}

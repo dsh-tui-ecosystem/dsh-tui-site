@@ -162,7 +162,15 @@ for (const route of SEO_ROUTES) {
   await writeFile(destination, html)
 }
 
+// 404.html 与其它路由不同：静态托管会把它当兜底页在**任意深度**的地址上返回
+// （nginx try_files … /404.html、Cloudflare Pages 同理），而 URL 不变。
+// 其它路由按自身深度改写成 ../ 前缀即可，兜底页不行 —— 它没有固定深度，
+// 相对路径在 /en/bad-path/ 上会解析成 /en/bad-path/assets/…，样式和脚本
+// 全部 404，只剩一张没有样式、也跑不了语言判断的裸 HTML。
+// 所以这一份用根绝对路径。站点本就按根目录部署（/plugins/、/downloads/、
+// /contact/*.png 都是绝对路径）。
 const notFoundHtml = template
+  .replace(/(href|src)="\.\/(assets\/|fonts\/|favicon\.svg|site\.webmanifest)/g, '$1="/$2')
   .replace('<html lang="zh-CN" data-route="/">', '<html lang="zh-CN" data-route="/404.html">')
   .replace(/<title>[^<]*<\/title>/, '<title>页面没有找到 | dsh-TUI</title>')
   .replace('<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />', '<meta name="robots" content="noindex, nofollow" />')

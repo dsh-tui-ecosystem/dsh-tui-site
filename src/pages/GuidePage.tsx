@@ -34,8 +34,7 @@ export default function GuidePage({ page }: { page: GuidePageData }) {
 
       <main id="article" className="mx-auto grid max-w-5xl gap-12 px-5 py-14 lg:grid-cols-[minmax(0,1fr)_220px] lg:py-20">
         <article>
-          <p className="font-mono2 text-[11px] tracking-[0.2em] text-mist2">{page.eyebrow}</p>
-          <h1 className="mt-4 max-w-3xl text-[34px] font-bold leading-tight text-head sm:text-[46px]">{page.title}</h1>
+          <h1 className="max-w-3xl text-[34px] font-bold leading-tight text-head sm:text-[46px]">{page.title}</h1>
           <p className="mt-5 max-w-3xl text-[16px] leading-[1.9] text-dim">{page.intro}</p>
 
           <div className="mt-12 space-y-12">

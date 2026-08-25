@@ -13,8 +13,6 @@ export default function Showcase() {
     <section id="showcase" className="py-24" style={{ background: 'var(--bg-2)' }}>
       <div className="mx-auto max-w-6xl px-5">
         <SectionHead
-          index="02"
-          en="INTERFACE"
           title={t(strings['showcase.title'])}
           desc={t(strings['showcase.desc'])}
         />
@@ -40,7 +38,7 @@ export default function Showcase() {
                       decoding="async"
                       width={i === 0 ? 2559 : 1600}
                       height={i === 0 ? 1400 : 846}
-                      className="w-full transition-transform duration-500 ease-out group-hover:scale-[1.015]"
+                      className="img-outline w-full transition-transform duration-500 ease-out group-hover:scale-[1.015]"
                     />
                   </picture>
                 </div>
@@ -56,7 +54,6 @@ export default function Showcase() {
         <Reveal delay={120} className="mt-10">
           <div className="grid gap-6 rounded-lg border border-line p-6 md:grid-cols-[1fr_240px] md:items-center" style={{ background: 'var(--panel)' }}>
             <div>
-              <div className="font-mono2 mb-2 text-[11.5px] tracking-[0.18em] text-mist2">FEATURED BY OFFICIAL</div>
               <h3 className="text-[19px] font-bold text-head">{t(strings['showcase.featured.title'])}</h3>
               <p className="mt-2 max-w-xl text-[13.5px] leading-[1.9] text-dim">
                 {t(strings['showcase.featured.desc'])}
@@ -66,7 +63,7 @@ export default function Showcase() {
               href="https://github.com/ccch1mneyyy/dsh-TUI#-官方收录"
               target="_blank"
               rel="noreferrer"
-              className="group block overflow-hidden rounded-md border border-line"
+              className="group block overflow-hidden rounded-md"
             >
               <picture>
                 <source type="image/avif" srcSet={fix('./shots/wechat-official-480.avif')} />
@@ -78,7 +75,7 @@ export default function Showcase() {
                   decoding="async"
                   width="1870"
                   height="1438"
-                  className="w-full transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="img-outline w-full rounded-md transition-transform duration-500 group-hover:scale-[1.03]"
                 />
               </picture>
             </a>

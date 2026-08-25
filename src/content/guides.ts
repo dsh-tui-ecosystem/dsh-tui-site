@@ -11,7 +11,6 @@ export interface GuidePageData {
   slug: string
   locale: SiteLocale
   navTitle: string
-  eyebrow: string
   title: string
   description: string
   intro: string
@@ -22,8 +21,7 @@ const zh: GuidePageData[] = [
   {
     slug: 'getting-started',
     locale: 'zh-CN',
-    navTitle: '安装指南',
-    eyebrow: 'GETTING STARTED',
+    navTitle: '安装与快速开始',
     title: 'dsh-TUI 安装与快速开始',
     description: '安装 dsh-TUI 的完整指南：环境要求、npm 安装、首次启动、恢复会话、更新方式与常见问题。',
     intro: '从准备运行环境到进入第一个 DeepSeek Harness TUI 会话，这里集中说明安装、启动和日常更新所需的步骤。',
@@ -59,7 +57,6 @@ const zh: GuidePageData[] = [
     slug: 'features',
     locale: 'zh-CN',
     navTitle: '功能特性',
-    eyebrow: 'CAPABILITIES',
     title: 'dsh-TUI 功能特性',
     description: '了解 dsh-TUI 的终端交互、实时 Agent 状态、会话工作流、长会话性能和 DeepSeek Harness 能力接入。',
     intro: 'dsh-TUI 不只是视觉主题，而是一套围绕编码 Agent 工作流设计的全屏终端交互层。',
@@ -87,7 +84,6 @@ const zh: GuidePageData[] = [
     slug: 'commands',
     locale: 'zh-CN',
     navTitle: '命令参考',
-    eyebrow: 'SLASH COMMANDS',
     title: 'dsh-TUI Slash Commands 命令参考',
     description: 'dsh-TUI 斜杠命令参考，涵盖会话、模型、状态、账号策略、技能、MCP、Goals 与开发辅助命令。',
     intro: '在输入框键入 / 即可打开命令菜单。所有本地命令都通过 DeepSeek Harness 官方服务或插件注册表执行。',
@@ -102,7 +98,6 @@ const zh: GuidePageData[] = [
     slug: 'shortcuts',
     locale: 'zh-CN',
     navTitle: '快捷键',
-    eyebrow: 'KEYBINDINGS',
     title: 'dsh-TUI 快捷键与终端操作',
     description: 'dsh-TUI 键盘快捷键、鼠标操作、macOS 修饰键与终端兼容性说明。',
     intro: '快捷键围绕终端肌肉记忆设计。支持扩展键盘协议的终端可在 macOS 上同时使用 Command 组合键。',
@@ -116,8 +111,7 @@ const zh: GuidePageData[] = [
   {
     slug: 'architecture',
     locale: 'zh-CN',
-    navTitle: '架构说明',
-    eyebrow: 'ARCHITECTURE',
+    navTitle: '架构与安全',
     title: 'dsh-TUI 架构、性能与安全边界',
     description: '了解 dsh-TUI 的 Cordis 插件挂载、事件投影、终端渲染、长会话虚拟化以及安全边界。',
     intro: 'dsh-TUI 只负责交互和呈现。会话日志、模型调用、工具执行、fork、compaction 和持久化仍由 DeepSeek Harness 服务拥有。',
@@ -132,7 +126,6 @@ const zh: GuidePageData[] = [
     slug: 'faq',
     locale: 'zh-CN',
     navTitle: '常见问题',
-    eyebrow: 'FAQ',
     title: 'dsh-TUI 常见问题',
     description: 'dsh-TUI 常见问题：项目定位、安装环境、支持平台、核心修改、会话恢复、更新和终端兼容性。',
     intro: '集中回答安装和使用 dsh-TUI 时最常见的问题。',
@@ -148,8 +141,7 @@ const zh: GuidePageData[] = [
 
 const en: GuidePageData[] = [
   {
-    slug: 'getting-started', locale: 'en', navTitle: 'Installation', eyebrow: 'GETTING STARTED',
-    title: 'Install and Start dsh-TUI',
+    slug: 'getting-started', locale: 'en', navTitle: 'Getting started', title: 'Install and Start dsh-TUI',
     description: 'Complete dsh-TUI installation guide covering requirements, npm setup, first launch, session resume, updates, and troubleshooting.',
     intro: 'Everything required to open your first DeepSeek Harness session in the dsh-TUI terminal interface.',
     sections: [
@@ -161,8 +153,7 @@ const en: GuidePageData[] = [
     ],
   },
   {
-    slug: 'features', locale: 'en', navTitle: 'Features', eyebrow: 'CAPABILITIES',
-    title: 'dsh-TUI Features',
+    slug: 'features', locale: 'en', navTitle: 'Features', title: 'dsh-TUI Features',
     description: 'Explore dsh-TUI terminal interaction, observable agent status, session workflows, long-session performance, and DeepSeek Harness integration.',
     intro: 'dsh-TUI is a complete terminal interaction layer designed around coding-agent workflows, not only a visual theme.',
     sections: [
@@ -173,8 +164,7 @@ const en: GuidePageData[] = [
     ],
   },
   {
-    slug: 'commands', locale: 'en', navTitle: 'Commands', eyebrow: 'SLASH COMMANDS',
-    title: 'dsh-TUI Slash Command Reference',
+    slug: 'commands', locale: 'en', navTitle: 'Commands', title: 'dsh-TUI Slash Command Reference',
     description: 'Reference for dsh-TUI session, model, status, policy, skills, MCP, Goals, and developer slash commands.',
     intro: 'Type / in the prompt to open the command menu. Local commands use official DeepSeek Harness services or plugin registries.',
     sections: [
@@ -185,8 +175,7 @@ const en: GuidePageData[] = [
     ],
   },
   {
-    slug: 'shortcuts', locale: 'en', navTitle: 'Shortcuts', eyebrow: 'KEYBINDINGS',
-    title: 'dsh-TUI Keyboard Shortcuts',
+    slug: 'shortcuts', locale: 'en', navTitle: 'Shortcuts', title: 'dsh-TUI Keyboard Shortcuts',
     description: 'dsh-TUI keyboard shortcuts, mouse controls, macOS modifiers, clipboard behavior, and terminal compatibility.',
     intro: 'The keybindings follow common terminal habits. Terminals with extended keyboard protocols can also expose Command shortcuts on macOS.',
     sections: [
@@ -197,8 +186,7 @@ const en: GuidePageData[] = [
     ],
   },
   {
-    slug: 'architecture', locale: 'en', navTitle: 'Architecture', eyebrow: 'ARCHITECTURE',
-    title: 'dsh-TUI Architecture and Security Boundaries',
+    slug: 'architecture', locale: 'en', navTitle: 'Architecture', title: 'dsh-TUI Architecture and Security Boundaries',
     description: 'Understand dsh-TUI Cordis mounting, event projection, terminal rendering, long-session virtualization, and security boundaries.',
     intro: 'dsh-TUI owns interaction and presentation. DeepSeek Harness services continue to own session logs, model calls, tools, forks, compaction, and persistence.',
     sections: [
@@ -209,8 +197,7 @@ const en: GuidePageData[] = [
     ],
   },
   {
-    slug: 'faq', locale: 'en', navTitle: 'FAQ', eyebrow: 'FAQ',
-    title: 'dsh-TUI Frequently Asked Questions',
+    slug: 'faq', locale: 'en', navTitle: 'FAQ', title: 'dsh-TUI Frequently Asked Questions',
     description: 'Answers about dsh-TUI requirements, platforms, core modifications, session recovery, updates, and terminal compatibility.',
     intro: 'Answers to common questions about installing and using dsh-TUI.',
     sections: [

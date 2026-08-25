@@ -1,6 +1,7 @@
 import SectionHead from '../components/SectionHead'
 import Reveal from '../components/Reveal'
-import CopyButton from '../components/CopyButton'
+import CommandLine from '../components/CommandLine'
+import Icon from '../components/Icon'
 import { INSTALL_STEPS, strings, useLang, useT } from '../i18n'
 
 const STEPS = INSTALL_STEPS
@@ -12,8 +13,6 @@ export default function Install() {
     <section id="install" className="py-24">
       <div className="mx-auto max-w-6xl px-5">
         <SectionHead
-          index="03"
-          en="GETTING STARTED"
           title={t(strings['install.title'])}
           desc={t(strings['install.desc'])}
         />
@@ -44,7 +43,7 @@ export default function Install() {
                     className="font-mono2 flex items-center gap-1.5 rounded border border-soft px-2.5 py-1 text-[11.5px] text-mist3"
                     style={{ background: 'var(--bg-2)' }}
                   >
-                    <span className="flex h-4 w-4 items-center justify-center rounded bg-[var(--mist)] text-[9.5px] font-bold text-white">
+                    <span className="flex h-4 w-4 items-center justify-center rounded bg-[var(--mist-solid)] text-[9.5px] font-bold text-white">
                       {s.no}
                     </span>
                     {s.txt}
@@ -55,7 +54,7 @@ export default function Install() {
             <div className="flex shrink-0 flex-col items-stretch gap-2 sm:items-end">
               <a
                 href="/downloads/dsh-tui-setup.zip"
-                className="btn-press rounded bg-[var(--mist)] px-6 py-3 text-center text-[14px] font-semibold text-white transition-colors hover:bg-[#5d7dff]"
+                className="btn-press rounded bg-[var(--mist-solid)] px-6 py-3 text-center text-[14px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)]"
               >
                 {t(strings['bundle.download'])}
               </a>
@@ -63,9 +62,10 @@ export default function Install() {
                 href="https://github.com/ccch1mneyyy/dsh-TUI/releases/latest/download/dsh-tui-setup.zip"
                 target="_blank"
                 rel="noreferrer"
-                className="font-mono2 text-center text-[11px] text-faint transition-colors hover:text-mist3"
+                className="font-mono2 inline-flex items-center justify-center gap-1 text-center text-[11px] text-faint transition-colors hover:text-mist3 sm:justify-end"
               >
-                {t(strings['bundle.mirror'])} ↗
+                {t(strings['bundle.mirror'])}
+                <Icon name="arrow-up-right" size={11} />
               </a>
             </div>
           </div>
@@ -81,14 +81,7 @@ export default function Install() {
                   </span>
                   <span className="text-[15px] font-bold text-head">{s.title[lang]}</span>
                 </div>
-                <div
-                  className="font-mono2 flex items-center gap-2 rounded border border-soft px-3 py-2.5"
-                  style={{ background: 'var(--bg-2)' }}
-                >
-                  <span className="text-faint select-none">$</span>
-                  <code className="min-w-0 flex-1 break-all text-[12px] leading-relaxed text-mist3">{s.cmd}</code>
-                  <CopyButton text={s.cmd} />
-                </div>
+                <CommandLine command={s.cmd} tone="inset" />
                 <p className="mt-3 text-[12.5px] leading-relaxed text-faint">{s.note[lang]}</p>
               </div>
             </Reveal>
@@ -103,7 +96,7 @@ export default function Install() {
             <span className="text-mist2 font-semibold">{t(strings['install.alt.label'])}</span>
             <code className="text-mist3">sh install.sh</code>
             <span className="text-faint">{t(strings['install.alt.or'])}</span>
-            <code className="break-all text-mist3">dsh plugin --profile dsh-tui add @deepseek-harness-tui/dsh-tui</code>
+            <code className="break-words text-mist3">dsh plugin --profile dsh-tui add @deepseek-harness-tui/dsh-tui</code>
           </div>
         </Reveal>
       </div>

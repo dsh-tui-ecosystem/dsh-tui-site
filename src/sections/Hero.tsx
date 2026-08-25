@@ -1,23 +1,25 @@
 import TerminalDemo from '../components/TerminalDemo'
-import CopyButton from '../components/CopyButton'
-import { formatStars, useStars } from '../lib/useStars'
+import CommandLine from '../components/CommandLine'
+import Icon from '../components/Icon'
+import BrandIcon from '../components/BrandIcon'
 import { HERO_BADGES, strings, useLang, useT } from '../i18n'
 
 const INSTALL = 'npm install -g @deepseek-ai/dsh @deepseek-harness-tui/dsh-tui'
 
 const BADGES = HERO_BADGES
 
+/** 支持的平台。标识来自 Bootstrap Icons，仅用于说明兼容性。 */
+const PLATFORMS = [
+  { icon: 'windows', label: 'Windows' },
+  { icon: 'apple', label: 'macOS' },
+  { icon: 'tux', label: 'Linux' },
+] as const
+
 export default function Hero() {
   const lang = useLang()
   const t = useT()
-  const stars = formatStars(useStars())
   return (
     <section id="top" className="grid-bg relative overflow-hidden pt-[61px]">
-      {/* 雾蓝氛围光 */}
-      <div
-        className="pointer-events-none absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full"
-        style={{ background: 'radial-gradient(closest-side, var(--glow), transparent)' }}
-      />
       {/* 星点 */}
       {[
         { l: '8%', t: '22%', d: '0s' }, { l: '16%', t: '58%', d: '0.8s' },
@@ -72,9 +74,13 @@ export default function Hero() {
                 style={{ left: '4%', bottom: '-4%', background: 'var(--mist-2)', animation: 'twinkle 2.4s ease-in-out 1.5s infinite' }}
               />
             </div>
-            <h1 className="font-mono2 min-w-0 text-[38px] font-extrabold leading-[0.95] tracking-tight sm:text-[76px] lg:text-[84px]">
-              <span className="wordmark-shine-blue">dsh</span>
-              <span className="wordmark-shine">-TUI</span>
+            {/* 品牌字不能断行（连字符在 CSS 里是断点，会被断成 dsh- / TUI），
+                但 nowrap 之后字号就必须是流体的：lg 断点在 1024px 生效，
+                而左栏此时只有 ~281px 可用，固定 84px 会直接顶出去被右侧面板盖住。
+                clamp 让它随视口连续缩放，两头都不失控。 */}
+            <h1 className="font-mono2 min-w-0 whitespace-nowrap text-[38px] font-extrabold leading-[0.95] tracking-tight sm:text-[76px] lg:text-[clamp(56px,6.1vw,84px)]">
+              <span className="wordmark-accent">dsh</span>
+              <span className="wordmark-ink">-TUI</span>
             </h1>
           </div>
 
@@ -97,27 +103,22 @@ export default function Hero() {
             {t(strings['hero.desc'])}
           </p>
 
-          <div
-            className="font-mono2 mt-8 flex max-w-xl items-center gap-2 overflow-hidden rounded-md border border-line px-3.5 py-3"
-            style={{ background: 'var(--panel)' }}
-          >
-            <span className="text-faint select-none">$</span>
-            <code className="min-w-0 flex-1 truncate text-[12px] text-mist3 sm:text-[12.5px]">{INSTALL}</code>
-            <CopyButton text={INSTALL} />
-          </div>
+          <CommandLine command={INSTALL} className="mt-8" />
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <a
               href="/downloads/dsh-tui-setup.zip"
-              className="btn-press rounded bg-[var(--mist)] px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[#5d7dff]"
+              className="btn-press flex items-center gap-2 rounded bg-[var(--mist-solid)] px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)]"
             >
+              <Icon name="download" size={15} weight={2} />
               {t(strings['hero.cta.bundle'])}
             </a>
             <a
               href="#install"
-              className="btn-press rounded border border-line px-5 py-2.5 text-[14px] text-dim transition-colors hover:border-[var(--mist)] hover:text-mist3"
+              className="btn-press group flex items-center gap-1.5 rounded border border-line px-5 py-2.5 text-[14px] text-dim transition-colors hover:border-[var(--mist)] hover:text-mist3"
             >
               {t(strings['hero.cta.start'])}
+              <Icon name="arrow-right" size={14} className="transition-transform group-hover:translate-x-0.5" />
             </a>
             <a
               href="#showcase"
@@ -125,37 +126,20 @@ export default function Hero() {
             >
               {t(strings['hero.cta.showcase'])}
             </a>
-            <a
-              href="https://github.com/ccch1mneyyy/dsh-TUI"
-              target="_blank"
-              rel="noreferrer"
-              className="btn-press flex items-center gap-1.5 rounded border border-line px-5 py-2.5 text-[14px] text-dim transition-colors hover:border-[var(--mist)] hover:text-mist3"
-            >
-              <svg viewBox="0 0 16 16" className="h-4 w-4 fill-current" aria-hidden>
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
-              </svg>
-              GitHub{stars ? ` ★ ${stars}` : ''}
-            </a>
-            <a
-              href="https://www.npmjs.com/package/@deepseek-harness-tui/dsh-tui"
-              target="_blank"
-              rel="noreferrer"
-              className="btn-press font-mono2 rounded border border-line px-5 py-2.5 text-[14px] text-dim transition-colors hover:border-[var(--mist)] hover:text-mist3"
-            >
-              npm
-            </a>
           </div>
-          <div className="font-mono2 mt-3 text-[11.5px] text-faint">
-            Node ^22.19 / ≥24 · pnpm 10+ · Windows / macOS / Linux
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+            {PLATFORMS.map((p) => (
+              <span key={p.label} className="font-mono2 flex items-center gap-1.5 text-[12px] text-dim">
+                <BrandIcon name={p.icon} size={13} />
+                {p.label}
+              </span>
+            ))}
           </div>
+          <div className="font-mono2 mt-2.5 text-[11.5px] text-faint">Node ^22.19 / ≥24 · pnpm 10+</div>
         </div>
 
         {/* right: live terminal */}
         <div className="relative">
-          <div
-            className="pointer-events-none absolute -inset-6 rounded-2xl"
-            style={{ background: 'radial-gradient(closest-side, var(--glow), transparent)' }}
-          />
           <TerminalDemo />
           <p className="font-mono2 mt-3 text-center text-[11px] text-faint">
             {t(strings['hero.demoNote'])}

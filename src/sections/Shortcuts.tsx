@@ -12,8 +12,6 @@ export default function Shortcuts() {
     <section id="shortcuts" className="py-24" style={{ background: 'var(--bg-2)' }}>
       <div className="mx-auto max-w-6xl px-5">
         <SectionHead
-          index="04"
-          en="KEYBINDINGS"
           title={t(strings['shortcuts.title'])}
           desc={t(strings['shortcuts.desc'])}
         />
@@ -25,7 +23,7 @@ export default function Shortcuts() {
                 <li
                   key={i}
                   className={`flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-[var(--panel-2)] ${
-                    k.hi ? 'bg-[rgba(75,111,255,0.06)]' : ''
+                    k.hi ? 'bg-[var(--mist-wash)]' : ''
                   }`}
                 >
                   <span className="flex shrink-0 items-center gap-1.5">
@@ -47,7 +45,6 @@ export default function Shortcuts() {
 
           <Reveal delay={120}>
             <div className="flex h-full flex-col rounded-lg border border-line p-6" style={{ background: 'var(--panel)' }}>
-              <div className="font-mono2 mb-4 text-[11.5px] tracking-[0.18em] text-mist2">MOUSE · FULLSCREEN</div>
               <ul className="space-y-4">
                 {MOUSE.map((m) => (
                   <li key={m.k.zh}>

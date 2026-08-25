@@ -2,3 +2,6 @@ node_modules
 dist
 .ssr
 public/downloads
+
+# 本地用 bun 装依赖时会生成；仓库以 package-lock.json 为准（CI 跑 npm ci）
+bun.lock

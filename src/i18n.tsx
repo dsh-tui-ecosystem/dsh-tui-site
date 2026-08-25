@@ -25,23 +25,31 @@ export function useT() {
 
 /** 扁平词典：独立文案 */
 export const strings = {
+  'notfound.kicker': { zh: '404 · 页面没有找到', en: '404 · Page not found' },
+  'notfound.title': { zh: '页面没有找到', en: 'Page not found' },
+  'notfound.desc': {
+    zh: '这个地址不存在，或者页面已经移动。',
+    en: 'This address does not exist, or the page has moved.',
+  },
+  'notfound.back': { zh: '返回首页', en: 'Back to home' },
+
   'home.skip': { zh: '跳到主要内容', en: 'Skip to main content' },
 
   'nav.aria.main': { zh: '主导航', en: 'Main navigation' },
-  'nav.aria.mobile': { zh: '移动端导航', en: 'Mobile navigation' },
+  'nav.aria.mobile': { zh: '菜单导航', en: 'Menu navigation' },
   'nav.toggleTheme': { zh: '切换深浅色模式', en: 'Toggle dark / light mode' },
   'nav.menu': { zh: '菜单', en: 'Menu' },
 
   'copy.aria': { zh: '复制命令', en: 'Copy command' },
-  'copy.label': { zh: '复制', en: 'Copy' },
-  'copy.done': { zh: '✓ 已复制', en: '✓ Copied' },
+  'copy.aria.number': { zh: '复制群号', en: 'Copy group number' },
+  'copy.done': { zh: '已复制', en: 'Copied' },   // 对勾现在是图标，不必再进播报文本
 
   'hero.desc': {
     zh: '像素鲸鱼顶栏、实时工作状态行、思考流式展开、双击 Esc 时间回溯、蓝白上下文进度条 + TPS 仪表。零核心改动，纯插件挂载 —— 装上即用，卸了不留补丁。',
     en: 'Pixel-whale top bar, live status line, streaming thinking, double-tap Esc time travel, and a blue-white context progress bar with a TPS gauge. Zero core changes, pure plugin mounting — install and go, uninstall with no residue.',
   },
-  'hero.cta.start': { zh: '快速开始 →', en: 'Get started →' },
-  'hero.cta.bundle': { zh: '⬇ 下载整合包', en: '⬇ Download bundle' },
+  'hero.cta.start': { zh: '快速开始', en: 'Get started' },
+  'hero.cta.bundle': { zh: '下载整合包', en: 'Download bundle' },
   'hero.cta.showcase': { zh: '看看界面', en: 'See the interface' },
   'hero.whaleAlt': { zh: 'dsh-TUI 像素鲸鱼娘', en: 'dsh-TUI pixel whale girl' },
   'hero.demoNote': {
@@ -51,11 +59,11 @@ export const strings = {
 
   'features.title': { zh: '核心能力', en: 'Core capabilities' },
   'features.desc': {
-    zh: '不只好看。dsh-TUI 把 Claude Code 的终端体验完整移植到 DSH 插件体系，同时为长会话做了性能设计。',
-    en: 'More than good looks. dsh-TUI brings the complete Claude Code terminal experience to the DSH plugin system, with performance engineering for long sessions.',
+    zh: 'dsh-TUI 把 Claude Code 的终端体验完整移植到 DSH 插件体系，并为长会话做了性能设计。',
+    en: 'dsh-TUI brings the complete Claude Code terminal experience to the DSH plugin system, with performance engineering for long sessions.',
   },
 
-  'showcase.title': { zh: '界面预览', en: 'Interface' },
+  'showcase.title': { zh: '界面预览', en: 'Interface preview' },
   'showcase.desc': {
     zh: '真实截图，未加滤镜。Gentle Mist Blue 配色：雾蓝只承担品牌、焦点与高亮，正文保持中性灰；启动时通过 OSC 11 查询终端背景色，自动选择浅色/深色调色板。',
     en: 'Real screenshots, no filters. Gentle Mist Blue palette: mist blue carries only brand, focus, and highlights while body text stays neutral gray; on launch the TUI queries the terminal background via OSC 11 and picks the light / dark palette automatically.',
@@ -73,21 +81,20 @@ export const strings = {
     en: 'DeepSeek Harness official WeChat post featuring dsh-TUI',
   },
 
-  'install.title': { zh: 'npm 一键安装', en: 'One-command npm install' },
+  'install.title': { zh: 'npm 一条命令安装', en: 'One-command npm install' },
   'install.desc': {
-    zh: '前置条件：可用的终端 TTY、官方 dsh CLI、pnpm 10+；运行模型需要 DEEPSEEK_API_KEY。启动后插件会在后台检查 npm 新版本，输入 /update 即可自动更新并重启恢复会话。',
-    en: 'Prerequisites: a working terminal TTY, the official dsh CLI, and pnpm 10+; running models requires DEEPSEEK_API_KEY. After launch the plugin checks npm for new versions in the background — type /update to auto-update, restart, and resume the session.',
+    zh: '前置条件：Node.js ^22.19 或 24 及以上、pnpm 10+、可用的终端 TTY；运行模型需要 DEEPSEEK_API_KEY。dsh CLI 由下面第一步一并装好，不用预先准备。启动后插件会在后台检查 npm 新版本，输入 /update 即可自动更新并重启恢复会话。',
+    en: 'Prerequisites: Node.js ^22.19 or 24+, pnpm 10+, and a working terminal TTY; running models requires DEEPSEEK_API_KEY. Step one below installs the dsh CLI, so you do not need it beforehand. After launch the plugin checks npm for new versions in the background — type /update to auto-update, restart, and resume the session.',
   },
-  'install.alt.label': { zh: '备选 —— 手工安装 profile', en: 'Alternative — manual profile install' },
+  'install.alt.label': { zh: '备选 —— 手工加入 dsh 配置档', en: 'Alternative — add to a dsh profile manually' },
   'install.alt.or': { zh: '或', en: 'or' },
 
-  'bundle.title': { zh: '整合包安装（新手推荐）', en: 'Installer bundle (recommended)' },
+  'bundle.title': { zh: '整合包安装（新手推荐）', en: 'Installer bundle (recommended for beginners)' },
   'bundle.desc': {
     zh: '不想敲命令？下载整合包，解压后双击 install.bat（macOS / Linux 运行 sh install.sh），脚本会自动装好 Node、pnpm、dsh CLI 与 dsh-TUI，并引导配置 API Key。',
     en: 'Prefer not to type commands? Download the bundle, extract it, and double-click install.bat (or run sh install.sh on macOS / Linux). The script installs Node, pnpm, the dsh CLI, and dsh-TUI, then walks you through the API key.',
   },
   'bundle.download': { zh: '下载整合包', en: 'Download bundle' },
-  'bundle.download.alt': { zh: '下载整合包（国内直连）', en: 'Download bundle (direct link)' },
   'bundle.mirror': { zh: 'GitHub 镜像', en: 'GitHub mirror' },
   'bundle.step1': { zh: '下载整合包', en: 'Download the bundle' },
   'bundle.step2': { zh: '解压到任意目录', en: 'Extract it anywhere' },
@@ -107,7 +114,7 @@ export const strings = {
     en: 'After copying, the selection clears automatically and a "Copied N characters" toast appears; press Esc mid-drag to cancel the selection without copying.',
   },
 
-  'commands.title': { zh: 'CC 指令全集复刻', en: 'The complete CC command set, replicated' },
+  'commands.title': { zh: 'Claude Code 指令全集复刻', en: 'The complete Claude Code command set, replicated' },
   'commands.desc': {
     zh: '所有本地命令均走 DSH 官方链路。/plan、/goal 来自 DSH 命令注册表插件，随插件自动并入 / 菜单。',
     en: 'All local commands go through official DSH pipelines. /plan and /goal come from the DSH command-registry plugin and merge into the / menu automatically.',
@@ -128,7 +135,7 @@ export const strings = {
     zh: '按主题阅读安装、功能、命令、快捷键与架构说明。',
     en: 'Read by topic: installation, features, commands, shortcuts, and architecture.',
   },
-  'guides.more': { zh: '查看指南 →', en: 'Read guide →' },
+  'guides.more': { zh: '查看指南', en: 'Read guide' },
 
   'faq.title': { zh: '常见问题', en: 'Frequently asked questions' },
   'faq.desc': {
@@ -136,30 +143,30 @@ export const strings = {
     en: 'Positioning, installation, platform support, and plugin boundaries of dsh-TUI.',
   },
 
-  'footer.cta.title': { zh: '探索未至之境', en: 'Explore the Unexplored' },
+  'footer.cta.title': { zh: '探索未至之境', en: 'Explore the unexplored' },   // terminal.tagline 保持标题式：那是逐字复刻产品自身的输出
   'footer.cta.sub': {
     zh: '一条命令，把鲸鱼放进你的终端。',
     en: 'One command puts a whale in your terminal.',
   },
   'footer.brand': {
-    zh: 'DeepSeek Harness 的 Claude Code 风格终端界面插件。\n献给偏爱 CLI 的各位极客。',
+    zh: 'DeepSeek Harness 的 Claude Code 风格终端界面插件。献给偏爱 CLI 的各位极客。',
     en: 'A Claude Code-style terminal interface plugin for DeepSeek Harness. For CLI-loving geeks everywhere.',
   },
-  'footer.community.eyebrow': { zh: '社区', en: 'COMMUNITY' },
-  'footer.community.qq': { zh: 'QQ 群', en: 'QQ GROUP' },
-  'footer.community.wechat': { zh: '微信群', en: 'WECHAT GROUP' },
-  'footer.community.name': { zh: 'dsh-TUI 插件交流群', en: 'dsh-TUI Plugin Community' },
-  'footer.community.qqDesc': {
-    zh: '扫码加入 QQ 群，和插件作者们一起玩耍（群号：572549239）',
-    en: 'Scan to join the QQ group (group no. 572549239) and hang out with the plugin authors',
+  'community.title': { zh: '加入社区', en: 'Join the community' },
+  'community.desc': {
+    zh: 'dsh-TUI 插件交流群同时开在 QQ 和微信。安装、配置、终端兼容性的问题都可以直接问，也欢迎来提需求。',
+    en: 'The dsh-TUI plugin community runs on both QQ and WeChat. Ask about installation, configuration, and terminal compatibility, or bring a feature request.',
   },
-  'footer.community.wechatDesc': {
-    zh: '扫码加入微信群，和插件作者们一起玩耍',
-    en: 'Scan to join the WeChat group and hang out with the plugin authors',
-  },
+  // 卡片上原本四行里有三行不带区分信息：群名两张卡完全相同，
+  // 「扫码加入…」在同屏说了三次（section 描述里已有一次）。只留下真正区分两者的。
+  'footer.community.qq': { zh: 'QQ 群', en: 'QQ group' },
+  'footer.community.wechat': { zh: '微信群', en: 'WeChat group' },
+  'community.qqNumberLabel': { zh: '群号', en: 'Group no.' },
+  'community.qqNumber': { zh: '572549239', en: '572549239' },
+  'community.wechatNote': { zh: '微信扫码直接入群', en: 'Scan with WeChat to join' },
   'footer.community.qqAlt': { zh: 'QQ 群二维码', en: 'QQ group QR code' },
   'footer.community.wechatAlt': { zh: '微信群二维码', en: 'WeChat group QR code' },
-  'footer.community.qrPending': { zh: '二维码更新中', en: 'QR code updating' },
+  'footer.community.qrPending': { zh: '二维码加载失败，请刷新页面', en: 'QR code failed to load — refresh the page' },
 
   'terminal.tagline': { zh: '探索未至之境！', en: 'Explore the Unexplored!' },
   'terminal.busy': {
@@ -193,31 +200,30 @@ export type StringKey = keyof typeof strings
 
 /* ---------------- 结构化数据（数组类文案） ---------------- */
 
+/** 顶栏主导航：只保留首屏漏斗上的页内锚点。
+ *  快捷键 / 命令 / 架构 / 常见问题 各自有 Guides 区块的专页与页脚文档链接兜底，
+ *  放进顶栏只会把它压成一份目录。 */
 export const NAV_LINKS: { href: string; label: Pair }[] = [
   { href: '#features', label: { zh: '特性', en: 'Features' } },
   { href: '#showcase', label: { zh: '预览', en: 'Showcase' } },
   { href: '#install', label: { zh: '安装', en: 'Install' } },
-  { href: '#shortcuts', label: { zh: '快捷键', en: 'Shortcuts' } },
-  { href: '#commands', label: { zh: '命令', en: 'Commands' } },
-  { href: '#arch', label: { zh: '架构', en: 'Architecture' } },
   { href: '#guides', label: { zh: '指南', en: 'Guides' } },
-  { href: '#faq', label: { zh: '常见问题', en: 'FAQ' } },
 ]
 
-export const NAV_SECONDARY: { href: string; label: Pair }[] = [
+/** 站外目的地，和页内锚点分组渲染，不共用同一节奏。 */
+export const NAV_SECONDARY: { href: string; label: Pair; external?: boolean }[] = [
   { href: '/plugins/', label: { zh: '插件市场', en: 'Plugins' } },
-  { href: 'https://join.dshtui.com/', label: { zh: '加入生态', en: 'Join' } },
+  { href: 'https://join.dshtui.com/', label: { zh: '加入生态', en: 'Join the ecosystem' }, external: true },
 ]
 
+/** 首屏徽章。原本四条（npm / license / status / 收录）在页面别处都各有一份：
+ *  包名就在下方安装命令里、license 在页脚、status 是顶栏 logo 旁的 chip、
+ *  收录 在 Showcase 区块。只保留唯一承载可信度的那条，其余是重复噪音。 */
 export const HERO_BADGES: { k: Pair; v: Pair }[] = [
-  { k: { zh: 'npm', en: 'npm' }, v: { zh: '@deepseek-harness-tui/dsh-tui', en: '@deepseek-harness-tui/dsh-tui' } },
-  { k: { zh: 'license', en: 'license' }, v: { zh: 'MIT', en: 'MIT' } },
-  { k: { zh: 'status', en: 'status' }, v: { zh: 'public beta', en: 'public beta' } },
   { k: { zh: '收录', en: 'featured' }, v: { zh: 'DSH 官方公众号', en: 'DSH Official WeChat' } },
 ]
 
 export interface FeatureCellData {
-  no: string
   title: Pair
   desc: Pair
   tags: Pair[]
@@ -227,7 +233,6 @@ export interface FeatureCellData {
 
 export const FEATURE_CELLS: FeatureCellData[] = [
   {
-    no: '01',
     title: { zh: '终端原生交互', en: 'Terminal-native interaction' },
     desc: {
       zh: '流式 Markdown、结构化工具卡、命令与文件补全、@ 文件引用（消息任意位置补全，发送时自动附加文件内容）、历史搜索、消息选择，inline / alternate-screen 两种渲染模式，/lang 中英界面一键切换。',
@@ -242,7 +247,6 @@ export const FEATURE_CELLS: FeatureCellData[] = [
     span: 'md:col-span-3',
   },
   {
-    no: '02',
     title: { zh: '可观察的 Agent 状态', en: 'Observable agent status' },
     desc: {
       zh: '实时工作状态行、上下文分段进度、TPS 仪表、缓存命中率、推理等级、输入/输出 token 与 Git/会话信息 —— Agent 在做什么，一眼可见。',
@@ -257,7 +261,6 @@ export const FEATURE_CELLS: FeatureCellData[] = [
     meter: true,
   },
   {
-    no: '03',
     title: { zh: '完整会话工作流', en: 'Complete session workflow' },
     desc: {
       zh: '/resume 恢复、/new 新会话、/compact 压缩、/export 导出、/btw 侧问、模型切换，以及双击 Esc 发起的会话 rewind / fork 时间回溯。',
@@ -271,7 +274,6 @@ export const FEATURE_CELLS: FeatureCellData[] = [
     span: 'md:col-span-2',
   },
   {
-    no: '04',
     title: { zh: 'DSH 官方能力接入', en: 'Official DSH capabilities' },
     desc: {
       zh: 'Agent preset、Skills、MCP、Goals、Todos、子代理、ask_user_question 问卷，全部通过现有服务或注册表连接，不重复造轮子。',
@@ -285,7 +287,6 @@ export const FEATURE_CELLS: FeatureCellData[] = [
     span: 'md:col-span-2',
   },
   {
-    no: '05',
     title: { zh: '为长会话设计', en: 'Built for long sessions' },
     desc: {
       zh: '事件驱动投影、差分终端输出、消息虚拟化、回放合并与有界缓存 —— 每帧成本从 O(全会话) 降到 O(可视窗口)，渲染与内存不随会话膨胀。',
@@ -489,6 +490,14 @@ export const FOOTER_GROUPS: { name: Pair; links: { label: Pair; href: string }[]
       { label: { zh: '配置参考', en: 'Configuration' }, href: 'https://github.com/ccch1mneyyy/dsh-TUI/blob/main/docs/configuration.md' },
       { label: { zh: '主题系统', en: 'Themes' }, href: 'https://github.com/ccch1mneyyy/dsh-TUI/blob/main/docs/themes.md' },
       { label: { zh: '架构与限制', en: 'Architecture & limits' }, href: 'https://github.com/ccch1mneyyy/dsh-TUI/blob/main/docs/architecture.md' },
+    ],
+  },
+  {
+    name: { zh: '社区', en: 'Community' },
+    links: [
+      { label: { zh: 'QQ 群', en: 'QQ group' }, href: '#contact' },
+      { label: { zh: '微信群', en: 'WeChat group' }, href: '#contact' },
+      { label: { zh: 'Discussions', en: 'Discussions' }, href: 'https://github.com/dsh-tui-ecosystem/dsh-tui-site/discussions' },
     ],
   },
   {

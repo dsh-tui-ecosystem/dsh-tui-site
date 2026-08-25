@@ -12,8 +12,8 @@ function MiniMeter() {
       </div>
       <div className="flex items-center justify-between text-dim">
         <span>
-          tps <span style={{ color: 'var(--ok)' }}>▂▃▅▆▇█▇▅</span>{' '}
-          <span style={{ color: 'var(--ok)' }} className="font-semibold">58</span>
+          tps <span style={{ color: 'var(--ok-text)' }}>▂▃▅▆▇█▇▅</span>{' '}
+          <span style={{ color: 'var(--ok-text)' }} className="font-semibold">58</span>
         </span>
         <span className="text-faint">cache 99.7%</span>
       </div>
@@ -30,15 +30,13 @@ export default function Features() {
     <section id="features" className="relative py-24">
       <div className="mx-auto max-w-6xl px-5">
         <SectionHead
-          index="01"
-          en="CAPABILITIES"
           title={t(strings['features.title'])}
           desc={t(strings['features.desc'])}
         />
         <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-[var(--line)] md:grid-cols-6">
           {CELLS.map((c, i) => (
             <Reveal
-              key={c.no}
+              key={c.title.zh}
               delay={i * 70}
               className={`group ${c.span}`}
             >
@@ -46,10 +44,6 @@ export default function Features() {
                 className="h-full p-6 transition-colors duration-200 group-hover:bg-[var(--panel-2)]"
                 style={{ background: 'var(--panel)' }}
               >
-                <div className="font-mono2 mb-4 flex items-center justify-between text-[11px]">
-                  <span className="text-faint">{c.no}</span>
-                  <span className="h-1.5 w-1.5 bg-[var(--mist)] opacity-40 transition-opacity group-hover:opacity-100" />
-                </div>
                 <h3 className="text-[17px] font-bold text-head transition-colors group-hover:text-mist3">
                   {c.title[lang]}
                 </h3>
