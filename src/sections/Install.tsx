@@ -1,6 +1,7 @@
 import SectionHead from '../components/SectionHead'
 import Reveal from '../components/Reveal'
 import CopyButton from '../components/CopyButton'
+import Icon from '../components/Icon'
 import { INSTALL_STEPS, strings, useLang, useT } from '../i18n'
 
 const STEPS = INSTALL_STEPS
@@ -63,9 +64,10 @@ export default function Install() {
                 href="https://github.com/ccch1mneyyy/dsh-TUI/releases/latest/download/dsh-tui-setup.zip"
                 target="_blank"
                 rel="noreferrer"
-                className="font-mono2 text-center text-[11px] text-faint transition-colors hover:text-mist3"
+                className="font-mono2 inline-flex items-center justify-center gap-1 text-center text-[11px] text-faint transition-colors hover:text-mist3 sm:justify-end"
               >
-                {t(strings['bundle.mirror'])} ↗
+                {t(strings['bundle.mirror'])}
+                <Icon name="arrow-up-right" size={11} />
               </a>
             </div>
           </div>

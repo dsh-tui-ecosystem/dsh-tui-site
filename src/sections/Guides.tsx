@@ -1,4 +1,5 @@
 import SectionHead from '../components/SectionHead'
+import Icon from '../components/Icon'
 import Reveal from '../components/Reveal'
 import { GUIDE_CARDS, strings, useLang, useT } from '../i18n'
 
@@ -26,7 +27,10 @@ export default function Guides() {
               >
                 <h3 className="font-semibold text-head transition-colors group-hover:text-mist3">{guide.title[lang]}</h3>
                 <p className="mt-2 text-[12.5px] leading-[1.8] text-dim [text-wrap:pretty]">{guide.desc[lang]}</p>
-                <span className="font-mono2 mt-4 inline-block text-[11px] text-mist2">{t(strings['guides.more'])}</span>
+                <span className="font-mono2 mt-4 inline-flex items-center gap-1 text-[11px] text-mist2">
+                  {t(strings['guides.more'])}
+                  <Icon name="arrow-right" size={12} className="transition-transform group-hover:translate-x-0.5" />
+                </span>
               </a>
             </Reveal>
           ))}

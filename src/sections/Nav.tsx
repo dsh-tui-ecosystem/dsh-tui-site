@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import PixelWhale from '../components/PixelWhale'
+import Icon from '../components/Icon'
+import BrandIcon from '../components/BrandIcon'
 import { formatStars, useStars } from '../lib/useStars'
 import { NAV_LINKS, NAV_SECONDARY, strings, useLang, type Lang } from '../i18n'
 
@@ -90,9 +92,7 @@ export default function Nav() {
               >
                 {l.label[lang]}
                 {l.external && (
-                  <svg viewBox="0 0 12 12" className="h-2.5 w-2.5 stroke-current" fill="none" strokeWidth="1.5" aria-hidden="true">
-                    <path d="M4 2h6v6M10 2 3 9" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <Icon name="arrow-up-right" size={11} />
                 )}
               </a>
             ))}
@@ -115,13 +115,8 @@ export default function Nav() {
             aria-label={strings['nav.toggleTheme'][lang]}
             title={strings['nav.toggleTheme'][lang]}
           >
-            <svg viewBox="0 0 20 20" className="theme-icon-sun h-4 w-4 fill-none stroke-current" strokeWidth="1.6" aria-hidden="true">
-                <circle cx="10" cy="10" r="4" />
-                <path d="M10 1.5v2M10 16.5v2M1.5 10h2M16.5 10h2M3.9 3.9l1.4 1.4M14.7 14.7l1.4 1.4M16.1 3.9l-1.4 1.4M5.3 14.7l-1.4 1.4" />
-            </svg>
-            <svg viewBox="0 0 20 20" className="theme-icon-moon h-4 w-4 fill-none stroke-current" strokeWidth="1.6" aria-hidden="true">
-                <path d="M16.5 12.5A7 7 0 0 1 7.5 3.5a7 7 0 1 0 9 9Z" />
-            </svg>
+            <Icon name="sun" size={16} className="theme-icon-sun" />
+            <Icon name="moon" size={16} className="theme-icon-moon" />
           </button>
           <a
             href="https://github.com/ccch1mneyyy/dsh-TUI"
@@ -129,9 +124,7 @@ export default function Nav() {
             rel="noreferrer"
             className="btn-press flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded bg-[var(--mist-solid)] px-3 py-1.5 text-[12.5px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)]"
           >
-            <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-current" aria-hidden>
-              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
-            </svg>
+            <BrandIcon name="github" size={14} />
             <span className="tnum">GitHub {starDisplay && `★ ${starDisplay}`}</span>
           </a>
           <button
@@ -141,9 +134,7 @@ export default function Nav() {
             aria-expanded={open}
             aria-controls="mobile-nav"
           >
-            <svg viewBox="0 0 20 20" className="h-4 w-4 stroke-current" fill="none" strokeWidth="1.6">
-              <path d="M3 5h14M3 10h14M3 15h14" />
-            </svg>
+            <Icon name="menu" size={16} />
           </button>
         </div>
       </div>

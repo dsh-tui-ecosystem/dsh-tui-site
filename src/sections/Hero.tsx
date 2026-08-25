@@ -1,10 +1,19 @@
 import TerminalDemo from '../components/TerminalDemo'
 import CopyButton from '../components/CopyButton'
+import Icon from '../components/Icon'
+import BrandIcon from '../components/BrandIcon'
 import { HERO_BADGES, strings, useLang, useT } from '../i18n'
 
 const INSTALL = 'npm install -g @deepseek-ai/dsh @deepseek-harness-tui/dsh-tui'
 
 const BADGES = HERO_BADGES
+
+/** 支持的平台。标识来自 Bootstrap Icons，仅用于说明兼容性。 */
+const PLATFORMS = [
+  { icon: 'windows', label: 'Windows' },
+  { icon: 'apple', label: 'macOS' },
+  { icon: 'tux', label: 'Linux' },
+] as const
 
 export default function Hero() {
   const lang = useLang()
@@ -107,15 +116,17 @@ export default function Hero() {
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <a
               href="/downloads/dsh-tui-setup.zip"
-              className="btn-press rounded bg-[var(--mist-solid)] px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)]"
+              className="btn-press flex items-center gap-2 rounded bg-[var(--mist-solid)] px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)]"
             >
+              <Icon name="download" size={15} weight={2} />
               {t(strings['hero.cta.bundle'])}
             </a>
             <a
               href="#install"
-              className="btn-press rounded border border-line px-5 py-2.5 text-[14px] text-dim transition-colors hover:border-[var(--mist)] hover:text-mist3"
+              className="btn-press group flex items-center gap-1.5 rounded border border-line px-5 py-2.5 text-[14px] text-dim transition-colors hover:border-[var(--mist)] hover:text-mist3"
             >
               {t(strings['hero.cta.start'])}
+              <Icon name="arrow-right" size={14} className="transition-transform group-hover:translate-x-0.5" />
             </a>
             <a
               href="#showcase"
@@ -124,9 +135,15 @@ export default function Hero() {
               {t(strings['hero.cta.showcase'])}
             </a>
           </div>
-          <div className="font-mono2 mt-3 text-[11.5px] text-faint">
-            Node ^22.19 / ≥24 · pnpm 10+ · Windows / macOS / Linux
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+            {PLATFORMS.map((p) => (
+              <span key={p.label} className="font-mono2 flex items-center gap-1.5 text-[12px] text-dim">
+                <BrandIcon name={p.icon} size={13} />
+                {p.label}
+              </span>
+            ))}
           </div>
+          <div className="font-mono2 mt-2.5 text-[11.5px] text-faint">Node ^22.19 / ≥24 · pnpm 10+</div>
         </div>
 
         {/* right: live terminal */}

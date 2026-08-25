@@ -40,8 +40,8 @@ export const strings = {
     zh: '像素鲸鱼顶栏、实时工作状态行、思考流式展开、双击 Esc 时间回溯、蓝白上下文进度条 + TPS 仪表。零核心改动，纯插件挂载 —— 装上即用，卸了不留补丁。',
     en: 'Pixel-whale top bar, live status line, streaming thinking, double-tap Esc time travel, and a blue-white context progress bar with a TPS gauge. Zero core changes, pure plugin mounting — install and go, uninstall with no residue.',
   },
-  'hero.cta.start': { zh: '快速开始 →', en: 'Get started →' },
-  'hero.cta.bundle': { zh: '⬇ 下载整合包', en: '⬇ Download bundle' },
+  'hero.cta.start': { zh: '快速开始', en: 'Get started' },
+  'hero.cta.bundle': { zh: '下载整合包', en: 'Download bundle' },
   'hero.cta.showcase': { zh: '看看界面', en: 'See the interface' },
   'hero.whaleAlt': { zh: 'dsh-TUI 像素鲸鱼娘', en: 'dsh-TUI pixel whale girl' },
   'hero.demoNote': {
@@ -128,7 +128,7 @@ export const strings = {
     zh: '按主题阅读安装、功能、命令、快捷键与架构说明。',
     en: 'Read by topic: installation, features, commands, shortcuts, and architecture.',
   },
-  'guides.more': { zh: '查看指南 →', en: 'Read guide →' },
+  'guides.more': { zh: '查看指南', en: 'Read guide' },
 
   'faq.title': { zh: '常见问题', en: 'Frequently asked questions' },
   'faq.desc': {
@@ -209,10 +209,10 @@ export const NAV_SECONDARY: { href: string; label: Pair; external?: boolean }[] 
   { href: 'https://join.dshtui.com/', label: { zh: '加入生态', en: 'Join' }, external: true },
 ]
 
+/** 首屏徽章。原本四条（npm / license / status / 收录）在页面别处都各有一份：
+ *  包名就在下方安装命令里、license 在页脚、status 是顶栏 logo 旁的 chip、
+ *  收录 在 Showcase 区块。只保留唯一承载可信度的那条，其余是重复噪音。 */
 export const HERO_BADGES: { k: Pair; v: Pair }[] = [
-  { k: { zh: 'npm', en: 'npm' }, v: { zh: '@deepseek-harness-tui/dsh-tui', en: '@deepseek-harness-tui/dsh-tui' } },
-  { k: { zh: 'license', en: 'license' }, v: { zh: 'MIT', en: 'MIT' } },
-  { k: { zh: 'status', en: 'status' }, v: { zh: 'public beta', en: 'public beta' } },
   { k: { zh: '收录', en: 'featured' }, v: { zh: 'DSH 官方公众号', en: 'DSH Official WeChat' } },
 ]
 
