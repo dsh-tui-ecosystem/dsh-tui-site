@@ -3,6 +3,8 @@ import Reveal from './Reveal'
 interface Props {
   title: string
   desc?: string
+  /** 内容区块一律左对齐；邀请 / 收尾类区块居中（页脚 CTA 也是这个处理）。 */
+  align?: 'start' | 'center'
 }
 
 /**
@@ -14,11 +16,16 @@ interface Props {
  *
  * 层级改由字号与留白承担。
  */
-export default function SectionHead({ title, desc }: Props) {
+export default function SectionHead({ title, desc, align = 'start' }: Props) {
+  const centered = align === 'center'
   return (
-    <Reveal className="mb-10">
+    <Reveal className={`mb-10 ${centered ? 'text-center' : ''}`}>
       <h2 className="text-[30px] font-bold leading-tight text-head sm:text-[38px]">{title}</h2>
-      {desc && <p className="mt-3 max-w-2xl text-[14px] leading-[1.9] text-dim">{desc}</p>}
+      {desc && (
+        <p className={`mt-3 max-w-2xl text-[14px] leading-[1.9] text-dim ${centered ? 'mx-auto' : ''}`}>
+          {desc}
+        </p>
+      )}
     </Reveal>
   )
 }

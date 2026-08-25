@@ -11,8 +11,19 @@ import { strings, useLang } from '../i18n'
  * 图标按钮没有可见文字，所以可访问名靠 aria-label；状态变化另开 role="status"
  * 播报，两者内容不重复。
  */
-export default function CopyButton({ text, className = '' }: { text: string; className?: string }) {
+export default function CopyButton({
+  text,
+  label,
+  className = '',
+}: {
+  text: string
+  /** 图标按钮没有可见文字，可访问名全靠这里。复制的不是命令时必须传，
+   *  否则读屏会念"复制命令"去复制一个群号。 */
+  label?: string
+  className?: string
+}) {
   const lang = useLang()
+  const name = label ?? strings['copy.aria'][lang]
   const [ok, setOk] = useState(false)
 
   const copy = async () => {
@@ -33,8 +44,8 @@ export default function CopyButton({ text, className = '' }: { text: string; cla
   return (
     <button
       onClick={copy}
-      aria-label={strings['copy.aria'][lang]}
-      title={strings['copy.aria'][lang]}
+      aria-label={name}
+      title={name}
       className={`btn-press icon-swap relative grid h-7 w-7 shrink-0 place-items-center rounded border border-line transition-colors ${
         ok ? 'text-[var(--ok-text)]' : 'text-faint hover:border-[var(--mist)] hover:text-mist3'
       } ${className}`}

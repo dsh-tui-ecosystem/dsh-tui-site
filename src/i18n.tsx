@@ -33,8 +33,8 @@ export const strings = {
   'nav.menu': { zh: '菜单', en: 'Menu' },
 
   'copy.aria': { zh: '复制命令', en: 'Copy command' },
-  'copy.label': { zh: '复制', en: 'Copy' },
-  'copy.done': { zh: '✓ 已复制', en: '✓ Copied' },
+  'copy.aria.number': { zh: '复制群号', en: 'Copy group number' },
+  'copy.done': { zh: '已复制', en: 'Copied' },   // 对勾现在是图标，不必再进播报文本
 
   'hero.desc': {
     zh: '像素鲸鱼顶栏、实时工作状态行、思考流式展开、双击 Esc 时间回溯、蓝白上下文进度条 + TPS 仪表。零核心改动，纯插件挂载 —— 装上即用，卸了不留补丁。',
@@ -81,13 +81,12 @@ export const strings = {
   'install.alt.label': { zh: '备选 —— 手工安装 profile', en: 'Alternative — manual profile install' },
   'install.alt.or': { zh: '或', en: 'or' },
 
-  'bundle.title': { zh: '整合包安装（新手推荐）', en: 'Installer bundle (recommended)' },
+  'bundle.title': { zh: '整合包安装（新手推荐）', en: 'Installer bundle (easiest way in)' },
   'bundle.desc': {
     zh: '不想敲命令？下载整合包，解压后双击 install.bat（macOS / Linux 运行 sh install.sh），脚本会自动装好 Node、pnpm、dsh CLI 与 dsh-TUI，并引导配置 API Key。',
     en: 'Prefer not to type commands? Download the bundle, extract it, and double-click install.bat (or run sh install.sh on macOS / Linux). The script installs Node, pnpm, the dsh CLI, and dsh-TUI, then walks you through the API key.',
   },
   'bundle.download': { zh: '下载整合包', en: 'Download bundle' },
-  'bundle.download.alt': { zh: '下载整合包（国内直连）', en: 'Download bundle (direct link)' },
   'bundle.mirror': { zh: 'GitHub 镜像', en: 'GitHub mirror' },
   'bundle.step1': { zh: '下载整合包', en: 'Download the bundle' },
   'bundle.step2': { zh: '解压到任意目录', en: 'Extract it anywhere' },
@@ -142,25 +141,21 @@ export const strings = {
     en: 'One command puts a whale in your terminal.',
   },
   'footer.brand': {
-    zh: 'DeepSeek Harness 的 Claude Code 风格终端界面插件。\n献给偏爱 CLI 的各位极客。',
+    zh: 'DeepSeek Harness 的 Claude Code 风格终端界面插件。献给偏爱 CLI 的各位极客。',
     en: 'A Claude Code-style terminal interface plugin for DeepSeek Harness. For CLI-loving geeks everywhere.',
   },
   'community.title': { zh: '加入社区', en: 'Join the community' },
   'community.desc': {
-    zh: '扫码进 QQ 群或微信群，安装、配置、终端兼容性的问题都可以直接问，也欢迎来提需求。',
-    en: 'Scan to join the QQ or WeChat group. Ask about installation, configuration, and terminal compatibility, or bring a feature request.',
+    zh: 'dsh-TUI 插件交流群同时开在 QQ 和微信。安装、配置、终端兼容性的问题都可以直接问，也欢迎来提需求。',
+    en: 'The dsh-TUI plugin community runs on both QQ and WeChat. Ask about installation, configuration, and terminal compatibility, or bring a feature request.',
   },
-  'footer.community.qq': { zh: 'QQ 群', en: 'QQ GROUP' },
-  'footer.community.wechat': { zh: '微信群', en: 'WECHAT GROUP' },
-  'footer.community.name': { zh: 'dsh-TUI 插件交流群', en: 'dsh-TUI Plugin Community' },
-  'footer.community.qqDesc': {
-    zh: '扫码加入 QQ 群，和插件作者们一起玩耍（群号：572549239）',
-    en: 'Scan to join the QQ group (group no. 572549239) and hang out with the plugin authors',
-  },
-  'footer.community.wechatDesc': {
-    zh: '扫码加入微信群，和插件作者们一起玩耍',
-    en: 'Scan to join the WeChat group and hang out with the plugin authors',
-  },
+  // 卡片上原本四行里有三行不带区分信息：群名两张卡完全相同，
+  // 「扫码加入…」在同屏说了三次（section 描述里已有一次）。只留下真正区分两者的。
+  'footer.community.qq': { zh: 'QQ 群', en: 'QQ group' },
+  'footer.community.wechat': { zh: '微信群', en: 'WeChat group' },
+  'community.qqNumberLabel': { zh: '群号', en: 'Group no.' },
+  'community.qqNumber': { zh: '572549239', en: '572549239' },
+  'community.wechatNote': { zh: '微信扫码直接入群', en: 'Scan with WeChat to join' },
   'footer.community.qqAlt': { zh: 'QQ 群二维码', en: 'QQ group QR code' },
   'footer.community.wechatAlt': { zh: '微信群二维码', en: 'WeChat group QR code' },
   'footer.community.qrPending': { zh: '二维码更新中', en: 'QR code updating' },

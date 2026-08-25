@@ -35,14 +35,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-3 max-w-xs text-[12.5px] leading-[1.85] text-faint">
-              {lang === 'zh' ? (
-                <>
-                  DeepSeek Harness 的 Claude Code 风格终端界面插件。
-                  献给偏爱 CLI 的各位极客。
-                </>
-              ) : (
-                t(strings['footer.brand'])
-              )}
+              {t(strings['footer.brand'])}
             </p>
           </div>
           {LINK_GROUPS.map((g) => (
