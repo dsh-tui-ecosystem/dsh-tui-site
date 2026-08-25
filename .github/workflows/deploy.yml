@@ -18,8 +18,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-      - run: npm ci
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
       - name: 拉取最新插件收录数据（dsh-tui-ecosystem）
         run: |
           curl -fsSL https://raw.githubusercontent.com/dsh-tui-ecosystem/dsh-tui-ecosystem/main/plugins.json -o public/plugins/plugins.json
@@ -31,7 +33,7 @@ jobs:
           ls -la public/downloads
         env:
           GH_TOKEN: ${{ github.token }}
-      - run: SITE_URL=https://dshtui.com/ npm run build
+      - run: SITE_URL=https://dshtui.com/ bun run build
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:

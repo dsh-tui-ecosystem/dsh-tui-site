@@ -23,17 +23,17 @@
 ## 本地运行
 
 ```sh
-npm install
-npm run dev      # 开发预览
-npm run build    # 构建到 dist/
+bun install
+bun run dev      # 开发预览
+bun run build    # 构建到 dist/
 ```
 
-要求 Node ^22.19 或 ≥24。
+要求 Node ^22.19 或 ≥24，包管理与脚本运行用 [bun](https://bun.sh)。
 
 生产构建会把首页预渲染为完整 HTML。部署时建议提供正式站点 URL，以生成绝对 canonical、`og:url` 和 `sitemap.xml`：
 
 ```sh
-SITE_URL=https://example.com/ npm run build
+SITE_URL=https://example.com/ bun run build
 ```
 
 ## 特性
