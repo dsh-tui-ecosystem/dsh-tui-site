@@ -23,12 +23,15 @@ export default function CopyButton({ text, className = '' }: { text: string; cla
   return (
     <button
       onClick={copy}
-      className={`btn-press font-mono2 rounded border border-line px-2.5 py-1.5 text-[11.5px] transition-colors ${
+      className={`btn-press font-mono2 shrink-0 rounded border border-line px-2.5 py-1.5 text-[11.5px] transition-colors ${
         ok ? 'text-[var(--ok)]' : 'text-dim hover:text-mist3 hover:border-[var(--mist)]'
       } ${className}`}
-      aria-label={strings['copy.aria'][lang]}
     >
+      {/* 可见文字即可访问名：固定的 aria-label 会盖掉它，让"已复制"永远传不到读屏 */}
       {ok ? strings['copy.done'][lang] : strings['copy.label'][lang]}
+      <span role="status" className="sr-only">
+        {ok ? strings['copy.done'][lang] : ''}
+      </span>
     </button>
   )
 }

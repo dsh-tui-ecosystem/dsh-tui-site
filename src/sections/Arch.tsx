@@ -29,7 +29,7 @@ export default function Arch() {
                       i === 2
                         ? 'border-[var(--mist)] text-mist3'
                         : i === PIPE.length - 1
-                          ? 'border-[var(--mist)] bg-[var(--mist)] font-semibold text-white'
+                          ? 'border-[var(--mist-solid)] bg-[var(--mist-solid)] font-semibold text-white'
                           : 'border-line text-dim'
                     }`}
                     style={i === 2 ? { background: 'rgba(75,111,255,0.08)' } : undefined}
@@ -51,7 +51,7 @@ export default function Arch() {
             <Reveal key={p.t.zh} delay={i * 60}>
               <div className="h-full p-5 transition-colors hover:bg-[var(--panel-2)]" style={{ background: 'var(--panel)' }}>
                 <h3 className="text-[14.5px] font-bold text-head">
-                  <span className="text-mist font-mono2 mr-2 text-[12px]">▸</span>
+                  <span aria-hidden="true" className="text-mist font-mono2 mr-2 text-[12px]">▸</span>
                   {p.t[lang]}
                 </h3>
                 <p className="mt-2 text-[12.5px] leading-[1.85] text-dim">{p.d[lang]}</p>

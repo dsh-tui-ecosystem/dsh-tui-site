@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import PixelWhale from '../components/PixelWhale'
 import CopyButton from '../components/CopyButton'
 import { FOOTER_GROUPS, strings, useLang, useT } from '../i18n'
@@ -5,6 +6,21 @@ import { FOOTER_GROUPS, strings, useLang, useT } from '../i18n'
 const INSTALL = 'npm install -g @deepseek-ai/dsh @deepseek-harness-tui/dsh-tui'
 
 const LINK_GROUPS = FOOTER_GROUPS
+
+/** 二维码框。图片加载失败前不渲染占位文案，
+ *  否则读屏会先念 alt 再念"二维码更新中"，两句互相矛盾。 */
+function QrFrame({ src, alt, pending }: { src: string; alt: string; pending: string }) {
+  const [failed, setFailed] = useState(false)
+  return (
+    <div className="relative mx-auto mt-4 flex h-40 w-40 items-center justify-center overflow-hidden rounded-md border border-line bg-white">
+      {failed ? (
+        <span className="font-mono2 text-[10px] text-[#616c84]">{pending}</span>
+      ) : (
+        <img src={src} alt={alt} className="h-full w-full object-contain" onError={() => setFailed(true)} />
+      )}
+    </div>
+  )
+}
 
 export default function Footer() {
   const lang = useLang()
@@ -24,11 +40,11 @@ export default function Footer() {
           </h2>
           <p className="font-mono2 mt-2 text-[12.5px] text-dim">{t(strings['footer.cta.sub'])}</p>
           <div
-            className="font-mono2 mt-7 flex w-full max-w-xl items-center gap-2 rounded-md border border-line px-4 py-3.5"
+            className="font-mono2 mt-7 flex w-full max-w-xl items-start gap-2 rounded-md border border-line px-4 py-3.5"
             style={{ background: 'var(--panel)' }}
           >
             <span className="text-faint select-none">$</span>
-            <code className="min-w-0 flex-1 truncate text-left text-[12px] text-mist3 sm:text-[12.5px]">{INSTALL}</code>
+            <code className="min-w-0 flex-1 break-all text-left text-[12px] leading-relaxed text-mist3 sm:text-[12.5px]">{INSTALL}</code>
             <CopyButton text={INSTALL} />
           </div>
         </div>
@@ -77,7 +93,7 @@ export default function Footer() {
         </div>
 
         {/* Community / Contact */}
-        <div className="border-t border-soft py-8" id="contact">
+        <div className="scroll-mt-20 border-t border-soft py-8" id="contact">
           <div className="mx-auto max-w-6xl px-5">
             <div className="text-center mb-6">
               <div className="font-mono2 text-[11px] tracking-[0.18em] text-mist2">{t(strings['footer.community.eyebrow'])}</div>
@@ -88,21 +104,10 @@ export default function Footer() {
                 { kicker: t(strings['footer.community.qq']), desc: t(strings['footer.community.qqDesc']), src: '/contact/qq-qr.png', alt: t(strings['footer.community.qqAlt']) },
                 { kicker: t(strings['footer.community.wechat']), desc: t(strings['footer.community.wechatDesc']), src: '/contact/wechat-qr.png', alt: t(strings['footer.community.wechatAlt']) },
               ]).map((c) => (
-                <div key={c.src} className="rounded-xl border border-line p-6 text-center" style={{ background: 'var(--panel)' }}>
+                <div key={c.src} className="rounded-lg border border-line p-6 text-center" style={{ background: 'var(--panel)' }}>
                   <div className="font-mono2 text-[11px] tracking-[0.18em] text-mist2">{c.kicker}</div>
                   <div className="text-[15px] font-semibold text-head mt-1">{t(strings['footer.community.name'])}</div>
-                  <div className="mx-auto mt-4 w-40 h-40 bg-white rounded-xl flex items-center justify-center overflow-hidden shadow-inner relative border border-line">
-                    <img
-                      src={c.src}
-                      alt={c.alt}
-                      className="w-full h-full object-contain relative z-10"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement
-                        target.style.display = 'none'
-                      }}
-                    />
-                    <span className="absolute inset-0 flex items-center justify-center text-[10px] text-faint font-mono2 pointer-events-none">{t(strings['footer.community.qrPending'])}</span>
-                  </div>
+                  <QrFrame src={c.src} alt={c.alt} pending={t(strings['footer.community.qrPending'])} />
                   <p className="text-[12.5px] text-dim mt-4 leading-snug">{c.desc}</p>
                 </div>
               ))}
