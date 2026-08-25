@@ -21,7 +21,7 @@ const zh: GuidePageData[] = [
   {
     slug: 'getting-started',
     locale: 'zh-CN',
-    navTitle: '安装指南',
+    navTitle: '安装与快速开始',
     title: 'dsh-TUI 安装与快速开始',
     description: '安装 dsh-TUI 的完整指南：环境要求、npm 安装、首次启动、恢复会话、更新方式与常见问题。',
     intro: '从准备运行环境到进入第一个 DeepSeek Harness TUI 会话，这里集中说明安装、启动和日常更新所需的步骤。',
@@ -111,7 +111,7 @@ const zh: GuidePageData[] = [
   {
     slug: 'architecture',
     locale: 'zh-CN',
-    navTitle: '架构说明',
+    navTitle: '架构与安全',
     title: 'dsh-TUI 架构、性能与安全边界',
     description: '了解 dsh-TUI 的 Cordis 插件挂载、事件投影、终端渲染、长会话虚拟化以及安全边界。',
     intro: 'dsh-TUI 只负责交互和呈现。会话日志、模型调用、工具执行、fork、compaction 和持久化仍由 DeepSeek Harness 服务拥有。',
@@ -141,7 +141,7 @@ const zh: GuidePageData[] = [
 
 const en: GuidePageData[] = [
   {
-    slug: 'getting-started', locale: 'en', navTitle: 'Installation', title: 'Install and Start dsh-TUI',
+    slug: 'getting-started', locale: 'en', navTitle: 'Getting started', title: 'Install and Start dsh-TUI',
     description: 'Complete dsh-TUI installation guide covering requirements, npm setup, first launch, session resume, updates, and troubleshooting.',
     intro: 'Everything required to open your first DeepSeek Harness session in the dsh-TUI terminal interface.',
     sections: [

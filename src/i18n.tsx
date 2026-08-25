@@ -25,10 +25,18 @@ export function useT() {
 
 /** 扁平词典：独立文案 */
 export const strings = {
+  'notfound.kicker': { zh: '404 · 页面没有找到', en: '404 · Page not found' },
+  'notfound.title': { zh: '页面没有找到', en: 'Page not found' },
+  'notfound.desc': {
+    zh: '这个地址不存在，或者页面已经移动。',
+    en: 'This address does not exist, or the page has moved.',
+  },
+  'notfound.back': { zh: '返回首页', en: 'Back to home' },
+
   'home.skip': { zh: '跳到主要内容', en: 'Skip to main content' },
 
   'nav.aria.main': { zh: '主导航', en: 'Main navigation' },
-  'nav.aria.mobile': { zh: '移动端导航', en: 'Mobile navigation' },
+  'nav.aria.mobile': { zh: '菜单导航', en: 'Menu navigation' },
   'nav.toggleTheme': { zh: '切换深浅色模式', en: 'Toggle dark / light mode' },
   'nav.menu': { zh: '菜单', en: 'Menu' },
 
@@ -51,11 +59,11 @@ export const strings = {
 
   'features.title': { zh: '核心能力', en: 'Core capabilities' },
   'features.desc': {
-    zh: '不只好看。dsh-TUI 把 Claude Code 的终端体验完整移植到 DSH 插件体系，同时为长会话做了性能设计。',
-    en: 'More than good looks. dsh-TUI brings the complete Claude Code terminal experience to the DSH plugin system, with performance engineering for long sessions.',
+    zh: 'dsh-TUI 把 Claude Code 的终端体验完整移植到 DSH 插件体系，并为长会话做了性能设计。',
+    en: 'dsh-TUI brings the complete Claude Code terminal experience to the DSH plugin system, with performance engineering for long sessions.',
   },
 
-  'showcase.title': { zh: '界面预览', en: 'Interface' },
+  'showcase.title': { zh: '界面预览', en: 'Interface preview' },
   'showcase.desc': {
     zh: '真实截图，未加滤镜。Gentle Mist Blue 配色：雾蓝只承担品牌、焦点与高亮，正文保持中性灰；启动时通过 OSC 11 查询终端背景色，自动选择浅色/深色调色板。',
     en: 'Real screenshots, no filters. Gentle Mist Blue palette: mist blue carries only brand, focus, and highlights while body text stays neutral gray; on launch the TUI queries the terminal background via OSC 11 and picks the light / dark palette automatically.',
@@ -73,15 +81,15 @@ export const strings = {
     en: 'DeepSeek Harness official WeChat post featuring dsh-TUI',
   },
 
-  'install.title': { zh: 'npm 一键安装', en: 'One-command npm install' },
+  'install.title': { zh: 'npm 一条命令安装', en: 'One-command npm install' },
   'install.desc': {
-    zh: '前置条件：可用的终端 TTY、官方 dsh CLI、pnpm 10+；运行模型需要 DEEPSEEK_API_KEY。启动后插件会在后台检查 npm 新版本，输入 /update 即可自动更新并重启恢复会话。',
-    en: 'Prerequisites: a working terminal TTY, the official dsh CLI, and pnpm 10+; running models requires DEEPSEEK_API_KEY. After launch the plugin checks npm for new versions in the background — type /update to auto-update, restart, and resume the session.',
+    zh: '前置条件：Node.js ^22.19 或 24 及以上、pnpm 10+、可用的终端 TTY；运行模型需要 DEEPSEEK_API_KEY。dsh CLI 由下面第一步一并装好，不用预先准备。启动后插件会在后台检查 npm 新版本，输入 /update 即可自动更新并重启恢复会话。',
+    en: 'Prerequisites: Node.js ^22.19 or 24+, pnpm 10+, and a working terminal TTY; running models requires DEEPSEEK_API_KEY. Step one below installs the dsh CLI, so you do not need it beforehand. After launch the plugin checks npm for new versions in the background — type /update to auto-update, restart, and resume the session.',
   },
-  'install.alt.label': { zh: '备选 —— 手工安装 profile', en: 'Alternative — manual profile install' },
+  'install.alt.label': { zh: '备选 —— 手工加入 dsh 配置档', en: 'Alternative — add to a dsh profile manually' },
   'install.alt.or': { zh: '或', en: 'or' },
 
-  'bundle.title': { zh: '整合包安装（新手推荐）', en: 'Installer bundle (easiest way in)' },
+  'bundle.title': { zh: '整合包安装（新手推荐）', en: 'Installer bundle (recommended for beginners)' },
   'bundle.desc': {
     zh: '不想敲命令？下载整合包，解压后双击 install.bat（macOS / Linux 运行 sh install.sh），脚本会自动装好 Node、pnpm、dsh CLI 与 dsh-TUI，并引导配置 API Key。',
     en: 'Prefer not to type commands? Download the bundle, extract it, and double-click install.bat (or run sh install.sh on macOS / Linux). The script installs Node, pnpm, the dsh CLI, and dsh-TUI, then walks you through the API key.',
@@ -106,7 +114,7 @@ export const strings = {
     en: 'After copying, the selection clears automatically and a "Copied N characters" toast appears; press Esc mid-drag to cancel the selection without copying.',
   },
 
-  'commands.title': { zh: 'CC 指令全集复刻', en: 'The complete CC command set, replicated' },
+  'commands.title': { zh: 'Claude Code 指令全集复刻', en: 'The complete Claude Code command set, replicated' },
   'commands.desc': {
     zh: '所有本地命令均走 DSH 官方链路。/plan、/goal 来自 DSH 命令注册表插件，随插件自动并入 / 菜单。',
     en: 'All local commands go through official DSH pipelines. /plan and /goal come from the DSH command-registry plugin and merge into the / menu automatically.',
@@ -135,7 +143,7 @@ export const strings = {
     en: 'Positioning, installation, platform support, and plugin boundaries of dsh-TUI.',
   },
 
-  'footer.cta.title': { zh: '探索未至之境', en: 'Explore the Unexplored' },
+  'footer.cta.title': { zh: '探索未至之境', en: 'Explore the unexplored' },   // terminal.tagline 保持标题式：那是逐字复刻产品自身的输出
   'footer.cta.sub': {
     zh: '一条命令，把鲸鱼放进你的终端。',
     en: 'One command puts a whale in your terminal.',
@@ -158,7 +166,7 @@ export const strings = {
   'community.wechatNote': { zh: '微信扫码直接入群', en: 'Scan with WeChat to join' },
   'footer.community.qqAlt': { zh: 'QQ 群二维码', en: 'QQ group QR code' },
   'footer.community.wechatAlt': { zh: '微信群二维码', en: 'WeChat group QR code' },
-  'footer.community.qrPending': { zh: '二维码更新中', en: 'QR code updating' },
+  'footer.community.qrPending': { zh: '二维码加载失败，请刷新页面', en: 'QR code failed to load — refresh the page' },
 
   'terminal.tagline': { zh: '探索未至之境！', en: 'Explore the Unexplored!' },
   'terminal.busy': {
@@ -205,7 +213,7 @@ export const NAV_LINKS: { href: string; label: Pair }[] = [
 /** 站外目的地，和页内锚点分组渲染，不共用同一节奏。 */
 export const NAV_SECONDARY: { href: string; label: Pair; external?: boolean }[] = [
   { href: '/plugins/', label: { zh: '插件市场', en: 'Plugins' } },
-  { href: 'https://join.dshtui.com/', label: { zh: '加入生态', en: 'Join' }, external: true },
+  { href: 'https://join.dshtui.com/', label: { zh: '加入生态', en: 'Join the ecosystem' }, external: true },
 ]
 
 /** 首屏徽章。原本四条（npm / license / status / 收录）在页面别处都各有一份：
