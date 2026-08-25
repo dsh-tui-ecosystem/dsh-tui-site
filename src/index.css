@@ -27,25 +27,6 @@
 @layer base {
   /* 亮色（默认） */
   :root {
-    --background: 220 20% 97%;
-    --foreground: 219 20% 28%;
-    --card: 0 0% 100%;
-    --card-foreground: 219 20% 28%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 219 20% 28%;
-    --primary: 225 100% 65%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 220 24% 94%;
-    --secondary-foreground: 219 20% 28%;
-    --muted: 220 24% 94%;
-    --muted-foreground: 221 14% 46%;
-    --accent: 220 24% 94%;
-    --accent-foreground: 219 20% 28%;
-    --destructive: 4 68% 46%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 220 20% 88%;
-    --input: 220 20% 88%;
-    --ring: 225 100% 65%;
     --radius: 0.375rem;
 
     --bg: #f6f7f9;
@@ -101,22 +82,6 @@
 
   /* 深色 */
   :root[data-theme='dark'] {
-    --background: 222 47% 4%;
-    --foreground: 214 32% 84%;
-    --card: 220 40% 6%;
-    --card-foreground: 214 32% 84%;
-    --popover: 220 40% 6%;
-    --popover-foreground: 214 32% 84%;
-    --secondary: 220 30% 10%;
-    --secondary-foreground: 214 32% 84%;
-    --muted: 220 30% 10%;
-    --muted-foreground: 217 15% 52%;
-    --accent: 220 30% 10%;
-    --accent-foreground: 214 32% 84%;
-    --destructive: 0 72% 51%;
-    --border: 219 28% 14%;
-    --input: 219 28% 14%;
-
     --bg: #07090d;
     --bg-2: #0a0e15;
     --panel: #0c1119;
