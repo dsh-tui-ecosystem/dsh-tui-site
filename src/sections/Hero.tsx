@@ -100,7 +100,7 @@ export default function Hero() {
             style={{ background: 'var(--panel)' }}
           >
             <span className="text-faint select-none">$</span>
-            <code className="min-w-0 flex-1 break-all text-[12px] leading-relaxed text-mist3 sm:text-[12.5px]">{INSTALL}</code>
+            <code className="min-w-0 flex-1 break-words text-[12px] leading-relaxed text-mist3 sm:text-[12.5px]">{INSTALL}</code>
             <CopyButton text={INSTALL} />
           </div>
 

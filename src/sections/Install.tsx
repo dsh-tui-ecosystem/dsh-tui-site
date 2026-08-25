@@ -82,11 +82,11 @@ export default function Install() {
                   <span className="text-[15px] font-bold text-head">{s.title[lang]}</span>
                 </div>
                 <div
-                  className="font-mono2 flex items-center gap-2 rounded border border-soft px-3 py-2.5"
+                  className="font-mono2 flex items-start gap-2 rounded border border-soft px-3 py-2.5"
                   style={{ background: 'var(--bg-2)' }}
                 >
                   <span className="text-faint select-none">$</span>
-                  <code className="min-w-0 flex-1 break-all text-[12px] leading-relaxed text-mist3">{s.cmd}</code>
+                  <code className="min-w-0 flex-1 break-words text-[12px] leading-relaxed text-mist3">{s.cmd}</code>
                   <CopyButton text={s.cmd} />
                 </div>
                 <p className="mt-3 text-[12.5px] leading-relaxed text-faint">{s.note[lang]}</p>
@@ -103,7 +103,7 @@ export default function Install() {
             <span className="text-mist2 font-semibold">{t(strings['install.alt.label'])}</span>
             <code className="text-mist3">sh install.sh</code>
             <span className="text-faint">{t(strings['install.alt.or'])}</span>
-            <code className="break-all text-mist3">dsh plugin --profile dsh-tui add @deepseek-harness-tui/dsh-tui</code>
+            <code className="break-words text-mist3">dsh plugin --profile dsh-tui add @deepseek-harness-tui/dsh-tui</code>
           </div>
         </Reveal>
       </div>
