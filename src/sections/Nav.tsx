@@ -57,8 +57,11 @@ export default function Nav() {
   const starDisplay = formatStars(starCount)
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 ${scrolled || open ? 'nav-scrolled' : ''}`}>
-      <div className="mx-auto flex h-[61px] max-w-6xl items-center gap-3 px-5">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 ${scrolled || open ? 'nav-scrolled' : ''}`}
+      style={{ paddingTop: 'env(safe-area-inset-top)' }}
+    >
+      <div className="mx-auto flex h-[61px] max-w-6xl items-center gap-3 px-page">
         <a href="#top" className="flex shrink-0 items-center gap-2.5">
           <PixelWhale float={false} className="h-7 w-9" />
           <span className="font-mono2 whitespace-nowrap text-[15px] font-bold tracking-tight text-head">
@@ -70,7 +73,7 @@ export default function Nav() {
         </span>
 
         {/* 页内锚点与站外目的地分成两组：组内 28px，组间 64px（2.3×），靠留白分组而不是分隔线 */}
-        <nav aria-label={strings['nav.aria.main'][lang]} className="ml-auto hidden items-center lg:flex">
+        <nav aria-label={strings['nav.aria.main'][lang]} className="ms-auto hidden items-center lg:flex">
           <span className="flex items-center gap-7">
             {NAV_LINKS.map((l) => (
               <a
@@ -82,7 +85,7 @@ export default function Nav() {
               </a>
             ))}
           </span>
-          <span className="ml-16 flex items-center gap-7">
+          <span className="ms-16 flex items-center gap-7">
             {NAV_SECONDARY.map((l) => (
               <a
                 key={l.href}
@@ -99,7 +102,7 @@ export default function Nav() {
           </span>
         </nav>
 
-        <div className="ml-auto flex items-center gap-2 lg:ml-16">
+        <div className="ms-auto flex items-center gap-2 lg:ms-16">
           <a
             href={lang === 'en' ? '../' : './en/'}
             onClick={() => rememberLang(lang === 'en' ? 'zh' : 'en')}
@@ -122,10 +125,10 @@ export default function Nav() {
             href="https://github.com/ccch1mneyyy/dsh-TUI"
             target="_blank"
             rel="noreferrer"
-            className="btn-press flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded bg-[var(--mist-solid)] px-3 py-1.5 text-[12.5px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)]"
+            className="btn-press hidden shrink-0 items-center gap-1.5 whitespace-nowrap rounded bg-[var(--mist-solid)] px-3 py-1.5 text-[12.5px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)] min-[420px]:flex"
           >
             <BrandIcon name="github" size={14} />
-            <span className="tnum">GitHub {starDisplay && `★ ${starDisplay}`}</span>
+            <span className="tnum">GitHub{starDisplay ? <span className="hidden sm:inline">{` ★ ${starDisplay}`}</span> : null}</span>
           </a>
           <button
             className="btn-press rounded border border-line p-1.5 text-dim lg:hidden"
@@ -143,8 +146,12 @@ export default function Nav() {
         <nav
           id="mobile-nav"
           aria-label={strings['nav.aria.mobile'][lang]}
-          className="border-t border-soft px-5 py-3 lg:hidden"
-          style={{ background: 'var(--nav-bg)', backdropFilter: 'blur(12px)' }}
+          className="border-t border-soft px-page py-3 lg:hidden"
+          style={{
+            background: 'var(--nav-bg)',
+            backdropFilter: 'blur(12px)',
+            paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))',
+          }}
         >
           <div className="grid grid-cols-2 gap-2">
             {NAV_LINKS.map((l) => (
@@ -172,6 +179,16 @@ export default function Nav() {
               </a>
             ))}
           </div>
+          <a
+            href="https://github.com/ccch1mneyyy/dsh-TUI"
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => setOpen(false)}
+            className="btn-press mt-4 flex items-center justify-center gap-1.5 rounded bg-[var(--mist-solid)] px-3 py-2.5 text-[13px] font-semibold text-white min-[420px]:hidden"
+          >
+            <BrandIcon name="github" size={14} />
+            <span className="tnum">GitHub {starDisplay && `★ ${starDisplay}`}</span>
+          </a>
         </nav>
       )}
     </header>

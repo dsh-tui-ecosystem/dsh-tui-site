@@ -139,7 +139,8 @@ html {
   scroll-behavior: smooth;
 }
 
-/* 标题均分断行，正文不留末行孤字 */
+/* 标题均分行长；正文避免末行孤字。
+   居中对齐时短行会吊在正中间，窄屏标题/描述改 text-start，见各区块。 */
 h1, h2, h3 {
   text-wrap: balance;
 }
@@ -149,7 +150,7 @@ p {
 
 .skip-link {
   position: fixed;
-  left: 1rem;
+  inset-inline-start: 1rem;
   top: 0.75rem;
   z-index: 100;
   transform: translateY(-200%);
@@ -226,8 +227,12 @@ body {
   .bg-panel { background: var(--panel); }
   .border-line { border-color: var(--line); }
   .border-soft { border-color: var(--line-soft); }
+  .px-page {
+    padding-inline: max(1.25rem, env(safe-area-inset-left)) max(1.25rem, env(safe-area-inset-right));
+  }
 }
 
+/* 指南页手机导航：横向滑动，下一项探出 16–32px，避免看起来像已经到头 */
 /* ---------- keyframes ---------- */
 
 @keyframes blink {

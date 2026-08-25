@@ -10,7 +10,7 @@ export default function Shortcuts() {
   const t = useT()
   return (
     <section id="shortcuts" className="py-24" style={{ background: 'var(--bg-2)' }}>
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-6xl px-page">
         <SectionHead
           title={t(strings['shortcuts.title'])}
           desc={t(strings['shortcuts.desc'])}
@@ -22,20 +22,20 @@ export default function Shortcuts() {
               {KEYS.map((k, i) => (
                 <li
                   key={i}
-                  className={`flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-[var(--panel-2)] ${
+                  className={`flex flex-wrap items-center gap-x-4 gap-y-2 px-5 py-3.5 transition-colors hover:bg-[var(--panel-2)] ${
                     k.hi ? 'bg-[var(--mist-wash)]' : ''
                   }`}
                 >
-                  <span className="flex shrink-0 items-center gap-1.5">
-                    {k.keys.map((key, j) => (
-                      <span key={j} className="flex items-center gap-1.5">
-                        <kbd className="kbd">{key}</kbd>
-                        {j < k.keys.length - 1 && <span className="text-[11px] text-faint">×2</span>}
-                      </span>
+                  <span className="flex shrink-0 items-center gap-1.5 whitespace-nowrap">
+                    {k.keys.map((key) => (
+                      <kbd key={key} className="kbd">{key}</kbd>
                     ))}
+                    {k.times && k.times > 1 && (
+                      <span className="text-[11px] text-faint">×{k.times}</span>
+                    )}
                   </span>
-                  <span className={`text-[13px] leading-relaxed ${k.hi ? 'text-mist3' : 'text-dim'}`}>
-                    {k.hi && <span className="font-mono2 mr-2 text-[10.5px] text-mist">★</span>}
+                  <span className={`min-w-0 text-[13px] leading-relaxed ${k.hi ? 'text-mist3' : 'text-dim'}`}>
+                    {k.hi && <span className="font-mono2 me-2 text-[10.5px] text-mist">★</span>}
                     {k.desc[lang]}
                   </span>
                 </li>

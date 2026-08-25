@@ -9,7 +9,7 @@ export default function Commands() {
   const t = useT()
   return (
     <section id="commands" className="py-24">
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-6xl px-page">
         <SectionHead
           title={t(strings['commands.title'])}
           desc={t(strings['commands.desc'])}

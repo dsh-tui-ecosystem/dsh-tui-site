@@ -18,10 +18,10 @@ export default function NotFound({ lang = 'zh' }: { lang?: Lang }) {
   return (
     <LangProvider lang={lang}>
       <main
-        className="grid-bg flex min-h-screen items-center justify-center px-5"
+        className="grid-bg flex min-h-screen items-center justify-center px-page"
         style={{ background: 'var(--bg)' }}
       >
-        <div className="max-w-lg text-center">
+        <div className="max-w-lg text-start sm:text-center">
           <PixelWhale className="mx-auto h-auto w-40" />
           <p className="font-mono2 mt-7 text-[12px] tracking-[0.2em] text-mist2">
             {strings['notfound.kicker'][lang]}

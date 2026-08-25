@@ -36,7 +36,7 @@ export default function Hero() {
         />
       ))}
 
-      <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-12 px-5 pb-20 pt-14 lg:grid-cols-[1.02fr_1fr] lg:items-center lg:gap-10 lg:pt-20">
+      <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-12 px-page pb-20 pt-14 lg:grid-cols-[1.02fr_1fr] lg:items-center lg:gap-10 lg:pt-20">
         {/* left */}
         <div>
           <div className="mb-7 flex flex-wrap gap-2">
@@ -88,41 +88,54 @@ export default function Hero() {
             {lang === 'zh' ? (
               <>
                 Claude Code 风格的全屏终端交互，
-                <br className="hidden sm:block" />
-                为 <span className="text-mist3 font-semibold">DeepSeek Harness</span> 补上没有 TUI 的那一块拼图。
+                <br />
+                为 <span className="text-mist3 font-semibold">DeepSeek Harness</span>
+                <br className="sm:hidden" />
+                {' '}补上没有 TUI 的那一块拼图。
               </>
             ) : (
               <>
                 Claude Code-style fullscreen terminal interaction,
-                <br className="hidden sm:block" />
-                the missing TUI piece for <span className="text-mist3 font-semibold">DeepSeek Harness</span>.
+                <br />
+                the missing TUI piece for
+                <br className="sm:hidden" />
+                {' '}<span className="text-mist3 font-semibold">DeepSeek Harness</span>.
               </>
             )}
           </p>
           <p className="mt-4 max-w-xl text-[14px] leading-[1.9] text-dim">
-            {t(strings['hero.desc'])}
+            {lang === 'zh' ? (
+              <>
+                像素鲸鱼顶栏、实时工作状态行、思考流式展开、
+                <span className="whitespace-nowrap">双击 Esc</span>
+                {' '}时间回溯、蓝白上下文进度条 + TPS 仪表。零核心改动，纯插件挂载 ——
+                <span className="whitespace-nowrap">装上即用，卸了不留补丁。</span>
+              </>
+            ) : (
+              t(strings['hero.desc'])
+            )}
           </p>
 
           <CommandLine command={INSTALL} className="mt-8" />
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-col gap-3 min-[420px]:flex-row min-[420px]:flex-wrap min-[420px]:items-center">
             <a
               href="/downloads/dsh-tui-setup.zip"
-              className="btn-press flex items-center gap-2 rounded bg-[var(--mist-solid)] px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)]"
+              className="btn-press flex w-full items-center justify-center gap-2 whitespace-nowrap rounded bg-[var(--mist-solid)] px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)] min-[420px]:w-auto"
             >
               <Icon name="download" size={15} weight={2} />
               {t(strings['hero.cta.bundle'])}
             </a>
             <a
               href="#install"
-              className="btn-press group flex items-center gap-1.5 rounded border border-line px-5 py-2.5 text-[14px] text-dim transition-colors hover:border-[var(--mist)] hover:text-mist3"
+              className="btn-press group flex w-full items-center justify-center gap-1.5 whitespace-nowrap rounded border border-line px-5 py-2.5 text-[14px] text-dim transition-colors hover:border-[var(--mist)] hover:text-mist3 min-[420px]:w-auto"
             >
               {t(strings['hero.cta.start'])}
               <Icon name="arrow-right" size={14} className="transition-transform group-hover:translate-x-0.5" />
             </a>
             <a
               href="#showcase"
-              className="btn-press rounded border border-line px-5 py-2.5 text-[14px] text-dim transition-colors hover:border-[var(--mist)] hover:text-mist3"
+              className="btn-press flex w-full items-center justify-center whitespace-nowrap rounded border border-line px-5 py-2.5 text-[14px] text-dim transition-colors hover:border-[var(--mist)] hover:text-mist3 min-[420px]:w-auto"
             >
               {t(strings['hero.cta.showcase'])}
             </a>
@@ -141,7 +154,7 @@ export default function Hero() {
         {/* right: live terminal */}
         <div className="relative">
           <TerminalDemo />
-          <p className="font-mono2 mt-3 text-center text-[11px] text-faint">
+          <p className="font-mono2 mt-3 text-start text-[11px] text-faint sm:text-center">
             {t(strings['hero.demoNote'])}
           </p>
         </div>
