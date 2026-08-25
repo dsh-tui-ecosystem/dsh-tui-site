@@ -5,19 +5,17 @@
 ## 快速开始
 
 ```sh
-# 需要 Node ^22.19 或 ≥24，以及 bun（https://bun.sh）
-bun install
-bun run dev        # 本地开发，http://localhost:3000
-bun run lint       # ESLint 检查
-bun run build      # 生产构建（含预渲染与 SEO 检查）
+# 需要 Node ^22.19 或 ≥24
+npm install
+npm run dev        # 本地开发，http://localhost:3000
+npm run lint       # ESLint 检查
+npm run build      # 生产构建（含预渲染与 SEO 检查）
 ```
-
-依赖由 `bun.lock` 锁定，CI 用 `bun install --frozen-lockfile`。改动依赖后记得把 `bun.lock` 一起提交。
 
 ## 提 PR 的流程
 
 1. **Fork** 本仓库，从 `main` 切一个分支：`git checkout -b feat/xxx`
-2. 完成改动，本地跑通 `bun run lint` 和 `bun run build`
+2. 完成改动，本地跑通 `npm run lint` 和 `npm run build`
 3. 推送分支，向 `main` 提 Pull Request
 4. 描述清楚改了什么、为什么；视觉改动请附截图
 5. CI 自动跑 lint + 构建，通过后等待核心维护者 review 合并

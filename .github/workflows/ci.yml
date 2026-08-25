@@ -13,9 +13,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-      - run: bun install --frozen-lockfile
-      - run: bun run lint
-      - run: SITE_URL=https://dshtui.com/ bun run build
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: SITE_URL=https://dshtui.com/ npm run build
