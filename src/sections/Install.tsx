@@ -44,7 +44,7 @@ export default function Install() {
                     className="font-mono2 flex items-center gap-1.5 rounded border border-soft px-2.5 py-1 text-[11.5px] text-mist3"
                     style={{ background: 'var(--bg-2)' }}
                   >
-                    <span className="flex h-4 w-4 items-center justify-center rounded bg-[var(--mist)] text-[9.5px] font-bold text-white">
+                    <span className="flex h-4 w-4 items-center justify-center rounded bg-[var(--mist-solid)] text-[9.5px] font-bold text-white">
                       {s.no}
                     </span>
                     {s.txt}
@@ -55,7 +55,7 @@ export default function Install() {
             <div className="flex shrink-0 flex-col items-stretch gap-2 sm:items-end">
               <a
                 href="/downloads/dsh-tui-setup.zip"
-                className="btn-press rounded bg-[var(--mist)] px-6 py-3 text-center text-[14px] font-semibold text-white transition-colors hover:bg-[#5d7dff]"
+                className="btn-press rounded bg-[var(--mist-solid)] px-6 py-3 text-center text-[14px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)]"
               >
                 {t(strings['bundle.download'])}
               </a>

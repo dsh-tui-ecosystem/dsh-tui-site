@@ -55,14 +55,18 @@
     --line: #dfe4ec;
     --line-soft: #eaeef3;
     --text: #3c4657;
-    --text-dim: #67718a;
-    --text-faint: #9aa3b5;
+    --text-dim: #525a6e;
+    --text-faint: #616c84;
     --head: #141c2b;
-    --mist: #4b6fff;
+    --mist: #4b6fff;          /* 边框 / 辉光 / 装饰面，不承载文字 */
+    --mist-text: #2f59ff;     /* 同色相压暗，正文安全 */
+    --mist-solid: #3f5fe0;    /* 实心填充，白字 5.35 */
+    --mist-solid-hover: #3a56d0;
     --mist-2: #4861cf;
     --mist-3: #3b53c2;
     --mist-deep: #172554;
     --ok: #189a5b;
+    --ok-text: #137c49;
     --warn: #a87b00;
     --bad: #d84339;
 
@@ -80,13 +84,13 @@
     --term-bg: #fafaf7;
     --term-chrome: #f0f0ea;
     --term-text: #263146;
-    --term-dim: #66718a;
-    --term-faint: #98a1b6;
+    --term-dim: #525a6e;
+    --term-faint: #606c87;
     --term-line: #e2e5ee;
     --term-userbar: #f6efdb;
     --term-status: #eef0f4;
     --term-accent: #3b53c2;
-    --term-chip: #4b6fff;
+    --term-chip: #3f5fe0;
     --tw1-base: #4b6fff;
     --tw1-mid: #93b0ff;
     --tw1-peak: #ffffff;
@@ -120,13 +124,17 @@
     --line: #1b2433;
     --line-soft: #131b27;
     --text: #c7d2e2;
-    --text-dim: #6d7b92;
-    --text-faint: #45536b;
+    --text-dim: #8995a7;
+    --text-faint: #6e81a1;
     --head: #edf2fa;
     --mist: #4b6fff;
+    --mist-text: #5174ff;
+    --mist-solid: #3f5fe0;
+    --mist-solid-hover: #3a56d0;
     --mist-2: #7da1de;
     --mist-3: #abc2ec;
     --ok: #3ddc84;
+    --ok-text: #3ddc84;   /* 深色下已有 10.60，无需调整 */
     --warn: #f5c542;
     --bad: #f0685f;
 
@@ -144,13 +152,13 @@
     --term-bg: #0c1119;
     --term-chrome: #0a0e15;
     --term-text: #c7d2e2;
-    --term-dim: #6d7b92;
-    --term-faint: #45536b;
+    --term-dim: #8692a5;
+    --term-faint: #6b7e9f;
     --term-line: #1b2433;
     --term-userbar: rgba(245, 197, 66, 0.1);
     --term-status: #0a0e15;
     --term-accent: #7da1de;
-    --term-chip: #4b6fff;
+    --term-chip: #3f5fe0;
     --tw1-base: #5d80ff;
     --tw1-mid: #a9c0ff;
     --tw1-peak: #eef3ff;
@@ -162,6 +170,14 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* 标题均分断行，正文不留末行孤字 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
 }
 
 .skip-link {
@@ -221,6 +237,7 @@ body {
 }
 
 @layer utilities {
+  .tnum { font-variant-numeric: tabular-nums; }
   .font-mono2 {
     font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas,
       'Microsoft YaHei', monospace;
@@ -228,7 +245,7 @@ body {
   .text-head { color: var(--head); }
   .text-dim { color: var(--text-dim); }
   .text-faint { color: var(--text-faint); }
-  .text-mist { color: var(--mist); }
+  .text-mist { color: var(--mist-text); }
   .text-mist2 { color: var(--mist-2); }
   .text-mist3 { color: var(--mist-3); }
   .bg-panel { background: var(--panel); }

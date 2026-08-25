@@ -12,8 +12,8 @@ function MiniMeter() {
       </div>
       <div className="flex items-center justify-between text-dim">
         <span>
-          tps <span style={{ color: 'var(--ok)' }}>▂▃▅▆▇█▇▅</span>{' '}
-          <span style={{ color: 'var(--ok)' }} className="font-semibold">58</span>
+          tps <span style={{ color: 'var(--ok-text)' }}>▂▃▅▆▇█▇▅</span>{' '}
+          <span style={{ color: 'var(--ok-text)' }} className="font-semibold">58</span>
         </span>
         <span className="text-faint">cache 99.7%</span>
       </div>
