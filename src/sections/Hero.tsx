@@ -1,5 +1,5 @@
 import TerminalDemo from '../components/TerminalDemo'
-import CopyButton from '../components/CopyButton'
+import CommandLine from '../components/CommandLine'
 import Icon from '../components/Icon'
 import BrandIcon from '../components/BrandIcon'
 import { HERO_BADGES, strings, useLang, useT } from '../i18n'
@@ -20,11 +20,6 @@ export default function Hero() {
   const t = useT()
   return (
     <section id="top" className="grid-bg relative overflow-hidden pt-[61px]">
-      {/* 雾蓝氛围光 */}
-      <div
-        className="pointer-events-none absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full"
-        style={{ background: 'radial-gradient(closest-side, var(--glow), transparent)' }}
-      />
       {/* 星点 */}
       {[
         { l: '8%', t: '22%', d: '0s' }, { l: '16%', t: '58%', d: '0.8s' },
@@ -79,9 +74,10 @@ export default function Hero() {
                 style={{ left: '4%', bottom: '-4%', background: 'var(--mist-2)', animation: 'twinkle 2.4s ease-in-out 1.5s infinite' }}
               />
             </div>
-            <h1 className="font-mono2 min-w-0 text-[38px] font-extrabold leading-[0.95] tracking-tight sm:text-[76px] lg:text-[84px]">
-              <span className="wordmark-shine-blue">dsh</span>
-              <span className="wordmark-shine">-TUI</span>
+            {/* 连字符在 CSS 里是断点，品牌字会被断成 dsh- / TUI —— 品牌字不能断行 */}
+            <h1 className="font-mono2 min-w-0 whitespace-nowrap text-[38px] font-extrabold leading-[0.95] tracking-tight sm:text-[76px] lg:text-[84px]">
+              <span className="wordmark-accent">dsh</span>
+              <span className="wordmark-ink">-TUI</span>
             </h1>
           </div>
 
@@ -104,14 +100,7 @@ export default function Hero() {
             {t(strings['hero.desc'])}
           </p>
 
-          <div
-            className="font-mono2 mt-8 flex max-w-xl items-start gap-2 rounded-md border border-line px-3.5 py-3"
-            style={{ background: 'var(--panel)' }}
-          >
-            <span className="text-faint select-none">$</span>
-            <code className="min-w-0 flex-1 break-words text-[12px] leading-relaxed text-mist3 sm:text-[12.5px]">{INSTALL}</code>
-            <CopyButton text={INSTALL} />
-          </div>
+          <CommandLine command={INSTALL} className="mt-8" />
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <a
@@ -148,10 +137,6 @@ export default function Hero() {
 
         {/* right: live terminal */}
         <div className="relative">
-          <div
-            className="pointer-events-none absolute -inset-6 rounded-2xl"
-            style={{ background: 'radial-gradient(closest-side, var(--glow), transparent)' }}
-          />
           <TerminalDemo />
           <p className="font-mono2 mt-3 text-center text-[11px] text-faint">
             {t(strings['hero.demoNote'])}

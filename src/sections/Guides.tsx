@@ -12,8 +12,6 @@ export default function Guides() {
     <section id="guides" className="py-24" style={{ background: 'var(--bg-2)' }}>
       <div className="mx-auto max-w-6xl px-5">
         <SectionHead
-          index="07"
-          en="GUIDES"
           title={t(strings['guides.title'])}
           desc={t(strings['guides.desc'])}
         />

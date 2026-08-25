@@ -12,8 +12,6 @@ export default function Arch() {
     <section id="arch" className="py-24" style={{ background: 'var(--bg-2)' }}>
       <div className="mx-auto max-w-6xl px-5">
         <SectionHead
-          index="06"
-          en="ARCHITECTURE"
           title={t(strings['arch.title'])}
           desc={t(strings['arch.desc'])}
         />

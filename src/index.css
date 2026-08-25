@@ -253,33 +253,11 @@ body {
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 }
-.wordmark-shine {
-  background: linear-gradient(
-    100deg,
-    var(--head) 0%, var(--head) 35%,
-    var(--wm-s1) 46%, var(--wm-s2) 50%, var(--wm-s1) 54%,
-    var(--head) 65%, var(--head) 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shine-sweep 5s linear infinite;
-}
-.wordmark-shine-blue {
-  background: linear-gradient(
-    100deg,
-    var(--mist) 0%, var(--mist) 35%,
-    #9db8ff 46%, #e3ecff 50%, #9db8ff 54%,
-    var(--mist) 65%, var(--mist) 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shine-sweep 5s linear infinite;
-  animation-delay: 0.35s;
-}
+/* 品牌字：实心墨色，层级交给字号与字重。
+   原本是 background-clip:text 渐变 + 5s 无限流光扫过 —— 全页最大的元素
+   一直在动，注意力成本是持续付出的，且渐变填充压低了对比。 */
+.wordmark-ink { color: var(--head); }
+.wordmark-accent { color: var(--mist-text); }
 
 /* 终端顶栏双流光大字 */
 .tw-line1 {
@@ -324,6 +302,27 @@ body {
   50% { opacity: 0.55; }
 }
 
+/* 图标切换：两个图标都在 DOM 里，一个绝对定位，交叉淡入而不是切 visibility。
+   数值取自 better-ui：scale 0.25→1、opacity 0→1、blur 4px→0。 */
+.icon-swap > .icon-swap-out,
+.icon-swap > .icon-swap-in {
+  grid-area: 1 / 1;
+  transition:
+    opacity 200ms cubic-bezier(0.2, 0, 0, 1),
+    scale 200ms cubic-bezier(0.2, 0, 0, 1),
+    filter 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+.icon-swap > [data-on='false'] {
+  opacity: 0;
+  scale: 0.25;
+  filter: blur(4px);
+}
+.icon-swap > [data-on='true'] {
+  opacity: 1;
+  scale: 1;
+  filter: blur(0);
+}
+
 /* FAQ 展开：<details> 没法原生过渡高度，退而让内容淡入上移。
    全局 prefers-reduced-motion 块会把它压掉。 */
 @keyframes faq-in {
@@ -343,21 +342,6 @@ body {
 }
 .reveal.is-in {
   animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* scanlines over terminal */
-.scanlines::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 2px,
-    rgba(255, 255, 255, 0.012) 3px,
-    transparent 4px
-  );
 }
 
 /* faint blueprint grid */

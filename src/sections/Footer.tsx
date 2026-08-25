@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import PixelWhale from '../components/PixelWhale'
-import CopyButton from '../components/CopyButton'
+import CommandLine from '../components/CommandLine'
 import { FOOTER_GROUPS, strings, useLang, useT } from '../i18n'
 
 const INSTALL = 'npm install -g @deepseek-ai/dsh @deepseek-harness-tui/dsh-tui'
@@ -29,24 +29,13 @@ export default function Footer() {
     <footer className="border-t border-line">
       {/* CTA */}
       <div className="grid-bg relative overflow-hidden">
-        <div
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[360px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full"
-          style={{ background: 'radial-gradient(closest-side, var(--glow), transparent)' }}
-        />
         <div className="relative mx-auto flex max-w-6xl flex-col items-center px-5 py-20 text-center">
           <PixelWhale className="h-20 w-[104px]" />
           <h2 className="mt-6 text-[26px] font-bold text-head sm:text-[32px]">
             {t(strings['footer.cta.title'])}
           </h2>
           <p className="font-mono2 mt-2 text-[12.5px] text-dim">{t(strings['footer.cta.sub'])}</p>
-          <div
-            className="font-mono2 mt-7 flex w-full max-w-xl items-start gap-2 rounded-md border border-line px-4 py-3.5"
-            style={{ background: 'var(--panel)' }}
-          >
-            <span className="text-faint select-none">$</span>
-            <code className="min-w-0 flex-1 break-words text-left text-[12px] leading-relaxed text-mist3 sm:text-[12.5px]">{INSTALL}</code>
-            <CopyButton text={INSTALL} />
-          </div>
+          <CommandLine command={INSTALL} className="mt-7 w-full max-w-xl text-left" />
         </div>
       </div>
 
@@ -95,9 +84,8 @@ export default function Footer() {
         {/* Community / Contact */}
         <div className="scroll-mt-20 border-t border-soft py-8" id="contact">
           <div className="mx-auto max-w-6xl px-5">
-            <div className="text-center mb-6">
-              <div className="font-mono2 text-[11px] tracking-[0.18em] text-mist2">{t(strings['footer.community.eyebrow'])}</div>
-              <h3 className="text-[24px] font-bold text-head mt-1">Contact / Community</h3>
+            <div className="mb-6 text-center">
+              <h3 className="text-[24px] font-bold text-head">Contact / Community</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
               {([

@@ -145,7 +145,6 @@ export const strings = {
     zh: 'DeepSeek Harness 的 Claude Code 风格终端界面插件。\n献给偏爱 CLI 的各位极客。',
     en: 'A Claude Code-style terminal interface plugin for DeepSeek Harness. For CLI-loving geeks everywhere.',
   },
-  'footer.community.eyebrow': { zh: '社区', en: 'COMMUNITY' },
   'footer.community.qq': { zh: 'QQ 群', en: 'QQ GROUP' },
   'footer.community.wechat': { zh: '微信群', en: 'WECHAT GROUP' },
   'footer.community.name': { zh: 'dsh-TUI 插件交流群', en: 'dsh-TUI Plugin Community' },
@@ -217,7 +216,6 @@ export const HERO_BADGES: { k: Pair; v: Pair }[] = [
 ]
 
 export interface FeatureCellData {
-  no: string
   title: Pair
   desc: Pair
   tags: Pair[]
@@ -227,7 +225,6 @@ export interface FeatureCellData {
 
 export const FEATURE_CELLS: FeatureCellData[] = [
   {
-    no: '01',
     title: { zh: '终端原生交互', en: 'Terminal-native interaction' },
     desc: {
       zh: '流式 Markdown、结构化工具卡、命令与文件补全、@ 文件引用（消息任意位置补全，发送时自动附加文件内容）、历史搜索、消息选择，inline / alternate-screen 两种渲染模式，/lang 中英界面一键切换。',
@@ -242,7 +239,6 @@ export const FEATURE_CELLS: FeatureCellData[] = [
     span: 'md:col-span-3',
   },
   {
-    no: '02',
     title: { zh: '可观察的 Agent 状态', en: 'Observable agent status' },
     desc: {
       zh: '实时工作状态行、上下文分段进度、TPS 仪表、缓存命中率、推理等级、输入/输出 token 与 Git/会话信息 —— Agent 在做什么，一眼可见。',
@@ -257,7 +253,6 @@ export const FEATURE_CELLS: FeatureCellData[] = [
     meter: true,
   },
   {
-    no: '03',
     title: { zh: '完整会话工作流', en: 'Complete session workflow' },
     desc: {
       zh: '/resume 恢复、/new 新会话、/compact 压缩、/export 导出、/btw 侧问、模型切换，以及双击 Esc 发起的会话 rewind / fork 时间回溯。',
@@ -271,7 +266,6 @@ export const FEATURE_CELLS: FeatureCellData[] = [
     span: 'md:col-span-2',
   },
   {
-    no: '04',
     title: { zh: 'DSH 官方能力接入', en: 'Official DSH capabilities' },
     desc: {
       zh: 'Agent preset、Skills、MCP、Goals、Todos、子代理、ask_user_question 问卷，全部通过现有服务或注册表连接，不重复造轮子。',
@@ -285,7 +279,6 @@ export const FEATURE_CELLS: FeatureCellData[] = [
     span: 'md:col-span-2',
   },
   {
-    no: '05',
     title: { zh: '为长会话设计', en: 'Built for long sessions' },
     desc: {
       zh: '事件驱动投影、差分终端输出、消息虚拟化、回放合并与有界缓存 —— 每帧成本从 O(全会话) 降到 O(可视窗口)，渲染与内存不随会话膨胀。',

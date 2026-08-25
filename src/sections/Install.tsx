@@ -1,6 +1,6 @@
 import SectionHead from '../components/SectionHead'
 import Reveal from '../components/Reveal'
-import CopyButton from '../components/CopyButton'
+import CommandLine from '../components/CommandLine'
 import Icon from '../components/Icon'
 import { INSTALL_STEPS, strings, useLang, useT } from '../i18n'
 
@@ -13,8 +13,6 @@ export default function Install() {
     <section id="install" className="py-24">
       <div className="mx-auto max-w-6xl px-5">
         <SectionHead
-          index="03"
-          en="GETTING STARTED"
           title={t(strings['install.title'])}
           desc={t(strings['install.desc'])}
         />
@@ -83,14 +81,7 @@ export default function Install() {
                   </span>
                   <span className="text-[15px] font-bold text-head">{s.title[lang]}</span>
                 </div>
-                <div
-                  className="font-mono2 flex items-start gap-2 rounded border border-soft px-3 py-2.5"
-                  style={{ background: 'var(--bg-2)' }}
-                >
-                  <span className="text-faint select-none">$</span>
-                  <code className="min-w-0 flex-1 break-words text-[12px] leading-relaxed text-mist3">{s.cmd}</code>
-                  <CopyButton text={s.cmd} />
-                </div>
+                <CommandLine command={s.cmd} tone="inset" />
                 <p className="mt-3 text-[12.5px] leading-relaxed text-faint">{s.note[lang]}</p>
               </div>
             </Reveal>

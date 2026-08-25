@@ -12,8 +12,6 @@ export default function Faq() {
     <section id="faq" className="py-24">
       <div className="mx-auto max-w-6xl px-5">
         <SectionHead
-          index="08"
-          en="FREQUENTLY ASKED QUESTIONS"
           title={t(strings['faq.title'])}
           desc={t(strings['faq.desc'])}
         />

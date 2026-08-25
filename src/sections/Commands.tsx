@@ -11,8 +11,6 @@ export default function Commands() {
     <section id="commands" className="py-24">
       <div className="mx-auto max-w-6xl px-5">
         <SectionHead
-          index="05"
-          en="SLASH COMMANDS"
           title={t(strings['commands.title'])}
           desc={t(strings['commands.desc'])}
         />
