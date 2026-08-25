@@ -41,6 +41,7 @@ export const strings = {
     en: 'Pixel-whale top bar, live status line, streaming thinking, double-tap Esc time travel, and a blue-white context progress bar with a TPS gauge. Zero core changes, pure plugin mounting — install and go, uninstall with no residue.',
   },
   'hero.cta.start': { zh: '快速开始 →', en: 'Get started →' },
+  'hero.cta.bundle': { zh: '⬇ 下载整合包', en: '⬇ Download bundle' },
   'hero.cta.showcase': { zh: '看看界面', en: 'See the interface' },
   'hero.whaleAlt': { zh: 'dsh-TUI 像素鲸鱼娘', en: 'dsh-TUI pixel whale girl' },
   'hero.demoNote': {
@@ -79,6 +80,22 @@ export const strings = {
   },
   'install.alt.label': { zh: '备选 —— 手工安装 profile', en: 'Alternative — manual profile install' },
   'install.alt.or': { zh: '或', en: 'or' },
+
+  'bundle.title': { zh: '整合包安装（新手推荐）', en: 'Installer bundle (recommended)' },
+  'bundle.desc': {
+    zh: '不想敲命令？下载整合包，解压后双击 install.bat（macOS / Linux 运行 sh install.sh），脚本会自动装好 Node、pnpm、dsh CLI 与 dsh-TUI，并引导配置 API Key。',
+    en: 'Prefer not to type commands? Download the bundle, extract it, and double-click install.bat (or run sh install.sh on macOS / Linux). The script installs Node, pnpm, the dsh CLI, and dsh-TUI, then walks you through the API key.',
+  },
+  'bundle.download': { zh: '下载整合包', en: 'Download bundle' },
+  'bundle.download.alt': { zh: '下载整合包（国内直连）', en: 'Download bundle (direct link)' },
+  'bundle.mirror': { zh: 'GitHub 镜像', en: 'GitHub mirror' },
+  'bundle.step1': { zh: '下载整合包', en: 'Download the bundle' },
+  'bundle.step2': { zh: '解压到任意目录', en: 'Extract it anywhere' },
+  'bundle.step3': { zh: '双击 install.bat / 运行 sh install.sh', en: 'Double-click install.bat / run sh install.sh' },
+  'bundle.note': {
+    zh: '国内直连下载 · 自动切换 npm 镜像 · 无需手动安装 Node',
+    en: 'Direct download · auto-switches npm mirror · no manual Node setup',
+  },
 
   'shortcuts.title': { zh: '快捷键，全在指尖', en: 'Shortcuts, all at your fingertips' },
   'shortcuts.desc': {

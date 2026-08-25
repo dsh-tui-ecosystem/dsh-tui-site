@@ -24,6 +24,13 @@ jobs:
         run: |
           curl -fsSL https://raw.githubusercontent.com/dsh-tui-ecosystem/dsh-tui-ecosystem/main/plugins.json -o public/plugins/plugins.json
           node -e "const d=JSON.parse(require('fs').readFileSync('public/plugins/plugins.json','utf8')); console.log('plugins.json OK: '+d.plugins.length+' 条')"
+      - name: 拉取最新一键安装整合包（ccch1mneyyy/dsh-TUI Releases）
+        run: |
+          mkdir -p public/downloads
+          gh release download --repo ccch1mneyyy/dsh-TUI --pattern dsh-tui-setup.zip --dir public/downloads --clobber
+          ls -la public/downloads
+        env:
+          GH_TOKEN: ${{ github.token }}
       - run: SITE_URL=https://dshtui.com/ npm run build
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

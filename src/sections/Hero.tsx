@@ -108,8 +108,14 @@ export default function Hero() {
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <a
-              href="#install"
+              href="/downloads/dsh-tui-setup.zip"
               className="btn-press rounded bg-[var(--mist)] px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[#5d7dff]"
+            >
+              {t(strings['hero.cta.bundle'])}
+            </a>
+            <a
+              href="#install"
+              className="btn-press rounded border border-line px-5 py-2.5 text-[14px] text-dim transition-colors hover:border-[var(--mist)] hover:text-mist3"
             >
               {t(strings['hero.cta.start'])}
             </a>

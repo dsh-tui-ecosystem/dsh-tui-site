@@ -18,6 +18,59 @@ export default function Install() {
           desc={t(strings['install.desc'])}
         />
 
+        {/* 整合包安装（新手推荐） */}
+        <Reveal delay={40}>
+          <div
+            className="mb-6 flex flex-col gap-5 rounded-lg border p-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8"
+            style={{ background: 'var(--panel)', borderColor: 'var(--mist)' }}
+          >
+            <div className="min-w-0">
+              <div className="mb-1.5 flex flex-wrap items-center gap-2">
+                <span className="font-mono2 rounded border border-[var(--mist)] px-1.5 py-0.5 text-[10.5px] font-bold tracking-wide text-mist2">
+                  NEW
+                </span>
+                <h3 className="text-[17px] font-bold text-head">{t(strings['bundle.title'])}</h3>
+              </div>
+              <p className="max-w-2xl text-[13px] leading-relaxed text-dim">{t(strings['bundle.desc'])}</p>
+              <p className="font-mono2 mt-2 text-[11px] text-faint">{t(strings['bundle.note'])}</p>
+              <div className="mt-4 flex flex-wrap items-center gap-2">
+                {[
+                  { no: '1', txt: t(strings['bundle.step1']) },
+                  { no: '2', txt: t(strings['bundle.step2']) },
+                  { no: '3', txt: t(strings['bundle.step3']) },
+                ].map((s) => (
+                  <span
+                    key={s.no}
+                    className="font-mono2 flex items-center gap-1.5 rounded border border-soft px-2.5 py-1 text-[11.5px] text-mist3"
+                    style={{ background: 'var(--bg-2)' }}
+                  >
+                    <span className="flex h-4 w-4 items-center justify-center rounded bg-[var(--mist)] text-[9.5px] font-bold text-white">
+                      {s.no}
+                    </span>
+                    {s.txt}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="flex shrink-0 flex-col items-stretch gap-2 sm:items-end">
+              <a
+                href="/downloads/dsh-tui-setup.zip"
+                className="btn-press rounded bg-[var(--mist)] px-6 py-3 text-center text-[14px] font-semibold text-white transition-colors hover:bg-[#5d7dff]"
+              >
+                {t(strings['bundle.download'])}
+              </a>
+              <a
+                href="https://github.com/ccch1mneyyy/dsh-TUI/releases/latest/download/dsh-tui-setup.zip"
+                target="_blank"
+                rel="noreferrer"
+                className="font-mono2 text-center text-[11px] text-faint transition-colors hover:text-mist3"
+              >
+                {t(strings['bundle.mirror'])} ↗
+              </a>
+            </div>
+          </div>
+        </Reveal>
+
         <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-[var(--line)] lg:grid-cols-3">
           {STEPS.map((s, i) => (
             <Reveal key={s.no} delay={i * 80}>
