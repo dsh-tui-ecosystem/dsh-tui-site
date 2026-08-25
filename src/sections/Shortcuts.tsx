@@ -23,7 +23,7 @@ export default function Shortcuts() {
                 <li
                   key={i}
                   className={`flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-[var(--panel-2)] ${
-                    k.hi ? 'bg-[rgba(75,111,255,0.06)]' : ''
+                    k.hi ? 'bg-[var(--mist-wash)]' : ''
                   }`}
                 >
                   <span className="flex shrink-0 items-center gap-1.5">

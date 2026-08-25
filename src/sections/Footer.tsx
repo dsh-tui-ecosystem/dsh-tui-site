@@ -12,7 +12,7 @@ const LINK_GROUPS = FOOTER_GROUPS
 function QrFrame({ src, alt, pending }: { src: string; alt: string; pending: string }) {
   const [failed, setFailed] = useState(false)
   return (
-    <div className="relative mx-auto mt-4 flex h-40 w-40 items-center justify-center overflow-hidden rounded-md border border-line bg-white">
+    <div className="img-outline relative mx-auto mt-4 flex h-40 w-40 items-center justify-center overflow-hidden rounded-md bg-white">
       {failed ? (
         <span className="font-mono2 text-[10px] text-[#616c84]">{pending}</span>
       ) : (

@@ -43,6 +43,7 @@
     --mist-text: #2f59ff;     /* 同色相压暗，正文安全 */
     --mist-solid: #3f5fe0;    /* 实心填充，白字 5.35 */
     --mist-solid-hover: #3a56d0;
+    --mist-wash: rgba(75, 111, 255, 0.08);   /* 强调节点的浅底 */
     --mist-2: #4861cf;
     --mist-3: #3b53c2;
     --mist-deep: #172554;
@@ -96,6 +97,7 @@
     --mist-text: #5174ff;
     --mist-solid: #3f5fe0;
     --mist-solid-hover: #3a56d0;
+    --mist-wash: rgba(75, 111, 255, 0.06);  /* 再高会压垮其上 --mist-text 的对比（实测 0.08 → 4.43） */
     --mist-2: #7da1de;
     --mist-3: #abc2ec;
     --ok: #3ddc84;
@@ -162,6 +164,7 @@ p {
 }
 
 .theme-icon-sun { display: none; }
+:root[data-theme='dark'] .img-outline { outline-color: rgb(255 255 255 / 0.1); }
 :root[data-theme='dark'] .theme-icon-sun { display: block; }
 :root[data-theme='dark'] .theme-icon-moon { display: none; }
 
@@ -202,6 +205,13 @@ body {
 }
 
 @layer utilities {
+  /* 图片描边固定用纯黑 / 纯白低透明度。项目的 --line (#dfe4ec) 是蓝调中性色，
+     用它描图片会吸走底下的表面色，在图片边缘读成一圈脏印。 */
+  .img-outline {
+    outline: 1px solid rgb(0 0 0 / 0.1);
+    outline-offset: -1px;
+  }
+
   .tnum { font-variant-numeric: tabular-nums; }
   .font-mono2 {
     font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas,

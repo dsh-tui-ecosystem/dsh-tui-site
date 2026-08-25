@@ -38,7 +38,7 @@ export default function Showcase() {
                       decoding="async"
                       width={i === 0 ? 2559 : 1600}
                       height={i === 0 ? 1400 : 846}
-                      className="w-full transition-transform duration-500 ease-out group-hover:scale-[1.015]"
+                      className="img-outline w-full transition-transform duration-500 ease-out group-hover:scale-[1.015]"
                     />
                   </picture>
                 </div>
@@ -63,7 +63,7 @@ export default function Showcase() {
               href="https://github.com/ccch1mneyyy/dsh-TUI#-官方收录"
               target="_blank"
               rel="noreferrer"
-              className="group block overflow-hidden rounded-md border border-line"
+              className="group block overflow-hidden rounded-md"
             >
               <picture>
                 <source type="image/avif" srcSet={fix('./shots/wechat-official-480.avif')} />
@@ -75,7 +75,7 @@ export default function Showcase() {
                   decoding="async"
                   width="1870"
                   height="1438"
-                  className="w-full transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="img-outline w-full rounded-md transition-transform duration-500 group-hover:scale-[1.03]"
                 />
               </picture>
             </a>
