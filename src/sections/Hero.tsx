@@ -74,8 +74,11 @@ export default function Hero() {
                 style={{ left: '4%', bottom: '-4%', background: 'var(--mist-2)', animation: 'twinkle 2.4s ease-in-out 1.5s infinite' }}
               />
             </div>
-            {/* 连字符在 CSS 里是断点，品牌字会被断成 dsh- / TUI —— 品牌字不能断行 */}
-            <h1 className="font-mono2 min-w-0 whitespace-nowrap text-[38px] font-extrabold leading-[0.95] tracking-tight sm:text-[76px] lg:text-[84px]">
+            {/* 品牌字不能断行（连字符在 CSS 里是断点，会被断成 dsh- / TUI），
+                但 nowrap 之后字号就必须是流体的：lg 断点在 1024px 生效，
+                而左栏此时只有 ~281px 可用，固定 84px 会直接顶出去被右侧面板盖住。
+                clamp 让它随视口连续缩放，两头都不失控。 */}
+            <h1 className="font-mono2 min-w-0 whitespace-nowrap text-[38px] font-extrabold leading-[0.95] tracking-tight sm:text-[76px] lg:text-[clamp(56px,6.1vw,84px)]">
               <span className="wordmark-accent">dsh</span>
               <span className="wordmark-ink">-TUI</span>
             </h1>

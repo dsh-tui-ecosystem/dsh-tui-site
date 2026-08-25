@@ -145,6 +145,11 @@ export const strings = {
     zh: 'DeepSeek Harness 的 Claude Code 风格终端界面插件。\n献给偏爱 CLI 的各位极客。',
     en: 'A Claude Code-style terminal interface plugin for DeepSeek Harness. For CLI-loving geeks everywhere.',
   },
+  'community.title': { zh: '加入社区', en: 'Join the community' },
+  'community.desc': {
+    zh: '扫码进 QQ 群或微信群，安装、配置、终端兼容性的问题都可以直接问，也欢迎来提需求。',
+    en: 'Scan to join the QQ or WeChat group. Ask about installation, configuration, and terminal compatibility, or bring a feature request.',
+  },
   'footer.community.qq': { zh: 'QQ 群', en: 'QQ GROUP' },
   'footer.community.wechat': { zh: '微信群', en: 'WECHAT GROUP' },
   'footer.community.name': { zh: 'dsh-TUI 插件交流群', en: 'dsh-TUI Plugin Community' },
@@ -482,6 +487,14 @@ export const FOOTER_GROUPS: { name: Pair; links: { label: Pair; href: string }[]
       { label: { zh: '配置参考', en: 'Configuration' }, href: 'https://github.com/ccch1mneyyy/dsh-TUI/blob/main/docs/configuration.md' },
       { label: { zh: '主题系统', en: 'Themes' }, href: 'https://github.com/ccch1mneyyy/dsh-TUI/blob/main/docs/themes.md' },
       { label: { zh: '架构与限制', en: 'Architecture & limits' }, href: 'https://github.com/ccch1mneyyy/dsh-TUI/blob/main/docs/architecture.md' },
+    ],
+  },
+  {
+    name: { zh: '社区', en: 'Community' },
+    links: [
+      { label: { zh: 'QQ 群', en: 'QQ group' }, href: '#contact' },
+      { label: { zh: '微信群', en: 'WeChat group' }, href: '#contact' },
+      { label: { zh: 'Discussions', en: 'Discussions' }, href: 'https://github.com/dsh-tui-ecosystem/dsh-tui-site/discussions' },
     ],
   },
   {

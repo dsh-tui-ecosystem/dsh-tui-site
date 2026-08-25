@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import PixelWhale from '../components/PixelWhale'
 import CommandLine from '../components/CommandLine'
 import { FOOTER_GROUPS, strings, useLang, useT } from '../i18n'
@@ -7,20 +6,6 @@ const INSTALL = 'npm install -g @deepseek-ai/dsh @deepseek-harness-tui/dsh-tui'
 
 const LINK_GROUPS = FOOTER_GROUPS
 
-/** 二维码框。图片加载失败前不渲染占位文案，
- *  否则读屏会先念 alt 再念"二维码更新中"，两句互相矛盾。 */
-function QrFrame({ src, alt, pending }: { src: string; alt: string; pending: string }) {
-  const [failed, setFailed] = useState(false)
-  return (
-    <div className="img-outline relative mx-auto mt-4 flex h-40 w-40 items-center justify-center overflow-hidden rounded-md bg-white">
-      {failed ? (
-        <span className="font-mono2 text-[10px] text-[#616c84]">{pending}</span>
-      ) : (
-        <img src={src} alt={alt} className="h-full w-full object-contain" onError={() => setFailed(true)} />
-      )}
-    </div>
-  )
-}
 
 export default function Footer() {
   const lang = useLang()
@@ -41,7 +26,7 @@ export default function Footer() {
 
       {/* links */}
       <div className="border-t border-soft">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:grid-cols-[1.2fr_repeat(3,1fr)]">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
           <div>
             <div className="flex items-center gap-2.5">
               <PixelWhale float={false} className="h-6 w-8" />
@@ -68,8 +53,7 @@ export default function Footer() {
                   <li key={l.label.zh}>
                     <a
                       href={l.href}
-                      target="_blank"
-                      rel="noreferrer"
+                      {...(l.href.startsWith('#') ? {} : { target: '_blank', rel: 'noreferrer' })}
                       className="text-[13px] text-dim transition-colors hover:text-mist3"
                     >
                       {l.label[lang]}
@@ -79,28 +63,6 @@ export default function Footer() {
               </ul>
             </div>
           ))}
-        </div>
-
-        {/* Community / Contact */}
-        <div className="scroll-mt-20 border-t border-soft py-8" id="contact">
-          <div className="mx-auto max-w-6xl px-5">
-            <div className="mb-6 text-center">
-              <h3 className="text-[24px] font-bold text-head">Contact / Community</h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-              {([
-                { kicker: t(strings['footer.community.qq']), desc: t(strings['footer.community.qqDesc']), src: '/contact/qq-qr.png', alt: t(strings['footer.community.qqAlt']) },
-                { kicker: t(strings['footer.community.wechat']), desc: t(strings['footer.community.wechatDesc']), src: '/contact/wechat-qr.png', alt: t(strings['footer.community.wechatAlt']) },
-              ]).map((c) => (
-                <div key={c.src} className="rounded-lg border border-line p-6 text-center" style={{ background: 'var(--panel)' }}>
-                  <div className="font-mono2 text-[11px] tracking-[0.18em] text-mist2">{c.kicker}</div>
-                  <div className="text-[15px] font-semibold text-head mt-1">{t(strings['footer.community.name'])}</div>
-                  <QrFrame src={c.src} alt={c.alt} pending={t(strings['footer.community.qrPending'])} />
-                  <p className="text-[12.5px] text-dim mt-4 leading-snug">{c.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         <div className="border-t border-soft">

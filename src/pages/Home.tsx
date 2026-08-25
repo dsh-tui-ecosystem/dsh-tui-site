@@ -10,6 +10,7 @@ import Commands from '../sections/Commands'
 import Arch from '../sections/Arch'
 import Faq from '../sections/Faq'
 import Guides from '../sections/Guides'
+import Community from '../sections/Community'
 import Footer from '../sections/Footer'
 
 /** 中英文首页共享的完整页面结构（语言由外层 LangProvider 决定） */
@@ -29,6 +30,7 @@ export function HomeSections() {
         <Arch />
         <Guides />
         <Faq />
+        <Community />
       </main>
       <Footer />
     </div>
