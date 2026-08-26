@@ -112,7 +112,7 @@ const zh: GuidePageData[] = [
     slug: 'architecture',
     locale: 'zh-CN',
     navTitle: '架构与安全',
-    title: 'dsh-TUI 架构、性能与安全边界',
+    title: 'dsh-TUI 架构、性能与\u200b安全边界',
     description: '了解 dsh-TUI 的 Cordis 插件挂载、事件投影、终端渲染、长会话虚拟化以及安全边界。',
     intro: 'dsh-TUI 只负责交互和呈现。会话日志、模型调用、工具执行、fork、compaction 和持久化仍由 DeepSeek Harness 服务拥有。',
     sections: [

@@ -32,7 +32,7 @@ export default function Community() {
   const t = useT()
   return (
     <section id="contact" className="scroll-mt-20 py-24" style={{ background: 'var(--bg-2)' }}>
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-6xl px-page">
         <SectionHead
           align="center"
           title={t(strings['community.title'])}

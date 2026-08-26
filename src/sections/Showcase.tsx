@@ -11,7 +11,7 @@ export default function Showcase() {
   const fix = (p: string) => (lang === 'en' ? p.replaceAll('./', '../') : p)
   return (
     <section id="showcase" className="py-24" style={{ background: 'var(--bg-2)' }}>
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-6xl px-page">
         <SectionHead
           title={t(strings['showcase.title'])}
           desc={t(strings['showcase.desc'])}
@@ -25,7 +25,7 @@ export default function Showcase() {
                   <span className="h-2 w-2 rounded-full bg-[#f0685f]/70" />
                   <span className="h-2 w-2 rounded-full bg-[#f5c542]/70" />
                   <span className="h-2 w-2 rounded-full bg-[#3ddc84]/70" />
-                  <span className="font-mono2 ml-2 text-[11px] text-faint">{s.file}</span>
+                  <span className="font-mono2 ms-2 text-[11px] text-faint">{s.file}</span>
                 </div>
                 <div className="overflow-hidden">
                   <picture>
@@ -54,7 +54,7 @@ export default function Showcase() {
         <Reveal delay={120} className="mt-10">
           <div className="grid gap-6 rounded-lg border border-line p-6 md:grid-cols-[1fr_240px] md:items-center" style={{ background: 'var(--panel)' }}>
             <div>
-              <h3 className="text-[19px] font-bold text-head">{t(strings['showcase.featured.title'])}</h3>
+              <h3 className="text-[19px] font-bold leading-snug text-head">{t(strings['showcase.featured.title'])}</h3>
               <p className="mt-2 max-w-xl text-[13.5px] leading-[1.9] text-dim">
                 {t(strings['showcase.featured.desc'])}
               </p>

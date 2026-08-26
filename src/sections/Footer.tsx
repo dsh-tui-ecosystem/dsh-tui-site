@@ -14,19 +14,19 @@ export default function Footer() {
     <footer className="border-t border-line">
       {/* CTA */}
       <div className="grid-bg relative overflow-hidden">
-        <div className="relative mx-auto flex max-w-6xl flex-col items-center px-5 py-20 text-center">
-          <PixelWhale className="h-20 w-[104px]" />
-          <h2 className="mt-6 text-[26px] font-bold text-head sm:text-[32px]">
+        <div className="relative mx-auto flex max-w-6xl flex-col items-stretch px-page py-16 text-start sm:items-center sm:py-20 sm:text-center">
+          <PixelWhale className="h-20 w-[104px] sm:mx-auto" />
+          <h2 className="mt-6 text-[24px] font-bold text-head sm:text-[32px]">
             {t(strings['footer.cta.title'])}
           </h2>
           <p className="font-mono2 mt-2 text-[12.5px] text-dim">{t(strings['footer.cta.sub'])}</p>
-          <CommandLine command={INSTALL} className="mt-7 w-full max-w-xl text-left" />
+          <CommandLine command={INSTALL} className="mt-7 w-full max-w-xl text-start" />
         </div>
       </div>
 
       {/* links */}
       <div className="border-t border-soft">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
+        <div className="mx-auto grid max-w-6xl gap-10 px-page py-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
           <div>
             <div className="flex items-center gap-2.5">
               <PixelWhale float={false} className="h-6 w-8" />
@@ -59,7 +59,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-soft">
-          <div className="font-mono2 mx-auto flex max-w-6xl flex-col gap-2 px-5 py-5 text-[11.5px] text-faint sm:flex-row sm:items-center sm:justify-between">
+          <div className="font-mono2 mx-auto flex max-w-6xl flex-col gap-2 px-page py-5 text-[11.5px] text-faint sm:flex-row sm:items-center sm:justify-between">
             <span>© 2026 DSH-TUI Team</span>
           </div>
         </div>

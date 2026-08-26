@@ -10,7 +10,7 @@ export default function Guides() {
   const t = useT()
   return (
     <section id="guides" className="py-24" style={{ background: 'var(--bg-2)' }}>
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-6xl px-page">
         <SectionHead
           title={t(strings['guides.title'])}
           desc={t(strings['guides.desc'])}

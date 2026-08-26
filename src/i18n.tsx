@@ -347,10 +347,10 @@ export const INSTALL_STEPS: { no: string; title: Pair; cmd: string; note: Pair }
   },
 ]
 
-export const SHORTCUT_KEYS: { keys: string[]; desc: Pair; hi?: boolean }[] = [
+export const SHORTCUT_KEYS: { keys: string[]; times?: number; desc: Pair; hi?: boolean }[] = [
   { keys: ['Enter'], desc: { zh: '发送（Shift+Enter 换行）；命令菜单打开时执行选中项', en: 'Send (Shift+Enter for a newline); runs the selected item when the command menu is open' } },
   { keys: ['Ctrl+C'], desc: { zh: '中断当前回合；空闲时连按两次退出', en: 'Interrupt the current turn; press twice while idle to quit' } },
-  { keys: ['Esc', 'Esc'], desc: { zh: '空输入双击 = 时间回溯（rewind / fork）', en: 'Double-tap on empty input = time travel (rewind / fork)' }, hi: true },
+  { keys: ['Esc'], times: 2, desc: { zh: '空输入双击 = 时间回溯（rewind / fork）', en: 'Double-tap on empty input = time travel (rewind / fork)' }, hi: true },
   { keys: ['Ctrl+O'], desc: { zh: '展开 / 收起详情：思考全文、工具参数与输出', en: 'Expand / collapse details: full thinking, tool params and output' } },
   { keys: ['Ctrl+R'], desc: { zh: '历史消息搜索', en: 'Search message history' } },
   { keys: ['/'], desc: { zh: '会话内全文搜索，n / N 跳转', en: 'Full-text search within the session, n / N to jump between matches' } },

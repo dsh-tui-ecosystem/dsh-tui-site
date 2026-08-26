@@ -10,7 +10,7 @@ export default function Faq() {
   const t = useT()
   return (
     <section id="faq" className="py-24">
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-6xl px-page">
         <SectionHead
           title={t(strings['faq.title'])}
           desc={t(strings['faq.desc'])}

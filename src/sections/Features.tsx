@@ -5,12 +5,12 @@ import { FEATURE_CELLS, strings, useLang, useT } from '../i18n'
 /** 可观察状态格里的小仪表：上下文进度条 + TPS */
 function MiniMeter() {
   return (
-    <div className="font-mono2 mt-4 space-y-2 rounded border border-soft p-3 text-[11px]" style={{ background: 'var(--bg-2)' }}>
-      <div className="flex items-center justify-between text-dim">
-        <span>ctx <span className="text-mist2">▓▓▓▓▓▓░░░░</span> 512.4k/1.0M</span>
-        <span className="text-mist3">51.2%</span>
+    <div className="font-mono2 mt-4 space-y-2 overflow-x-auto rounded border border-soft p-3 text-[11px]" style={{ background: 'var(--bg-2)' }}>
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-dim">
+        <span>ctx <span className="text-mist2">▓▓▓▓▓▓░░░░</span></span>
+        <span className="text-mist3">512.4k/1.0M · 51.2%</span>
       </div>
-      <div className="flex items-center justify-between text-dim">
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-dim">
         <span>
           tps <span style={{ color: 'var(--ok-text)' }}>▂▃▅▆▇█▇▅</span>{' '}
           <span style={{ color: 'var(--ok-text)' }} className="font-semibold">58</span>
@@ -28,7 +28,7 @@ export default function Features() {
   const t = useT()
   return (
     <section id="features" className="relative py-24">
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-6xl px-page">
         <SectionHead
           title={t(strings['features.title'])}
           desc={t(strings['features.desc'])}

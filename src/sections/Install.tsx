@@ -11,7 +11,7 @@ export default function Install() {
   const t = useT()
   return (
     <section id="install" className="py-24">
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-6xl px-page">
         <SectionHead
           title={t(strings['install.title'])}
           desc={t(strings['install.desc'])}
@@ -24,11 +24,11 @@ export default function Install() {
             style={{ background: 'var(--panel)', borderColor: 'var(--mist)' }}
           >
             <div className="min-w-0">
-              <div className="mb-1.5 flex flex-wrap items-center gap-2">
+              <div className="mb-1.5 flex flex-col items-start gap-2 sm:flex-row sm:flex-wrap sm:items-center">
                 <span className="font-mono2 rounded border border-[var(--mist)] px-1.5 py-0.5 text-[10.5px] font-bold tracking-wide text-mist2">
                   NEW
                 </span>
-                <h3 className="text-[17px] font-bold text-head">{t(strings['bundle.title'])}</h3>
+                <h3 className="text-[17px] font-bold leading-snug text-head">{t(strings['bundle.title'])}</h3>
               </div>
               <p className="max-w-2xl text-[13px] leading-relaxed text-dim">{t(strings['bundle.desc'])}</p>
               <p className="font-mono2 mt-2 text-[11px] text-faint">{t(strings['bundle.note'])}</p>
@@ -54,7 +54,7 @@ export default function Install() {
             <div className="flex shrink-0 flex-col items-stretch gap-2 sm:items-end">
               <a
                 href="/downloads/dsh-tui-setup.zip"
-                className="btn-press rounded bg-[var(--mist-solid)] px-6 py-3 text-center text-[14px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)]"
+                className="btn-press whitespace-nowrap rounded bg-[var(--mist-solid)] px-6 py-3 text-center text-[14px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)]"
               >
                 {t(strings['bundle.download'])}
               </a>

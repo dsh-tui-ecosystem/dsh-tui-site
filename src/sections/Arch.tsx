@@ -11,7 +11,7 @@ export default function Arch() {
   const t = useT()
   return (
     <section id="arch" className="py-24" style={{ background: 'var(--bg-2)' }}>
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto max-w-6xl px-page">
         <SectionHead
           title={t(strings['arch.title'])}
           desc={t(strings['arch.desc'])}
@@ -56,7 +56,7 @@ export default function Arch() {
             <Reveal key={p.t.zh} delay={i * 60}>
               <div className="h-full p-5 transition-colors hover:bg-[var(--panel-2)]" style={{ background: 'var(--panel)' }}>
                 <h3 className="text-[14.5px] font-bold text-head">
-                  <span aria-hidden="true" className="text-mist font-mono2 mr-2 text-[12px]">▸</span>
+                  <span aria-hidden="true" className="text-mist font-mono2 me-2 text-[12px]">▸</span>
                   {p.t[lang]}
                 </h3>
                 <p className="mt-2 text-[12.5px] leading-[1.85] text-dim">{p.d[lang]}</p>
