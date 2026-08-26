@@ -115,6 +115,9 @@ export default function Hero() {
               t(strings['hero.desc'])
             )}
           </p>
+          <p className="mt-3 max-w-xl text-[12.5px] leading-[1.8] text-faint">
+            {t(strings['hero.aliases'])}
+          </p>
 
           <CommandLine command={INSTALL} className="mt-8" />
 

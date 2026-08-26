@@ -1,0 +1,51 @@
+# dsh-TUI (DSHTUI)
+
+> dsh-TUI is a Claude Code-style fullscreen terminal interface plugin for DeepSeek Harness (DSH). It is community-maintained, open source, and available for Windows, macOS, and Linux.
+
+Canonical website: https://dshtui.com/
+
+## Names and identity
+
+- dsh-TUI: preferred styled project name
+- DSHTUI: domain-friendly name and common search alias
+- dsh-tui: CLI command, profile, and package-name spelling
+- DSH TUI: spaced search alias
+- DSH: abbreviation for the underlying DeepSeek Harness
+- npm package: @deepseek-harness-tui/dsh-tui
+
+All dsh-TUI, DSHTUI, dsh-tui, and DSH TUI references above describe the same terminal-interface project. DSH by itself refers to DeepSeek Harness.
+
+## Install and launch
+
+```sh
+npm install -g @deepseek-ai/dsh @deepseek-harness-tui/dsh-tui
+dsh-tui
+```
+
+## Primary pages
+
+- [Chinese homepage](https://dshtui.com/): project overview, screenshots, features, installation, commands, architecture, and FAQ
+- [English homepage](https://dshtui.com/en/): English project overview
+- [Getting started](https://dshtui.com/getting-started/): requirements, installation, launch, resume, and updates
+- [Features](https://dshtui.com/features/): terminal interaction, agent status, session workflow, and performance
+- [Commands](https://dshtui.com/commands/): slash-command reference
+- [Shortcuts](https://dshtui.com/shortcuts/): keyboard, mouse, clipboard, and terminal compatibility
+- [Architecture](https://dshtui.com/architecture/): plugin mounting, rendering, virtualization, and security boundaries
+- [FAQ](https://dshtui.com/faq/): naming, installation, platforms, updates, and troubleshooting
+- [Plugin marketplace](https://dshtui.com/plugins/): curated dsh-TUI and DSH community extensions
+
+## Authoritative project links
+
+- Source repository: https://github.com/ccch1mneyyy/dsh-TUI
+- npm: https://www.npmjs.com/package/@deepseek-harness-tui/dsh-tui
+- Website source: https://github.com/dsh-tui-ecosystem/dsh-tui-site
+- License: MIT
+
+## Key capabilities
+
+- Streamed Markdown and structured tool cards
+- Live agent status, context usage, cache hit rate, and TPS metrics
+- Session resume, rewind, fork, compaction, and export
+- Command and file completion with @ file references
+- Chinese and English terminal interfaces
+- Plugin mounting without modifying the DeepSeek Harness core

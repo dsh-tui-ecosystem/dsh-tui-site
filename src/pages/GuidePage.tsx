@@ -114,6 +114,11 @@ export default function GuidePage({ page }: { page: GuidePageData }) {
 
       <main id="article" className="mx-auto grid max-w-5xl gap-10 px-page py-10 md:grid-cols-[minmax(0,1fr)_200px] md:gap-12 md:py-16 lg:py-20">
         <article className="min-w-0">
+          <nav aria-label={isEnglish ? 'Breadcrumb' : '面包屑导航'} className="mb-6 flex items-center gap-2 text-[12px] text-faint">
+            <a href={homeHref} className="hover:text-mist3">{isEnglish ? 'Home' : '首页'}</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page" className="text-dim">{page.navTitle}</span>
+          </nav>
           <h1 className="max-w-3xl text-[26px] font-bold leading-[1.25] text-head sm:text-[46px] sm:leading-tight">{page.title}</h1>
           <p className="mt-4 max-w-3xl text-[15px] leading-[1.9] text-dim sm:mt-5 sm:text-[16px]">{page.intro}</p>
 

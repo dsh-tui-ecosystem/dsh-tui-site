@@ -30,7 +30,7 @@ npm run build    # 构建到 dist/
 
 要求 Node ^22.19 或 ≥24。
 
-生产构建会把首页预渲染为完整 HTML。部署时建议提供正式站点 URL，以生成绝对 canonical、`og:url` 和 `sitemap.xml`：
+生产构建会把所有内容页预渲染为完整 HTML，并默认使用 `https://dshtui.com/` 生成绝对 canonical、`og:url` 和 `sitemap.xml`。其他部署可通过环境变量覆盖：
 
 ```sh
 SITE_URL=https://example.com/ npm run build
@@ -45,8 +45,13 @@ SITE_URL=https://example.com/ npm run build
 
 ## SEO 与部署
 
-- 构建会预渲染中文、英文首页与 12 个主题页面，并运行产物级 SEO 检查。
-- 设置 `SITE_URL` 后会生成绝对 canonical、`hreflang`、`og:url` 与包含全部路由的 `sitemap.xml`。
+- 构建会预渲染中文、英文首页与 12 个主题页面，并把插件市场数据预渲染成可直接抓取的 HTML。
+- 全站围绕 `dsh-TUI` 主名称以及 `DSHTUI`、`dsh-tui`、`DSH TUI`、`DSH` 相关别名建立一致的可见文案、页面标题和结构化数据。
+- 每个内容页都有唯一 title、description、canonical、Open Graph、Twitter Card、双向 `hreflang` 和 JSON-LD；指南页另有面包屑与 TechArticle 数据。
+- 构建会自动生成包含全部 canonical 页面和语言关系的 `sitemap.xml`，并在 `robots.txt` 中保持唯一 Sitemap 声明。
+- `public/llms.txt` 为 AI 搜索与回答引擎提供项目身份、名称关系、安装方式和权威链接。
+- `npm run build` 最后会运行产物级 SEO 检查，包括品牌词、结构化数据、站点地图、robots、插件静态内容和本地资源完整性。
+- 可在 GitHub Actions Secrets 中配置 `GOOGLE_SITE_VERIFICATION`、`BING_SITE_VERIFICATION`、`BAIDU_SITE_VERIFICATION`，部署时自动注入对应站长平台验证标签；不要把验证 token 直接提交到仓库。
 - `public/_headers` 提供适用于支持 `_headers` 规则的静态托管平台的长期资源缓存配置。
 - `deploy/nginx.conf.example` 提供 Nginx 的缓存、gzip 与 404 配置示例。
-- 上线后应通过搜索引擎的 URL 检查工具核对渲染 HTML、canonical、语言版本和 Core Web Vitals。
+- 上线后仍需在 Google Search Console、Bing Webmaster Tools 和百度搜索资源平台验证域名、提交 `https://dshtui.com/sitemap.xml`，并请求重新抓取首页；代码优化本身不能保证特定关键词排名。

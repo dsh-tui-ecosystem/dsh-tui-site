@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://dshtui.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://dshtui.com/en/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://dshtui.com/plugins/</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
-  <url><loc>https://dshtui.com/getting-started/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://dshtui.com/features/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dshtui.com/architecture/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dshtui.com/commands/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dshtui.com/shortcuts/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://dshtui.com/faq/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://join.dshtui.com/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://dshtui.com/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/"/></url>
+  <url><loc>https://dshtui.com/en/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/"/></url>
+  <url><loc>https://dshtui.com/getting-started/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/getting-started/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/getting-started/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/getting-started/"/></url>
+  <url><loc>https://dshtui.com/en/getting-started/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/getting-started/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/getting-started/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/getting-started/"/></url>
+  <url><loc>https://dshtui.com/features/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/features/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/features/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/features/"/></url>
+  <url><loc>https://dshtui.com/en/features/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/features/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/features/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/features/"/></url>
+  <url><loc>https://dshtui.com/commands/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/commands/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/commands/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/commands/"/></url>
+  <url><loc>https://dshtui.com/en/commands/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/commands/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/commands/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/commands/"/></url>
+  <url><loc>https://dshtui.com/shortcuts/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/shortcuts/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/shortcuts/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/shortcuts/"/></url>
+  <url><loc>https://dshtui.com/en/shortcuts/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/shortcuts/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/shortcuts/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/shortcuts/"/></url>
+  <url><loc>https://dshtui.com/architecture/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/architecture/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/architecture/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/architecture/"/></url>
+  <url><loc>https://dshtui.com/en/architecture/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/architecture/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/architecture/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/architecture/"/></url>
+  <url><loc>https://dshtui.com/faq/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/faq/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/faq/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/faq/"/></url>
+  <url><loc>https://dshtui.com/en/faq/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/faq/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/faq/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/faq/"/></url>
+  <url><loc>https://dshtui.com/plugins/</loc></url>
 </urlset>
