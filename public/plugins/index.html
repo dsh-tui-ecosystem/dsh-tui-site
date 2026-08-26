@@ -3,14 +3,27 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="dsh-TUI 插件市场：dsh-tui-ecosystem 社区插件收录。主题、技能、TUI 扩展，装上即用。"/>
+<meta name="description" content="dsh-TUI 插件市场：社区插件、主题、技能和 TUI 扩展收录。"/>
+<meta name="keywords" content="dsh-TUI, DSHTUI, dsh-tui, DSH TUI, DSH, DeepSeek Harness, DSH 插件, dsh-tui 插件"/>
+<meta name="application-name" content="dsh-TUI"/>
+<meta name="author" content="dsh-TUI Community"/>
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+<!-- site-verification -->
 <link rel="canonical" href="https://dshtui.com/plugins/"/>
 <meta property="og:type" content="website"/>
-<meta property="og:site_name" content="dsh-TUI 生态门户"/>
-<meta property="og:title" content="插件市场 — dsh-TUI 生态"/>
-<meta property="og:description" content="dsh-tui-ecosystem 的社区插件收录列表。主题、技能、TUI 扩展，装上即用。"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:site_name" content="dsh-TUI"/>
+<meta property="og:title" content="dsh-TUI 插件市场 — 社区扩展"/>
+<meta property="og:description" content="浏览 dsh-TUI 的社区插件、主题、技能和 TUI 扩展。"/>
 <meta property="og:url" content="https://dshtui.com/plugins/"/>
-<meta name="twitter:card" content="summary"/>
+<meta property="og:image" content="https://raw.githubusercontent.com/ccch1mneyyy/dsh-TUI/main/screenshots/social-preview.png"/>
+<meta property="og:image:width" content="1280"/>
+<meta property="og:image:height" content="640"/>
+<meta property="og:image:alt" content="dsh-TUI 插件市场与 DeepSeek Harness 终端界面"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="dsh-TUI 插件市场 — 社区扩展"/>
+<meta name="twitter:description" content="浏览 dsh-TUI 的社区插件和 TUI 扩展。"/>
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ccch1mneyyy/dsh-TUI/main/screenshots/social-preview.png"/>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"CollectionPage","name":"dsh-TUI 插件市场","url":"https://dshtui.com/plugins/","description":"dsh-tui-ecosystem 社区插件收录列表","isPartOf":{"@type":"WebSite","name":"dsh-TUI 生态门户","url":"https://dshtui.com/"}}
 </script>
@@ -20,12 +33,13 @@
     document.documentElement.dataset.theme = t === 'dark' ? 'dark' : 'light';
   } catch (e) { document.documentElement.dataset.theme = 'light'; }
 </script>
-<title>插件市场 — dsh-TUI 生态</title>
-<link rel="preconnect" href="https://fonts.loli.net"/>
-<link rel="preconnect" href="https://gstatic.loli.net" crossorigin=""/>
-<link href="https://fonts.loli.net/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=Press+Start+2P&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="../assets/index-ll_tsFBn.css"/>
-<link rel="icon" href="../favicon.ico"/>
+<title>dsh-TUI 插件市场 — 社区扩展</title>
+<link rel="preload" href="../fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin=""/>
+<link rel="preload" href="../fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin=""/>
+<link rel="stylesheet" href="/src/index.css" data-app-styles/>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="../whale-girl.png"/>
+<link rel="manifest" href="../site.webmanifest"/>
 <style>
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -603,8 +617,8 @@ var SUBMIT_API = 'https://api.dshtui.com/api/plugin-submissions';
 /* ===== 中英双语 ===== */
 var I18N = {
   zh: {
-    docTitle: '插件市场 — dsh-TUI 生态',
-    docDesc: 'dsh-TUI 插件市场：dsh-tui-ecosystem 社区插件收录。主题、技能、TUI 扩展，装上即用。',
+    docTitle: 'dsh-TUI 插件市场 — 社区扩展',
+    docDesc: 'dsh-TUI 插件市场：社区插件、主题、技能和 TUI 扩展收录。',
     navIntro: '介绍', navPlugins: '插件市场', navJoin: '加入生态',
     kick: '// PLUGINS · 插件市场',
     h1: '给 dsh-TUI 装上<span class="grad">社区的手</span>',
@@ -646,8 +660,8 @@ var I18N = {
     contactLink: '联系：QQ群 / 微信群 见官网首页 →'
   },
   en: {
-    docTitle: 'Plugin Marketplace — dsh-TUI Ecosystem',
-    docDesc: 'dsh-TUI plugin marketplace: community plugins curated by dsh-tui-ecosystem. Themes, skills, TUI extensions — install and go.',
+    docTitle: 'dsh-TUI Plugin Marketplace',
+    docDesc: 'Community plugins for dsh-TUI: themes, skills, tools, and TUI extensions.',
     navIntro: 'Intro', navPlugins: 'Plugins', navJoin: 'Join',
     kick: '// PLUGINS · Marketplace',
     h1: 'Community-built <span class="grad">hands for dsh-TUI</span>',
@@ -738,8 +752,12 @@ function cardHTML(p, isFeatured, i) {
   var avatar = 'https://github.com/' + encodeURIComponent(p.author) + '.png?size=84';
   var badge = '<span class="mk-kind ' + esc(p.kind || 'plugin') + '">' + esc(p.kind === 'template' ? 'template' : p.kind === 'core' ? t('coreBadge') : 'plugin') + '</span>';
   var tags = (p.tags || []).map(function (x) { return '<span class="mk-tag">' + esc(x) + '</span>'; }).join('');
-  var npm = p.npm ? '<a href="' + esc(p.npm) + '" target="_blank" rel="noopener">' + t('npmBtn') + '</a>' : '';
-  var pkgName = p.npm ? String(p.npm).replace(/^https?:\/\/www\.npmjs\.com\/package\//, '').split('/')[0] : null;
+  var npmValue = p.npm ? String(p.npm) : '';
+  var pkgName = npmValue ? npmValue.replace(/^https?:\/\/www\.npmjs\.com\/package\//, '') : null;
+  var npmHref = npmValue && /^https?:\/\//.test(npmValue)
+    ? npmValue
+    : (npmValue ? 'https://www.npmjs.com/package/' + npmValue.split('/').map(encodeURIComponent).join('/') : '');
+  var npm = npmValue ? '<a href="' + esc(npmHref) + '" target="_blank" rel="noopener">' + t('npmBtn') + '</a>' : '';
   var installName = pkgName || p.name;
   var delay = firstPaint ? ' style="animation-delay:' + Math.min(i * 45, 400) + 'ms"' : '';
   var shot = p.screenshot ? '<div class="mk-shot"><img src="' + esc(p.screenshot) + '" alt="" loading="lazy" onerror="this.parentNode.style.display=\'none\'"/></div>' : '';

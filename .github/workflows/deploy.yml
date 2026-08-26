@@ -31,7 +31,13 @@ jobs:
           ls -la public/downloads
         env:
           GH_TOKEN: ${{ github.token }}
-      - run: SITE_URL=https://dshtui.com/ npm run build
+      - name: 构建站点与 SEO 产物
+        run: npm run build
+        env:
+          SITE_URL: https://dshtui.com/
+          GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
+          BING_SITE_VERIFICATION: ${{ secrets.BING_SITE_VERIFICATION }}
+          BAIDU_SITE_VERIFICATION: ${{ secrets.BAIDU_SITE_VERIFICATION }}
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:

@@ -48,6 +48,10 @@ export const strings = {
     zh: '像素鲸鱼顶栏、实时工作状态行、思考流式展开、双击 Esc 时间回溯、蓝白上下文进度条 + TPS 仪表。零核心改动，纯插件挂载 —— 装上即用，卸了不留补丁。',
     en: 'Pixel-whale top bar, live status line, streaming thinking, double-tap Esc time travel, and a blue-white context progress bar with a TPS gauge. Zero core changes, pure plugin mounting — install and go, uninstall with no residue.',
   },
+  'hero.aliases': {
+    zh: '项目名写作 dsh-TUI；命令与包名使用 dsh-tui，域名与常用简称是 DSHTUI。它运行在 DeepSeek Harness（简称 DSH）之上。',
+    en: 'The project name is dsh-TUI; the command and package use dsh-tui, while DSHTUI is the domain-friendly alias. It runs on DeepSeek Harness, abbreviated DSH.',
+  },
   'hero.cta.start': { zh: '快速开始', en: 'Get started' },
   'hero.cta.bundle': { zh: '下载整合包', en: 'Download bundle' },
   'hero.cta.showcase': { zh: '看看界面', en: 'See the interface' },
@@ -439,7 +443,7 @@ export const GUIDE_CARDS: { href: string; title: Pair; desc: Pair }[] = [
   { href: './commands/', title: { zh: '命令参考', en: 'Commands' }, desc: { zh: '会话、模型、技能、MCP 与开发辅助命令。', en: 'Session, model, skills, MCP, and developer commands.' } },
   { href: './shortcuts/', title: { zh: '快捷键', en: 'Shortcuts' }, desc: { zh: '键盘、鼠标、剪贴板与终端兼容性。', en: 'Keyboard, mouse, clipboard, and terminal compatibility.' } },
   { href: './architecture/', title: { zh: '架构与安全', en: 'Architecture' }, desc: { zh: '插件挂载、事件投影、虚拟化和安全边界。', en: 'Plugin mounting, event projection, virtualization, and security boundaries.' } },
-  { href: './faq/', title: { zh: '常见问题', en: 'FAQ' }, desc: { zh: '安装、平台、更新和会话恢复问题。', en: 'Installation, platforms, updates, and session recovery.' } },
+  { href: './faq/', title: { zh: '常见问题', en: 'FAQ' }, desc: { zh: '名称关系、安装、平台、更新和会话恢复。', en: 'Naming, installation, platforms, updates, and session recovery.' } },
 ]
 
 export const FAQ_ITEMS: { question: Pair; answer: Pair }[] = [
@@ -448,6 +452,13 @@ export const FAQ_ITEMS: { question: Pair; answer: Pair }[] = [
     answer: {
       zh: 'dsh-TUI 是 DeepSeek Harness 的 Claude Code 风格全屏终端界面插件，提供流式 Markdown、结构化工具卡、会话管理、实时 Agent 状态和终端原生交互。',
       en: 'dsh-TUI is a Claude Code-style fullscreen terminal interface plugin for DeepSeek Harness, with streamed Markdown, structured tool cards, session management, live agent status, and terminal-native interaction.',
+    },
+  },
+  {
+    question: { zh: 'DSHTUI、dsh-tui、DSH TUI 是同一个项目吗？', en: 'Do DSHTUI, dsh-tui, and DSH TUI mean the same project?' },
+    answer: {
+      zh: '是。dsh-TUI 是项目的标准写法；DSHTUI、dsh-tui、DSH TUI 都指同一个项目。DSH 是底层 DeepSeek Harness 的简称。',
+      en: 'Yes. dsh-TUI is the styled project name; DSHTUI, dsh-tui, and DSH TUI all refer to the same project. DSH abbreviates the underlying DeepSeek Harness.',
     },
   },
   {

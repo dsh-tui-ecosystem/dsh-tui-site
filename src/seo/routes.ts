@@ -5,8 +5,14 @@ export interface SeoRoute {
   locale: SiteLocale
   title: string
   description: string
+  keywords: string[]
   alternatePath: string
   kind: 'home' | 'guide'
+}
+
+const brandKeywords: Record<SiteLocale, string[]> = {
+  'zh-CN': ['dsh-TUI', 'DSHTUI', 'dsh-tui', 'DSH TUI', 'DSH', 'DeepSeek Harness', 'DeepSeek Harness TUI', '终端界面', 'AI 编码助手'],
+  en: ['dsh-TUI', 'DSHTUI', 'dsh-tui', 'DSH TUI', 'DSH', 'DeepSeek Harness', 'DeepSeek Harness TUI', 'terminal UI', 'coding agent'],
 }
 
 const homeRoutes: SeoRoute[] = [
@@ -15,6 +21,7 @@ const homeRoutes: SeoRoute[] = [
     locale: 'zh-CN',
     title: 'dsh-TUI：DeepSeek Harness 的 Claude Code 风格终端界面',
     description: 'dsh-TUI 是 DeepSeek Harness 的 Claude Code 风格全屏终端界面插件，支持流式 Markdown、实时 Agent 状态、会话回溯、上下文进度与 TPS 仪表。',
+    keywords: brandKeywords['zh-CN'],
     alternatePath: '/en/',
     kind: 'home',
   },
@@ -23,6 +30,7 @@ const homeRoutes: SeoRoute[] = [
     locale: 'en',
     title: 'dsh-TUI — Claude Code-style TUI for DeepSeek Harness',
     description: 'A fullscreen terminal interface for DeepSeek Harness with streamed Markdown, observable agent status, session rewind, context usage, and TPS metrics.',
+    keywords: brandKeywords.en,
     alternatePath: '/',
     kind: 'home',
   },
@@ -33,6 +41,7 @@ const guideRoutes: SeoRoute[] = GUIDE_PAGES.map((page) => ({
   locale: page.locale,
   title: `${page.title} | dsh-TUI`,
   description: page.description,
+  keywords: [...brandKeywords[page.locale], page.navTitle, page.title],
   alternatePath: page.locale === 'en' ? `/${page.slug}/` : `/en/${page.slug}/`,
   kind: 'guide',
 }))
