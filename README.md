@@ -46,7 +46,7 @@ SITE_URL=https://example.com/ npm run build
 ## SEO 与部署
 
 - 构建会预渲染中文、英文首页与 12 个主题页面，并把插件市场数据预渲染成可直接抓取的 HTML。
-- 全站围绕 `dsh-TUI` 主名称以及 `DSHTUI`、`dsh-tui`、`DSH TUI`、`DSH` 相关别名建立一致的可见文案、页面标题和结构化数据。
+- 全站主名称写作 `dsh-TUI`。`DSHTUI`、`dsh-tui`、`DSH TUI` 等别名放在可见 FAQ、`llms.txt` 和 JSON-LD `alternateName` 里，不堆进每个页面标题。
 - 每个内容页都有唯一 title、description、canonical、Open Graph、Twitter Card、双向 `hreflang` 和 JSON-LD；指南页另有面包屑与 TechArticle 数据。
 - 构建会自动生成包含全部 canonical 页面和语言关系的 `sitemap.xml`，并在 `robots.txt` 中保持唯一 Sitemap 声明。
 - `public/llms.txt` 为 AI 搜索与回答引擎提供项目身份、名称关系、安装方式和权威链接。

@@ -65,7 +65,6 @@ for (const route of expectedRoutes) {
 
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1]
   const description = metaValue(html, 'name', 'description')
-  const keywords = metaValue(html, 'name', 'keywords')?.toLowerCase() ?? ''
   const h1Count = (html.match(/<h1\b/g) ?? []).length
   const jsonLd = jsonLdValue(html)
   const types = graphTypes(jsonLd)
@@ -83,7 +82,6 @@ for (const route of expectedRoutes) {
   record((html.match(/rel="alternate" hreflang=/g) ?? []).length === 3, `${route}: hreflang set incomplete`)
   record(metaValue(html, 'property', 'og:url') === routeUrl(route), `${route}: og:url mismatch`)
   record(metaValue(html, 'property', 'og:type') === (isGuide ? 'article' : 'website'), `${route}: og:type mismatch`)
-  record(['dshtui', 'dsh-tui', 'dsh'].every((term) => keywords.includes(term)), `${route}: brand keyword set incomplete`)
   record(Boolean(jsonLd), `${route}: JSON-LD missing or invalid`)
 
   if (jsonLd) {
@@ -96,7 +94,6 @@ for (const route of expectedRoutes) {
     if (!isGuide) {
       record(types.has('SoftwareApplication'), `${route}: SoftwareApplication structured data missing`)
       record(types.has('SoftwareSourceCode'), `${route}: SoftwareSourceCode structured data missing`)
-      record(!types.has('FAQPage'), `${route}: homepage must not emit deprecated FAQPage`)
     } else {
       record(types.has('WebPage'), `${route}: WebPage structured data missing`)
       record(types.has('TechArticle'), `${route}: TechArticle structured data missing`)
@@ -147,7 +144,6 @@ const pluginJsonLd = jsonLdValue(pluginHtml)
 const pluginTypes = graphTypes(pluginJsonLd)
 const pluginTitle = pluginHtml.match(/<title>([^<]+)<\/title>/)?.[1]
 const pluginDescription = metaValue(pluginHtml, 'name', 'description')
-const pluginKeywords = metaValue(pluginHtml, 'name', 'keywords')?.toLowerCase() ?? ''
 const pluginCssHref = pluginHtml.match(/<link rel="stylesheet" href="([^"]+)"/i)?.[1]
 
 record(Boolean(pluginTitle && pluginTitle.length >= 15 && pluginTitle.length <= 75), '/plugins/: invalid title')
@@ -155,7 +151,6 @@ record(Boolean(pluginDescription && pluginDescription.length >= 25 && pluginDesc
 record((pluginHtml.match(/<h1\b/g) ?? []).length === 1, '/plugins/: expected exactly one h1')
 record(canonicalValue(pluginHtml) === routeUrl('/plugins/'), '/plugins/: canonical mismatch')
 record(metaValue(pluginHtml, 'property', 'og:url') === routeUrl('/plugins/'), '/plugins/: og:url mismatch')
-record(['dshtui', 'dsh-tui', 'dsh'].every((term) => pluginKeywords.includes(term)), '/plugins/: brand keyword set incomplete')
 record(!/(?:fonts\.googleapis\.com|fonts\.loli\.net)/.test(pluginHtml), '/plugins/: third-party font stylesheet remains')
 record((pluginHtml.match(/data-prerendered="true"/g) ?? []).length === pluginData.plugins.length, '/plugins/: plugin list was not fully prerendered')
 record(pluginTypes.has('CollectionPage'), '/plugins/: CollectionPage structured data missing')
@@ -188,7 +183,7 @@ record(sitemapDirectives.length === 1, `robots.txt: expected one Sitemap directi
 record(sitemapDirectives[0]?.trim() === `Sitemap: ${routeUrl('/sitemap.xml')}`, 'robots.txt: Sitemap URL mismatch')
 
 const manifest = JSON.parse(await readFile(path.join(distDir, 'site.webmanifest'), 'utf8'))
-record(manifest.name.includes('DSHTUI'), 'web manifest: DSHTUI alias missing')
+record(manifest.name.includes('dsh-TUI'), 'web manifest: project name missing')
 record(manifest.start_url === '/', 'web manifest: canonical start_url missing')
 
 const llms = await readFile(path.join(distDir, 'llms.txt'), 'utf8')

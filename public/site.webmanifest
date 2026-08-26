@@ -1,8 +1,8 @@
 {
   "id": "/",
-  "name": "dsh-TUI (DSHTUI) — DeepSeek Harness / DSH 终端界面",
+  "name": "dsh-TUI — DeepSeek Harness 终端界面",
   "short_name": "dsh-TUI",
-  "description": "dsh-TUI（也称 DSHTUI、dsh-tui）是 DeepSeek Harness（DSH）的 Claude Code 风格全屏终端界面。",
+  "description": "DeepSeek Harness 的 Claude Code 风格全屏终端界面插件。",
   "lang": "zh-CN",
   "start_url": "/",
   "scope": "/",

@@ -402,7 +402,7 @@ async function enhancePluginMarketplace() {
         name: 'dsh-TUI 插件市场',
         alternateName: ['DSHTUI Plugin Marketplace', 'dsh-tui plugins', 'DSH plugins'],
         url: pluginUrl,
-        description: 'dsh-TUI（DSHTUI）与 DeepSeek Harness（DSH）的社区插件、主题、技能和 TUI 扩展收录。',
+        description: 'dsh-TUI 社区插件、主题、技能和 TUI 扩展收录。',
         inLanguage: ['zh-CN', 'en'],
         isPartOf: { '@id': entityUrl('#website') },
         mainEntity: { '@id': `${pluginUrl}#plugins` },
@@ -430,10 +430,10 @@ async function enhancePluginMarketplace() {
     )
     .replace('<!-- site-verification -->', verificationMarkup())
 
-  html = replaceMeta(html, 'name="description"', 'dsh-TUI（DSHTUI）插件市场：收录 dsh-tui 与 DeepSeek Harness（DSH）社区插件、主题、技能和 TUI 扩展。')
+  html = replaceMeta(html, 'name="description"', 'dsh-TUI 插件市场：社区插件、主题、技能和 TUI 扩展收录。')
   html = replaceMeta(html, 'property="og:url"', pluginUrl)
-  html = replaceMeta(html, 'property="og:title"', 'dsh-TUI（DSHTUI）插件市场 — DSH 生态')
-  html = replaceMeta(html, 'property="og:description"', '浏览 dsh-TUI、dsh-tui 与 DeepSeek Harness（DSH）的社区插件、主题、技能和 TUI 扩展。')
+  html = replaceMeta(html, 'property="og:title"', 'dsh-TUI 插件市场 — 社区扩展')
+  html = replaceMeta(html, 'property="og:description"', '浏览 dsh-TUI 的社区插件、主题、技能和 TUI 扩展。')
 
   await writeFile(pluginHtmlPath, html)
   return { updatedAt: pluginData.updatedAt, count: plugins.length }
