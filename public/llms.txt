@@ -33,6 +33,7 @@ dsh-tui
 - [Architecture](https://dshtui.com/architecture/): plugin mounting, rendering, virtualization, and security boundaries
 - [FAQ](https://dshtui.com/faq/): naming, installation, platforms, updates, and troubleshooting
 - [Plugin marketplace](https://dshtui.com/plugins/): curated dsh-TUI and DSH community extensions
+- [English plugin marketplace](https://dshtui.com/en/plugins/): English catalog of community plugins, themes, skills, and TUI extensions
 
 ## Authoritative project links
 

@@ -14,5 +14,6 @@
   <url><loc>https://dshtui.com/en/architecture/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/architecture/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/architecture/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/architecture/"/></url>
   <url><loc>https://dshtui.com/faq/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/faq/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/faq/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/faq/"/></url>
   <url><loc>https://dshtui.com/en/faq/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/faq/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/faq/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/faq/"/></url>
-  <url><loc>https://dshtui.com/plugins/</loc></url>
+  <url><loc>https://dshtui.com/plugins/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/plugins/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/plugins/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/plugins/"/></url>
+  <url><loc>https://dshtui.com/en/plugins/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/plugins/"/><xhtml:link rel="alternate" hreflang="en" href="https://dshtui.com/en/plugins/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://dshtui.com/plugins/"/></url>
 </urlset>

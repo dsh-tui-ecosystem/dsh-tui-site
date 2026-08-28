@@ -17,9 +17,12 @@ function publicDirIndex(): Plugin {
       server.middlewares.use((req, _res, next: () => void) => {
         if (req.url) {
           const [pathname, query = ''] = req.url.split('?')
-          if (pathname.endsWith('/')) {
+          const q = query ? `?${query}` : ''
+          if (pathname === '/en/plugins' || pathname === '/en/plugins/') {
+            req.url = '/plugins/index.html' + q
+          } else if (pathname.endsWith('/')) {
             const file = path.resolve(__dirname, 'public', '.' + pathname, 'index.html')
-            if (fs.existsSync(file)) req.url = pathname + 'index.html' + (query ? '?' + query : '')
+            if (fs.existsSync(file)) req.url = pathname + 'index.html' + q
           }
         }
         next()

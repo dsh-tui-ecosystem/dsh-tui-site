@@ -340,26 +340,61 @@ function normalizeNpmReference(value) {
   }
 }
 
-function pluginKindLabel(kind) {
-  if (kind === 'core') return '核心'
-  if (kind === 'template') return '模板'
-  return '插件'
+function extractPluginI18n(html) {
+  const start = html.indexOf('var I18N = ')
+  const from = html.indexOf('{', start)
+  const close = html.indexOf('\n};', from)
+  if (start < 0 || from < 0 || close < 0) throw new Error('Unable to extract plugin I18N')
+  return new Function(`return (${html.slice(from, close + 2)})`)()
 }
 
-function pluginCard(plugin) {
+function applyPluginPack(html, pack) {
+  html = html.replace(/(\sdata-i18n="([^"]+)"[^>]*>)([^<]*)/g, (match, open, key) => (
+    pack[key] == null ? match : `${open}${pack[key]}`
+  ))
+  html = html.replace(/(\sdata-i18n-html="([^"]+)"[^>]*>)([\s\S]*?)(<\/(?:h1|p|li)>)/g, (match, open, key, _inner, close) => (
+    pack[key] == null ? match : `${open}${pack[key]}${close}`
+  ))
+  html = html.replace(/\splaceholder="[^"]*"(\s[^>]*data-i18n-ph="([^"]+)")/g, (match, rest, key) => (
+    pack[key] == null ? match : ` placeholder="${escapeHtml(pack[key])}"${rest}`
+  ))
+  html = html.replace(/(\sdata-i18n-ph="([^"]+)"[^>]*\splaceholder=")[^"]*"/g, (match, open, key) => (
+    pack[key] == null ? match : `${open}${escapeHtml(pack[key])}"`
+  ))
+  html = html.replace(/(\sdata-i18n-aria="([^"]+)"[^>]*aria-label=")[^"]*"/g, (match, open, key) => (
+    pack[key] == null ? match : `${open}${escapeHtml(pack[key])}"`
+  ))
+  html = html.replace(/(aria-label=")[^"]*("([^>]*\sdata-i18n-aria="([^"]+)")[^>]*)/g, (match, pre, post, _attrs, key) => (
+    pack[key] == null ? match : `${pre}${escapeHtml(pack[key])}${post}`
+  ))
+  const readmeRest = (pack.readmeExample || '').split(' · ').slice(1).join(' · ')
+  html = html.replace(
+    /<pre id="readme-example">[\s\S]*?<\/pre>/,
+    `<pre id="readme-example"><span class="k">[dsh-TUI]</span>(https://github.com/ccch1mneyyy/dsh-TUI) · ${escapeHtml(readmeRest)}</pre>`,
+  )
+  return html
+}
+
+function pluginKindLabel(kind, pack) {
+  if (kind === 'core') return pack.kindCore
+  if (kind === 'template') return pack.kindTemplate
+  return pack.kindPlugin
+}
+
+function pluginCard(plugin, pack) {
   const kind = plugin.kind === 'template' || plugin.kind === 'core' ? plugin.kind : 'plugin'
   const tags = (plugin.tags ?? []).map((tag) => `<span class="mk-tag">${escapeHtml(tag)}</span>`).join('')
   const npmReference = normalizeNpmReference(plugin.npm)
   const npmLink = npmReference
-    ? `<a href="${escapeHtml(npmReference.url)}" target="_blank" rel="noopener">npm 包</a>`
+    ? `<a href="${escapeHtml(npmReference.url)}" target="_blank" rel="noopener">${escapeHtml(pack.npmBtn)}</a>`
     : ''
   const title = plugin.displayName || plugin.name
   const install = plugin.name
     ? `<div class="mk-install"><code>dsh plugin add ${escapeHtml(plugin.name)}</code></div>`
     : ''
   const badge = plugin.featured
-    ? '<span class="mk-pick">编辑推荐</span>'
-    : `<span class="mk-kind ${escapeHtml(kind)}">${escapeHtml(pluginKindLabel(kind))}</span>`
+    ? `<span class="mk-pick">${escapeHtml(pack.pickBadge)}</span>`
+    : `<span class="mk-kind ${escapeHtml(kind)}">${escapeHtml(pluginKindLabel(kind, pack))}</span>`
 
   return `<article class="mk-card${plugin.featured ? ' featured' : ''}" data-prerendered="true">
     <div class="mk-card-body">
@@ -371,7 +406,7 @@ function pluginCard(plugin) {
       </div>
       <p class="mk-desc">${escapeHtml(plugin.description)}</p>
       ${tags ? `<div class="mk-tags">${tags}</div>` : ''}
-      <div class="mk-actions"><a class="primary" href="${escapeHtml(plugin.repo)}" target="_blank" rel="noopener">GitHub 仓库</a>${npmLink}</div>
+      <div class="mk-actions"><a class="primary" href="${escapeHtml(plugin.repo)}" target="_blank" rel="noopener">${escapeHtml(pack.repoBtn)}</a>${npmLink}</div>
       ${install}
     </div>
   </article>`
@@ -386,77 +421,124 @@ async function enhancePluginMarketplace() {
   ])
   const pluginData = JSON.parse(pluginDataSource)
   const plugins = Array.isArray(pluginData.plugins) ? pluginData.plugins : []
-  const pluginUrl = routeUrl('/plugins/')
   const cssAsset = template.match(/<link rel="stylesheet"[^>]*href="\.\/(assets\/[^" ]+\.css)"/)?.[1]
   if (!cssAsset) throw new Error('Unable to find the generated CSS asset for the plugin marketplace')
+  const i18n = extractPluginI18n(sourceHtml)
+  const zhUrl = routeUrl('/plugins/')
+  const enUrl = routeUrl('/en/plugins/')
+  const alternates = [
+    `<link rel="alternate" hreflang="zh-CN" href="${zhUrl}"/>`,
+    `<link rel="alternate" hreflang="en" href="${enUrl}"/>`,
+    `<link rel="alternate" hreflang="x-default" href="${zhUrl}"/>`,
+  ].join('\n')
 
-  const itemList = {
-    '@type': 'ItemList',
-    '@id': `${pluginUrl}#plugins`,
-    name: 'dsh-TUI plugins',
-    numberOfItems: plugins.length,
-    itemListElement: plugins.map((plugin, index) => {
-      const npmReference = normalizeNpmReference(plugin.npm)
-      return {
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': plugin.kind === 'template' ? 'SoftwareSourceCode' : 'SoftwareApplication',
-          name: plugin.displayName || plugin.name,
-          alternateName: plugin.name,
-          description: plugin.description,
-          url: plugin.repo,
-          codeRepository: plugin.repo,
-          ...(npmReference ? { sameAs: npmReference.url } : {}),
+  async function writeLocale(locale) {
+    const isEnglish = locale === 'en'
+    const pack = isEnglish ? i18n.en : i18n.zh
+    const pluginUrl = isEnglish ? enUrl : zhUrl
+    const htmlLang = isEnglish ? 'en' : 'zh-CN'
+    const homeUrl = isEnglish ? routeUrl('/en/') : siteUrl.toString()
+    const homeHref = isEnglish ? '/en/' : '/'
+    const pluginsHref = isEnglish ? '/en/plugins/' : '/plugins/'
+    const itemList = {
+      '@type': 'ItemList',
+      '@id': `${pluginUrl}#plugins`,
+      name: 'dsh-TUI plugins',
+      numberOfItems: plugins.length,
+      itemListElement: plugins.map((plugin, index) => {
+        const npmReference = normalizeNpmReference(plugin.npm)
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          item: {
+            '@type': plugin.kind === 'template' ? 'SoftwareSourceCode' : 'SoftwareApplication',
+            name: plugin.displayName || plugin.name,
+            alternateName: plugin.name,
+            description: plugin.description,
+            url: plugin.repo,
+            codeRepository: plugin.repo,
+            ...(npmReference ? { sameAs: npmReference.url } : {}),
+          },
+        }
+      }),
+    }
+    const pluginStructuredData = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        projectNode(),
+        websiteNode(pack.docDesc),
+        {
+          '@type': 'CollectionPage',
+          '@id': `${pluginUrl}#webpage`,
+          name: pack.docTitle,
+          alternateName: ['DSHTUI Plugin Marketplace', 'dsh-tui plugins', 'DSH plugins'],
+          url: pluginUrl,
+          description: pack.docDesc,
+          inLanguage: htmlLang,
+          isPartOf: { '@id': entityUrl('#website') },
+          mainEntity: { '@id': `${pluginUrl}#plugins` },
+          ...(pluginData.updatedAt ? { dateModified: pluginData.updatedAt } : {}),
         },
-      }
-    }),
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${pluginUrl}#breadcrumb`,
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: isEnglish ? 'Home' : '首页', item: homeUrl },
+            { '@type': 'ListItem', position: 2, name: pack.navPlugins, item: pluginUrl },
+          ],
+        },
+        itemList,
+      ],
+    }
+
+    let html = applyPluginPack(sourceHtml, pack)
+      .replace(/<html lang="[^"]*"/, `<html lang="${htmlLang}"`)
+      .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(pack.docTitle)}</title>`)
+      .replace(/<link rel="stylesheet"[^>]*data-app-styles[^>]*>/, `<link rel="stylesheet" href="/${cssAsset}" data-app-styles/>`)
+      .replace(/<link rel="canonical" href="[^"]+"\/>/, `<link rel="canonical" href="${pluginUrl}"/>`)
+      .replace(/<link rel="alternate" hreflang="zh-CN" href="[^"]+"\/>[\s\S]*?<link rel="alternate" hreflang="x-default" href="[^"]+"\/>/, alternates)
+      .replace(/<div class="mk-grid" id="grid"[^>]*><\/div>/, `<div class="mk-grid" id="grid">${plugins.map((plugin) => pluginCard(plugin, pack)).join('')}</div>`)
+      .replace(
+        /<script type="application\/ld\+json">[\s\S]*?<\/script>/,
+        `<script type="application/ld+json">${JSON.stringify(pluginStructuredData).replaceAll('<', '\\u003c')}</script>`,
+      )
+      .replace('<!-- site-verification -->', verificationMarkup())
+
+    if (isEnglish) {
+      html = html
+        .replaceAll('href="/plugins/"', `href="${pluginsHref}"`)
+        .replaceAll('href="/"', `href="${homeHref}"`)
+        .replaceAll('href="/#contact"', `href="${homeHref}#contact"`)
+        .replace(
+          /<a class="mk-lang mk-press" id="lang-btn" href="[^"]*" lang="[^"]*" hreflang="[^"]*">[^<]*<\/a>/,
+          '<a class="mk-lang mk-press" id="lang-btn" href="/plugins/" lang="zh-CN" hreflang="zh-CN">中文</a>',
+        )
+    }
+
+    html = replaceMeta(html, 'name="description"', pack.docDesc)
+    html = replaceMeta(html, 'property="og:url"', pluginUrl)
+    html = replaceMeta(html, 'property="og:locale"', isEnglish ? 'en_US' : 'zh_CN')
+    html = replaceMeta(html, 'property="og:locale:alternate"', isEnglish ? 'zh_CN' : 'en_US')
+    html = replaceMeta(html, 'property="og:title"', pack.docTitle)
+    html = replaceMeta(html, 'property="og:description"', pack.docDesc)
+    html = replaceMeta(html, 'property="og:image:alt"', isEnglish
+      ? 'dsh-TUI plugin marketplace and DeepSeek Harness terminal interface'
+      : 'dsh-TUI 插件市场与 DeepSeek Harness 终端界面')
+    html = replaceMeta(html, 'name="twitter:title"', pack.docTitle)
+    html = replaceMeta(html, 'name="twitter:description"', pack.docDesc)
+    html = replaceMeta(html, 'name="twitter:image:alt"', isEnglish
+      ? 'dsh-TUI plugin marketplace and DeepSeek Harness terminal interface'
+      : 'dsh-TUI 插件市场与 DeepSeek Harness 终端界面')
+
+    const destination = isEnglish
+      ? path.join(distDir, 'en', 'plugins', 'index.html')
+      : pluginHtmlPath
+    await mkdir(path.dirname(destination), { recursive: true })
+    await writeFile(destination, html)
   }
-  const pluginStructuredData = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      projectNode(),
-      websiteNode('dsh-TUI 社区插件、主题、技能和 TUI 扩展收录。'),
-      {
-        '@type': 'CollectionPage',
-        '@id': `${pluginUrl}#webpage`,
-        name: 'dsh-TUI 插件市场',
-        alternateName: ['DSHTUI Plugin Marketplace', 'dsh-tui plugins', 'DSH plugins'],
-        url: pluginUrl,
-        description: 'dsh-TUI 社区插件、主题、技能和 TUI 扩展收录。',
-        inLanguage: ['zh-CN', 'en'],
-        isPartOf: { '@id': entityUrl('#website') },
-        mainEntity: { '@id': `${pluginUrl}#plugins` },
-        ...(pluginData.updatedAt ? { dateModified: pluginData.updatedAt } : {}),
-      },
-      {
-        '@type': 'BreadcrumbList',
-        '@id': `${pluginUrl}#breadcrumb`,
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: '首页', item: siteUrl.toString() },
-          { '@type': 'ListItem', position: 2, name: '插件市场', item: pluginUrl },
-        ],
-      },
-      itemList,
-    ],
-  }
 
-  let html = sourceHtml
-    .replace(/<link rel="stylesheet"[^>]*data-app-styles[^>]*>/, `<link rel="stylesheet" href="../${cssAsset}" data-app-styles/>`)
-    .replace(/<link rel="canonical" href="[^"]+"\/>/, `<link rel="canonical" href="${pluginUrl}"/>`)
-    .replace(/<div class="mk-grid" id="grid"[^>]*><\/div>/, `<div class="mk-grid" id="grid">${plugins.map(pluginCard).join('')}</div>`)
-    .replace(
-      /<script type="application\/ld\+json">[\s\S]*?<\/script>/,
-      `<script type="application/ld+json">${JSON.stringify(pluginStructuredData).replaceAll('<', '\\u003c')}</script>`,
-    )
-    .replace('<!-- site-verification -->', verificationMarkup())
-
-  html = replaceMeta(html, 'name="description"', 'dsh-TUI 插件市场：社区插件、主题、技能和 TUI 扩展收录。')
-  html = replaceMeta(html, 'property="og:url"', pluginUrl)
-  html = replaceMeta(html, 'property="og:title"', 'dsh-TUI 插件市场 — 社区扩展')
-  html = replaceMeta(html, 'property="og:description"', '浏览 dsh-TUI 的社区插件、主题、技能和 TUI 扩展。')
-
-  await writeFile(pluginHtmlPath, html)
+  await writeLocale('zh')
+  await writeLocale('en')
   return { updatedAt: pluginData.updatedAt, count: plugins.length }
 }
 
@@ -480,7 +562,8 @@ function sitemapEntry(route) {
 
 const sitemapRoutes = [
   ...SEO_ROUTES,
-  { path: '/plugins/', lastmod: pluginInfo.updatedAt },
+  { path: '/plugins/', locale: 'zh-CN', alternatePath: '/en/plugins/', lastmod: pluginInfo.updatedAt },
+  { path: '/en/plugins/', locale: 'en', alternatePath: '/plugins/', lastmod: pluginInfo.updatedAt },
 ]
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">

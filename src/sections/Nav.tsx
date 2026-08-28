@@ -88,8 +88,8 @@ export default function Nav() {
           <span className="ms-16 flex items-center gap-7">
             {NAV_SECONDARY.map((l) => (
               <a
-                key={l.href}
-                href={l.href}
+                key={l.label.zh}
+                href={typeof l.href === 'string' ? l.href : l.href[lang]}
                 {...(l.external ? { target: '_blank', rel: 'noreferrer' } : {})}
                 className="group flex items-center gap-1 whitespace-nowrap text-[13.5px] tracking-[-0.006em] text-faint transition-colors hover:text-head"
               >
@@ -168,8 +168,8 @@ export default function Nav() {
           <div className="mt-4 grid grid-cols-2 gap-2">
             {NAV_SECONDARY.map((l) => (
               <a
-                key={l.href}
-                href={l.href}
+                key={l.label.zh}
+                href={typeof l.href === 'string' ? l.href : l.href[lang]}
                 {...(l.external ? { target: '_blank', rel: 'noreferrer' } : {})}
                 onClick={() => setOpen(false)}
                 className="rounded border border-soft px-3 py-2 text-center text-[13px] text-faint"

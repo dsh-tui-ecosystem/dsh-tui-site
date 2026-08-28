@@ -9,6 +9,9 @@
 <meta name="author" content="dsh-TUI Community"/>
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
 <link rel="canonical" href="https://dshtui.com/plugins/"/>
+<link rel="alternate" hreflang="zh-CN" href="https://dshtui.com/plugins/"/>
+<link rel="alternate" hreflang="en" href="https://dshtui.com/en/plugins/"/>
+<link rel="alternate" hreflang="x-default" href="https://dshtui.com/plugins/"/>
 <meta property="og:type" content="website"/>
 <meta property="og:locale" content="zh_CN"/>
 <meta property="og:locale:alternate" content="en_US"/>
@@ -35,11 +38,11 @@
   } catch (e) { document.documentElement.dataset.theme = 'light'; }
 </script>
 <title>dsh-TUI 插件市场 — 社区扩展</title>
-<link rel="preload" href="../fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin=""/>
+<link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin=""/>
 <link rel="stylesheet" href="/src/index.css" data-app-styles/>
-<link rel="icon" href="../favicon.svg" type="image/svg+xml"/>
-<link rel="apple-touch-icon" href="../whale-girl.png"/>
-<link rel="manifest" href="../site.webmanifest"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/whale-girl.png"/>
+<link rel="manifest" href="/site.webmanifest"/>
 <style>
   /* 终端目录：主站 mist/ink 系统，目录优先于营销装饰。 */
 
@@ -514,7 +517,7 @@
 
 <header class="mk-topbar" id="topbar">
   <div class="mk-topbar-in">
-    <a class="mk-logo" href="../">
+    <a class="mk-logo" href="/">
       <svg viewBox="0 0 200 150" shape-rendering="crispEdges" aria-hidden="true" focusable="false">
         <g transform="translate(8 9)">
           <path fill="var(--mist-deep)" d="M16 70h8V54h16V46h64v8h24v8h16V46h8V30h16v16h8V30h16v48h-8v16h-16v24h-16v16h-32v-8h-16v16H56v-8H40v-8H24v-16h-8z"/>
@@ -528,12 +531,12 @@
     </a>
     <span class="mk-badge">ecosystem</span>
     <nav class="mk-nav" data-i18n-aria="navMain" aria-label="主导航">
-      <a href="../" data-i18n="navIntro">介绍</a>
-      <a href="./" class="on" aria-current="page" data-i18n="navPlugins">插件市场</a>
+      <a href="/" data-home data-i18n="navIntro">介绍</a>
+      <a href="/plugins/" class="on" aria-current="page" data-i18n="navPlugins">插件市场</a>
       <a href="https://join.dshtui.com/" target="_blank" rel="noopener" data-i18n="navJoin">加入生态</a>
     </nav>
     <div class="mk-tools">
-      <button class="mk-lang mk-press" id="lang-btn" type="button" lang="en">EN</button>
+      <a class="mk-lang mk-press" id="lang-btn" href="/en/plugins/" lang="en" hreflang="en">EN</a>
       <button class="mk-icon-btn mk-press" id="theme-btn" type="button" data-i18n-aria="themeToggle" aria-label="切换深浅色模式">
         <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
         <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -549,8 +552,8 @@
   </div>
   <nav class="mk-sheet" id="mobile-nav" data-i18n-aria="navMobile" aria-label="菜单导航">
     <div class="mk-sheet-grid">
-      <a href="../" data-i18n="navIntro">介绍</a>
-      <a href="./" class="on" aria-current="page" data-i18n="navPlugins">插件市场</a>
+      <a href="/" data-home data-i18n="navIntro">介绍</a>
+      <a href="/plugins/" class="on" aria-current="page" data-i18n="navPlugins">插件市场</a>
       <a href="https://join.dshtui.com/" target="_blank" rel="noopener" data-i18n="navJoin">加入生态</a>
     </div>
     <a class="mk-sheet-gh mk-press" href="https://github.com/dsh-tui-ecosystem" target="_blank" rel="noopener">
@@ -670,7 +673,7 @@
 <footer class="mk-footer">
   <div class="mk-footer-in">
     <p data-i18n="footer1">dsh-TUI 生态门户 · 社区维护的开源项目，并非 DeepSeek 官方产品 · 插件版权归各自作者所有</p>
-    <p style="margin-top:8px"><a href="https://dshtui.com/#contact" data-i18n="contactLink">联系：QQ 群 / 微信群见官网首页</a></p>
+    <p style="margin-top:8px"><a href="/#contact" data-contact data-i18n="contactLink">联系：QQ 群 / 微信群见官网首页</a></p>
     <p class="mono" style="margin-top:8px;font-size:12px">
       <a href="https://github.com/ccch1mneyyy/dsh-TUI" target="_blank" rel="noopener">dsh-TUI</a> ·
       <a href="https://github.com/dsh-tui-ecosystem" target="_blank" rel="noopener">ecosystem</a> ·
@@ -793,8 +796,13 @@ var I18N = {
   }
 };
 
-var lang = 'zh';
-try { lang = localStorage.getItem('dsh-tui-lang') === 'en' ? 'en' : 'zh'; } catch (e) {}
+function pathLang() {
+  var p = (location.pathname || '').replace(/\/index\.html$/, '').replace(/\/+$/, '');
+  if (p === '/en/plugins') return 'en';
+  if (p === '/plugins') return 'zh';
+  return '';
+}
+var lang = pathLang() || 'zh';
 function t(k) { return (I18N[lang] && I18N[lang][k]) || I18N.zh[k] || k; }
 function applyLang() {
   document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
@@ -805,9 +813,18 @@ function applyLang() {
   document.querySelectorAll('[data-i18n-html]').forEach(function (el) { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
   document.querySelectorAll('[data-i18n-ph]').forEach(function (el) { el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph'))); });
   document.querySelectorAll('[data-i18n-aria]').forEach(function (el) { el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria'))); });
+  var home = lang === 'en' ? '/en/' : '/';
+  var plugins = lang === 'en' ? '/en/plugins/' : '/plugins/';
+  document.querySelectorAll('[data-home]').forEach(function (el) { el.setAttribute('href', home); });
+  document.querySelectorAll('.mk-logo').forEach(function (el) { el.setAttribute('href', home); });
+  document.querySelectorAll('a.on[data-i18n="navPlugins"]').forEach(function (el) { el.setAttribute('href', plugins); });
+  var contact = document.querySelector('[data-contact]');
+  if (contact) contact.setAttribute('href', home + '#contact');
   var lb = document.getElementById('lang-btn');
   lb.textContent = lang === 'en' ? '中文' : 'EN';
   lb.lang = lang === 'en' ? 'zh-CN' : 'en';
+  lb.setAttribute('hreflang', lb.lang);
+  lb.setAttribute('href', lang === 'en' ? '/plugins/' : '/en/plugins/');
   var re = document.getElementById('readme-example');
   if (re) re.innerHTML = '<span class="k">[dsh-TUI]</span>(https://github.com/ccch1mneyyy/dsh-TUI) · ' + esc(t('readmeExample').split(' · ')[1] || t('readmeExample'));
   syncNewTabCues();
@@ -1025,7 +1042,7 @@ function loadPlugins(urls) {
   }).catch(function () { return loadPlugins(urls.slice(1)); });
 }
 document.getElementById('result-status').textContent = t('loading');
-loadPlugins([PLUGINS_API, './plugins.json']).then(function (data) {
+loadPlugins([PLUGINS_API, '/plugins/plugins.json']).then(function (data) {
   all = data.plugins || [];
   document.getElementById('stat-count').textContent = all.length;
   document.getElementById('stat-authors').textContent = new Set(all.map(function (p) { return p.author; })).size;
@@ -1051,9 +1068,7 @@ loadPlugins([PLUGINS_API, './plugins.json']).then(function (data) {
 });
 
 document.getElementById('lang-btn').addEventListener('click', function () {
-  lang = lang === 'zh' ? 'en' : 'zh';
-  try { localStorage.setItem('dsh-tui-lang', lang); } catch (e) {}
-  applyLang();
+  try { localStorage.setItem('dsh-tui-lang', lang === 'zh' ? 'en' : 'zh'); } catch (e) {}
 });
 if (lang !== 'zh') applyLang();
 else renderChips();
