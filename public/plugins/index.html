@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <meta name="description" content="dsh-TUI 插件市场：社区插件、主题、技能和 TUI 扩展收录。"/>
 <meta name="keywords" content="dsh-TUI, DSHTUI, dsh-tui, DSH TUI, DSH, DeepSeek Harness, DSH 插件, dsh-tui 插件"/>
 <meta name="application-name" content="dsh-TUI"/>
@@ -34,7 +34,6 @@
 </script>
 <title>dsh-TUI 插件市场 — 社区扩展</title>
 <link rel="preload" href="../fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin=""/>
-<link rel="preload" href="../fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin=""/>
 <link rel="stylesheet" href="/src/index.css" data-app-styles/>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml"/>
 <link rel="apple-touch-icon" href="../whale-girl.png"/>
@@ -49,11 +48,15 @@
   }
 
   .mk-press {
-    transition-property: scale, border-color, color, background-color, box-shadow;
+    transition-property: scale, border-color, color, background-color;
     transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    transition-timing-function: ease-out;
   }
   .mk-press:active { scale: 0.96; }
+  .mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas,
+      'Microsoft YaHei', monospace;
+  }
 
   /* ===== 顶栏 ===== */
   .mk-topbar {
@@ -70,14 +73,14 @@
   }
   .mk-logo {
     display: flex; align-items: center; gap: 10px; flex: none;
-    text-decoration: none; color: var(--head); font-weight: 700; font-size: 15px;
+    text-decoration: none; color: var(--head); font-weight: 600; font-size: 15px;
     letter-spacing: -.01em;
   }
   .mk-logo svg { height: 28px; width: 36px; }
-  .mk-logo .brand { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .mk-logo .brand { font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace; font-weight: 700; }
   .mk-logo .brand em { font-style: normal; color: var(--mist-text); }
   .mk-badge {
-    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace; font-size: 12px;
     color: var(--text-dim); border: 1px solid var(--line); border-radius: 4px;
     padding: 2px 8px; letter-spacing: .02em; flex: none;
   }
@@ -87,28 +90,26 @@
   }
   .mk-nav a:not(.gh) {
     font-size: 13.5px; font-weight: 500; color: var(--text-dim); text-decoration: none;
-    transition-property: color; transition-duration: 150ms;
+    transition-property: color; transition-duration: 150ms; transition-timing-function: ease-out;
   }
-  .mk-nav a:not(.gh):hover { color: var(--head); }
-  .mk-nav a.on { color: var(--head); font-weight: 700; }
+  .mk-nav a.on { color: var(--head); font-weight: 600; }
   .mk-tools { display: flex; align-items: center; gap: 8px; flex: none; }
   .mk-icon-btn, .mk-lang {
     display: inline-flex; align-items: center; justify-content: center;
     min-width: 40px; min-height: 40px; padding: 0 10px;
     border: 1px solid var(--line); border-radius: 6px;
     background: transparent; color: var(--text-dim); cursor: pointer;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace;
     font-size: 12px; font-weight: 700; text-decoration: none;
   }
   .mk-icon-btn { width: 40px; padding: 0; }
   .mk-icon-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; }
   .mk-desktop-gh, .mk-sheet-gh {
     display: inline-flex; align-items: center; gap: 6px;
-    background: var(--mist-solid); color: #fff; border-radius: 6px;
-    padding: 8px 14px; font-size: 12.5px; font-weight: 600; text-decoration: none;
+    background: var(--mist-solid); color: var(--on-accent); border-radius: 6px;
+    padding: 8px 14px 8px 12px; font-size: 12.5px; font-weight: 600; text-decoration: none;
     min-height: 40px;
   }
-  .mk-desktop-gh:hover, .mk-sheet-gh:hover { background: var(--mist-solid-hover); color: #fff; }
   .mk-menu-btn { display: none; }
   .mk-sheet { display: none; }
 
@@ -117,19 +118,19 @@
     max-width: 72rem; margin-inline: auto;
     padding: 32px max(1.25rem, env(safe-area-inset-right)) 64px max(1.25rem, env(safe-area-inset-left));
   }
-  #catalog, #submit, #submit-form, h2 { scroll-margin-top: 88px; }
+  #main, #catalog, #submit, #submit-form, h2 { scroll-margin-top: 88px; }
 
   /* ===== Hero：短，目录优先 ===== */
   .mk-hero { max-width: 40rem; }
   .mk-kicker {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace;
     color: var(--mist-text); font-size: 12px; letter-spacing: .12em;
     margin: 0 0 12px;
   }
   .mk-hero h1 {
     color: var(--head); font-size: clamp(1.5rem, 5vw, 2.25rem);
-    font-weight: 800; margin: 0 0 12px; line-height: 1.2; letter-spacing: -.02em;
-    text-wrap: wrap; overflow-wrap: anywhere; max-width: 100%;
+    font-weight: 600; margin: 0 0 12px; line-height: 1.2; letter-spacing: -.02em;
+    text-wrap: balance; overflow-wrap: break-word; max-width: 100%;
   }
   .mk-accent { color: var(--mist-text); }
   .mk-hero .lede {
@@ -138,7 +139,7 @@
   }
   .mk-live {
     display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace;
     font-size: 13px; color: var(--text-dim);
   }
   .mk-live b { color: var(--head); font-weight: 700; font-variant-numeric: tabular-nums; }
@@ -146,17 +147,17 @@
   /* ===== 工具条 ===== */
   .mk-toolbar { margin: 40px 0 16px; }
   .mk-toolbar h2 {
-    color: var(--head); font-size: 1.125rem; font-weight: 700; margin: 0 0 14px;
-    letter-spacing: -.01em;
+    color: var(--head); font-size: 1.125rem; font-weight: 600; margin: 0 0 14px;
+    letter-spacing: -.01em; line-height: 1.2;
   }
   .mk-search {
     display: flex; align-items: center; gap: 10px;
-    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    background: var(--panel); border: 1px solid color-mix(in srgb, var(--head) 50%, var(--panel)); border-radius: 10px;
     padding: 4px 14px;
   }
   .mk-search:focus-within { border-color: var(--mist); }
   .mk-search .prompt {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace;
     color: var(--mist-text); font-size: 13px; font-weight: 700; flex: none;
   }
   .mk-search input {
@@ -166,16 +167,16 @@
   .mk-search input::placeholder { color: var(--text-faint); }
   .mk-chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
   .mk-chip {
-    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace; font-size: 13px;
     cursor: pointer; min-height: 36px; padding: 6px 14px;
     border: 1px solid var(--line); background: var(--panel); color: var(--text-dim);
     border-radius: 999px;
     transition-property: border-color, color, background-color, scale;
-    transition-duration: 150ms; transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    transition-duration: 150ms; transition-timing-function: ease-out;
   }
   .mk-chip:active { scale: 0.96; }
   .mk-chip[aria-pressed="true"] {
-    background: var(--mist-wash); border-color: var(--mist); color: var(--mist-text);
+    background: var(--mist-solid); border-color: var(--mist-solid); color: var(--on-accent);
     font-weight: 700;
   }
 
@@ -185,8 +186,8 @@
     display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin: 0 0 14px;
   }
   .mk-featured h2 {
-    color: var(--head); font-size: 1.125rem; font-weight: 700; margin: 0;
-    letter-spacing: -.01em;
+    color: var(--head); font-size: 1.125rem; font-weight: 600; margin: 0;
+    letter-spacing: -.01em; line-height: 1.2;
   }
   .mk-featured-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .mk-grid {
@@ -196,22 +197,22 @@
   }
   .mk-grid > *, .mk-featured-grid > * { min-inline-size: 0; }
   .mk-card {
-    background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 24px;
     display: flex; flex-direction: column; min-inline-size: 0;
-    transition-property: border-color, box-shadow;
-    transition-duration: 150ms;
+    transition-property: border-color;
+    transition-duration: 150ms; transition-timing-function: ease-out;
   }
   .mk-card.featured { border-color: var(--mist-2); }
   .mk-shot {
     background: var(--panel-2); border-bottom: 1px solid var(--line-soft);
     max-height: 180px; display: flex; align-items: center; justify-content: center;
-    overflow: hidden; border-radius: 16px 16px 0 0;
+    overflow: hidden; border-radius: 24px 24px 0 0;
   }
   .mk-shot img {
     display: block; width: 100%; max-height: 180px; object-fit: contain;
-    outline: 1px solid oklch(0 0 0 / 0.1); outline-offset: -1px;
+    outline: 1px solid rgb(0 0 0 / 0.1); outline-offset: -1px;
   }
-  :root[data-theme='dark'] .mk-shot img { outline-color: oklch(1 0 0 / 0.1); }
+  :root[data-theme='dark'] .mk-shot img { outline-color: rgb(255 255 255 / 0.1); }
   .mk-card-body {
     padding: 16px; display: flex; flex-direction: column; gap: 12px; flex: 1;
   }
@@ -219,30 +220,30 @@
   .mk-card-head img {
     width: 40px; height: 40px; border-radius: 9px; flex: none;
     background: var(--panel-2);
-    outline: 1px solid oklch(0 0 0 / 0.1); outline-offset: -1px;
+    outline: 1px solid rgb(0 0 0 / 0.1); outline-offset: -1px;
   }
-  :root[data-theme='dark'] .mk-card-head img { outline-color: oklch(1 0 0 / 0.1); }
+  :root[data-theme='dark'] .mk-card-head img { outline-color: rgb(255 255 255 / 0.1); }
   .mk-card-head .who { min-inline-size: 0; flex: 1; }
   .mk-card-head h3 {
-    color: var(--head); font-weight: 700; font-size: 1rem; letter-spacing: -.01em;
+    color: var(--head); font-weight: 600; font-size: 1rem; letter-spacing: -.01em;
     margin: 0; line-height: 1.3; overflow-wrap: anywhere;
   }
   .mk-card-head .a {
     color: var(--text-faint); font-size: 12px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    text-decoration: none; display: inline-block; margin-top: 2px;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace;
+    text-decoration: underline; text-underline-position: from-font; text-decoration-thickness: from-font;
+    display: inline-block; margin-top: 2px;
   }
-  .mk-card-head .a:hover { color: var(--mist-text); }
   .mk-kind {
-    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace; font-size: 12px;
     border-radius: 6px; padding: 3px 8px; letter-spacing: .02em; flex: none;
     white-space: nowrap; align-self: flex-start;
   }
   .mk-kind.plugin { color: var(--mist-text); background: var(--mist-wash); }
   .mk-kind.template { color: var(--text-dim); background: var(--panel-2); border: 1px solid var(--line); }
-  .mk-kind.core { color: #fff; background: var(--mist-deep); }
+  .mk-kind.core { color: var(--on-accent); background: var(--mist-deep); }
   .mk-pick {
-    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; font-weight: 700;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace; font-size: 12px; font-weight: 700;
     color: var(--mist-text); background: var(--mist-wash); border-radius: 999px;
     padding: 4px 10px; white-space: nowrap; flex: none;
   }
@@ -252,13 +253,13 @@
   }
   .mk-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .mk-tag {
-    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace; font-size: 12px;
     color: var(--mist-text); background: var(--mist-wash);
     border-radius: 6px; padding: 2px 8px; white-space: nowrap;
   }
   .mk-meta {
     display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
-    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace; font-size: 12px;
     color: var(--text-faint); font-variant-numeric: tabular-nums;
   }
   .mk-meta b { color: var(--head); font-weight: 700; }
@@ -271,13 +272,12 @@
     border: 1px solid var(--line); color: var(--text-dim);
     display: inline-flex; align-items: center; gap: 5px;
     transition-property: border-color, color, background-color, scale;
-    transition-duration: 150ms;
+    transition-duration: 150ms; transition-timing-function: ease-out;
   }
   .mk-actions a:active { scale: 0.96; }
   .mk-actions a.primary {
-    background: var(--mist-solid); border-color: transparent; color: #fff;
+    background: var(--mist-solid); border-color: transparent; color: var(--on-accent);
   }
-  .mk-actions a.primary:hover { background: var(--mist-solid-hover); color: #fff; }
   .mk-install {
     display: flex; align-items: center; gap: 6px; min-inline-size: 0;
     flex: 1 1 100%; width: 100%;
@@ -285,7 +285,7 @@
     padding: 2px 4px 2px 10px;
   }
   .mk-install code {
-    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace; font-size: 12px;
     color: var(--mist-text); overflow-wrap: anywhere; flex: 1; min-inline-size: 0;
     line-height: 1.4;
   }
@@ -294,27 +294,28 @@
     border: 0; background: transparent; color: var(--text-faint); cursor: pointer;
     border-radius: 6px; position: relative;
   }
-  .mk-copy:hover { color: var(--mist-text); }
-  .mk-copy svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; grid-area: 1 / 1; }
-  .mk-copy .ck { opacity: 0; }
+  .mk-copy svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
   .mk-copy.is-copied { color: var(--ok-text); }
-  .mk-copy.is-copied .ic { opacity: 0; }
-  .mk-copy.is-copied .ck { opacity: 1; }
 
   .mk-empty, .mk-fail {
     text-align: start; color: var(--text-dim); padding: 28px 0 8px;
     font-size: 14px; line-height: 1.55;
   }
+  .mk-empty {
+    display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center;
+  }
+  .mk-empty #empty-msg { flex: 1 1 100%; }
   .mk-empty button, .mk-fail a {
     color: var(--mist-text); background: none; border: 0; padding: 0;
-    font: inherit; font-weight: 700; cursor: pointer; text-decoration: underline;
+    font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline;
     text-underline-position: from-font; text-decoration-thickness: from-font;
+    min-height: 40px; display: inline-flex; align-items: center;
   }
 
   /* ===== 提交区：一个表单面，说明用字而不是套娃卡片 ===== */
   .mk-submit { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line-soft); }
   .mk-submit h2 {
-    color: var(--head); font-size: 1.5rem; font-weight: 800; margin: 0;
+    color: var(--head); font-size: 1.5rem; font-weight: 600; margin: 0;
     letter-spacing: -.02em; line-height: 1.2;
   }
   .mk-submit .sub {
@@ -324,13 +325,14 @@
   .mk-flow {
     display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 0;
     margin: 18px 0 28px; padding: 0; list-style: none;
-    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace; font-size: 13px;
     color: var(--text-dim);
   }
   .mk-flow li { display: flex; align-items: baseline; gap: 8px; }
   .mk-flow li:not(:last-child)::after {
     content: '→'; color: var(--text-faint); margin-inline: 12px; font-weight: 700;
   }
+  [dir='rtl'] .mk-flow li:not(:last-child)::after { content: '←'; }
   .mk-flow .n { color: var(--mist-text); font-weight: 700; }
   .mk-flow b { color: var(--head); font-weight: 700; font-size: 13px; }
 
@@ -338,7 +340,7 @@
     display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.85fr);
     gap: 40px; align-items: start;
   }
-  .mk-notes h3 { color: var(--head); font-size: 1rem; font-weight: 700; margin: 0 0 12px; }
+  .mk-notes h3 { color: var(--head); font-size: 1rem; font-weight: 600; margin: 0 0 12px; }
   .mk-notes ol {
     margin: 0; padding: 0; list-style: none; display: grid; gap: 10px;
     counter-reset: req;
@@ -351,7 +353,7 @@
   .mk-notes ol li::before {
     content: counter(req);
     position: absolute; inset-inline-start: 0; top: 0.15em;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace;
     font-size: 12px; font-weight: 700; color: var(--mist-text);
   }
   .mk-notes ol li strong { color: var(--head); }
@@ -361,15 +363,15 @@
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
     padding: 8px 12px; border-bottom: 1px solid var(--line-soft); background: var(--panel-2);
   }
-  .mk-snippet-head .t { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--text-faint); }
+  .mk-snippet-head .t { font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace; font-size: 12px; color: var(--text-faint); }
   .mk-snippet-head button {
-    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; cursor: pointer;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace; font-size: 12px; cursor: pointer;
     min-height: 32px; min-width: 4.5rem; border: 1px solid var(--line); background: var(--panel);
     color: var(--text-dim); border-radius: 7px; padding: 4px 12px;
   }
   .mk-snippet pre {
     margin: 0; padding: 14px 16px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; line-height: 1.7;
+    font-family: 'JetBrains Mono', ui-monospace, 'Microsoft YaHei', monospace; font-size: 13px; line-height: 1.7;
     color: var(--text-dim); overflow-x: auto; white-space: pre-wrap; overflow-wrap: break-word;
   }
   .mk-snippet pre .k { color: var(--mist-text); }
@@ -379,19 +381,17 @@
     border-top: 1px solid var(--line-soft);
   }
   .mk-alts a {
-    color: var(--mist-text); font-size: 14px; font-weight: 600; text-decoration: none;
-  }
-  .mk-alts a:hover {
+    color: var(--mist-text); font-size: 14px; font-weight: 600;
     text-decoration: underline; text-underline-position: from-font; text-decoration-thickness: from-font;
   }
 
   .mk-form-card { border: 1px solid var(--line); border-radius: 14px; padding: 22px; background: var(--panel); }
   .mk-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 12px; }
   .mk-form .full { grid-column: 1 / -1; }
-  .mk-field label { display: block; font-size: 13px; color: var(--text-dim); margin-bottom: 6px; font-weight: 700; }
+  .mk-field label { display: block; font-size: 13px; color: var(--text-dim); margin-bottom: 6px; font-weight: 600; }
   .mk-field label .req { color: var(--bad-text); }
   .mk-field input, .mk-field textarea {
-    width: 100%; box-sizing: border-box; border: 1px solid var(--line); border-radius: 8px;
+    width: 100%; box-sizing: border-box; border: 1px solid color-mix(in srgb, var(--head) 50%, var(--panel)); border-radius: 8px;
     background: var(--panel); color: var(--text); padding: 11px 12px; font-size: 16px;
     font-family: inherit;
     transition-property: border-color; transition-duration: 150ms;
@@ -399,21 +399,21 @@
   .mk-field input::placeholder, .mk-field textarea::placeholder { color: var(--text-faint); }
   .mk-field input:focus-visible, .mk-field textarea:focus-visible { border-color: var(--mist); }
   .mk-field textarea { resize: vertical; min-height: 88px; }
-  .mk-field .hint { font-size: 12px; color: var(--text-faint); margin-top: 6px; }
+  .mk-field .hint, .mk-form > .hint { font-size: 12px; color: var(--text-faint); margin-top: 6px; }
+  .mk-form > .hint { margin: 0; }
   .mk-form-btn {
     grid-column: 1 / -1; justify-self: start; cursor: pointer;
-    background: var(--mist-solid); color: #fff; border: 0; border-radius: 8px;
-    font-size: 14px; font-weight: 700; padding: 12px 24px; min-height: 44px;
+    background: var(--mist-solid); color: var(--on-accent); border: 0; border-radius: 8px;
+    font-size: 14px; font-weight: 600; padding: 12px 24px; min-height: 44px;
     font-family: inherit;
     transition-property: scale, background-color, opacity;
-    transition-duration: 150ms;
+    transition-duration: 150ms; transition-timing-function: ease-out;
   }
-  .mk-form-btn:active:not(:disabled) { scale: 0.96; }
-  .mk-form-btn:hover:not(:disabled) { background: var(--mist-solid-hover); }
-  .mk-form-btn:disabled { opacity: .6; cursor: default; }
+  .mk-form-btn:active:not([aria-disabled="true"]) { scale: 0.96; }
+  .mk-form-btn[aria-disabled="true"] { opacity: .6; cursor: default; }
   .mk-form-btn .spinner {
-    display: none; width: 13px; height: 13px; border: 2px solid rgba(255,255,255,.4);
-    border-top-color: #fff; border-radius: 50%; animation: mkspin .7s linear infinite;
+    display: none; width: 13px; height: 13px; border: 2px solid color-mix(in srgb, var(--on-accent) 40%, transparent);
+    border-top-color: var(--on-accent); border-radius: 50%; animation: mkspin .7s linear infinite;
     vertical-align: -2px; margin-inline-end: 8px;
   }
   .mk-form-btn.loading .spinner { display: inline-block; }
@@ -434,16 +434,27 @@
     padding: 28px max(1.25rem, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
     text-align: start;
   }
+  .mk-footer-in { max-width: 72rem; margin-inline: auto; }
   .mk-footer p { color: var(--text-faint); font-size: 13px; line-height: 1.6; margin: 0; max-width: 65ch; }
-  .mk-footer a { color: var(--text-dim); text-decoration: none; }
-  .mk-footer a:hover { color: var(--mist-text); }
+  .mk-footer a {
+    color: var(--text-dim);
+    text-decoration: underline; text-underline-position: from-font; text-decoration-thickness: from-font;
+  }
 
   @media (hover: hover) {
+    .mk-nav a:not(.gh):hover { color: var(--head); }
     .mk-icon-btn:hover, .mk-lang:hover { border-color: var(--mist); color: var(--mist-text); }
+    .mk-desktop-gh:hover, .mk-sheet-gh:hover { background: var(--mist-solid-hover); color: var(--on-accent); }
     .mk-chip:hover { border-color: var(--mist-2); color: var(--mist-text); }
+    .mk-chip[aria-pressed="true"]:hover { background: var(--mist-solid-hover); border-color: var(--mist-solid-hover); color: var(--on-accent); }
     .mk-card:hover { border-color: var(--mist-2); }
+    .mk-card-head .a:hover { color: var(--mist-text); }
+    .mk-copy:hover { color: var(--mist-text); }
     .mk-actions a:not(.primary):hover { border-color: var(--mist-2); color: var(--mist-text); }
+    .mk-actions a.primary:hover { background: var(--mist-solid-hover); color: var(--on-accent); }
     .mk-snippet-head button:hover { border-color: var(--mist-2); color: var(--mist-text); }
+    .mk-form-btn:hover:not([aria-disabled="true"]) { background: var(--mist-solid-hover); }
+    .mk-footer a:hover { color: var(--mist-text); }
   }
 
   @media (min-width: 640px) {
@@ -453,7 +464,7 @@
     .mk-submit-grid { grid-template-columns: 1fr; gap: 28px; }
     .mk-flow li:not(:last-child)::after { margin-inline: 8px; }
   }
-  @media (max-width: 720px) {
+  @media (max-width: 880px) {
     .mk-nav, .mk-badge { display: none; }
     .mk-tools { margin-inline-start: auto; }
     .mk-menu-btn { display: inline-flex; }
@@ -467,27 +478,31 @@
       padding: 12px max(1.25rem, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
       background: var(--nav-bg);
     }
-    .mk-sheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .mk-sheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .mk-sheet a {
       display: block; text-align: center; text-decoration: none;
       border: 1px solid var(--line-soft); border-radius: 8px;
       padding: 10px 12px; font-size: 13px; color: var(--text-dim); min-height: 40px;
     }
-    .mk-sheet a.on { color: var(--head); font-weight: 700; border-color: var(--mist); background: var(--mist-wash); }
+    .mk-sheet a.on { color: var(--head); font-weight: 600; border-color: var(--mist); background: var(--mist-wash); }
     .mk-sheet-gh { margin-top: 10px; justify-content: center; width: 100%; }
+  }
+  @media (max-width: 720px) {
     .mk-wrap { padding-top: 20px; padding-bottom: 40px; }
     .mk-form { grid-template-columns: 1fr; }
     .mk-form-btn { width: 100%; justify-self: stretch; }
     .mk-form-card { padding: 16px; }
     .mk-submit { margin-top: 40px; padding-top: 24px; }
     .mk-hero h1 { font-size: 1.5rem; }
-    .mk-card-body { padding: 14px; }
     .mk-shot, .mk-shot img { max-height: 140px; }
+  }
+  @media (max-width: 400px) {
+    .mk-sheet-grid { grid-template-columns: 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .mk-press, .mk-chip, .mk-actions a, .mk-form-btn { transition: none; }
-    .mk-press:active, .mk-chip:active, .mk-form-btn:active { scale: 1; }
+    .mk-press:active, .mk-chip:active, .mk-actions a:active, .mk-form-btn:active { scale: 1; }
     .mk-form-btn .spinner { animation: none; }
   }
 </style>
@@ -498,7 +513,7 @@
 <header class="mk-topbar" id="topbar">
   <div class="mk-topbar-in">
     <a class="mk-logo" href="../">
-      <svg viewBox="0 0 200 150" shape-rendering="crispEdges" role="img" aria-label="dsh-TUI">
+      <svg viewBox="0 0 200 150" shape-rendering="crispEdges" aria-hidden="true" focusable="false">
         <g transform="translate(8 9)">
           <path fill="var(--mist-deep)" d="M16 70h8V54h16V46h64v8h24v8h16V46h8V30h16v16h8V30h16v48h-8v16h-16v24h-16v16h-32v-8h-16v16H56v-8H40v-8H24v-16h-8z"/>
           <path fill="var(--mist)" d="M24 70h8V62h16v-8h48v8h24v8h24v-8h8V46h8v16h16V46h8v32h-8v16h-16v24h-16v8h-16v-8h-16v-16H96v24H56v-8H40v-8H24z"/>
@@ -536,11 +551,14 @@
       <a href="./" class="on" aria-current="page" data-i18n="navPlugins">插件市场</a>
       <a href="https://join.dshtui.com/" target="_blank" rel="noopener" data-i18n="navJoin">加入生态</a>
     </div>
-    <a class="mk-sheet-gh mk-press" href="https://github.com/dsh-tui-ecosystem" target="_blank" rel="noopener">GitHub</a>
+    <a class="mk-sheet-gh mk-press" href="https://github.com/dsh-tui-ecosystem" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      GitHub
+    </a>
   </nav>
 </header>
 
-<main class="mk-wrap" id="main">
+<main class="mk-wrap" id="main" tabindex="-1">
 
   <header class="mk-hero">
     <p class="mk-kicker" data-i18n="kick">插件市场</p>
@@ -569,17 +587,13 @@
     <div class="mk-featured-grid" id="featured-grid"></div>
   </section>
 
-  <div class="mk-grid" id="grid"></div>
+  <div class="mk-grid" id="grid" aria-busy="true"></div>
   <p class="mk-empty" id="empty" hidden>
-    <span data-i18n="empty">没有匹配的插件。</span>
+    <span id="empty-msg" data-i18n="empty">没有匹配的插件。</span>
     <button type="button" id="empty-clear" data-i18n="emptyClear">清掉筛选</button>
-    <span data-i18n="emptyOr">，或</span>
-    <a href="#submit" data-i18n="emptySubmit">到下方收录一个。</a>
+    <a href="#submit" data-i18n="emptySubmit">收录你的插件</a>
   </p>
-  <p class="mk-fail" id="load-fail" hidden role="alert">
-    <span data-i18n="loadFail">插件列表加载失败。</span>
-    <a href="./" data-i18n="loadRetry">刷新页面重试</a>。
-  </p>
+  <p class="mk-fail" id="load-fail" hidden tabindex="-1"></p>
 
   <section class="mk-submit" id="submit">
     <h2 id="submit-title" data-i18n="submitTitle">收录你的插件</h2>
@@ -595,6 +609,7 @@
     <div class="mk-submit-grid">
       <form class="mk-form-card" id="submit-form" aria-labelledby="submit-title">
         <div class="mk-form">
+          <p class="hint full" data-i18n="reqMark">* 必填</p>
           <div class="mk-field">
             <label for="f-name"><span data-i18n="fName">插件名称</span> <span class="req" aria-hidden="true">*</span></label>
             <input id="f-name" name="name" required maxlength="60" placeholder="dsh-xxx" autocomplete="off" spellcheck="false"/>
@@ -613,7 +628,7 @@
           <div class="mk-field full">
             <label for="f-tags" data-i18n="fTags">标签</label>
             <input id="f-tags" name="tags" maxlength="80" placeholder="主题, 状态栏" data-i18n-ph="phTags" autocomplete="off"/>
-            <div class="hint" id="h-tags" data-i18n="fTagsHint">逗号分隔，最多 6 个</div>
+            <div class="hint" id="h-tags" data-i18n="fTagsHint">选填。逗号分隔，最多 6 个</div>
           </div>
           <div class="mk-field full">
             <label for="f-desc" data-i18n="fDesc">一句话介绍</label>
@@ -622,16 +637,17 @@
           </div>
           <button class="mk-form-btn" type="submit"><span class="spinner"></span><span data-i18n="submitBtn">提交收录申请</span></button>
           <div class="mk-form-msg" id="form-msg" role="status"></div>
+          <div class="mk-form-msg err" id="form-err" role="alert" tabindex="-1"></div>
         </div>
       </form>
 
       <aside class="mk-notes">
         <h3 data-i18n="reqTitle">收录要求</h3>
         <ol>
-          <li data-i18n="req1">仓库必须是<strong>公开的 GitHub 仓库</strong>，且你是 owner 或 collaborator</li>
-          <li data-i18n="req2">README 必须带 dsh-TUI 链接（站点或仓库均可）</li>
-          <li data-i18n="req3">必须是 dsh-TUI / DeepSeek Harness 的真实扩展</li>
-          <li data-i18n="req4">通过后立即上架；同一 IP 每 6 小时最多 10 次</li>
+          <li data-i18n-html="req1">仓库必须是<strong>公开的 GitHub 仓库</strong>，且你是 owner 或 collaborator</li>
+          <li data-i18n-html="req2">README 必须带 dsh-TUI 链接（站点或仓库均可）</li>
+          <li data-i18n-html="req3">必须是 dsh-TUI / DeepSeek Harness 的真实扩展</li>
+          <li data-i18n-html="req4">通过后立即上架；同一 IP 每 6 小时最多 10 次</li>
         </ol>
         <div class="mk-snippet">
           <div class="mk-snippet-head">
@@ -641,7 +657,7 @@
           <pre id="readme-example"><span class="k">[dsh-TUI]</span>(https://github.com/ccch1mneyyy/dsh-TUI) · 一个为 dsh-TUI 生态打造的插件</pre>
         </div>
         <ul class="mk-alts">
-          <li><a href="https://github.com/dsh-tui-ecosystem/dsh-tui-site/blob/main/public/plugins/plugins.json" target="_blank" rel="noopener" data-i18n="path1a">也可以打开 plugins.json 提 PR</a></li>
+          <li><a href="https://github.com/dsh-tui-ecosystem/dsh-tui-site/blob/main/public/plugins/plugins.json" target="_blank" rel="noopener" data-i18n="path1a">打开 plugins.json 提 PR</a></li>
           <li><a href="https://github.com/dsh-tui-ecosystem/plugin-template" target="_blank" rel="noopener" data-i18n="path3a">还没有插件？从官方模板起步</a></li>
         </ul>
       </aside>
@@ -650,13 +666,15 @@
 </main>
 
 <footer class="mk-footer">
-  <p data-i18n="footer1">dsh-TUI 生态门户 · 社区维护的开源项目，并非 DeepSeek 官方产品 · 插件版权归各自作者所有</p>
-  <p style="margin-top:8px"><a href="https://dshtui.com/#contact" data-i18n="contactLink">联系：QQ 群 / 微信群见官网首页</a></p>
-  <p class="mono" style="margin-top:8px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px">
-    <a href="https://github.com/ccch1mneyyy/dsh-TUI" target="_blank" rel="noopener">dsh-TUI</a> ·
-    <a href="https://github.com/dsh-tui-ecosystem" target="_blank" rel="noopener">ecosystem</a> ·
-    MIT License
-  </p>
+  <div class="mk-footer-in">
+    <p data-i18n="footer1">dsh-TUI 生态门户 · 社区维护的开源项目，并非 DeepSeek 官方产品 · 插件版权归各自作者所有</p>
+    <p style="margin-top:8px"><a href="https://dshtui.com/#contact" data-i18n="contactLink">联系：QQ 群 / 微信群见官网首页</a></p>
+    <p class="mono" style="margin-top:8px;font-size:12px">
+      <a href="https://github.com/ccch1mneyyy/dsh-TUI" target="_blank" rel="noopener">dsh-TUI</a> ·
+      <a href="https://github.com/dsh-tui-ecosystem" target="_blank" rel="noopener">ecosystem</a> ·
+      MIT License
+    </p>
+  </div>
 </footer>
 
 <div class="sr-only" id="copy-status" role="status"></div>
@@ -678,12 +696,16 @@ var I18N = {
     h1: '给 <span class="mk-accent">dsh-TUI</span> 挂上社区插件',
     heroSub: '主题、技能、TUI 扩展。零核心改动，纯插件挂载：装上即用，卸了不留补丁。',
     statPlugins: '个收录', statAuthors: '位作者', statUpdatedPrefix: '更新',
+    loading: '加载中…', newTab: '（新标签页打开）', copyFail: '复制失败，请手动选择',
+    reqMark: '* 必填',
+    readmeExample: '[dsh-TUI](https://github.com/ccch1mneyyy/dsh-TUI) · 一个为 dsh-TUI 生态打造的插件',
     catalogTitle: '插件列表',
     searchLabel: '搜索插件', searchPh: 'dsh-xxx、主题、@author',
     kindFilter: '按类型筛选',
     kindAll: '全部', kindCore: '核心', kindPlugin: '插件', kindTemplate: '模板',
     featuredTitle: '编辑推荐', pickBadge: '编辑推荐',
-    empty: '没有匹配的插件。', emptyClear: '清掉筛选', emptyOr: '，或', emptySubmit: '到下方收录一个。',
+    empty: '没有匹配的插件。', emptyMatch: '没有匹配「{q}」的插件。',
+    emptyClear: '清掉筛选', emptySubmit: '收录你的插件',
     results: '{n} 个插件',
     loadFail: '插件列表加载失败。', loadRetry: '刷新页面重试',
     submitTitle: '收录你的插件',
@@ -697,18 +719,18 @@ var I18N = {
     req2: 'README 必须带 dsh-TUI 链接（站点或仓库均可）',
     req3: '必须是 dsh-TUI / DeepSeek Harness 的真实扩展',
     req4: '通过后立即上架；同一 IP 每 6 小时最多 10 次',
-    path1a: '也可以打开 plugins.json 提 PR',
+    path1a: '打开 plugins.json 提 PR',
     path3a: '还没有插件？从官方模板起步',
     fName: '插件名称', fRepo: '仓库地址', fAuthor: '你的 GitHub 用户名', fTags: '标签', fDesc: '一句话介绍',
     fNameHint: '小写字母和连字符，例如 dsh-xxx',
     fAuthorHint: '须与仓库 owner / collaborator 一致',
     fRepoHint: '必须是你拥有或参与协作的公开仓库',
-    fTagsHint: '逗号分隔，最多 6 个',
+    fTagsHint: '选填。逗号分隔，最多 6 个',
     fDescHint: '选填。留空则用仓库简介。',
     phTags: '主题, 状态栏', phDesc: '为 dsh-TUI 提供雾蓝主题',
     submitBtn: '提交收录申请', submitting: '提交中…',
     submitOk: '已提交。自动校验和 AI 审查通过后会上架。',
-    submitFail: '提交失败：{error}。也可以改走 GitHub PR。',
+    submitFail: '提交失败：{error}。也可以打开 plugins.json 提 PR。',
     submitTimeout: '请求超时。先到列表确认是否已收录，不要重复提交。',
     repoBtn: 'GitHub 仓库', npmBtn: 'npm 包',
     shotAlt: '{name} 截图',
@@ -722,42 +744,46 @@ var I18N = {
     navMain: 'Main navigation', navMobile: 'Menu navigation', menu: 'Menu',
     navIntro: 'Intro', navPlugins: 'Plugins', navJoin: 'Join the ecosystem',
     themeToggle: 'Toggle dark / light mode',
-    kick: 'Marketplace',
+    kick: 'Plugins',
     h1: 'Community plugins for <span class="mk-accent">dsh-TUI</span>',
-    heroSub: 'Themes, skills, TUI extensions. Zero core changes, pure plugin mounting: install and go; uninstall leaves no trace.',
-    statPlugins: 'listed', statAuthors: 'authors', statUpdatedPrefix: 'Updated',
+    heroSub: 'Themes, skills, TUI extensions. Zero core changes, pure plugin mounting: install and go; uninstall with no residue.',
+    statPlugins: 'plugins', statAuthors: 'authors', statUpdatedPrefix: 'Updated',
+    loading: 'Loading…', newTab: ' (opens in a new tab)', copyFail: 'Copy failed. Select the text and copy it yourself.',
+    reqMark: '* required',
+    readmeExample: '[dsh-TUI](https://github.com/ccch1mneyyy/dsh-TUI) · A plugin for the dsh-TUI ecosystem',
     catalogTitle: 'Plugins',
     searchLabel: 'Search plugins', searchPh: 'dsh-xxx, theme, @author',
     kindFilter: 'Filter by type',
     kindAll: 'All', kindCore: 'Core', kindPlugin: 'Plugin', kindTemplate: 'Template',
     featuredTitle: "Editor's pick", pickBadge: "Editor's pick",
-    empty: 'No matching plugins.', emptyClear: 'Clear filters', emptyOr: ', or ', emptySubmit: 'list one below.',
-    results: '{n} plugins',
+    empty: 'No matching plugins.', emptyMatch: 'No plugins matching “{q}”.',
+    emptyClear: 'Clear filters', emptySubmit: 'Get your plugin listed',
+    results: '{n} plugins', resultsOne: '{n} plugin',
     loadFail: "Couldn't load the plugin list.", loadRetry: 'Refresh and try again',
     submitTitle: 'Get your plugin listed',
-    submitSub: 'The list is a single <span class="mono">plugins.json</span>. Authors keep the repo; listing is just a link. Auto checks and AI review run on submit — pass and it goes live.',
+    submitSub: 'The list is a single <span class="mono">plugins.json</span>. Authors keep the repo; listing is just a link. Auto checks and AI review run on submit — pass and it is listed.',
     pipeline: 'Listing flow',
-    pipe1: 'Submit', pipe2: 'Checks', pipe3: 'AI review', pipe4: 'Live',
+    pipe1: 'Submit', pipe2: 'Checks', pipe3: 'AI review', pipe4: 'Listed',
     snippetTitle: 'Add one line to README.md:', copyBtn: 'Copy', copied: 'Copied',
     copyInstall: 'Copy install command',
     reqTitle: 'Requirements',
     req1: 'The repo must be a <strong>public GitHub repository</strong> and you must be its owner or a collaborator',
     req2: 'The README must include a dsh-TUI link (site or repo)',
     req3: 'It must be a real dsh-TUI / DeepSeek Harness extension',
-    req4: 'Passing submissions go live immediately. Max 10 per IP per 6 hours',
-    path1a: 'Or open a PR against plugins.json',
+    req4: 'Passing submissions are listed immediately. Max 10 per IP per 6 hours',
+    path1a: 'Open a PR against plugins.json',
     path3a: 'No plugin yet? Start from the official template',
-    fName: 'Plugin name', fRepo: 'Repository URL', fAuthor: 'Your GitHub username', fTags: 'Tags', fDesc: 'One-line pitch',
+    fName: 'Plugin name', fRepo: 'Repository URL', fAuthor: 'Your GitHub username', fTags: 'Tags', fDesc: 'One-line description',
     fNameHint: 'Lowercase letters and dashes, for example dsh-xxx',
     fAuthorHint: 'Must match the repo owner or a collaborator',
     fRepoHint: 'A public repo you own or collaborate on',
-    fTagsHint: 'Comma-separated, max 6',
+    fTagsHint: 'Optional. Comma-separated, max 6',
     fDescHint: 'Optional. Leave blank to use the GitHub intro.',
     phTags: 'theme, statusline', phDesc: 'A mist-blue theme for dsh-TUI',
     submitBtn: 'Submit for review', submitting: 'Submitting…',
-    submitOk: 'Submitted. It goes live after auto checks and AI review.',
-    submitFail: 'Submission failed: {error}. You can also open a GitHub PR.',
-    submitTimeout: 'Request timed out. Check the list before submitting again.',
+    submitOk: 'Submitted. It is listed after auto checks and AI review.',
+    submitFail: 'Submission failed: {error}. You can open a PR against plugins.json.',
+    submitTimeout: 'Request timed out. Check the list to see if it is already listed, and do not submit again.',
     repoBtn: 'GitHub repo', npmBtn: 'npm package',
     shotAlt: 'Screenshot of {name}',
     footer1: 'dsh-TUI ecosystem portal · A community-maintained open-source project, not an official DeepSeek product · Plugins belong to their authors',
@@ -780,8 +806,25 @@ function applyLang() {
   var lb = document.getElementById('lang-btn');
   lb.textContent = lang === 'en' ? '中文' : 'EN';
   lb.lang = lang === 'en' ? 'zh-CN' : 'en';
+  var re = document.getElementById('readme-example');
+  if (re) re.innerHTML = '<span class="k">[dsh-TUI]</span>(https://github.com/ccch1mneyyy/dsh-TUI) · ' + esc(t('readmeExample').split(' · ')[1] || t('readmeExample'));
+  syncNewTabCues();
   renderChips();
   render();
+}
+function newTabCue() {
+  return '<span class="sr-only new-tab">' + esc(t('newTab')) + '</span>';
+}
+function syncNewTabCues() {
+  document.querySelectorAll('a[target="_blank"]').forEach(function (a) {
+    var s = a.querySelector('.new-tab');
+    if (!s) {
+      s = document.createElement('span');
+      s.className = 'sr-only new-tab';
+      a.appendChild(s);
+    }
+    s.textContent = t('newTab');
+  });
 }
 
 function withoutTransitions(swap) {
@@ -819,7 +862,7 @@ function kindLabel(kind) {
   return t('kindPlugin');
 }
 
-var COPY_IC = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="ck" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-9"/></svg>';
+var COPY_IC = '<svg class="icon-swap-out" data-on="true" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="icon-swap-in" data-on="false" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-9"/></svg>';
 
 function cardHTML(p, isFeatured) {
   var repo = esc(p.repo);
@@ -831,7 +874,7 @@ function cardHTML(p, isFeatured) {
   var npmHref = npmValue && /^https?:\/\//.test(npmValue)
     ? npmValue
     : (npmValue ? 'https://www.npmjs.com/package/' + npmValue.split('/').map(encodeURIComponent).join('/') : '');
-  var npm = npmValue ? '<a href="' + esc(npmHref) + '" target="_blank" rel="noopener">' + t('npmBtn') + '</a>' : '';
+  var npm = npmValue ? '<a href="' + esc(npmHref) + '" target="_blank" rel="noopener">' + t('npmBtn') + newTabCue() + '</a>' : '';
   var installName = p.name || '';
   var cmd = 'dsh plugin add ' + installName;
   var title = p.displayName || p.name;
@@ -842,7 +885,7 @@ function cardHTML(p, isFeatured) {
   var stars = (typeof p.stars === 'number' && p.stars > 0) ? '<span>★ <b>' + fmtStars(p.stars) + '</b></span>' : '';
   var updated = p.pushedAt ? '<span>' + t('statUpdatedPrefix') + ' <b>' + fmtDate(p.pushedAt) + '</b></span>' : '';
   var install = installName
-    ? '<div class="mk-install"><code>' + esc(cmd) + '</code><button class="mk-copy mk-press" type="button" data-copy="' + esc(cmd) + '" aria-label="' + esc(t('copyInstall')) + '" title="' + esc(t('copyInstall')) + '">' + COPY_IC + '</button></div>'
+    ? '<div class="mk-install"><code>' + esc(cmd) + '</code><button class="mk-copy mk-press icon-swap" type="button" data-copy="' + esc(cmd) + '" aria-label="' + esc(t('copyInstall')) + '" title="' + esc(t('copyInstall')) + '">' + COPY_IC + '</button></div>'
     : '';
   return '<article class="mk-card' + (isFeatured ? ' featured' : '') + '">'
     + shot
@@ -850,32 +893,40 @@ function cardHTML(p, isFeatured) {
     + '<div class="mk-card-head">'
     + '<img src="' + avatar + '" alt="" width="40" height="40" loading="lazy" onerror="this.style.visibility=\'hidden\'"/>'
     + '<div class="who"><h3>' + esc(title) + '</h3>'
-    + '<a class="a" href="https://github.com/' + encodeURIComponent(p.author) + '" target="_blank" rel="noopener">@' + esc(p.author) + '</a></div>'
+    + '<a class="a" href="https://github.com/' + encodeURIComponent(p.author) + '" target="_blank" rel="noopener">@' + esc(p.author) + newTabCue() + '</a></div>'
     + (isFeatured ? '<span class="mk-pick">' + esc(t('pickBadge')) + '</span>' : badge)
     + '</div>'
     + '<p class="mk-desc">' + esc(p.description) + '</p>'
     + (tags ? '<div class="mk-tags">' + tags + '</div>' : '')
     + ((stars || updated) ? '<div class="mk-meta">' + stars + updated + '</div>' : '')
-    + '<div class="mk-actions"><a class="primary mk-press" href="' + repo + '" target="_blank" rel="noopener">' + t('repoBtn') + '</a>' + npm + install + '</div>'
+    + '<div class="mk-actions"><a class="primary mk-press" href="' + repo + '" target="_blank" rel="noopener">' + t('repoBtn') + newTabCue() + '</a>' + npm + install + '</div>'
     + '</div></article>';
 }
 
-function copyText(text, btn) {
-  var done = function () {
-    if (btn) {
-      btn.classList.add('is-copied');
-      setTimeout(function () { btn.classList.remove('is-copied'); }, 1600);
+function setCopyIcons(btn, copied) {
+  var out = btn.querySelector('.icon-swap-out');
+  var inn = btn.querySelector('.icon-swap-in');
+  if (out) out.setAttribute('data-on', copied ? 'false' : 'true');
+  if (inn) inn.setAttribute('data-on', copied ? 'true' : 'false');
+  btn.classList.toggle('is-copied', copied);
+}
+function copyText(text, btn, cb) {
+  var done = function (ok) {
+    if (ok && btn && btn.querySelector('.icon-swap-out')) {
+      setCopyIcons(btn, true);
+      setTimeout(function () { setCopyIcons(btn, false); }, 1600);
     }
     var st = document.getElementById('copy-status');
     st.textContent = '';
-    st.textContent = t('copied');
+    st.textContent = ok ? t('copied') : t('copyFail');
+    if (cb) cb(ok);
   };
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(done, function () {});
+    navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
   } else {
     var ta = document.createElement('textarea');
     ta.value = text; document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); done(); } catch (err) {}
+    try { document.execCommand('copy'); done(true); } catch (err) { done(false); }
     document.body.removeChild(ta);
   }
 }
@@ -896,6 +947,10 @@ function currentList() {
   });
 }
 
+function resultLabel(n) {
+  if (lang === 'en' && n === 1 && I18N.en.resultsOne) return t('resultsOne').replace('{n}', '1');
+  return t('results').replace('{n}', String(n));
+}
 function render() {
   var list = currentList();
   var featured = list.filter(function (p) { return p.featured; });
@@ -903,15 +958,34 @@ function render() {
   document.getElementById('featured').hidden = featured.length === 0;
   document.getElementById('featured-grid').innerHTML = featured.map(function (p) { return cardHTML(p, true); }).join('');
   emptyEl.hidden = list.length > 0;
+  var q = qEl.value.trim();
+  var emptyMsg = document.getElementById('empty-msg');
+  if (emptyMsg) emptyMsg.textContent = q ? t('emptyMatch').replace('{q}', q) : t('empty');
   grid.innerHTML = rest.map(function (p) { return cardHTML(p, false); }).join('');
-  document.getElementById('result-status').textContent = t('results').replace('{n}', String(list.length));
+  document.getElementById('result-status').textContent = resultLabel(list.length);
 }
 
+function chipLabel(k) {
+  return k === '' ? t('kindAll') : kindLabel(k);
+}
+function syncChipPressed() {
+  chipsEl.querySelectorAll('[data-kind]').forEach(function (b) {
+    b.setAttribute('aria-pressed', (b.getAttribute('data-kind') || '') === activeKind ? 'true' : 'false');
+  });
+}
 function renderChips() {
+  var existing = chipsEl.querySelectorAll('[data-kind]');
+  if (existing.length === KINDS.length) {
+    KINDS.forEach(function (k, i) {
+      existing[i].textContent = chipLabel(k);
+      existing[i].setAttribute('data-kind', k);
+    });
+    syncChipPressed();
+    return;
+  }
   chipsEl.innerHTML = KINDS.map(function (k) {
-    var label = k === '' ? t('kindAll') : kindLabel(k);
     var on = activeKind === k;
-    return '<button type="button" class="mk-chip" data-kind="' + esc(k) + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + esc(label) + '</button>';
+    return '<button type="button" class="mk-chip" data-kind="' + esc(k) + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + esc(chipLabel(k)) + '</button>';
   }).join('');
 }
 
@@ -919,13 +993,19 @@ chipsEl.addEventListener('click', function (e) {
   var btn = e.target && e.target.closest ? e.target.closest('[data-kind]') : null;
   if (!btn) return;
   activeKind = btn.getAttribute('data-kind') || '';
-  renderChips(); render();
+  syncChipPressed();
+  render();
 });
-qEl.addEventListener('input', render);
+var renderTimer;
+qEl.addEventListener('input', function () {
+  clearTimeout(renderTimer);
+  renderTimer = setTimeout(render, 160);
+});
 document.getElementById('empty-clear').addEventListener('click', function () {
   activeKind = '';
   qEl.value = '';
-  renderChips(); render();
+  syncChipPressed();
+  render();
   qEl.focus();
 });
 
@@ -942,15 +1022,30 @@ function loadPlugins(urls) {
     return r.json();
   }).catch(function () { return loadPlugins(urls.slice(1)); });
 }
+document.getElementById('result-status').textContent = t('loading');
 loadPlugins([PLUGINS_API, './plugins.json']).then(function (data) {
   all = data.plugins || [];
   document.getElementById('stat-count').textContent = all.length;
   document.getElementById('stat-authors').textContent = new Set(all.map(function (p) { return p.author; })).size;
   document.getElementById('stat-updated').textContent = data.updatedAt || '';
   failEl.hidden = true;
+  failEl.removeAttribute('role');
+  failEl.replaceChildren();
+  grid.removeAttribute('aria-busy');
   renderChips(); render();
 }).catch(function () {
+  grid.removeAttribute('aria-busy');
+  failEl.replaceChildren();
+  failEl.appendChild(document.createTextNode(t('loadFail') + ' '));
+  var retry = document.createElement('a');
+  retry.href = './';
+  retry.textContent = t('loadRetry');
+  failEl.appendChild(retry);
+  failEl.appendChild(document.createTextNode(lang === 'en' ? '.' : '。'));
   failEl.hidden = false;
+  failEl.setAttribute('role', 'alert');
+  failEl.focus();
+  document.getElementById('result-status').textContent = t('loadFail');
 });
 
 document.getElementById('lang-btn').addEventListener('click', function () {
@@ -978,6 +1073,9 @@ function setMenu(open) {
 menuBtn.addEventListener('click', function () {
   setMenu(!topbar.classList.contains('is-open'));
 });
+document.getElementById('mobile-nav').addEventListener('click', function (e) {
+  if (e.target && e.target.closest && e.target.closest('a')) setMenu(false);
+});
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape' && topbar.classList.contains('is-open')) {
     setMenu(false);
@@ -987,7 +1085,11 @@ document.addEventListener('keydown', function (e) {
 
 document.getElementById('submit-form').addEventListener('submit', function (e) {
   e.preventDefault();
-  var f = e.target, msg = document.getElementById('form-msg'), btn = f.querySelector('button[type="submit"]');
+  var f = e.target;
+  var msg = document.getElementById('form-msg');
+  var errBox = document.getElementById('form-err');
+  var btn = f.querySelector('button[type="submit"]');
+  if (btn.getAttribute('aria-disabled') === 'true') return;
   var body = {
     name: f.name.value.trim(),
     repo: f.repo.value.trim(),
@@ -995,10 +1097,11 @@ document.getElementById('submit-form').addEventListener('submit', function (e) {
     tags: f.tags.value.split(/[,，]/).map(function (s) { return s.trim(); }).filter(Boolean).slice(0, 6),
     description: f.description.value.trim()
   };
-  btn.disabled = true; btn.classList.add('loading');
+  btn.setAttribute('aria-disabled', 'true');
+  btn.classList.add('loading');
   msg.className = 'mk-form-msg';
-  msg.setAttribute('role', 'status');
   msg.textContent = t('submitting');
+  errBox.textContent = '';
   var ctrl = new AbortController();
   var timer = setTimeout(function () { ctrl.abort(); }, 20000);
   fetch(SUBMIT_API, {
@@ -1010,26 +1113,32 @@ document.getElementById('submit-form').addEventListener('submit', function (e) {
     return r.json().catch(function () { return null; }).then(function (data) {
       if (!r.ok) throw new Error((data && data.message) ? data.message : 'HTTP ' + r.status);
       msg.className = 'mk-form-msg ok';
-      msg.setAttribute('role', 'status');
-      msg.textContent = (data && data.message) ? data.message : t('submitOk');
+      msg.textContent = t('submitOk');
       f.reset();
     });
   }).catch(function (err) {
-    msg.className = 'mk-form-msg err';
-    msg.setAttribute('role', 'alert');
-    msg.textContent = err.name === 'AbortError'
+    msg.textContent = '';
+    errBox.textContent = err.name === 'AbortError'
       ? t('submitTimeout')
       : t('submitFail').replace('{error}', err.message);
-  }).finally(function () { clearTimeout(timer); btn.disabled = false; btn.classList.remove('loading'); });
+    errBox.focus();
+  }).finally(function () {
+    clearTimeout(timer);
+    btn.removeAttribute('aria-disabled');
+    btn.classList.remove('loading');
+  });
 });
 
 document.getElementById('copy-readme').addEventListener('click', function () {
   var btn = this;
-  copyText(document.getElementById('readme-example').textContent, null);
   var orig = t('copyBtn');
-  btn.textContent = t('copied');
-  setTimeout(function () { btn.textContent = orig; }, 1500);
+  copyText(document.getElementById('readme-example').textContent, btn, function (ok) {
+    if (!ok) return;
+    btn.textContent = t('copied');
+    setTimeout(function () { btn.textContent = orig; }, 1500);
+  });
 });
+syncNewTabCues();
 </script>
 </body>
 </html>

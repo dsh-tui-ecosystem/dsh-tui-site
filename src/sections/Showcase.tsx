@@ -52,7 +52,7 @@ export default function Showcase() {
 
         {/* 官方收录 */}
         <Reveal delay={120} className="mt-10">
-          <div className="grid gap-6 rounded-lg border border-line p-6 md:grid-cols-[1fr_240px] md:items-center" style={{ background: 'var(--panel)' }}>
+          <div className="relative grid gap-6 overflow-visible rounded-lg border border-line p-6 md:grid-cols-[1fr_240px] md:items-center" style={{ background: 'var(--panel)' }}>
             <div>
               <h3 className="text-[19px] font-bold leading-snug text-head">{t(strings['showcase.featured.title'])}</h3>
               <p className="mt-2 max-w-xl text-[13.5px] leading-[1.9] text-dim">
@@ -63,7 +63,7 @@ export default function Showcase() {
               href="https://github.com/ccch1mneyyy/dsh-TUI#-官方收录"
               target="_blank"
               rel="noreferrer"
-              className="group block overflow-hidden rounded-md"
+              className="wechat-preview btn-press rounded-md"
             >
               <picture>
                 <source type="image/avif" srcSet={fix('./shots/wechat-official-480.avif')} />
@@ -75,9 +75,18 @@ export default function Showcase() {
                   decoding="async"
                   width="1870"
                   height="1438"
-                  className="img-outline w-full rounded-md transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="img-outline w-full rounded-md"
                 />
               </picture>
+              <span className="wechat-pop" aria-hidden="true">
+                <img
+                  src={fix('./shots/wechat-official.png')}
+                  alt=""
+                  width="1870"
+                  height="1438"
+                  className="img-outline"
+                />
+              </span>
             </a>
           </div>
         </Reveal>
