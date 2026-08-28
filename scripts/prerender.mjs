@@ -340,21 +340,40 @@ function normalizeNpmReference(value) {
   }
 }
 
+function pluginKindLabel(kind) {
+  if (kind === 'core') return '核心'
+  if (kind === 'template') return '模板'
+  return '插件'
+}
+
 function pluginCard(plugin) {
+  const kind = plugin.kind === 'template' || plugin.kind === 'core' ? plugin.kind : 'plugin'
   const tags = (plugin.tags ?? []).map((tag) => `<span class="mk-tag">${escapeHtml(tag)}</span>`).join('')
   const npmReference = normalizeNpmReference(plugin.npm)
   const npmLink = npmReference
-    ? `<a href="${escapeHtml(npmReference.url)}" target="_blank" rel="noopener">npm →</a>`
+    ? `<a href="${escapeHtml(npmReference.url)}" target="_blank" rel="noopener">npm 包</a>`
     : ''
+  const title = plugin.displayName || plugin.name
+  const install = plugin.name
+    ? `<div class="mk-install"><code>dsh plugin add ${escapeHtml(plugin.name)}</code></div>`
+    : ''
+  const badge = plugin.featured
+    ? '<span class="mk-pick">编辑推荐</span>'
+    : `<span class="mk-kind ${escapeHtml(kind)}">${escapeHtml(pluginKindLabel(kind))}</span>`
 
-  return `<article class="mk-card" data-prerendered="true">
-    <div class="mk-card-head">
-      <div><h2 class="n">${escapeHtml(plugin.displayName || plugin.name)}</h2><a class="a" href="https://github.com/${encodeURIComponent(plugin.author)}" target="_blank" rel="noopener">@${escapeHtml(plugin.author)}</a></div>
-      <span class="mk-kind ${escapeHtml(plugin.kind || 'plugin')}">${escapeHtml(plugin.kind || 'plugin')}</span>
+  return `<article class="mk-card${plugin.featured ? ' featured' : ''}" data-prerendered="true">
+    <div class="mk-card-body">
+      <div class="mk-card-head">
+        <img src="https://github.com/${encodeURIComponent(plugin.author)}.png?size=84" alt="" width="40" height="40" loading="lazy"/>
+        <div class="who"><h3>${escapeHtml(title)}</h3>
+        <a class="a" href="https://github.com/${encodeURIComponent(plugin.author)}" target="_blank" rel="noopener">@${escapeHtml(plugin.author)}</a></div>
+        ${badge}
+      </div>
+      <p class="mk-desc">${escapeHtml(plugin.description)}</p>
+      ${tags ? `<div class="mk-tags">${tags}</div>` : ''}
+      <div class="mk-actions"><a class="primary" href="${escapeHtml(plugin.repo)}" target="_blank" rel="noopener">GitHub 仓库</a>${npmLink}</div>
+      ${install}
     </div>
-    <p class="mk-desc">${escapeHtml(plugin.description)}</p>
-    ${tags ? `<div class="mk-tags">${tags}</div>` : ''}
-    <div class="mk-actions"><a class="primary" href="${escapeHtml(plugin.repo)}" target="_blank" rel="noopener">仓库 →</a>${npmLink}</div>
   </article>`
 }
 
@@ -396,6 +415,8 @@ async function enhancePluginMarketplace() {
   const pluginStructuredData = {
     '@context': 'https://schema.org',
     '@graph': [
+      projectNode(),
+      websiteNode('dsh-TUI 社区插件、主题、技能和 TUI 扩展收录。'),
       {
         '@type': 'CollectionPage',
         '@id': `${pluginUrl}#webpage`,
