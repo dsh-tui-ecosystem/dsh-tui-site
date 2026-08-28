@@ -423,7 +423,7 @@ async function enhancePluginMarketplace() {
   let html = sourceHtml
     .replace(/<link rel="stylesheet"[^>]*data-app-styles[^>]*>/, `<link rel="stylesheet" href="../${cssAsset}" data-app-styles/>`)
     .replace(/<link rel="canonical" href="[^"]+"\/>/, `<link rel="canonical" href="${pluginUrl}"/>`)
-    .replace('<div class="mk-grid" id="grid"></div>', `<div class="mk-grid" id="grid">${plugins.map(pluginCard).join('')}</div>`)
+    .replace(/<div class="mk-grid" id="grid"[^>]*><\/div>/, `<div class="mk-grid" id="grid">${plugins.map(pluginCard).join('')}</div>`)
     .replace(
       /<script type="application\/ld\+json">[\s\S]*?<\/script>/,
       `<script type="application/ld+json">${JSON.stringify(pluginStructuredData).replaceAll('<', '\\u003c')}</script>`,
