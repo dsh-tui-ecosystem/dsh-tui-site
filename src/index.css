@@ -51,6 +51,7 @@
     --ok-text: #137c49;
     --warn: #a87b00;
     --bad: #d84339;
+    --bad-text: #b42318;   /* 正文安全：白底 6.57，--panel-2 5.97 */
 
     --nav-bg: rgba(246, 247, 249, 0.85);
     --badge-bg: rgba(255, 255, 255, 0.75);
@@ -104,6 +105,7 @@
     --ok-text: #3ddc84;   /* 深色下已有 10.60，无需调整 */
     --warn: #f5c542;
     --bad: #f0685f;
+    --bad-text: #f0685f;  /* 深色已有 6.17，与 --bad 同值 */
 
     --nav-bg: rgba(7, 9, 13, 0.82);
     --badge-bg: rgba(12, 17, 25, 0.7);
@@ -180,8 +182,9 @@ body {
 }
 
 ::selection {
-  background: rgba(138, 185, 255, 0.35);
-  color: #fff;
+  /* 白字叠 35% 蓝洗在亮底上只有 1.25:1。前景跟正文走，洗底用 --mist。 */
+  background: color-mix(in srgb, var(--mist) 22%, transparent);
+  color: var(--head);
 }
 
 :focus-visible {
