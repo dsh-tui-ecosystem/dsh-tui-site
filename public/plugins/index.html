@@ -215,7 +215,7 @@
   .mk-card-body {
     padding: 16px; display: flex; flex-direction: column; gap: 12px; flex: 1;
   }
-  .mk-card-head { display: flex; align-items: flex-start; gap: 12px; min-inline-size: 0; }
+  .mk-card-head { display: flex; align-items: flex-start; gap: 12px; min-inline-size: 0; flex-wrap: wrap; }
   .mk-card-head img {
     width: 40px; height: 40px; border-radius: 9px; flex: none;
     background: var(--panel-2);
@@ -265,7 +265,7 @@
   .mk-actions {
     display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: auto;
   }
-  .mk-actions a, .mk-path a {
+  .mk-actions a {
     font-size: 13px; font-weight: 600; text-decoration: none; border-radius: 8px;
     min-height: 36px; padding: 7px 14px;
     border: 1px solid var(--line); color: var(--text-dim);
@@ -273,7 +273,7 @@
     transition-property: border-color, color, background-color, scale;
     transition-duration: 150ms;
   }
-  .mk-actions a:active, .mk-path a:active { scale: 0.96; }
+  .mk-actions a:active { scale: 0.96; }
   .mk-actions a.primary {
     background: var(--mist-solid); border-color: transparent; color: #fff;
   }
@@ -311,56 +311,52 @@
     text-underline-position: from-font; text-decoration-thickness: from-font;
   }
 
-  /* ===== 提交区 ===== */
-  .mk-submit {
-    margin-top: 64px; background: var(--panel); border: 1px solid var(--line);
-    border-radius: 16px; padding: 28px 24px;
-  }
+  /* ===== 提交区：一个表单面，说明用字而不是套娃卡片 ===== */
+  .mk-submit { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line-soft); }
   .mk-submit h2 {
     color: var(--head); font-size: 1.5rem; font-weight: 800; margin: 0;
     letter-spacing: -.02em; line-height: 1.2;
   }
   .mk-submit .sub {
     color: var(--text-dim); font-size: 1rem; line-height: 1.55;
-    margin: 10px 0 22px; max-width: 65ch; text-wrap: pretty;
+    margin: 10px 0 0; max-width: 62ch; text-wrap: pretty;
   }
-  .mk-pipeline {
-    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px;
-    margin: 0 0 28px; padding: 0; list-style: none;
+  .mk-flow {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 0;
+    margin: 18px 0 28px; padding: 0; list-style: none;
+    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px;
+    color: var(--text-dim);
   }
-  .mk-step {
-    background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px;
-    padding: 12px 14px;
+  .mk-flow li { display: flex; align-items: baseline; gap: 8px; }
+  .mk-flow li:not(:last-child)::after {
+    content: '→'; color: var(--text-faint); margin-inline: 12px; font-weight: 700;
   }
-  .mk-step .n {
-    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px;
-    font-weight: 700; color: var(--mist-text); display: block; margin-bottom: 4px;
-  }
-  .mk-step b { display: block; color: var(--head); font-size: 14px; font-weight: 700; line-height: 1.3; }
-  .mk-step span { display: block; color: var(--text-faint); font-size: 12px; margin-top: 4px; line-height: 1.4; }
+  .mk-flow .n { color: var(--mist-text); font-weight: 700; }
+  .mk-flow b { color: var(--head); font-weight: 700; font-size: 13px; }
 
-  .mk-submit-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 22px; align-items: start; }
-  .mk-reqs { background: var(--panel-2); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
-  .mk-reqs h3 { color: var(--head); font-size: 1rem; font-weight: 700; margin: 0 0 14px; }
-  .mk-reqs ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
-  .mk-reqs li {
-    position: relative; padding-inline-start: 34px;
+  .mk-submit-grid {
+    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.85fr);
+    gap: 40px; align-items: start;
+  }
+  .mk-notes h3 { color: var(--head); font-size: 1rem; font-weight: 700; margin: 0 0 12px; }
+  .mk-notes ol {
+    margin: 0; padding: 0; list-style: none; display: grid; gap: 10px;
+    counter-reset: req;
+  }
+  .mk-notes ol li {
+    position: relative; padding-inline-start: 1.75rem;
     color: var(--text-dim); font-size: 14px; line-height: 1.55; overflow-wrap: anywhere;
+    counter-increment: req;
   }
-  .mk-reqs li::before {
-    content: ''; position: absolute; inset-inline-start: 0; top: 2px;
-    width: 22px; height: 22px; border-radius: 7px;
-    background: var(--mist-wash); border: 1px solid var(--line-soft);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%232f59ff' stroke-width='1.8'><path d='m3.5 8.5 3 3 6-6'/></svg>");
-    background-repeat: no-repeat; background-position: center; background-size: 12px;
+  .mk-notes ol li::before {
+    content: counter(req);
+    position: absolute; inset-inline-start: 0; top: 0.15em;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px; font-weight: 700; color: var(--mist-text);
   }
-  :root[data-theme='dark'] .mk-reqs li::before {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%235174ff' stroke-width='1.8'><path d='m3.5 8.5 3 3 6-6'/></svg>");
-  }
-  .mk-reqs li strong { color: var(--head); }
-  .mk-reqs .mono { color: var(--mist-text); font-size: 13px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .mk-notes ol li strong { color: var(--head); }
 
-  .mk-snippet { margin-top: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); overflow: hidden; }
+  .mk-snippet { margin-top: 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); overflow: hidden; }
   .mk-snippet-head {
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
     padding: 8px 12px; border-bottom: 1px solid var(--line-soft); background: var(--panel-2);
@@ -378,15 +374,18 @@
   }
   .mk-snippet pre .k { color: var(--mist-text); }
 
-  .mk-paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); gap: 10px; margin-top: 16px; }
-  .mk-path { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; background: var(--panel-2); }
-  .mk-path h3 { color: var(--head); font-size: 14px; margin: 0 0 6px; font-weight: 700; }
-  .mk-path p { color: var(--text-dim); font-size: 13px; line-height: 1.5; margin: 0 0 10px; }
-  .mk-path a { color: var(--mist-text); border: 0; padding: 0; min-height: 0; }
-  .mk-path a:hover { text-decoration: underline; text-underline-position: from-font; text-decoration-thickness: from-font; }
+  .mk-alts {
+    margin: 20px 0 0; padding: 16px 0 0; list-style: none; display: grid; gap: 8px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .mk-alts a {
+    color: var(--mist-text); font-size: 14px; font-weight: 600; text-decoration: none;
+  }
+  .mk-alts a:hover {
+    text-decoration: underline; text-underline-position: from-font; text-decoration-thickness: from-font;
+  }
 
-  .mk-form-card { border: 1px solid var(--line); border-radius: 14px; padding: 22px; background: var(--panel-2); }
-  .mk-form-card h3 { color: var(--head); font-size: 1rem; font-weight: 700; margin: 0 0 16px; }
+  .mk-form-card { border: 1px solid var(--line); border-radius: 14px; padding: 22px; background: var(--panel); }
   .mk-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 12px; }
   .mk-form .full { grid-column: 1 / -1; }
   .mk-field label { display: block; font-size: 13px; color: var(--text-dim); margin-bottom: 6px; font-weight: 700; }
@@ -451,8 +450,8 @@
     .mk-grid { grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); }
   }
   @media (max-width: 960px) {
-    .mk-submit-grid { grid-template-columns: 1fr; }
-    .mk-pipeline { grid-template-columns: 1fr 1fr; }
+    .mk-submit-grid { grid-template-columns: 1fr; gap: 28px; }
+    .mk-flow li:not(:last-child)::after { margin-inline: 8px; }
   }
   @media (max-width: 720px) {
     .mk-nav, .mk-badge { display: none; }
@@ -461,6 +460,7 @@
     .mk-desktop-gh { display: none; }
     .mk-icon-btn, .mk-lang { min-width: 36px; min-height: 36px; }
     .mk-icon-btn { width: 36px; }
+    .mk-lang { padding: 0 8px; }
     .mk-topbar.is-open .mk-sheet { display: block; }
     .mk-sheet {
       border-top: 1px solid var(--line-soft);
@@ -475,11 +475,14 @@
     }
     .mk-sheet a.on { color: var(--head); font-weight: 700; border-color: var(--mist); background: var(--mist-wash); }
     .mk-sheet-gh { margin-top: 10px; justify-content: center; width: 100%; }
+    .mk-wrap { padding-top: 20px; padding-bottom: 40px; }
     .mk-form { grid-template-columns: 1fr; }
-    .mk-submit { padding: 22px 16px; }
-  }
-  @media (max-width: 520px) {
-    .mk-pipeline { grid-template-columns: 1fr; }
+    .mk-form-btn { width: 100%; justify-self: stretch; }
+    .mk-form-card { padding: 16px; }
+    .mk-submit { margin-top: 40px; padding-top: 24px; }
+    .mk-hero h1 { font-size: 1.5rem; }
+    .mk-card-body { padding: 14px; }
+    .mk-shot, .mk-shot img { max-height: 140px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -579,55 +582,18 @@
   </p>
 
   <section class="mk-submit" id="submit">
-    <h2 data-i18n="submitTitle">收录你的插件</h2>
-    <p class="sub" data-i18n-html="submitSub">两条路，结果一样：列表就是一份 <span class="mono">plugins.json</span>。作者保有仓库所有权，收录只做链接与背书。提交后自动校验 + AI 审查，通过即上架。</p>
+    <h2 id="submit-title" data-i18n="submitTitle">收录你的插件</h2>
+    <p class="sub" data-i18n-html="submitSub">列表是一份 <span class="mono">plugins.json</span>。作者保有仓库，收录只做链接。提交后自动校验 + AI 审查，通过即上架。</p>
 
-    <ol class="mk-pipeline" data-i18n-aria="pipeline" aria-label="收录流程">
-      <li class="mk-step"><span class="n">01</span><b data-i18n="pipe1">提交</b><span data-i18n="pipe1s">PR 或表单</span></li>
-      <li class="mk-step"><span class="n">02</span><b data-i18n="pipe2">自动校验</b><span data-i18n="pipe2s">格式、归属、README</span></li>
-      <li class="mk-step"><span class="n">03</span><b data-i18n="pipe3">AI 审查</b><span data-i18n="pipe3s">deepseek-v4-flash</span></li>
-      <li class="mk-step"><span class="n">04</span><b data-i18n="pipe4">上架</b><span data-i18n="pipe4s">通过即写入列表</span></li>
+    <ol class="mk-flow" data-i18n-aria="pipeline" aria-label="收录流程">
+      <li><span class="n">01</span><b data-i18n="pipe1">提交</b></li>
+      <li><span class="n">02</span><b data-i18n="pipe2">校验</b></li>
+      <li><span class="n">03</span><b data-i18n="pipe3">AI 审查</b></li>
+      <li><span class="n">04</span><b data-i18n="pipe4">上架</b></li>
     </ol>
 
     <div class="mk-submit-grid">
-      <div>
-        <div class="mk-reqs">
-          <h3 data-i18n="reqTitle">收录要求</h3>
-          <ul>
-            <li data-i18n="req1">仓库必须是<strong>公开的 GitHub 仓库</strong>，且你是 owner 或 collaborator</li>
-            <li data-i18n-html="req2">README 必须包含 dsh-TUI 链接（<span class="mono">https://dshtui.com</span> 或 <span class="mono">https://github.com/ccch1mneyyy/dsh-TUI</span>）</li>
-            <li data-i18n="req3">必须是 dsh-TUI / DeepSeek Harness 的真实扩展（主题、技能、状态栏、工具、Agent 等）</li>
-            <li data-i18n="req4">通过后立即上架；不通过会说明原因。同一 IP 每 6 小时最多 10 次</li>
-          </ul>
-          <div class="mk-snippet">
-            <div class="mk-snippet-head">
-              <span class="t" data-i18n="snippetTitle">README.md 里加一行：</span>
-              <button id="copy-readme" type="button" data-i18n="copyBtn">复制</button>
-            </div>
-            <pre id="readme-example"><span class="k">[dsh-TUI]</span>(https://github.com/ccch1mneyyy/dsh-TUI) · 一个为 dsh-TUI 生态打造的插件</pre>
-          </div>
-        </div>
-        <div class="mk-paths">
-          <div class="mk-path">
-            <h3 data-i18n="path1h">直接提 PR</h3>
-            <p data-i18n-html="path1p">往收录仓库的 <span class="mono">plugins.json</span> 开 PR。自动校验 + AI 审查通过后合并。</p>
-            <a href="https://github.com/dsh-tui-ecosystem/dsh-tui-site/blob/main/public/plugins/plugins.json" target="_blank" rel="noopener" data-i18n="path1a">打开 plugins.json</a>
-          </div>
-          <div class="mk-path">
-            <h3 data-i18n="path2h">在线提交</h3>
-            <p data-i18n="path2p">填表单即可，不用写 JSON，不用开 PR。</p>
-            <a href="#submit-form" data-i18n="path2a">填写在线表单</a>
-          </div>
-          <div class="mk-path">
-            <h3 data-i18n="path3h">还没有插件？</h3>
-            <p data-i18n="path3p">从官方模板起步，大约 5 分钟得到一个能跑的 Cordis 插件。</p>
-            <a href="https://github.com/dsh-tui-ecosystem/plugin-template" target="_blank" rel="noopener" data-i18n="path3a">打开官方插件模板</a>
-          </div>
-        </div>
-      </div>
-
-      <form class="mk-form-card" id="submit-form">
-        <h3 data-i18n="formTitle">在线提交</h3>
+      <form class="mk-form-card" id="submit-form" aria-labelledby="submit-title">
         <div class="mk-form">
           <div class="mk-field">
             <label for="f-name"><span data-i18n="fName">插件名称</span> <span class="req" aria-hidden="true">*</span></label>
@@ -658,6 +624,27 @@
           <div class="mk-form-msg" id="form-msg" role="status"></div>
         </div>
       </form>
+
+      <aside class="mk-notes">
+        <h3 data-i18n="reqTitle">收录要求</h3>
+        <ol>
+          <li data-i18n="req1">仓库必须是<strong>公开的 GitHub 仓库</strong>，且你是 owner 或 collaborator</li>
+          <li data-i18n="req2">README 必须带 dsh-TUI 链接（站点或仓库均可）</li>
+          <li data-i18n="req3">必须是 dsh-TUI / DeepSeek Harness 的真实扩展</li>
+          <li data-i18n="req4">通过后立即上架；同一 IP 每 6 小时最多 10 次</li>
+        </ol>
+        <div class="mk-snippet">
+          <div class="mk-snippet-head">
+            <span class="t" data-i18n="snippetTitle">README.md 里加一行：</span>
+            <button id="copy-readme" type="button" data-i18n="copyBtn">复制</button>
+          </div>
+          <pre id="readme-example"><span class="k">[dsh-TUI]</span>(https://github.com/ccch1mneyyy/dsh-TUI) · 一个为 dsh-TUI 生态打造的插件</pre>
+        </div>
+        <ul class="mk-alts">
+          <li><a href="https://github.com/dsh-tui-ecosystem/dsh-tui-site/blob/main/public/plugins/plugins.json" target="_blank" rel="noopener" data-i18n="path1a">也可以打开 plugins.json 提 PR</a></li>
+          <li><a href="https://github.com/dsh-tui-ecosystem/plugin-template" target="_blank" rel="noopener" data-i18n="path3a">还没有插件？从官方模板起步</a></li>
+        </ul>
+      </aside>
     </div>
   </section>
 </main>
@@ -699,23 +686,19 @@ var I18N = {
     empty: '没有匹配的插件。', emptyClear: '清掉筛选', emptyOr: '，或', emptySubmit: '到下方收录一个。',
     results: '{n} 个插件',
     loadFail: '插件列表加载失败。', loadRetry: '刷新页面重试',
-    submitTitle: '收录你的插件', formTitle: '在线提交',
-    submitSub: '两条路，结果一样：列表就是一份 <span class="mono">plugins.json</span>。作者保有仓库所有权，收录只做链接与背书。提交后自动校验 + AI 审查，通过即上架。',
+    submitTitle: '收录你的插件',
+    submitSub: '列表是一份 <span class="mono">plugins.json</span>。作者保有仓库，收录只做链接。提交后自动校验 + AI 审查，通过即上架。',
     pipeline: '收录流程',
-    pipe1: '提交', pipe1s: 'PR 或表单',
-    pipe2: '自动校验', pipe2s: '格式、归属、README',
-    pipe3: 'AI 审查', pipe3s: 'deepseek-v4-flash',
-    pipe4: '上架', pipe4s: '通过即写入列表',
+    pipe1: '提交', pipe2: '校验', pipe3: 'AI 审查', pipe4: '上架',
     snippetTitle: 'README.md 里加一行：', copyBtn: '复制', copied: '已复制',
     copyInstall: '复制安装命令',
     reqTitle: '收录要求',
     req1: '仓库必须是<strong>公开的 GitHub 仓库</strong>，且你是 owner 或 collaborator',
-    req2: 'README 必须包含 dsh-TUI 链接（<span class="mono">https://dshtui.com</span> 或 <span class="mono">https://github.com/ccch1mneyyy/dsh-TUI</span>）',
-    req3: '必须是 dsh-TUI / DeepSeek Harness 的真实扩展（主题、技能、状态栏、工具、Agent 等）',
-    req4: '通过后立即上架；不通过会说明原因。同一 IP 每 6 小时最多 10 次',
-    path1h: '直接提 PR', path1p: '往收录仓库的 <span class="mono">plugins.json</span> 开 PR。自动校验 + AI 审查通过后合并。', path1a: '打开 plugins.json',
-    path2h: '在线提交', path2p: '填表单即可，不用写 JSON，不用开 PR。', path2a: '填写在线表单',
-    path3h: '还没有插件？', path3p: '从官方模板起步，大约 5 分钟得到一个能跑的 Cordis 插件。', path3a: '打开官方插件模板',
+    req2: 'README 必须带 dsh-TUI 链接（站点或仓库均可）',
+    req3: '必须是 dsh-TUI / DeepSeek Harness 的真实扩展',
+    req4: '通过后立即上架；同一 IP 每 6 小时最多 10 次',
+    path1a: '也可以打开 plugins.json 提 PR',
+    path3a: '还没有插件？从官方模板起步',
     fName: '插件名称', fRepo: '仓库地址', fAuthor: '你的 GitHub 用户名', fTags: '标签', fDesc: '一句话介绍',
     fNameHint: '小写字母和连字符，例如 dsh-xxx',
     fAuthorHint: '须与仓库 owner / collaborator 一致',
@@ -751,23 +734,19 @@ var I18N = {
     empty: 'No matching plugins.', emptyClear: 'Clear filters', emptyOr: ', or ', emptySubmit: 'list one below.',
     results: '{n} plugins',
     loadFail: "Couldn't load the plugin list.", loadRetry: 'Refresh and try again',
-    submitTitle: 'Get your plugin listed', formTitle: 'Online submission',
-    submitSub: 'Two roads, same result: the list is a single <span class="mono">plugins.json</span>. Authors keep repo ownership; listing is a link plus an endorsement. Auto checks and AI review run on every submission — pass and it goes live.',
+    submitTitle: 'Get your plugin listed',
+    submitSub: 'The list is a single <span class="mono">plugins.json</span>. Authors keep the repo; listing is just a link. Auto checks and AI review run on submit — pass and it goes live.',
     pipeline: 'Listing flow',
-    pipe1: 'Submit', pipe1s: 'PR or form',
-    pipe2: 'Auto checks', pipe2s: 'format, ownership, README',
-    pipe3: 'AI review', pipe3s: 'deepseek-v4-flash',
-    pipe4: 'Live', pipe4s: 'written to the list on pass',
+    pipe1: 'Submit', pipe2: 'Checks', pipe3: 'AI review', pipe4: 'Live',
     snippetTitle: 'Add one line to README.md:', copyBtn: 'Copy', copied: 'Copied',
     copyInstall: 'Copy install command',
     reqTitle: 'Requirements',
     req1: 'The repo must be a <strong>public GitHub repository</strong> and you must be its owner or a collaborator',
-    req2: 'The README must contain a dsh-TUI link (<span class="mono">https://dshtui.com</span> or <span class="mono">https://github.com/ccch1mneyyy/dsh-TUI</span>)',
-    req3: 'It must be a real dsh-TUI / DeepSeek Harness extension (theme, skill, statusline, tool, agent, and so on)',
-    req4: 'Passing submissions go live immediately; failures say why. Max 10 per IP per 6 hours',
-    path1h: 'Open a PR', path1p: 'PR against <span class="mono">plugins.json</span> in the curation repo. Auto checks and AI review, then merge.', path1a: 'Open plugins.json',
-    path2h: 'Online submission', path2p: 'Fill in the form. No JSON, no PR.', path2a: 'Fill in the form',
-    path3h: 'No plugin yet?', path3p: 'Start from the official template and get a working Cordis plugin in about 5 minutes.', path3a: 'Open the official template',
+    req2: 'The README must include a dsh-TUI link (site or repo)',
+    req3: 'It must be a real dsh-TUI / DeepSeek Harness extension',
+    req4: 'Passing submissions go live immediately. Max 10 per IP per 6 hours',
+    path1a: 'Or open a PR against plugins.json',
+    path3a: 'No plugin yet? Start from the official template',
     fName: 'Plugin name', fRepo: 'Repository URL', fAuthor: 'Your GitHub username', fTags: 'Tags', fDesc: 'One-line pitch',
     fNameHint: 'Lowercase letters and dashes, for example dsh-xxx',
     fAuthorHint: 'Must match the repo owner or a collaborator',
