@@ -134,47 +134,69 @@ const notFound = await readFile(path.join(distDir, '404.html'), 'utf8')
 record(notFound.includes('noindex, nofollow'), '404 page must be noindex')
 record(!canonicalValue(notFound), '404 page must not declare a canonical URL')
 
-const pluginFile = path.join(distDir, 'plugins', 'index.html')
-const [pluginHtml, pluginDataSource] = await Promise.all([
-  readFile(pluginFile, 'utf8'),
-  readFile(path.join(distDir, 'plugins', 'plugins.json'), 'utf8'),
-])
-const pluginData = JSON.parse(pluginDataSource)
-const pluginJsonLd = jsonLdValue(pluginHtml)
-const pluginTypes = graphTypes(pluginJsonLd)
-const pluginTitle = pluginHtml.match(/<title>([^<]+)<\/title>/)?.[1]
-const pluginDescription = metaValue(pluginHtml, 'name', 'description')
-const pluginCssHref = pluginHtml.match(/<link rel="stylesheet" href="([^"]+)"/i)?.[1]
+const pluginData = JSON.parse(await readFile(path.join(distDir, 'plugins', 'plugins.json'), 'utf8'))
+const pluginRoutes = [
+  { route: '/plugins/', file: path.join(distDir, 'plugins', 'index.html'), lang: 'zh-CN', minDescription: 25 },
+  { route: '/en/plugins/', file: path.join(distDir, 'en', 'plugins', 'index.html'), lang: 'en', minDescription: 50 },
+]
 
-record(Boolean(pluginTitle && pluginTitle.length >= 15 && pluginTitle.length <= 75), '/plugins/: invalid title')
-record(Boolean(pluginDescription && pluginDescription.length >= 25 && pluginDescription.length <= 180), '/plugins/: invalid description')
-record((pluginHtml.match(/<h1\b/g) ?? []).length === 1, '/plugins/: expected exactly one h1')
-record(canonicalValue(pluginHtml) === routeUrl('/plugins/'), '/plugins/: canonical mismatch')
-record(metaValue(pluginHtml, 'property', 'og:url') === routeUrl('/plugins/'), '/plugins/: og:url mismatch')
-record(!/(?:fonts\.googleapis\.com|fonts\.loli\.net)/.test(pluginHtml), '/plugins/: third-party font stylesheet remains')
-record((pluginHtml.match(/data-prerendered="true"/g) ?? []).length === pluginData.plugins.length, '/plugins/: plugin list was not fully prerendered')
-record(pluginTypes.has('CollectionPage'), '/plugins/: CollectionPage structured data missing')
-record(pluginTypes.has('BreadcrumbList'), '/plugins/: BreadcrumbList structured data missing')
-record(pluginTypes.has('ItemList'), '/plugins/: ItemList structured data missing')
-const itemList = pluginJsonLd?.['@graph']?.find((node) => node['@type'] === 'ItemList')
-record(itemList?.numberOfItems === pluginData.plugins.length, '/plugins/: ItemList count mismatch')
-if (pluginCssHref) {
+function resolveDistAsset(href, fromFile) {
+  if (href.startsWith('/')) return path.join(distDir, href.replace(/^\//, ''))
+  return path.resolve(path.dirname(fromFile), href)
+}
+
+for (const plugin of pluginRoutes) {
+  let pluginHtml
   try {
-    await access(path.resolve(path.dirname(pluginFile), pluginCssHref))
+    pluginHtml = await readFile(plugin.file, 'utf8')
   } catch {
-    failures.push(`/plugins/: missing generated stylesheet ${pluginCssHref}`)
+    failures.push(`${plugin.route}: missing prerendered HTML`)
+    continue
   }
-} else {
-  failures.push('/plugins/: stylesheet link missing')
+  const pluginJsonLd = jsonLdValue(pluginHtml)
+  const pluginTypes = graphTypes(pluginJsonLd)
+  const pluginTitle = pluginHtml.match(/<title>([^<]+)<\/title>/)?.[1]
+  const pluginDescription = metaValue(pluginHtml, 'name', 'description')
+  const pluginCssHref = pluginHtml.match(/<link rel="stylesheet" href="([^"]+)"/i)?.[1]
+  const itemList = pluginJsonLd?.['@graph']?.find((node) => node['@type'] === 'ItemList')
+
+  record(pluginHtml.includes(`<html lang="${plugin.lang}"`), `${plugin.route}: lang mismatch`)
+  record(Boolean(pluginTitle && pluginTitle.length >= 15 && pluginTitle.length <= 75), `${plugin.route}: invalid title`)
+  record(Boolean(pluginDescription && pluginDescription.length >= plugin.minDescription && pluginDescription.length <= 180), `${plugin.route}: invalid description`)
+  record((pluginHtml.match(/<h1\b/g) ?? []).length === 1, `${plugin.route}: expected exactly one h1`)
+  record(canonicalValue(pluginHtml) === routeUrl(plugin.route), `${plugin.route}: canonical mismatch`)
+  record(metaValue(pluginHtml, 'property', 'og:url') === routeUrl(plugin.route), `${plugin.route}: og:url mismatch`)
+  record((pluginHtml.match(/rel="alternate" hreflang=/g) ?? []).length === 3, `${plugin.route}: hreflang set incomplete`)
+  record(!/(?:fonts\.googleapis\.com|fonts\.loli\.net)/.test(pluginHtml), `${plugin.route}: third-party font stylesheet remains`)
+  record((pluginHtml.match(/data-prerendered="true"/g) ?? []).length === pluginData.plugins.length, `${plugin.route}: plugin list was not fully prerendered`)
+  record((pluginHtml.match(/<article class="mk-card[^"]*" data-prerendered="true">[\s\S]*?<h3>/g) ?? []).length === pluginData.plugins.length, `${plugin.route}: prerendered cards must use h3, not section-level h2`)
+  record((pluginHtml.match(/<h2\b/g) ?? []).length <= 4, `${plugin.route}: too many h2s; plugin names should not compete with section titles`)
+  record(pluginTypes.has('WebSite'), `${plugin.route}: WebSite structured data missing`)
+  record(pluginTypes.has('CollectionPage'), `${plugin.route}: CollectionPage structured data missing`)
+  record(pluginTypes.has('BreadcrumbList'), `${plugin.route}: BreadcrumbList structured data missing`)
+  record(pluginTypes.has('ItemList'), `${plugin.route}: ItemList structured data missing`)
+  record(itemList?.numberOfItems === pluginData.plugins.length, `${plugin.route}: ItemList count mismatch`)
+  if (plugin.lang === 'en') {
+    record(Boolean(pluginTitle && /[A-Za-z]/.test(pluginTitle) && !pluginTitle.includes('插件市场')), `${plugin.route}: title should be English`)
+  }
+  if (pluginCssHref) {
+    try {
+      await access(resolveDistAsset(pluginCssHref, plugin.file))
+    } catch {
+      failures.push(`${plugin.route}: missing generated stylesheet ${pluginCssHref}`)
+    }
+  } else {
+    failures.push(`${plugin.route}: stylesheet link missing`)
+  }
 }
 
 const sitemap = await readFile(path.join(distDir, 'sitemap.xml'), 'utf8')
 const sitemapLocations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])
-for (const route of [...expectedRoutes, '/plugins/']) {
+for (const route of [...expectedRoutes, '/plugins/', '/en/plugins/']) {
   record(sitemapLocations.includes(routeUrl(route)), `sitemap: missing ${route}`)
 }
-record(sitemapLocations.length === expectedRoutes.length + 1, 'sitemap: unexpected or duplicate URLs')
-record((sitemap.match(/hreflang="x-default"/g) ?? []).length === expectedRoutes.length, 'sitemap: x-default annotations incomplete')
+record(sitemapLocations.length === expectedRoutes.length + 2, 'sitemap: unexpected or duplicate URLs')
+record((sitemap.match(/hreflang="x-default"/g) ?? []).length === expectedRoutes.length + 2, 'sitemap: x-default annotations incomplete')
 record(!sitemap.includes('join.dshtui.com'), 'sitemap: cross-domain URL should not be listed')
 
 const robots = await readFile(path.join(distDir, 'robots.txt'), 'utf8')
@@ -197,4 +219,4 @@ if (failures.length) {
   process.exit(1)
 }
 
-console.log(`SEO checks passed: ${expectedRoutes.length + 1} indexable routes, ${titles.size} unique content titles, ${pluginData.plugins.length} prerendered plugins, ${pictureCount} responsive pictures.`)
+console.log(`SEO checks passed: ${expectedRoutes.length + 2} indexable routes, ${titles.size} unique content titles, ${pluginData.plugins.length} prerendered plugins, ${pictureCount} responsive pictures.`)

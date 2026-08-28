@@ -215,8 +215,8 @@ export const NAV_LINKS: { href: string; label: Pair }[] = [
 ]
 
 /** 站外目的地，和页内锚点分组渲染，不共用同一节奏。 */
-export const NAV_SECONDARY: { href: string; label: Pair; external?: boolean }[] = [
-  { href: '/plugins/', label: { zh: '插件市场', en: 'Plugins' } },
+export const NAV_SECONDARY: { href: string | Pair; label: Pair; external?: boolean }[] = [
+  { href: { zh: '/plugins/', en: '/en/plugins/' }, label: { zh: '插件市场', en: 'Plugins' } },
   { href: 'https://join.dshtui.com/', label: { zh: '加入生态', en: 'Join the ecosystem' }, external: true },
 ]
 

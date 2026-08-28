@@ -2,6 +2,7 @@ import SectionHead from '../components/SectionHead'
 import Reveal from '../components/Reveal'
 import CommandLine from '../components/CommandLine'
 import Icon from '../components/Icon'
+import BrandIcon from '../components/BrandIcon'
 import { INSTALL_STEPS, strings, useLang, useT } from '../i18n'
 
 const STEPS = INSTALL_STEPS
@@ -62,10 +63,11 @@ export default function Install() {
                 href="https://github.com/ccch1mneyyy/dsh-TUI/releases/latest/download/dsh-tui-setup.zip"
                 target="_blank"
                 rel="noreferrer"
-                className="font-mono2 inline-flex items-center justify-center gap-1 text-center text-[11px] text-faint transition-colors hover:text-mist3 sm:justify-end"
+                className="font-mono2 inline-flex items-center justify-center gap-1.5 text-center text-[11px] text-faint transition-colors hover:text-mist3 sm:justify-end"
               >
+                <BrandIcon name="github" size={12} className="shrink-0" />
                 {t(strings['bundle.mirror'])}
-                <Icon name="arrow-up-right" size={11} />
+                <Icon name="arrow-up-right" size={11} className="shrink-0" />
               </a>
             </div>
           </div>
