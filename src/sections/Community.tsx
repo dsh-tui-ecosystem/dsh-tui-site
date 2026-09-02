@@ -72,7 +72,7 @@ export default function Community() {
               <div className="text-[15px] font-semibold text-head">{t(strings['footer.community.wechat'])}</div>
               <div className="mt-4">
                 <QrFrame
-                  src="/contact/wechat-qr.png"
+                  src="/contact/wechat-qr.png?v=4"
                   alt={t(strings['footer.community.wechatAlt'])}
                   pending={t(strings['footer.community.qrPending'])}
                 />
