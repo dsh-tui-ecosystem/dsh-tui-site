@@ -47,7 +47,7 @@ export const strings = {
 
   'hero.desc': {
     zh: '像素鲸鱼顶栏、实时工作状态行、思考流式展开、双击 Esc 时间回溯、蓝白上下文进度条 + TPS 仪表。零核心改动，纯插件挂载 —— 装上即用，卸了不留补丁。',
-    en: 'Pixel-whale top bar, live status line, streaming thinking, double-tap Esc time travel, and a blue-white context progress bar with a TPS gauge. Zero core changes, pure plugin mounting — install and go, uninstall with no residue.',
+    en: 'Pixel-whale top bar, live status line, streaming thinking, terminal image previews (Sixel / Kitty), double-tap Esc time travel, and a blue-white context progress bar with a TPS gauge. Zero core changes, pure plugin mounting — install and go, uninstall with no residue.',
   },
   'hero.aliases': {
     zh: '项目名写作 dsh-TUI；命令与包名使用 dsh-tui，域名与常用简称是 DSHTUI。它运行在 DeepSeek Harness（简称 DSH）之上。',
@@ -93,6 +93,7 @@ export const strings = {
   },
   'install.alt.label': { zh: '备选 —— 手工加入 dsh 配置档', en: 'Alternative — add to a dsh profile manually' },
   'install.alt.or': { zh: '或', en: 'or' },
+  'install.alt.vscode': { zh: 'VS Code 扩展', en: 'VS Code extension' },
 
   'bundle.title': { zh: '整合包安装（新手推荐）', en: 'Installer bundle (recommended for beginners)' },
   'bundle.desc': {
@@ -134,6 +135,13 @@ export const strings = {
     zh: '高亮处即 dsh-TUI 的挂载点：Cordis patch 层叠在 dsh-base 之上，卸载后不留核心补丁。',
     en: 'The highlight marks the dsh-TUI mount point: the Cordis patch layers on top of dsh-base and leaves no core patch behind when removed.',
   },
+
+  'changelog.title': { zh: '更新动态', en: "What's new" },
+  'changelog.desc': {
+    zh: '从 v0.9.0 到 v0.10.1，四周五个版本。事实核对自仓库提交记录与 npm 发布时间；完整发布记录见 GitHub Releases。',
+    en: 'Five releases in four weeks, from v0.9.0 to v0.10.1. Facts cross-checked against repo commits and npm publish times; full notes on GitHub Releases.',
+  },
+  'changelog.more': { zh: '全部发布记录', en: 'All releases' },
 
   'guides.title': { zh: '深入了解 dsh-TUI', en: 'Dive deeper into dsh-TUI' },
   'guides.desc': {
@@ -226,6 +234,7 @@ export const NAV_SECONDARY: { href: string | Pair; label: Pair; external?: boole
  *  收录 在 Showcase 区块。只保留唯一承载可信度的那条，其余是重复噪音。 */
 export const HERO_BADGES: { k: Pair; v: Pair }[] = [
   { k: { zh: '收录', en: 'featured' }, v: { zh: 'DSH 官方公众号', en: 'DSH Official WeChat' } },
+  { k: { zh: 'Trending', en: 'Trending' }, v: { zh: 'GitHub 日榜 #7', en: 'GitHub daily #7' } },
 ]
 
 export interface FeatureCellData {
@@ -240,11 +249,12 @@ export const FEATURE_CELLS: FeatureCellData[] = [
   {
     title: { zh: '终端原生交互', en: 'Terminal-native interaction' },
     desc: {
-      zh: '流式 Markdown、结构化工具卡、命令与文件补全、@ 文件引用（消息任意位置补全，发送时自动附加文件内容）、历史搜索、消息选择，inline / alternate-screen 两种渲染模式，/lang 中英界面一键切换。',
-      en: 'Streamed Markdown, structured tool cards, command and file completion, @ file references (complete anywhere in a message, file contents attached automatically on send), history search, message selection, inline / alternate-screen rendering modes, and one-tap Chinese / English switching via /lang.',
+      zh: '流式 Markdown、终端图片预览（Sixel / Kitty，内嵌缩略图与大图图库）、结构化工具卡、命令与文件补全、@ 文件引用（支持 #L12-14 行区间，发送时自动附加文件内容）、历史搜索、消息选择，inline / alternate-screen 两种渲染模式，/lang 中英界面一键切换。',
+      en: 'Streamed Markdown, terminal image previews (Sixel / Kitty with inline thumbnails and a full gallery), structured tool cards, command and file completion, @ file references (with #L12-14 line ranges, contents attached automatically on send), history search, message selection, inline / alternate-screen rendering modes, and one-tap Chinese / English switching via /lang.',
     },
     tags: [
       { zh: '流式 Markdown', en: 'Streamed Markdown' },
+      { zh: '图片预览', en: 'Image previews' },
       { zh: '@ 文件引用', en: '@ file refs' },
       { zh: '历史搜索', en: 'History search' },
       { zh: '中英双语', en: 'CN / EN bilingual' },
@@ -357,6 +367,7 @@ export const SHORTCUT_KEYS: { keys: string[]; times?: number; desc: Pair; hi?: b
   { keys: ['Ctrl+C'], desc: { zh: '中断当前回合；空闲时连按两次退出', en: 'Interrupt the current turn; press twice while idle to quit' } },
   { keys: ['Esc'], times: 2, desc: { zh: '空输入双击 = 时间回溯（rewind / fork）', en: 'Double-tap on empty input = time travel (rewind / fork)' }, hi: true },
   { keys: ['Ctrl+O'], desc: { zh: '展开 / 收起详情：思考全文、工具参数与输出', en: 'Expand / collapse details: full thinking, tool params and output' } },
+  { keys: ['Ctrl+Shift+E'], desc: { zh: '全屏草稿编辑器（行号 + 滚轮）', en: 'Fullscreen draft editor (line numbers + wheel)' } },
   { keys: ['Ctrl+R'], desc: { zh: '历史消息搜索', en: 'Search message history' } },
   { keys: ['/'], desc: { zh: '会话内全文搜索，n / N 跳转', en: 'Full-text search within the session, n / N to jump between matches' } },
   { keys: ['Tab'], desc: { zh: '命令 / @ 文件补全，目录可继续深入', en: 'Command / @ file completion; directories can be drilled into' } },
@@ -372,13 +383,63 @@ export const SHORTCUT_MOUSE: { k: Pair; v: Pair }[] = [
 ]
 
 export const COMMAND_GROUPS: { name: Pair; en: string; cmds: string[] }[] = [
-  { name: { zh: '会话', en: 'Session' }, en: 'session', cmds: ['/new', '/resume', '/rename', '/clear', '/compact', '/export', '/trace'] },
-  { name: { zh: '状态', en: 'Status' }, en: 'status', cmds: ['/status', '/cost', '/doctor', '/config', '/init'] },
-  { name: { zh: '模型', en: 'Model' }, en: 'model', cmds: ['/model', '/thinking', '/tokens', '/theme', '/lang'] },
-  { name: { zh: '账号 / 策略', en: 'Account / Policy' }, en: 'account', cmds: ['/login', '/logout', '/permissions', '/add-dir', '/hooks', '/mcp', '/memory'] },
-  { name: { zh: '技能', en: 'Skills' }, en: 'skills', cmds: ['/audit', '/bug', '/review', '/practice', '/pr_comments', '/release-notes', '/vuln-check'] },
-  { name: { zh: '其它', en: 'Misc' }, en: 'misc', cmds: ['/agents', '/update', '/vim', '/terminal-setup', '/connect', '/help', '/exit'] },
+  { name: { zh: '会话', en: 'Session' }, en: 'session', cmds: ['/new', '/resume', '/rename', '/clear', '/compact', '/export', '/trace', '/agentview', '/recap'] },
+  { name: { zh: '状态', en: 'Status' }, en: 'status', cmds: ['/status', '/cost', '/doctor', '/config', '/init', '/balance', '/jobs'] },
+  { name: { zh: '模型', en: 'Model' }, en: 'model', cmds: ['/model', '/thinking', '/tokens', '/theme', '/lang', '/provider'] },
+  { name: { zh: '账号 / 策略', en: 'Account / Policy' }, en: 'account', cmds: ['/login', '/logout', '/permissions', '/permission', '/add-dir', '/hooks', '/mcp', '/memory'] },
+  { name: { zh: '技能', en: 'Skills' }, en: 'skills', cmds: ['/skills', '/audit', '/bug', '/review', '/practice', '/pr_comments', '/release-notes', '/vuln-check'] },
+  { name: { zh: '其它', en: 'Misc' }, en: 'misc', cmds: ['/agents', '/update', '/settings', '/restart', '/reload', '/color', '/vim', '/terminal-setup', '/connect', '/help', '/exit'] },
   { name: { zh: '注册表', en: 'Registry' }, en: 'registry', cmds: ['/plan', '/goal'] },
+]
+
+/** 更新动态条目。事实来源：仓库 git 提交记录 + npm 发布时间（详见调研记录），
+ *  日期为 npm UTC 发布日。 */
+export const CHANGELOG_ENTRIES: { version: string; date: string; title: Pair; desc: Pair }[] = [
+  {
+    version: 'v0.10.1',
+    date: '2026-09-10',
+    title: { zh: '上下文进度条默认开启', en: 'Context progress bar on by default' },
+    desc: {
+      zh: '超长单行可折叠并支持鼠标交互；适配 DSH 0.1.5-rc.1，deepseek-flash 成为新默认模型。',
+      en: 'Long lines fold with mouse support; DSH 0.1.5-rc.1 support with deepseek-flash as the new default model.',
+    },
+  },
+  {
+    version: 'v0.10.0',
+    date: '2026-09-08',
+    title: { zh: '终端图片预览与鲸鱼动画', en: 'Terminal image previews & whale animation' },
+    desc: {
+      zh: 'Sixel / Kitty 终端图片预览与大图图库，像素鲸鱼点击唤醒动画，/agentview 会话总览，全屏草稿编辑器与 /jobs 后台任务。',
+      en: 'Sixel / Kitty terminal image previews with a gallery, click-to-wake whale animation, /agentview session overview, a fullscreen draft editor, and /jobs background tasks.',
+    },
+  },
+  {
+    version: 'v0.9.3',
+    date: '2026-08-26',
+    title: { zh: '单文件便携包 + 余额查询', en: 'Single-file portable bundle & balance check' },
+    desc: {
+      zh: '跨平台单文件便携包构建与自更新，/settings 自动保存，/balance 查询 DeepSeek 余额与状态栏花费估算。',
+      en: 'Cross-platform single-file portable build with self-update, /settings auto-save, and /balance for DeepSeek balance and per-session cost estimates.',
+    },
+  },
+  {
+    version: 'v0.9.1',
+    date: '2026-08-25',
+    title: { zh: 'OAuth 登录与会话回顾', en: 'OAuth login & session recap' },
+    desc: {
+      zh: '账号 OAuth 登录（dsh-auth）、/recap 会话自动总结、@ 引用行区间，以及 /restart 保会话重启与 /reload 软重载。',
+      en: 'OAuth account login (dsh-auth), /recap auto-session summaries, @ line-range references, plus /restart session-preserving restart and /reload soft reload.',
+    },
+  },
+  {
+    version: 'v0.9.0',
+    date: '2026-08-23',
+    title: { zh: '全屏默认 + 鼠标全覆盖', en: 'Fullscreen by default & full mouse support' },
+    desc: {
+      zh: 'fullscreen 改为出厂默认，新增时间线导航栏，鼠标交互全覆盖，长会话性能显著优化。',
+      en: 'Fullscreen becomes the default, a timeline rail is added, mouse interaction is covered throughout, and long-session performance is significantly improved.',
+    },
+  },
 ]
 
 export const ARCH_PIPE: Pair[] = [

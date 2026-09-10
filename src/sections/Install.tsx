@@ -55,7 +55,7 @@ export default function Install() {
             <div className="flex shrink-0 flex-col items-stretch gap-2 sm:items-end">
               <a
                 href="/downloads/dsh-tui-setup.zip"
-                className="btn-press whitespace-nowrap rounded bg-[var(--mist-solid)] px-6 py-3 text-center text-[14px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)]"
+                className="btn-press btn-shine whitespace-nowrap rounded bg-[var(--mist-solid)] px-6 py-3 text-center text-[14px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)]"
               >
                 {t(strings['bundle.download'])}
               </a>
@@ -99,6 +99,16 @@ export default function Install() {
             <code className="text-mist3">sh install.sh</code>
             <span className="text-faint">{t(strings['install.alt.or'])}</span>
             <code className="break-words text-mist3">dsh plugin --profile dsh-tui add @deepseek-harness-tui/dsh-tui</code>
+            <span className="text-faint">{t(strings['install.alt.or'])}</span>
+            <a
+              href="https://github.com/ccch1mneyyy/dsh-TUI/blob/main/docs/vscode.md"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 text-mist3 transition-colors hover:text-mist2"
+            >
+              {t(strings['install.alt.vscode'])}
+              <Icon name="arrow-up-right" size={11} />
+            </a>
           </div>
         </Reveal>
       </div>

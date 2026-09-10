@@ -80,7 +80,7 @@ export default function Hero() {
       <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-12 px-page pb-20 pt-14 lg:grid-cols-[1.02fr_1fr] lg:items-center lg:gap-10 lg:pt-20">
         {/* left */}
         <div>
-          <div className="mb-7 flex flex-wrap gap-2">
+          <div className="enter mb-7 flex flex-wrap gap-2" style={{ ['--enter-d' as never]: '40ms' }}>
             {BADGES.map((b) => (
               <span
                 key={b.k.zh}
@@ -94,7 +94,7 @@ export default function Hero() {
             ))}
           </div>
 
-          <div className="flex items-end gap-4 sm:gap-7">
+          <div className="enter flex items-end gap-4 sm:gap-7" style={{ ['--enter-d' as never]: '120ms' }}>
             <div className="parallax-whale relative shrink-0">
               <img
                 src={lang === 'en' ? '../whale-girl.png' : '/whale-girl.png'}
@@ -125,7 +125,7 @@ export default function Hero() {
             </h1>
           </div>
 
-          <p className="mt-6 max-w-xl text-[16.5px] leading-relaxed text-head sm:text-lg">
+          <p className="enter mt-6 max-w-xl text-[16.5px] leading-relaxed text-head sm:text-lg" style={{ ['--enter-d' as never]: '200ms' }}>
             {lang === 'zh' ? (
               <>
                 Claude Code 风格的全屏终端交互，
@@ -144,10 +144,11 @@ export default function Hero() {
               </>
             )}
           </p>
-          <p className="mt-4 max-w-xl text-[14px] leading-[1.9] text-dim">
+          <p className="enter mt-4 max-w-xl text-[14px] leading-[1.9] text-dim" style={{ ['--enter-d' as never]: '260ms' }}>
             {lang === 'zh' ? (
               <>
                 像素鲸鱼顶栏、实时工作状态行、思考流式展开、
+                <span className="whitespace-nowrap">终端图片预览（Sixel / Kitty）</span>、
                 <span className="whitespace-nowrap">双击 Esc</span>
                 {' '}时间回溯、蓝白上下文进度条 + TPS 仪表。零核心改动，纯插件挂载 ——
                 <span className="whitespace-nowrap">装上即用，卸了不留补丁。</span>
@@ -156,16 +157,18 @@ export default function Hero() {
               t(strings['hero.desc'])
             )}
           </p>
-          <p className="mt-3 max-w-xl text-[12.5px] leading-[1.8] text-faint">
+          <p className="enter mt-3 max-w-xl text-[12.5px] leading-[1.8] text-faint" style={{ ['--enter-d' as never]: '300ms' }}>
             {t(strings['hero.aliases'])}
           </p>
 
-          <CommandLine command={INSTALL} className="mt-8" />
+          <div className="enter" style={{ ['--enter-d' as never]: '360ms' }}>
+            <CommandLine command={INSTALL} className="mt-8" />
+          </div>
 
-          <div className="mt-6 flex flex-col gap-3 min-[420px]:flex-row min-[420px]:flex-wrap min-[420px]:items-center">
+          <div className="enter mt-6 flex flex-col gap-3 min-[420px]:flex-row min-[420px]:flex-wrap min-[420px]:items-center" style={{ ['--enter-d' as never]: '420ms' }}>
             <a
               href="/downloads/dsh-tui-setup.zip"
-              className="btn-press flex w-full items-center justify-center gap-2 whitespace-nowrap rounded bg-[var(--mist-solid)] px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)] min-[420px]:w-auto"
+              className="btn-press btn-shine flex w-full items-center justify-center gap-2 whitespace-nowrap rounded bg-[var(--mist-solid)] px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[var(--mist-solid-hover)] min-[420px]:w-auto"
             >
               <Icon name="download" size={15} weight={2} />
               {t(strings['hero.cta.bundle'])}
@@ -184,7 +187,7 @@ export default function Hero() {
               {t(strings['hero.cta.showcase'])}
             </a>
           </div>
-          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <div className="enter mt-5 flex flex-wrap items-center gap-x-5 gap-y-2" style={{ ['--enter-d' as never]: '470ms' }}>
             {PLATFORMS.map((p) => (
               <span key={p.label} className="font-mono2 flex items-center gap-1.5 text-[12px] text-dim">
                 <BrandIcon name={p.icon} size={13} />
@@ -192,12 +195,15 @@ export default function Hero() {
               </span>
             ))}
           </div>
-          <div className="font-mono2 mt-2.5 text-[11.5px] text-faint">Node ^22.19 / ≥24 · pnpm 10+</div>
+          <div className="enter font-mono2 mt-2.5 text-[11.5px] text-faint" style={{ ['--enter-d' as never]: '500ms' }}>Node ^22.19 / ≥24 · pnpm 10+</div>
         </div>
 
-        {/* right: live terminal */}
-        <div className="relative">
-          <TerminalDemo />
+        {/* right: live terminal。enter-r 负责入场，terminal-tilt 负责指针倾斜，
+            必须分两层：animation 填充期间会压住同元素的 transform。 */}
+        <div className="enter-r relative" style={{ ['--enter-d' as never]: '320ms' }}>
+          <div className="terminal-tilt">
+            <TerminalDemo />
+          </div>
           <p className="font-mono2 mt-3 text-start text-[11px] text-faint sm:text-center">
             {t(strings['hero.demoNote'])}
           </p>

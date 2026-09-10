@@ -734,6 +734,88 @@ body {
   transition: background 100ms ease-out, border-color 100ms ease-out;
 }
 
+/* Nav 滚动进度条：scaleX 由 Nav 的滚动监听写成 --sp，transform 纯合成器。 */
+.scroll-progress {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--mist-text), var(--mist-2));
+  transform: scaleX(var(--sp, 0));
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* Hero 首屏入场编排：页面加载时元素按 --enter-d 依次抵达，
+   不是一起冒出来。SSR 安全（纯 CSS），reduced-motion 被全局块压掉。 */
+@keyframes enter-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes enter-right {
+  from { opacity: 0; transform: translateX(22px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.enter {
+  animation: enter-up 0.65s var(--ease-out) both;
+  animation-delay: var(--enter-d, 0ms);
+}
+.enter-r {
+  animation: enter-right 0.75s var(--ease-out) both;
+  animation-delay: var(--enter-d, 0ms);
+}
+
+/* 终端卡片 3D 倾斜 + 动态光影：复用 Hero 视差写下的 --px/--py，
+   零额外 JS。小角度（±2.4°）保证文字可读；阴影随指针反向偏移，
+   像被一盏跟着人走的灯照着（handfeel §5 fake lighting）。 */
+.terminal-tilt {
+  transform:
+    perspective(1200px)
+    rotateY(calc(var(--px, 0) * -2.4deg))
+    rotateX(calc(var(--py, 0) * 1.8deg));
+  box-shadow:
+    calc(var(--px, 0) * -18px) 26px 70px -18px rgba(23, 37, 84, 0.3);
+}
+:root[data-theme='dark'] .terminal-tilt {
+  box-shadow:
+    calc(var(--px, 0) * -18px) 26px 80px -16px rgba(23, 37, 84, 0.55);
+}
+
+/* 命令 chip 级联入场：行 reveal 触发后，chip 按 sibling-index 依次弹入。
+   不支持的浏览器 delay 为 0（一起进，安全回退）。 */
+@keyframes chip-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+.is-in .cmd-chip {
+  animation: chip-in 0.4s var(--ease-out) both;
+}
+@supports (animation-delay: calc(sibling-index() * 1ms)) {
+  .is-in .cmd-chip {
+    animation-delay: calc(sibling-index() * 28ms);
+  }
+}
+
+/* 主按钮 hover 流光：一道高光扫过实心按钮，只在 hover 时放一次，不循环。 */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.28) 50%, transparent 58%);
+  transform: translateX(-130%);
+  transition: transform 0.6s var(--ease-out);
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .btn-shine:hover::after {
+    transform: translateX(130%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

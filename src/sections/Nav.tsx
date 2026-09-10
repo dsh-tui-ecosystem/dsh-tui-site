@@ -37,6 +37,7 @@ export default function Nav() {
   const starCount = useStars()
   const spyRef = useRef<HTMLSpanElement | null>(null)
   const linkRefs = useRef(new Map<string, HTMLAnchorElement>())
+  const headerRef = useRef<HTMLElement | null>(null)
 
   const toggleTheme = () => {
     withoutTransitions(() => {
@@ -51,7 +52,13 @@ export default function Nav() {
   }
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    const onScroll = () => {
+      const y = window.scrollY
+      setScrolled(y > 24)
+      // 滚动进度条：直接写 CSS 变量，不经过 React 渲染
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      headerRef.current?.style.setProperty('--sp', String(max > 0 ? Math.min(1, y / max) : 0))
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -96,9 +103,11 @@ export default function Nav() {
 
   return (
     <header
+      ref={headerRef}
       className={`fixed inset-x-0 top-0 z-50 ${scrolled || open ? 'nav-scrolled' : ''}`}
       style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
+      <span className="scroll-progress" aria-hidden="true" />
       <div className="mx-auto flex h-[61px] max-w-6xl items-center gap-3 px-page">
         <a href="#top" className="flex shrink-0 items-center gap-2.5">
           <PixelWhale float={false} className="h-7 w-9" />

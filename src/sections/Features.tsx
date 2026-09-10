@@ -1,20 +1,49 @@
+import { useEffect, useState } from 'react'
 import SectionHead from '../components/SectionHead'
 import Icon from '../components/Icon'
 import Reveal from '../components/Reveal'
 import { FEATURE_CELLS, strings, useLang, useT } from '../i18n'
 
-/** 可观察状态格里的小仪表：上下文进度条 + TPS */
+/** 活的迷你仪表：这格讲的是「可观察的 Agent 状态」，它自己就应该是活的。
+ *  tps 火花线每 1.1s 轮转一帧，ctx 百分比缓慢漂移、进度格数联动。
+ *  reduced-motion 不启动定时器，停在第 0 帧静态画面。 */
+const TPS_FRAMES = [
+  { bars: '▂▃▅▆▇█▇▅', v: 58 },
+  { bars: '▃▅▆▇█▇▅▂', v: 61 },
+  { bars: '▅▆▇█▇▅▂▃', v: 64 },
+  { bars: '▆▇█▇▅▂▃▅', v: 57 },
+  { bars: '▇█▇▅▂▃▅▆', v: 52 },
+  { bars: '█▇▅▂▃▅▆▇', v: 49 },
+  { bars: '▇▅▂▃▅▆▇█', v: 55 },
+  { bars: '▅▂▃▅▆▇█▇', v: 62 },
+] as const
+const CTX_SEQ = [51.2, 51.9, 52.6, 52.1, 51.5, 50.8, 50.2, 50.9] as const
+
 function MiniMeter() {
+  const [tick, setTick] = useState(0)
+  useEffect(() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const id = setInterval(() => setTick((n) => n + 1), 1100)
+    return () => clearInterval(id)
+  }, [])
+  const tps = TPS_FRAMES[tick % TPS_FRAMES.length]
+  const pct = CTX_SEQ[tick % CTX_SEQ.length]
+  const fill = Math.round(pct / 10)
   return (
     <div className="font-mono2 mt-4 space-y-2 overflow-x-auto rounded border border-soft p-3 text-[11px]" style={{ background: 'var(--bg-2)' }}>
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-dim">
-        <span>ctx <span className="text-mist2">▓▓▓▓▓▓░░░░</span></span>
-        <span className="text-mist3">512.4k/1.0M · 51.2%</span>
+        <span>
+          ctx{' '}
+          <span className="text-mist2">
+            {'▓'.repeat(fill)}{'░'.repeat(10 - fill)}
+          </span>
+        </span>
+        <span className="tnum text-mist3">{(pct * 10).toFixed(1)}k/1.0M · {pct.toFixed(1)}%</span>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-dim">
         <span>
-          tps <span style={{ color: 'var(--ok-text)' }}>▂▃▅▆▇█▇▅</span>{' '}
-          <span style={{ color: 'var(--ok-text)' }} className="font-semibold">58</span>
+          tps <span style={{ color: 'var(--ok-text)' }}>{tps.bars}</span>{' '}
+          <span style={{ color: 'var(--ok-text)' }} className="tnum font-semibold">{tps.v}</span>
         </span>
         <span className="text-faint">cache 99.7%</span>
       </div>
