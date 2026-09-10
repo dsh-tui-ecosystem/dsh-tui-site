@@ -40,7 +40,7 @@
     /* 全局背景层：光斑色 / 半透明 bg-2 / 噪点贴图（暗色主题另行覆盖） */
     --glow-1: rgba(75, 111, 255, 0.14);
     --glow-2: rgba(125, 161, 222, 0.1);
-    --bg-2-glass: color-mix(in srgb, var(--bg-2) 82%, transparent);
+    --bg-2-glass: color-mix(in srgb, var(--bg-2) 78%, transparent);
     --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
 
     --bg: #f6f7f9;
@@ -71,6 +71,7 @@
     --nav-bg: rgba(246, 247, 249, 0.85);
     --badge-bg: rgba(255, 255, 255, 0.75);
     --grid-line: rgba(75, 111, 255, 0.09);
+    --grid-line-hot: rgba(75, 111, 255, 0.3);
     --thumb: #6b778c;         /* 轨道 #f6f7f9 上 4.22:1 */
     --thumb-hover: #525a6e;
     --term-shadow: 0 24px 70px -18px rgba(23, 37, 84, 0.28);
@@ -101,7 +102,7 @@
   :root[data-theme='dark'] {
     --glow-1: rgba(75, 111, 255, 0.2);
     --glow-2: rgba(125, 161, 222, 0.13);
-    --bg-2-glass: color-mix(in srgb, var(--bg-2) 80%, transparent);
+    --bg-2-glass: color-mix(in srgb, var(--bg-2) 76%, transparent);
     --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
 
     --bg: #07090d;
@@ -132,6 +133,7 @@
     --nav-bg: rgba(7, 9, 13, 0.98);  /* 叠在浅色截图上 --mist-text 仍 ≥4.5 */
     --badge-bg: rgba(12, 17, 25, 0.7);
     --grid-line: rgba(125, 161, 222, 0.05);
+    --grid-line-hot: rgba(125, 161, 222, 0.18);
     --thumb: #7a8ba3;         /* 轨道 #07090d 上 5.74:1 */
     --thumb-hover: #8995a7;
     --term-shadow: 0 24px 80px -16px rgba(23, 37, 84, 0.55);
@@ -507,10 +509,11 @@ body {
    漂移首尾同帧，reduced-motion 全局压掉动画后停在原点。 */
 .page-bg {
   position: fixed;
-  inset: 0;
+  inset: -24px;
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
+  transform: translate3d(calc(var(--px, 0) * 10px), calc(var(--py, 0) * 8px), 0);
 }
 .page-bg::before {
   content: '';
@@ -520,8 +523,6 @@ body {
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 56px 56px;
-  mask-image: linear-gradient(to bottom, black 55%, transparent 96%);
-  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 96%);
 }
 .page-bg::after {
   content: '';
@@ -529,6 +530,18 @@ body {
   inset: 0;
   background-image: var(--noise);
   background-size: 180px;
+}
+/* 热网格：与底层网格同原点同周期，平时整体隐身，
+   被 260px 径向光圈照亮并跟随指针（--bx/--by 由 PageBg 写入，默认屏外）。 */
+.page-bg-hot {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line-hot) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line-hot) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(260px circle at var(--bx, -500px) var(--by, -500px), black 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(260px circle at var(--bx, -500px) var(--by, -500px), black 0%, transparent 72%);
 }
 .page-bg-glow {
   position: absolute;

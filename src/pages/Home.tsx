@@ -12,6 +12,7 @@ import Faq from '../sections/Faq'
 import Guides from '../sections/Guides'
 import Community from '../sections/Community'
 import Footer from '../sections/Footer'
+import PageBg from '../components/PageBg'
 
 /** 中英文首页共享的完整页面结构（语言由外层 LangProvider 决定） */
 export function HomeSections() {
@@ -19,10 +20,7 @@ export function HomeSections() {
   return (
     <div className="min-h-screen">
       <a className="skip-link" href="#main-content">{strings['home.skip'][lang]}</a>
-      <div className="page-bg" aria-hidden="true">
-        <span className="page-bg-glow page-bg-glow-a" />
-        <span className="page-bg-glow page-bg-glow-b" />
-      </div>
+      <PageBg />
       <Nav />
       <main id="main-content">
         <Hero />
