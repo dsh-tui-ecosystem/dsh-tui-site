@@ -17,8 +17,12 @@ import Footer from '../sections/Footer'
 export function HomeSections() {
   const lang = useLang()
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg)' }}>
+    <div className="min-h-screen">
       <a className="skip-link" href="#main-content">{strings['home.skip'][lang]}</a>
+      <div className="page-bg" aria-hidden="true">
+        <span className="page-bg-glow page-bg-glow-a" />
+        <span className="page-bg-glow page-bg-glow-b" />
+      </div>
       <Nav />
       <main id="main-content">
         <Hero />

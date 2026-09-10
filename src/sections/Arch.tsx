@@ -74,7 +74,7 @@ export default function Arch() {
   const t = useT()
   const pipeRef = usePipeFlow()
   return (
-    <section id="arch" className="py-24" style={{ background: 'var(--bg-2)' }}>
+    <section id="arch" className="py-24" style={{ background: 'var(--bg-2-glass)' }}>
       <div className="mx-auto max-w-6xl px-page">
         <SectionHead
           title={t(strings['arch.title'])}

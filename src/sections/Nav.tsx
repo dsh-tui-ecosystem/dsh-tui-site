@@ -106,7 +106,7 @@ export default function Nav() {
             <span className="text-mist">dsh</span>-TUI
           </span>
         </a>
-        <span className="font-mono2 hidden whitespace-nowrap rounded border border-line px-1.5 py-0.5 text-[10.5px] text-dim md:inline-block">
+        <span className="font-pixel hidden whitespace-nowrap rounded border border-line px-1.5 py-0.5 text-[8px] text-dim md:inline-block">
           public beta
         </span>
 

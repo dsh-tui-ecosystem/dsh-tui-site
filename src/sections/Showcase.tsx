@@ -10,7 +10,7 @@ export default function Showcase() {
   // /en/ 页面下相对资源需要回退一级
   const fix = (p: string) => (lang === 'en' ? p.replaceAll('./', '../') : p)
   return (
-    <section id="showcase" className="py-24" style={{ background: 'var(--bg-2)' }}>
+    <section id="showcase" className="py-24" style={{ background: 'var(--bg-2-glass)' }}>
       <div className="mx-auto max-w-6xl px-page">
         <SectionHead
           title={t(strings['showcase.title'])}
@@ -19,8 +19,8 @@ export default function Showcase() {
 
         <div className="space-y-8">
           {SHOTS.map((s, i) => (
-            <Reveal key={s.file} delay={i * 90}>
-              <figure className="group overflow-hidden rounded-lg border border-line" style={{ background: 'var(--panel)' }}>
+            <Reveal key={s.file} delay={i * 90} className={`lg:w-[94%] ${i % 2 === 1 ? 'lg:ms-auto' : ''}`}>
+              <figure className="group overflow-hidden rounded-lg border border-line transition-[border-color,box-shadow] duration-300 hover:border-[var(--mist)] hover:shadow-[var(--term-shadow)]" style={{ background: 'var(--panel)' }}>
                 <div className="flex items-center gap-2 border-b border-line px-3.5 py-2">
                   <span className="h-2 w-2 rounded-full bg-[#f0685f]/70" />
                   <span className="h-2 w-2 rounded-full bg-[#f5c542]/70" />

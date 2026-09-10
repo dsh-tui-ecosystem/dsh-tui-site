@@ -9,7 +9,7 @@ export default function Shortcuts() {
   const lang = useLang()
   const t = useT()
   return (
-    <section id="shortcuts" className="py-24" style={{ background: 'var(--bg-2)' }}>
+    <section id="shortcuts" className="py-24" style={{ background: 'var(--bg-2-glass)' }}>
       <div className="mx-auto max-w-6xl px-page">
         <SectionHead
           title={t(strings['shortcuts.title'])}

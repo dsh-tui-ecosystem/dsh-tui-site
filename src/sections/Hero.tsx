@@ -59,7 +59,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="top" ref={heroRef} className="grid-bg relative overflow-hidden pt-[61px]">
+    <section id="top" ref={heroRef} className="relative overflow-hidden pt-[61px]">
       {/* 星点 */}
       {[
         { l: '8%', t: '22%', d: '0s', z: 1.6 }, { l: '16%', t: '58%', d: '0.8s', z: 0.8 },

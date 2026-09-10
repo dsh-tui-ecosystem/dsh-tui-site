@@ -13,7 +13,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-line">
       {/* CTA */}
-      <div className="grid-bg relative overflow-hidden">
+      <div className="relative overflow-hidden">
         <div className="relative mx-auto flex max-w-6xl flex-col items-stretch px-page py-16 text-start sm:items-center sm:py-20 sm:text-center">
           <PixelWhale className="h-20 w-[104px] sm:mx-auto" />
           <h2 className="mt-6 text-[24px] font-bold text-head sm:text-[32px]">

@@ -37,6 +37,12 @@
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-spring: linear(0, 0.324 8.1%, 0.794 19.9%, 1.028 30.1%, 1.008 43.1%, 1);
 
+    /* 全局背景层：光斑色 / 半透明 bg-2 / 噪点贴图（暗色主题另行覆盖） */
+    --glow-1: rgba(75, 111, 255, 0.14);
+    --glow-2: rgba(125, 161, 222, 0.1);
+    --bg-2-glass: color-mix(in srgb, var(--bg-2) 82%, transparent);
+    --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+
     --bg: #f6f7f9;
     --bg-2: #eef0f4;
     --panel: #ffffff;
@@ -93,6 +99,11 @@
 
   /* 深色 */
   :root[data-theme='dark'] {
+    --glow-1: rgba(75, 111, 255, 0.2);
+    --glow-2: rgba(125, 161, 222, 0.13);
+    --bg-2-glass: color-mix(in srgb, var(--bg-2) 80%, transparent);
+    --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+
     --bg: #07090d;
     --bg-2: #0a0e15;
     --panel: #0c1119;
@@ -488,6 +499,123 @@ body {
     calc(var(--py, 0) * 4px),
     0
   );
+}
+
+/* 全站统一背景层：蓝图网格 + 两团雾蓝光斑缓慢漂移 + 细噪点。
+   fixed 满视口、z-index -1；bg-2 区块改用 --bg-2-glass 让网格隐约透上来。
+   光斑只动 transform（合成器），渐变本身是软的所以不需要 blur 滤镜。
+   漂移首尾同帧，reduced-motion 全局压掉动画后停在原点。 */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.page-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, black 55%, transparent 96%);
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 96%);
+}
+.page-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--noise);
+  background-size: 180px;
+}
+.page-bg-glow {
+  position: absolute;
+  border-radius: 9999px;
+}
+.page-bg-glow-a {
+  width: 46vw;
+  height: 46vw;
+  left: -8vw;
+  top: -12vh;
+  background: radial-gradient(circle, var(--glow-1) 0%, transparent 62%);
+  animation: bg-drift-a 44s ease-in-out infinite;
+}
+.page-bg-glow-b {
+  width: 40vw;
+  height: 40vw;
+  right: -10vw;
+  top: 34vh;
+  background: radial-gradient(circle, var(--glow-2) 0%, transparent 62%);
+  animation: bg-drift-b 58s ease-in-out infinite;
+}
+@keyframes bg-drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(9vw, 7vh, 0) scale(1.12); }
+}
+@keyframes bg-drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-8vw, -9vh, 0) scale(0.92); }
+}
+
+/* 像素字体（品牌彩蛋：与像素鲸鱼同族），只用于极短的拉丁/数字片段 */
+.font-pixel {
+  font-family: 'Press Start 2P', 'JetBrains Mono', monospace;
+}
+
+/* Features bento 指针光斑：--mx/--my 由指针事件写入，径向雾蓝 wash 跟随。
+   内容保持静态绘制顺序在 ::before 之上，wash 是 8% 级别，不影响对比。 */
+.spot-cell {
+  position: relative;
+}
+.spot-cell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(190px circle at var(--mx, 50%) var(--my, 50%), var(--mist-wash), transparent 70%);
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease-out);
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .spot-cell:hover::before {
+    opacity: 1;
+  }
+}
+
+/* kbd 键帽下沉：行 hover 或自身 hover 时像被按下（位移 + 底边变薄）。 */
+.kbd {
+  transition:
+    transform var(--dur-1) var(--ease-out),
+    border-bottom-width var(--dur-1) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out);
+}
+@media (hover: hover) {
+  li:hover .kbd,
+  .kbd:hover {
+    transform: translateY(1.5px);
+    border-bottom-width: 1px;
+    background: var(--panel);
+  }
+}
+
+/* FAQ 高度平滑开合：Chrome 131+ 的 ::details-content + interpolate-size；
+   不支持的浏览器退回瞬时切换（原有 faq-in 淡入仍在，两者不冲突）。 */
+:root {
+  interpolate-size: allow-keywords;
+}
+@supports (selector(::details-content)) {
+  .faq-item::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition:
+      block-size var(--dur-2) var(--ease-out),
+      content-visibility var(--dur-2) allow-discrete;
+  }
+  .faq-item[open]::details-content {
+    block-size: auto;
+  }
 }
 
 /* faint blueprint grid */

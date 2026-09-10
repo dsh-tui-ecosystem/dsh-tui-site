@@ -9,7 +9,7 @@ export default function Guides() {
   const lang = useLang()
   const t = useT()
   return (
-    <section id="guides" className="py-24" style={{ background: 'var(--bg-2)' }}>
+    <section id="guides" className="py-24" style={{ background: 'var(--bg-2-glass)' }}>
       <div className="mx-auto max-w-6xl px-page">
         <SectionHead
           title={t(strings['guides.title'])}
@@ -25,7 +25,7 @@ export default function Guides() {
               >
                 <span
                   aria-hidden="true"
-                  className="font-mono2 absolute right-4 top-4 text-[10.5px] tracking-widest text-faint transition-colors group-hover:text-mist2"
+                  className="font-pixel absolute right-4 top-4 text-[9px] tracking-widest text-faint transition-colors group-hover:text-mist2"
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>

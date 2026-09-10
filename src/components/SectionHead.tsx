@@ -20,7 +20,7 @@ export default function SectionHead({ title, desc, align = 'start' }: Props) {
   const centered = align === 'center'
   return (
     <Reveal className={`mb-10 ${centered ? 'text-start sm:text-center' : ''}`}>
-      <h2 className="text-[26px] font-bold leading-tight text-head sm:text-[38px]">{title}</h2>
+      <h2 className="text-[clamp(28px,24px+1.2vw,44px)] font-bold leading-tight tracking-[-0.015em] text-head">{title}</h2>
       {desc && (
         <p className={`mt-3 max-w-2xl text-[14px] leading-[1.9] text-dim ${centered ? 'sm:mx-auto' : ''}`}>
           {desc}

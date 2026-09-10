@@ -1,4 +1,5 @@
 import SectionHead from '../components/SectionHead'
+import Icon from '../components/Icon'
 import Reveal from '../components/Reveal'
 import { FEATURE_CELLS, strings, useLang, useT } from '../i18n'
 
@@ -21,11 +22,25 @@ function MiniMeter() {
   )
 }
 
+/** 五个格子各配一个图标章，顺序与 FEATURE_CELLS 一一对应。 */
+const CELL_ICONS = ['terminal', 'activity', 'history', 'puzzle', 'timer'] as const
+
 const CELLS = FEATURE_CELLS
 
 export default function Features() {
   const lang = useLang()
   const t = useT()
+
+  /* bento 指针光斑：事件委托挂在网格容器上，按最近的 .spot-cell 换算出
+     格内局部坐标写进 CSS 变量，光斑本身由 .spot-cell::before 绘制。 */
+  const onSpot = (e: React.PointerEvent<HTMLDivElement>) => {
+    const cell = (e.target as HTMLElement).closest<HTMLElement>('.spot-cell')
+    if (!cell) return
+    const r = cell.getBoundingClientRect()
+    cell.style.setProperty('--mx', `${e.clientX - r.left}px`)
+    cell.style.setProperty('--my', `${e.clientY - r.top}px`)
+  }
+
   return (
     <section id="features" className="relative py-24">
       <div className="mx-auto max-w-6xl px-page">
@@ -33,7 +48,10 @@ export default function Features() {
           title={t(strings['features.title'])}
           desc={t(strings['features.desc'])}
         />
-        <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-[var(--line)] md:grid-cols-6">
+        <div
+          className="grid gap-px overflow-hidden rounded-lg border border-line bg-[var(--line)] md:grid-cols-6"
+          onPointerMove={onSpot}
+        >
           {CELLS.map((c, i) => (
             <Reveal
               key={c.title.zh}
@@ -42,9 +60,12 @@ export default function Features() {
               className={`group ${c.span}`}
             >
               <div
-                className="h-full p-6 transition-colors duration-200 group-hover:bg-[var(--panel-2)]"
+                className="spot-cell h-full p-6 transition-colors duration-200 group-hover:bg-[var(--panel-2)]"
                 style={{ background: 'var(--panel)' }}
               >
+                <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-md border border-line text-mist2 transition-colors group-hover:border-[var(--mist)] group-hover:text-mist3" style={{ background: 'var(--panel-2)' }}>
+                  <Icon name={CELL_ICONS[i]} size={16} />
+                </div>
                 <h3 className="text-[17px] font-bold text-head transition-colors group-hover:text-mist3">
                   {c.title[lang]}
                 </h3>
