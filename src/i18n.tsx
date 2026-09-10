@@ -43,6 +43,7 @@ export const strings = {
   'copy.aria': { zh: '复制命令', en: 'Copy command' },
   'copy.aria.number': { zh: '复制群号', en: 'Copy group number' },
   'copy.done': { zh: '已复制', en: 'Copied' },   // 对勾现在是图标，不必再进播报文本
+  'commands.chipHint': { zh: '点击复制', en: 'Click to copy' },
 
   'hero.desc': {
     zh: '像素鲸鱼顶栏、实时工作状态行、思考流式展开、双击 Esc 时间回溯、蓝白上下文进度条 + TPS 仪表。零核心改动，纯插件挂载 —— 装上即用，卸了不留补丁。',

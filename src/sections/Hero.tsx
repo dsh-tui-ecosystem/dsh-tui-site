@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import TerminalDemo from '../components/TerminalDemo'
 import CommandLine from '../components/CommandLine'
 import Icon from '../components/Icon'
@@ -18,20 +19,60 @@ const PLATFORMS = [
 export default function Hero() {
   const lang = useLang()
   const t = useT()
+  const heroRef = useRef<HTMLElement | null>(null)
+
+  /* 星点/鲸鱼指针视差：指针位置归一化到 [-1,1]，经 exp(-k·dt) 滤波
+     （帧率无关，k=5）写成 --px/--py，深度由各元素自己的 --d 声明。
+     滤波沉淀后循环自动休眠，指针再动时唤醒。reduced-motion / 触屏不启动。 */
+  useEffect(() => {
+    const el = heroRef.current
+    if (!el) return
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (matchMedia('(hover: none)').matches) return
+    let raf = 0
+    let tx = 0, ty = 0, cx = 0, cy = 0
+    let last = 0
+    const tick = (now: number) => {
+      const dt = Math.min(0.05, (now - last) / 1000)
+      last = now
+      const f = 1 - Math.exp(-5 * dt)
+      cx += (tx - cx) * f
+      cy += (ty - cy) * f
+      el.style.setProperty('--px', cx.toFixed(4))
+      el.style.setProperty('--py', cy.toFixed(4))
+      raf = Math.abs(tx - cx) + Math.abs(ty - cy) > 0.002 ? requestAnimationFrame(tick) : 0
+    }
+    const onMove = (e: PointerEvent) => {
+      const r = el.getBoundingClientRect()
+      tx = ((e.clientX - r.left) / r.width - 0.5) * 2
+      ty = ((e.clientY - r.top) / r.height - 0.5) * 2
+      if (!raf) {
+        last = performance.now()
+        raf = requestAnimationFrame(tick)
+      }
+    }
+    el.addEventListener('pointermove', onMove)
+    return () => {
+      el.removeEventListener('pointermove', onMove)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
+
   return (
-    <section id="top" className="grid-bg relative overflow-hidden pt-[61px]">
+    <section id="top" ref={heroRef} className="grid-bg relative overflow-hidden pt-[61px]">
       {/* 星点 */}
       {[
-        { l: '8%', t: '22%', d: '0s' }, { l: '16%', t: '58%', d: '0.8s' },
-        { l: '46%', t: '14%', d: '1.6s' }, { l: '88%', t: '20%', d: '0.4s' },
-        { l: '78%', t: '66%', d: '2s' }, { l: '60%', t: '8%', d: '1.1s' },
+        { l: '8%', t: '22%', d: '0s', z: 1.6 }, { l: '16%', t: '58%', d: '0.8s', z: 0.8 },
+        { l: '46%', t: '14%', d: '1.6s', z: 1.2 }, { l: '88%', t: '20%', d: '0.4s', z: 1.8 },
+        { l: '78%', t: '66%', d: '2s', z: 0.7 }, { l: '60%', t: '8%', d: '1.1s', z: 1.0 },
       ].map((s, i) => (
         <span
           key={i}
-          className="pointer-events-none absolute h-1 w-1"
+          className="parallax-star pointer-events-none absolute h-1 w-1"
           style={{
             left: s.l, top: s.t, background: 'var(--mist-2)',
             animation: `twinkle 3s ease-in-out ${s.d} infinite`,
+            ['--d' as never]: s.z,
           }}
         />
       ))}
@@ -54,7 +95,7 @@ export default function Hero() {
           </div>
 
           <div className="flex items-end gap-4 sm:gap-7">
-            <div className="relative shrink-0">
+            <div className="parallax-whale relative shrink-0">
               <img
                 src={lang === 'en' ? '../whale-girl.png' : '/whale-girl.png'}
                 alt={t(strings['hero.whaleAlt'])}
@@ -78,7 +119,7 @@ export default function Hero() {
                 但 nowrap 之后字号就必须是流体的：lg 断点在 1024px 生效，
                 而左栏此时只有 ~281px 可用，固定 84px 会直接顶出去被右侧面板盖住。
                 clamp 让它随视口连续缩放，两头都不失控。 */}
-            <h1 className="font-mono2 min-w-0 whitespace-nowrap text-[38px] font-extrabold leading-[0.95] tracking-tight sm:text-[76px] lg:text-[clamp(56px,6.1vw,84px)]">
+            <h1 className="font-mono2 min-w-0 whitespace-nowrap text-[44px] font-extrabold leading-[0.95] tracking-tight sm:text-[76px] lg:text-[clamp(56px,6.1vw,84px)]">
               <span className="wordmark-accent">dsh</span>
               <span className="wordmark-ink">-TUI</span>
             </h1>

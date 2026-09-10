@@ -38,6 +38,7 @@ export default function Features() {
             <Reveal
               key={c.title.zh}
               delay={i * 70}
+              variant="pop"
               className={`group ${c.span}`}
             >
               <div

@@ -17,7 +17,7 @@ export default function Shortcuts() {
         />
 
         <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-          <Reveal>
+          <Reveal variant="slide-l">
             <ul className="divide-y divide-[var(--line-soft)] overflow-hidden rounded-lg border border-line" style={{ background: 'var(--panel)' }}>
               {KEYS.map((k, i) => (
                 <li
@@ -43,7 +43,7 @@ export default function Shortcuts() {
             </ul>
           </Reveal>
 
-          <Reveal delay={120}>
+          <Reveal delay={120} variant="slide-r">
             <div className="flex h-full flex-col rounded-lg border border-line p-6" style={{ background: 'var(--panel)' }}>
               <ul className="space-y-4">
                 {MOUSE.map((m) => (

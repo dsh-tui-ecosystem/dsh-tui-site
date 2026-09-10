@@ -29,6 +29,14 @@
   :root {
     --radius: 0.375rem;
 
+    /* 动效 token：时长三档 + 两条曲线。小件回弹用 linear() 采样曲线
+       表达过冲（cubic-bezier 做不到），与 motion-tokens 词典同源。 */
+    --dur-1: 120ms;
+    --dur-2: 240ms;
+    --dur-3: 520ms;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: linear(0, 0.324 8.1%, 0.794 19.9%, 1.028 30.1%, 1.008 43.1%, 1);
+
     --bg: #f6f7f9;
     --bg-2: #eef0f4;
     --panel: #ffffff;
@@ -366,6 +374,122 @@ body {
   animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Reveal 三体：全站不再共用一种抵达。
+   up=默认上浮（标题/大媒体），pop=回弹（卡片/格子小件），slide=侧进（双栏对进）。 */
+@keyframes reveal-pop {
+  from { opacity: 0; transform: scale(0.94) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.reveal-pop {
+  opacity: 0;
+}
+.reveal-pop.is-in {
+  animation: reveal-pop 0.55s var(--ease-spring) both;
+}
+
+@keyframes reveal-slide-l {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes reveal-slide-r {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.reveal-slide-l,
+.reveal-slide-r {
+  opacity: 0;
+}
+.reveal-slide-l.is-in {
+  animation: reveal-slide-l 0.6s var(--ease-out) both;
+}
+.reveal-slide-r.is-in {
+  animation: reveal-slide-r 0.6s var(--ease-out) both;
+}
+
+/* Arch 链路图：滚动驱动逐节点点亮。SSR / 无 JS 时没有 data-flow，
+   保持全亮的静态设计；挂载后 JS 置 wait/on，滚动到谁亮谁，可逆。 */
+.pipe-node,
+.pipe-arrow {
+  transition:
+    opacity var(--dur-3) var(--ease-out),
+    color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out);
+}
+.pipe-node[data-flow='wait'] {
+  opacity: 0.38;
+}
+.pipe-arrow[data-flow='wait'] {
+  opacity: 0.22;
+}
+.pipe-arrow[data-flow='on'] {
+  color: var(--mist-text);
+}
+@keyframes pipe-pop {
+  from { transform: scale(0.9); }
+  to { transform: scale(1); }
+}
+.pipe-node[data-flow='on'] {
+  animation: pipe-pop 0.32s var(--ease-spring);
+}
+
+/* 命令 chip 现在真可点（点击复制）：ok 色 + 回弹确认，不动布局。 */
+.cmd-chip {
+  cursor: pointer;
+}
+.cmd-chip[data-copied='true'] {
+  border-color: var(--ok);
+  color: var(--ok-text);
+  animation: chip-pop 0.26s var(--ease-spring);
+}
+@keyframes chip-pop {
+  from { transform: scale(0.92); }
+  to { transform: scale(1); }
+}
+
+/* Nav scrollspy 墨条：位置/宽度由 JS 写成 CSS 变量，滑动交给 transition。
+   一条 ink 从旧链接滑到新链接，而不是各链接各画一条下划线。 */
+.nav-spy {
+  position: relative;
+}
+.nav-spy::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  height: 2px;
+  width: var(--spy-w, 0);
+  transform: translateX(var(--spy-x, 0px));
+  background: var(--mist-text);
+  border-radius: 2px;
+  opacity: var(--spy-on, 0);
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    width var(--dur-2) var(--ease-out),
+    opacity var(--dur-1) ease-out;
+  pointer-events: none;
+}
+.nav-link[data-active='true'] {
+  color: var(--head);
+}
+
+/* Hero 指针视差：--px/--py ∈ [-1,1] 由 rAF 经 exp 滤波写入，
+   每个星点用 --d 声明自己的深度，位移量统一声明在这里。 */
+.parallax-star {
+  transform: translate3d(
+    calc(var(--px, 0) * var(--d, 1) * 7px),
+    calc(var(--py, 0) * var(--d, 1) * 5px),
+    0
+  );
+}
+.parallax-whale {
+  transform: translate3d(
+    calc(var(--px, 0) * 5px),
+    calc(var(--py, 0) * 4px),
+    0
+  );
+}
+
 /* faint blueprint grid */
 .grid-bg {
   background-image:
@@ -477,5 +601,8 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal { opacity: 1; }
+  .reveal,
+  .reveal-pop,
+  .reveal-slide-l,
+  .reveal-slide-r { opacity: 1; }
 }

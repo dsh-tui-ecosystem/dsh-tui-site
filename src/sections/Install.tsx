@@ -75,7 +75,7 @@ export default function Install() {
 
         <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-[var(--line)] lg:grid-cols-3">
           {STEPS.map((s, i) => (
-            <Reveal key={s.no} delay={i * 80}>
+            <Reveal key={s.no} delay={i * 80} variant="pop">
               <div className="flex h-full flex-col p-6" style={{ background: 'var(--panel)' }}>
                 <div className="font-mono2 mb-4 flex items-center gap-3">
                   <span className="flex h-7 w-7 items-center justify-center rounded border border-[var(--mist)] text-[13px] font-bold text-mist2">

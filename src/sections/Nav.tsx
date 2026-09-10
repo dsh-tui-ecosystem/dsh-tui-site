@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import PixelWhale from '../components/PixelWhale'
 import Icon from '../components/Icon'
 import BrandIcon from '../components/BrandIcon'
@@ -33,7 +33,10 @@ export default function Nav() {
   const lang = useLang()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [active, setActive] = useState<string | null>(null)
   const starCount = useStars()
+  const spyRef = useRef<HTMLSpanElement | null>(null)
+  const linkRefs = useRef(new Map<string, HTMLAnchorElement>())
 
   const toggleTheme = () => {
     withoutTransitions(() => {
@@ -53,6 +56,41 @@ export default function Nav() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  /* scrollspy：视口上中部一条窄带（38%–45%）扫到哪个锚点区块，哪个链接点亮；
+     回到首屏 hero 时熄灭。无链接的中段区块经过时保持上一次的状态。 */
+  useEffect(() => {
+    const targets = NAV_LINKS
+      .map((l) => document.getElementById(l.href.slice(1)))
+      .filter((el): el is HTMLElement => el !== null)
+    const hero = document.getElementById('top')
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return
+          setActive(e.target.id === 'top' ? null : `#${e.target.id}`)
+        })
+      },
+      { rootMargin: '-38% 0px -55% 0px', threshold: 0 }
+    )
+    targets.forEach((s) => io.observe(s))
+    if (hero) io.observe(hero)
+    return () => io.disconnect()
+  }, [])
+
+  /* 墨条是一条共享的 ink：位置/宽度写成 CSS 变量，滑动本身交给 transition。 */
+  useEffect(() => {
+    const box = spyRef.current
+    if (!box) return
+    const link = active ? linkRefs.current.get(active) : undefined
+    if (!link) {
+      box.style.setProperty('--spy-on', '0')
+      return
+    }
+    box.style.setProperty('--spy-x', `${link.offsetLeft}px`)
+    box.style.setProperty('--spy-w', `${link.offsetWidth}px`)
+    box.style.setProperty('--spy-on', '1')
+  }, [active])
 
   const starDisplay = formatStars(starCount)
 
@@ -74,12 +112,18 @@ export default function Nav() {
 
         {/* 页内锚点与站外目的地分成两组：组内 28px，组间 64px（2.3×），靠留白分组而不是分隔线 */}
         <nav aria-label={strings['nav.aria.main'][lang]} className="ms-auto hidden items-center lg:flex">
-          <span className="flex items-center gap-7">
+          <span ref={spyRef} className="nav-spy flex items-center gap-7">
             {NAV_LINKS.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className="whitespace-nowrap text-[13.5px] font-medium tracking-[-0.006em] text-dim transition-colors hover:text-head"
+                ref={(el) => {
+                  if (el) linkRefs.current.set(l.href, el)
+                  else linkRefs.current.delete(l.href)
+                }}
+                data-active={active === l.href}
+                aria-current={active === l.href ? 'true' : undefined}
+                className="nav-link whitespace-nowrap text-[13.5px] font-medium tracking-[-0.006em] text-dim transition-colors hover:text-head"
               >
                 {l.label[lang]}
               </a>
