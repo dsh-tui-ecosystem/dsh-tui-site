@@ -1,6 +1,6 @@
 {
   "$schema": "plugins 收录列表 · 作者提 PR 或经在线提交审批后更新；网站构建/运行时直接读取本文件",
-  "updatedAt": "2026-08-23",
+  "updatedAt": "2026-09-15",
   "plugins": [
     {
       "name": "dsh-tui",
@@ -411,6 +411,24 @@
       "kind": "plugin",
       "featured": false,
       "addedAt": "2026-08-23"
+    },
+    {
+      "name": "dsh-openwrite",
+      "displayName": "OpenWrite 小说创作",
+      "description": "DeepSeek Harness Web 小说创作工作台：统一创作 Agent、90 个小说工具、大纲与人物管理、正文彩色批注及审稿流程。当前支持 web profile，未验证 dsh-TUI 界面兼容性。安装：dsh plugin --profile web add -w dsh-openwrite@latest，然后 dsh web。",
+      "author": "LiPu-jpg",
+      "repo": "https://github.com/LiPu-jpg/Openwrite",
+      "npm": "https://www.npmjs.com/package/dsh-openwrite",
+      "tags": [
+        "小说创作",
+        "WebUI",
+        "Agent",
+        "审稿",
+        "大纲"
+      ],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-09-15"
     }
   ]
 }
