@@ -138,8 +138,8 @@ export const strings = {
 
   'changelog.title': { zh: '更新动态', en: "What's new" },
   'changelog.desc': {
-    zh: '从 v0.9.0 到 v0.10.1，四周五个版本。事实核对自仓库提交记录与 npm 发布时间；完整发布记录见 GitHub Releases。',
-    en: 'Five releases in four weeks, from v0.9.0 to v0.10.1. Facts cross-checked against repo commits and npm publish times; full notes on GitHub Releases.',
+    zh: '事实核对自仓库提交记录与 npm 发布时间；完整发布记录见 GitHub Releases。',
+    en: 'Facts cross-checked against repo commits and npm publish times; full notes on GitHub Releases.',
   },
   'changelog.more': { zh: '全部发布记录', en: 'All releases' },
 
@@ -395,6 +395,33 @@ export const COMMAND_GROUPS: { name: Pair; en: string; cmds: string[] }[] = [
 /** 更新动态条目。事实来源：仓库 git 提交记录 + npm 发布时间（详见调研记录），
  *  日期为 npm UTC 发布日。 */
 export const CHANGELOG_ENTRIES: { version: string; date: string; title: Pair; desc: Pair }[] = [
+  {
+    version: 'v0.11.1',
+    date: '2026-09-26',
+    title: { zh: '状态线语义归插件、TUI 只读', en: 'Plugin-owned status line semantics' },
+    desc: {
+      zh: '工作状态语义全部归 dsh-working-activity 0.5.0，TUI 只读投影；后台会话不再覆盖屏上会话的状态线。',
+      en: 'Working-status semantics move entirely to dsh-working-activity 0.5.0 with the TUI reading a read-only projection; background sessions no longer overwrite the status line of the on-screen session.',
+    },
+  },
+  {
+    version: 'v0.11.0',
+    date: '2026-09-24',
+    title: { zh: '三合一会话管理 + IDE 选区通道', en: 'Unified session manager & IDE selection channel' },
+    desc: {
+      zh: '/resume、/agentview、/bg 合并为三合一会话管理界面；IDE 选区实时徽标随提交自动附加，新增 safe mode、Mermaid 字符图渲染与图片入站降采样，适配 DSH 0.1.7-rc.1。',
+      en: '/resume, /agentview and /bg merge into one session manager; IDE selections get live badges auto-attached on submit, plus safe mode, Mermaid diagrams as Unicode art, inbound image downsampling, and DSH 0.1.7-rc.1 support.',
+    },
+  },
+  {
+    version: 'v0.10.2',
+    date: '2026-09-17',
+    title: { zh: '稳定性修复批次', en: 'Stability fixes' },
+    desc: {
+      zh: '修复空会话误判导致恢复后历史消失、滚动跳转白屏、长对话流式渲染与长文本绘制卡顿，以及回退分支残留的待处理队列。',
+      en: 'Fixes history vanishing after resume on empty-session misdetection, blank screens on scroll jumps, streaming and long-text paint jank in long conversations, and stale pending queues left on rewind branches.',
+    },
+  },
   {
     version: 'v0.10.1',
     date: '2026-09-10',
