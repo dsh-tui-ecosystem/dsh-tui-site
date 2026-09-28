@@ -2,10 +2,14 @@ import { access, readFile } from 'node:fs/promises'
 import path from 'node:path'
 
 const distDir = path.resolve('dist')
+const guideSlugs = [
+  'getting-started', 'features', 'shortcuts', 'commands', 'sessions', 'interface',
+  'customization', 'tips', 'architecture', 'faq',
+]
 const expectedRoutes = [
   '/', '/en/',
-  '/getting-started/', '/features/', '/commands/', '/shortcuts/', '/architecture/', '/faq/',
-  '/en/getting-started/', '/en/features/', '/en/commands/', '/en/shortcuts/', '/en/architecture/', '/en/faq/',
+  ...guideSlugs.map((slug) => `/${slug}/`),
+  ...guideSlugs.map((slug) => `/en/${slug}/`),
 ]
 const DEFAULT_SITE_URL = 'https://dshtui.com/'
 const siteUrl = new URL(process.env.SITE_URL?.trim() || DEFAULT_SITE_URL)

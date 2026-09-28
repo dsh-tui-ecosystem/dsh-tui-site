@@ -527,10 +527,14 @@ export const ARCH_POINTS: { t: Pair; d: Pair }[] = [
 ]
 
 export const GUIDE_CARDS: { href: string; title: Pair; desc: Pair }[] = [
-  { href: './getting-started/', title: { zh: '安装与快速开始', en: 'Getting started' }, desc: { zh: '环境要求、npm 安装、启动、恢复与更新。', en: 'Requirements, npm install, launch, resume, and updates.' } },
+  { href: './getting-started/', title: { zh: '安装与快速开始', en: 'Getting started' }, desc: { zh: '环境要求、安装、启动、首屏界面与更新。', en: 'Requirements, install, launch, the first screen, and updates.' } },
   { href: './features/', title: { zh: '功能特性', en: 'Features' }, desc: { zh: '终端交互、Agent 状态、会话工作流与性能。', en: 'Terminal interaction, agent status, session workflow, and performance.' } },
-  { href: './commands/', title: { zh: '命令参考', en: 'Commands' }, desc: { zh: '会话、模型、技能、MCP 与开发辅助命令。', en: 'Session, model, skills, MCP, and developer commands.' } },
-  { href: './shortcuts/', title: { zh: '快捷键', en: 'Shortcuts' }, desc: { zh: '键盘、鼠标、剪贴板与终端兼容性。', en: 'Keyboard, mouse, clipboard, and terminal compatibility.' } },
+  { href: './shortcuts/', title: { zh: '快捷键', en: 'Shortcuts' }, desc: { zh: '键盘、鼠标与问卷、审批、会话管理等各场景键位。', en: 'Keyboard, mouse, and per-scene keys for approvals, questionnaires, and sessions.' } },
+  { href: './commands/', title: { zh: '命令参考', en: 'Commands' }, desc: { zh: '全部斜杠命令：会话、诊断、模型、扩展与注册表命令。', en: 'Every slash command: session, diagnostics, model, extensions, and registry.' } },
+  { href: './sessions/', title: { zh: '会话工作流', en: 'Sessions' }, desc: { zh: '生命周期、双击 Esc 回溯、消息投递与 /btw 侧问。', en: 'Lifecycle, double-Esc rewind, message delivery, and /btw side questions.' } },
+  { href: './interface/', title: { zh: '界面与状态栏', en: 'Interface' }, desc: { zh: '开屏 Logo、三行状态栏、终端要求与安全模式。', en: 'Splash header, the three-row status bar, terminal needs, and safe mode.' } },
+  { href: './customization/', title: { zh: '模型、主题与语言', en: 'Models and themes' }, desc: { zh: '模型、推理强度、预设、主题、语言与环境变量。', en: 'Models, effort, presets, themes, language, and environment variables.' } },
+  { href: './tips/', title: { zh: '常用技巧', en: 'Tips' }, desc: { zh: '上手、提效与排障的十几条小技巧。', en: 'A dozen habits for getting started, speed, and troubleshooting.' } },
   { href: './architecture/', title: { zh: '架构与安全', en: 'Architecture' }, desc: { zh: '插件挂载、事件投影、虚拟化和安全边界。', en: 'Plugin mounting, event projection, virtualization, and security boundaries.' } },
   { href: './faq/', title: { zh: '常见问题', en: 'FAQ' }, desc: { zh: '名称关系、安装、平台、更新和会话恢复。', en: 'Naming, installation, platforms, updates, and session recovery.' } },
 ]
