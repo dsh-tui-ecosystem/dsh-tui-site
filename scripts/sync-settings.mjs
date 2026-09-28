@@ -52,6 +52,17 @@ function validate(document, expectedVersion) {
     problems.push(`packageVersion ${document.packageVersion} does not match the requested ${expectedVersion}`)
   }
   if (!isText(document.namespace)) problems.push('namespace missing')
+  if (!Array.isArray(document.groups) || document.groups.length === 0) {
+    problems.push('groups must be a non-empty array')
+  } else {
+    const groupIds = new Set()
+    for (const [index, group] of document.groups.entries()) {
+      if (!isText(group?.id)) problems.push(`groups[${index}]: id missing`)
+      else if (groupIds.has(group.id)) problems.push(`groups[${index}]: duplicate id ${group.id}`)
+      else groupIds.add(group.id)
+      if (!isPair(group?.label)) problems.push(`groups[${index}]: label needs both en and zh`)
+    }
+  }
   if (!Array.isArray(document.settings) || document.settings.length === 0) {
     problems.push('settings must be a non-empty array')
     return problems

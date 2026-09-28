@@ -53,7 +53,7 @@ SITE_URL=https://example.com/ npm run build
 - 版本必须是精确的 `x.y.z`，不接受 `latest` 等 dist-tag。
 - 一旦指定了版本就不会回退到示例清单：包不存在、包里没有 `lib/settings.json`、`packageVersion` 与请求的版本不一致、`schemaVersion` 不是 1，构建都会失败，线上保留上一版站点。
 - 目前还没有附带 `lib/settings.json` 的 dsh-tui 正式版本，所以 `config.dshTuiVersion` 留空，站点显示示例清单。第一个附带该文件的版本发布后，把它填进 `config.dshTuiVersion` 并提 PR。
-- 分组标题（通用 / 底栏设置 / 快捷键 / 会话）由站点维护，对应 TUI 里 `/settings` 的子页 id；其余文字全部取自清单本身，站点不做翻译。
+- 分组标题与顺序取自清单的 `groups`（与 TUI 里 `/settings` 的子页一致）；某个设置项的 `group` 不在 `groups` 里时，以原始 id 作标题排在最后。页面上的设置文字全部取自清单，站点不做翻译。
 
 ### 发版自动更新
 

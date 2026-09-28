@@ -9,23 +9,13 @@ interface SettingsManifest {
     package: string
     packageVersion: string
     namespace: string
+    groups: { id: string; label: { en: string; zh: string } }[]
     settings: SettingEntry[]
   }
 }
 
 const manifest = generated as unknown as SettingsManifest
 const { document, source } = manifest
-
-/**
- * Headings for the /settings subpage ids. The manifest carries per-setting text only, so group
- * titles mirror the ones dsh-TUI registers for its /settings subpages; an unknown id is shown as-is.
- */
-const GROUPS: { id: string; zh: string; en: string }[] = [
-  { id: 'general', zh: '通用', en: 'General' },
-  { id: 'status-bar', zh: '底栏设置', en: 'Status bar' },
-  { id: 'shortcuts', zh: '快捷键', en: 'Shortcuts' },
-  { id: 'session', zh: '会话', en: 'Session' },
-]
 
 function groupedSections(lang: 'zh' | 'en'): GuideSection[] {
   const byGroup = new Map<string, SettingEntry[]>()
@@ -34,13 +24,15 @@ function groupedSections(lang: 'zh' | 'en'): GuideSection[] {
     list.push(setting)
     byGroup.set(setting.group, list)
   }
-  const known = GROUPS.map((group) => group.id)
+  // Sections follow the manifest's /settings order; a group a setting names but `groups` lacks
+  // is appended under its raw id (the site never translates manifest text itself).
+  const known = document.groups.map((group) => group.id)
   const order = [...known.filter((id) => byGroup.has(id)), ...[...byGroup.keys()].filter((id) => !known.includes(id)).sort()]
   return order.map((id): GuideSection => {
-    const group = GROUPS.find((item) => item.id === id)
+    const group = document.groups.find((item) => item.id === id)
     const items = [...(byGroup.get(id) ?? [])].sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0))
     return {
-      heading: group ? group[lang] : id,
+      heading: group ? group.label[lang] : id,
       id: `group-${id}`,
       blocks: [{ type: 'settings', items }],
     }

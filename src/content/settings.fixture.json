@@ -3,6 +3,36 @@
   "package": "@deepseek-harness-tui/dsh-tui",
   "packageVersion": "0.0.0-fixture",
   "namespace": "dsh-tui",
+  "groups": [
+    {
+      "id": "general",
+      "label": {
+        "en": "General",
+        "zh": "通用"
+      }
+    },
+    {
+      "id": "status-bar",
+      "label": {
+        "en": "Status bar",
+        "zh": "底栏设置"
+      }
+    },
+    {
+      "id": "shortcuts",
+      "label": {
+        "en": "Shortcuts",
+        "zh": "快捷键"
+      }
+    },
+    {
+      "id": "session",
+      "label": {
+        "en": "Session",
+        "zh": "会话"
+      }
+    }
+  ],
   "settings": [
     {
       "key": "diffLayout",
