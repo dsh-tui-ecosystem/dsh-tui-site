@@ -36,6 +36,25 @@ npm run build    # 构建到 dist/
 SITE_URL=https://example.com/ npm run build
 ```
 
+## 使用指南与设置项参考
+
+使用指南按主题拆在 `src/content/guides/` 下，每个主题一个文件，同时导出中英两版；`src/content/guides.ts` 决定导航顺序和预渲染路由。新增主题时，还要同步 `scripts/check-seo.mjs` 里的 `guideSlugs` 和 `src/i18n.tsx` 里的 `GUIDE_CARDS`。正文支持 `` `code` ``、`**粗体**`、`[链接](url)` 三种行内写法，以及表格、小标题等块（见 `src/content/guides/types.ts`）。
+
+`/settings/`（设置项参考）不手写：构建时由 `scripts/sync-settings.mjs` 从 **某个确定版本** 的 dsh-tui npm 包里取出 `lib/settings.json`（schema v1），写到 `src/content/settings.generated.json`（不入库）再渲染。数据来源按以下顺序取第一个命中的：
+
+| 来源 | 用法 |
+|---|---|
+| 示例清单 | `DSH_TUI_SETTINGS_FIXTURE=1`：强制用 `src/content/settings.fixture.json` |
+| 本地文件 | `DSH_TUI_SETTINGS_FILE=../dsh-TUI/lib/settings.json`：发版前预览本地构建结果 |
+| 指定版本 | `DSH_TUI_VERSION=0.11.2`：`npm pack @deepseek-harness-tui/dsh-tui@0.11.2` 后解出 `package/lib/settings.json` |
+| 钉住的版本 | `package.json` 的 `config.dshTuiVersion` |
+| 兜底 | 都没有时用示例清单，页面顶部会标注「预览数据」 |
+
+- 版本必须是精确的 `x.y.z`，不接受 `latest` 等 dist-tag。
+- 一旦指定了版本就不会回退到示例清单：包不存在、包里没有 `lib/settings.json`、`packageVersion` 与请求的版本不一致、`schemaVersion` 不是 1，构建都会失败，线上保留上一版站点。
+- 目前还没有附带 `lib/settings.json` 的 dsh-tui 正式版本，所以 `config.dshTuiVersion` 留空，站点显示示例清单。第一个附带该文件的版本发布后，把它填进 `config.dshTuiVersion` 并提 PR。
+- 分组标题（通用 / 底栏设置 / 快捷键 / 会话）由站点维护，对应 TUI 里 `/settings` 的子页 id；其余文字全部取自清单本身，站点不做翻译。
+
 ## 特性
 
 - 亮 / 暗双模式（默认亮色，选择记忆在浏览器 localStorage）
@@ -45,7 +64,7 @@ SITE_URL=https://example.com/ npm run build
 
 ## SEO 与部署
 
-- 构建会预渲染中文、英文首页与 12 个主题页面，并把插件市场数据预渲染成可直接抓取的 HTML。
+- 构建会预渲染中文、英文首页与 22 个指南页面（11 个主题 × 中英），并把插件市场数据预渲染成可直接抓取的 HTML。
 - 全站主名称写作 `dsh-TUI`。`DSHTUI`、`dsh-tui`、`DSH TUI` 等别名放在可见 FAQ、`llms.txt` 和 JSON-LD `alternateName` 里，不堆进每个页面标题。
 - 每个内容页都有唯一 title、description、canonical、Open Graph、Twitter Card、双向 `hreflang` 和 JSON-LD；指南页另有面包屑与 TechArticle 数据。
 - 构建会自动生成包含全部 canonical 页面和语言关系的 `sitemap.xml`，并在 `robots.txt` 中保持唯一 Sitemap 声明。

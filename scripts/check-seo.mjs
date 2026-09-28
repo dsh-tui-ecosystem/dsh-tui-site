@@ -4,7 +4,7 @@ import path from 'node:path'
 const distDir = path.resolve('dist')
 const guideSlugs = [
   'getting-started', 'features', 'shortcuts', 'commands', 'sessions', 'interface',
-  'customization', 'tips', 'architecture', 'faq',
+  'settings', 'customization', 'tips', 'architecture', 'faq',
 ]
 const expectedRoutes = [
   '/', '/en/',
@@ -111,6 +111,16 @@ for (const route of expectedRoutes) {
     const previous = titles.get(title)
     record(!previous, `${route}: duplicate title also used by ${previous}`)
     titles.set(title, route)
+  }
+}
+
+// The settings reference must render every key from the manifest it was built with, plus its version.
+const settingsManifest = JSON.parse(await readFile(path.resolve('src/content/settings.generated.json'), 'utf8'))
+for (const route of ['/settings/', '/en/settings/']) {
+  const html = await readFile(routeFile(route), 'utf8').catch(() => '')
+  record(html.includes(settingsManifest.document.packageVersion), `${route}: settings packageVersion not shown`)
+  for (const setting of settingsManifest.document.settings) {
+    record(html.includes(`id="setting-${setting.key}"`), `${route}: setting ${setting.key} not rendered`)
   }
 }
 

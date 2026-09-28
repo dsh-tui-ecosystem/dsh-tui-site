@@ -1,5 +1,23 @@
 export type SiteLocale = 'zh-CN' | 'en'
 
+/** One entry of the settings reference, as shipped in dsh-tui's lib/settings.json (schema v1). */
+export interface SettingOption {
+  value: string
+  label: { en: string; zh: string }
+}
+
+export interface SettingEntry {
+  key: string
+  kind: 'boolean' | 'select' | 'text' | 'number'
+  group: string
+  label: { en: string; zh: string }
+  description: { en: string; zh: string }
+  default: unknown
+  options?: SettingOption[]
+  restartRequired: boolean
+  deprecated: boolean
+}
+
 /**
  * Rich content blocks. Text in `p`, `ul`, `ol`, `note` and table cells supports a small
  * inline syntax: `code`, **bold**, and [label](href).
@@ -12,6 +30,7 @@ export type GuideBlock =
   | { type: 'h3'; text: string }
   | { type: 'note'; text: string }
   | { type: 'table'; head: string[]; rows: string[][] }
+  | { type: 'settings'; items: SettingEntry[] }
 
 export interface GuideSection {
   heading: string

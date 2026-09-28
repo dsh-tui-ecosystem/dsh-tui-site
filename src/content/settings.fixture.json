@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 1,
+  "package": "@deepseek-harness-tui/dsh-tui",
+  "packageVersion": "0.0.0-fixture",
+  "namespace": "dsh-tui",
+  "settings": [
+    {
+      "key": "diffLayout",
+      "kind": "select",
+      "group": "general",
+      "label": {
+        "en": "Diff layout",
+        "zh": "diff 布局"
+      },
+      "description": {
+        "en": "Edit/Write tool cards: auto picks by terminal width, or force one layout.",
+        "zh": "Edit/Write 工具卡的 diff 呈现：auto 按终端宽度选择，或强制一种布局。"
+      },
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": {
+            "en": "Auto (by width)",
+            "zh": "自动（按宽度）"
+          }
+        },
+        {
+          "value": "split",
+          "label": {
+            "en": "Side-by-side",
+            "zh": "双栏对照"
+          }
+        },
+        {
+          "value": "unified",
+          "label": {
+            "en": "Unified",
+            "zh": "统一式"
+          }
+        }
+      ],
+      "restartRequired": false,
+      "deprecated": false
+    },
+    {
+      "key": "fullscreen",
+      "kind": "boolean",
+      "group": "general",
+      "label": {
+        "en": "Fullscreen mode",
+        "zh": "全屏模式"
+      },
+      "description": {
+        "en": "On: app takes the whole screen (vim/less style), in-app mouse. Off: native scrollback; full-page screens keep the mouse. Restart to apply.",
+        "zh": "开启：接管整个终端（同 vim/less），应用内鼠标；关闭：终端原生滚动选择；整屏页两种模式都有鼠标。重启生效。"
+      },
+      "default": true,
+      "restartRequired": true,
+      "deprecated": false
+    },
+    {
+      "key": "lang",
+      "kind": "select",
+      "group": "general",
+      "label": {
+        "en": "Language",
+        "zh": "界面语言"
+      },
+      "description": {
+        "en": "UI language for the whole interface — applies immediately and is saved.",
+        "zh": "整个界面的显示语言——立即生效并保存。"
+      },
+      "default": null,
+      "options": [
+        {
+          "value": "zh",
+          "label": {
+            "en": "中文",
+            "zh": "中文"
+          }
+        },
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "zh": "英文"
+          }
+        }
+      ],
+      "restartRequired": false,
+      "deprecated": false
+    },
+    {
+      "key": "latexMath",
+      "kind": "boolean",
+      "group": "general",
+      "label": {
+        "en": "LaTeX math",
+        "zh": "LaTeX 公式"
+      },
+      "description": {
+        "en": "Legacy on/off switch for LaTeX math, kept so existing settings files still load. Use LaTeX math (mathRendering) instead; false still means Source.",
+        "zh": "LaTeX 公式的旧版开关，保留是为了让已有配置文件照常加载。请改用 LaTeX 公式（mathRendering）；设为 false 仍等同于「源码」。"
+      },
+      "default": true,
+      "restartRequired": false,
+      "deprecated": true
+    },
+    {
+      "key": "mathRendering",
+      "kind": "select",
+      "group": "general",
+      "label": {
+        "en": "LaTeX math",
+        "zh": "LaTeX 公式"
+      },
+      "description": {
+        "en": "How LaTeX math in replies ($…$, \\(…\\), $$…$$, \\[…\\]) renders. Auto: the best available renderer — today Unicode text with symbols, sub/superscripts, stacked fractions and limits, matrices, cases. Image: typeset block formulas as images in terminals with graphics support (Kitty, Ghostty, WezTerm, iTerm2…); Unicode elsewhere and for inline math. Unicode: always Unicode text. Source: keep the TeX as written. Unsupported, still-streaming, or too-wide formulas keep their source. Applies immediately.",
+        "zh": "回复中的 LaTeX 公式（$…$、\\(…\\)、$$…$$、\\[…\\]）怎么显示。自动：用当前最好的渲染方式——目前是 Unicode 文本（符号、上下标、竖排的分数与上下限、矩阵、分段函数）。图片：在支持图形的终端（Kitty、Ghostty、WezTerm、iTerm2 等）里把块级公式排版成图片，其他终端与行内公式仍用 Unicode。Unicode：固定用 Unicode 文本。源码：保留原始 TeX。不支持、仍在流式输出或比终端宽的公式保留源码。立即生效。"
+      },
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": {
+            "en": "Auto",
+            "zh": "自动"
+          }
+        },
+        {
+          "value": "image",
+          "label": {
+            "en": "Image",
+            "zh": "图片"
+          }
+        },
+        {
+          "value": "unicode",
+          "label": {
+            "en": "Unicode",
+            "zh": "Unicode"
+          }
+        },
+        {
+          "value": "source",
+          "label": {
+            "en": "Source",
+            "zh": "源码"
+          }
+        }
+      ],
+      "restartRequired": false,
+      "deprecated": false
+    },
+    {
+      "key": "mermaidDiagrams",
+      "kind": "boolean",
+      "group": "general",
+      "label": {
+        "en": "Mermaid diagrams",
+        "zh": "Mermaid 图表"
+      },
+      "description": {
+        "en": "Render ```mermaid fences in replies as box-drawing diagrams (flowchart, sequence, state, class, ER, pie, mindmap, timeline, gitGraph). Diagrams wider than the terminal, or of an unsupported type, keep the fenced source. Applies immediately. On by default.",
+        "zh": "把回复中的 ```mermaid 代码块画成字符图（flowchart、sequence、state、class、ER、pie、mindmap、timeline、gitGraph）。比终端宽或类型不支持的图保留源码。立即生效。默认开启。"
+      },
+      "default": true,
+      "restartRequired": false,
+      "deprecated": false
+    },
+    {
+      "key": "pageMargin",
+      "kind": "text",
+      "group": "general",
+      "label": {
+        "en": "Page margin",
+        "zh": "页边距"
+      },
+      "description": {
+        "en": "Inset the whole UI from the terminal edges. ←/→ cycles presets (none / slim / normal / roomy); Enter types a custom spec `NxM`: N columns per side, M rows top/bottom (e.g. 3x1, max 8x4; a bare `N` keeps rows at 1). Empty resets to the default `normal`. Applies immediately.",
+        "zh": "让整个界面相对终端四边内缩。←/→ 循环预设（none / slim / normal / roomy）；Enter 输入自定义 `NxM`：左右各 N 列、上下各 M 行（如 3x1，上限 8x4；只填 N 则上下保持 1 行）。清空恢复默认 normal。立即生效。"
+      },
+      "default": "normal",
+      "options": [
+        {
+          "value": "none",
+          "label": {
+            "en": "None",
+            "zh": "无"
+          }
+        },
+        {
+          "value": "slim",
+          "label": {
+            "en": "Slim",
+            "zh": "窄"
+          }
+        },
+        {
+          "value": "normal",
+          "label": {
+            "en": "Normal",
+            "zh": "常规"
+          }
+        },
+        {
+          "value": "roomy",
+          "label": {
+            "en": "Roomy",
+            "zh": "宽"
+          }
+        }
+      ],
+      "restartRequired": false,
+      "deprecated": false
+    },
+    {
+      "key": "shortcuts.paste",
+      "kind": "text",
+      "group": "shortcuts",
+      "label": {
+        "en": "Paste shortcut",
+        "zh": "粘贴快捷键"
+      },
+      "description": {
+        "en": "Clipboard paste (text, file paths, images). Default: ctrl+v, alt+v. Alt+V works where the terminal eats Ctrl+V.",
+        "zh": "剪贴板粘贴（文本、文件路径、图片）。默认 ctrl+v, alt+v。终端吞掉 Ctrl+V 时可用 Alt+V。"
+      },
+      "default": null,
+      "restartRequired": false,
+      "deprecated": false
+    },
+    {
+      "key": "statusBar.model",
+      "kind": "boolean",
+      "group": "status-bar",
+      "label": {
+        "en": "Show model",
+        "zh": "显示模型"
+      },
+      "description": {
+        "en": "Show the live model id in the status bar.",
+        "zh": "在状态栏显示当前模型标识。"
+      },
+      "default": true,
+      "restartRequired": false,
+      "deprecated": false
+    },
+    {
+      "key": "whaleGirl",
+      "kind": "boolean",
+      "group": "general",
+      "label": {
+        "en": "Maid portrait",
+        "zh": "女仆娘立绘"
+      },
+      "description": {
+        "en": "Swap the header splash's pixel whale for the author-designed maid portrait, rendered FIRST as a real raster through the terminal image protocols (Kitty/Sixel); terminals without graphics support fall back to the character-art maid.",
+        "zh": "把开屏头部的像素鲸鱼换成项目作者绘制的女仆娘立绘，最优先走终端图像协议（Kitty/Sixel）的真图渲染；终端不支持时回落到字符画版女仆娘。"
+      },
+      "default": false,
+      "restartRequired": false,
+      "deprecated": false
+    }
+  ]
+}

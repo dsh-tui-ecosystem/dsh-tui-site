@@ -6,11 +6,12 @@ import features from './guides/features'
 import gettingStarted from './guides/getting-started'
 import interfaceGuide from './guides/interface'
 import sessions from './guides/sessions'
+import settings from './guides/settings'
 import shortcuts from './guides/shortcuts'
 import tips from './guides/tips'
 import type { GuidePageData, GuideTopic } from './guides/types'
 
-export type { GuideBlock, GuidePageData, GuideSection, SiteLocale } from './guides/types'
+export type { GuideBlock, GuidePageData, GuideSection, SettingEntry, SiteLocale } from './guides/types'
 
 /** Doc order: drives the guide navigation, the prerendered routes, and the sitemap. */
 const TOPICS: GuideTopic[] = [
@@ -20,6 +21,7 @@ const TOPICS: GuideTopic[] = [
   commands,
   sessions,
   interfaceGuide,
+  settings,
   customization,
   tips,
   architecture,

@@ -533,6 +533,7 @@ export const GUIDE_CARDS: { href: string; title: Pair; desc: Pair }[] = [
   { href: './commands/', title: { zh: '命令参考', en: 'Commands' }, desc: { zh: '全部斜杠命令：会话、诊断、模型、扩展与注册表命令。', en: 'Every slash command: session, diagnostics, model, extensions, and registry.' } },
   { href: './sessions/', title: { zh: '会话工作流', en: 'Sessions' }, desc: { zh: '生命周期、双击 Esc 回溯、消息投递与 /btw 侧问。', en: 'Lifecycle, double-Esc rewind, message delivery, and /btw side questions.' } },
   { href: './interface/', title: { zh: '界面与状态栏', en: 'Interface' }, desc: { zh: '开屏 Logo、三行状态栏、终端要求与安全模式。', en: 'Splash header, the three-row status bar, terminal needs, and safe mode.' } },
+  { href: './settings/', title: { zh: '设置项参考', en: 'Settings' }, desc: { zh: '/settings 全部设置项的类型、默认值与可选值。', en: 'Type, default, and options for every /settings key.' } },
   { href: './customization/', title: { zh: '模型、主题与语言', en: 'Models and themes' }, desc: { zh: '模型、推理强度、预设、主题、语言与环境变量。', en: 'Models, effort, presets, themes, language, and environment variables.' } },
   { href: './tips/', title: { zh: '常用技巧', en: 'Tips' }, desc: { zh: '上手、提效与排障的十几条小技巧。', en: 'A dozen habits for getting started, speed, and troubleshooting.' } },
   { href: './architecture/', title: { zh: '架构与安全', en: 'Architecture' }, desc: { zh: '插件挂载、事件投影、虚拟化和安全边界。', en: 'Plugin mounting, event projection, virtualization, and security boundaries.' } },

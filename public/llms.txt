@@ -32,6 +32,7 @@ dsh-tui
 - [Shortcuts](https://dshtui.com/shortcuts/): keymap, mouse, per-scene keys, and terminal compatibility
 - [Sessions](https://dshtui.com/sessions/): session lifecycle, rewind, message delivery, side questions, and model switching
 - [Interface](https://dshtui.com/interface/): splash header, status bar, the /settings editor, terminal requirements, and safe mode
+- [Settings reference](https://dshtui.com/settings/): every /settings key with type, default, and options, generated from the published npm package
 - [Models and themes](https://dshtui.com/customization/): models, reasoning effort, presets, themes, language, and environment variables
 - [Tips](https://dshtui.com/tips/): getting-started, efficiency, and troubleshooting tips
 - [Architecture](https://dshtui.com/architecture/): plugin mounting, rendering, virtualization, and security boundaries

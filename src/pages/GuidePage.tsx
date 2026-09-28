@@ -155,7 +155,7 @@ export default function GuidePage({ page }: { page: GuidePageData }) {
                     <code>{section.code}</code>
                   </pre>
                 )}
-                {section.blocks?.map((block, blockIndex) => <GuideBlockView key={blockIndex} block={block} />)}
+                {section.blocks?.map((block, blockIndex) => <GuideBlockView key={blockIndex} block={block} lang={isEnglish ? 'en' : 'zh'} />)}
               </section>
             ))}
           </div>
