@@ -36,6 +36,11 @@ export interface GuideSection {
   heading: string
   /** Stable anchor id; defaults to `section-<n>`. */
   id?: string
+  /**
+   * Extra anchors kept for links into an earlier version of the page (e.g. the old `section-3`).
+   * Never give a new section a `section-<n>` id that used to mean something else.
+   */
+  aliases?: string[]
   paragraphs?: string[]
   bullets?: string[]
   code?: string

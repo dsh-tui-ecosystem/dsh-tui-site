@@ -114,6 +114,17 @@ for (const route of expectedRoutes) {
   }
 }
 
+// Anchors published before the guide migration (section-1…N per page) must keep resolving.
+const legacyAnchorCounts = { 'getting-started': 5, features: 4, commands: 4, shortcuts: 4, architecture: 4, faq: 6 }
+for (const [slug, count] of Object.entries(legacyAnchorCounts)) {
+  for (const route of [`/${slug}/`, `/en/${slug}/`]) {
+    const html = await readFile(routeFile(route), 'utf8').catch(() => '')
+    for (let n = 1; n <= count; n += 1) {
+      record((html.match(new RegExp(`id="section-${n}"`, 'g')) ?? []).length === 1, `${route}: legacy anchor #section-${n} missing or duplicated`)
+    }
+  }
+}
+
 // The settings reference must render every key from the manifest it was built with, plus its version.
 const settingsManifest = JSON.parse(await readFile(path.resolve('src/content/settings.generated.json'), 'utf8'))
 for (const route of ['/settings/', '/en/settings/']) {

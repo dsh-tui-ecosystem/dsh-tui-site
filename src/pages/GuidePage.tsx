@@ -143,6 +143,7 @@ export default function GuidePage({ page }: { page: GuidePageData }) {
           <div className="mt-10 space-y-10 sm:mt-12 sm:space-y-12">
             {page.sections.map((section, index) => (
               <section key={section.heading} id={sectionId(section, index)} className="scroll-mt-28 md:scroll-mt-24">
+                {section.aliases?.map((alias) => <span key={alias} id={alias} aria-hidden="true" className="block scroll-mt-28 md:scroll-mt-24" />)}
                 <h2 className="text-[22px] font-bold text-head sm:text-[24px]">{section.heading}</h2>
                 {section.paragraphs?.map((paragraph) => <p key={paragraph} className="mt-4 text-[14.5px] leading-[2] text-dim">{paragraph}</p>)}
                 {section.bullets && (

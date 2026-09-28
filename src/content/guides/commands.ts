@@ -11,6 +11,8 @@ const topic: GuideTopic = {
     sections: [
       {
         heading: '会话',
+        id: 'session',
+        aliases: ['section-1'],
         blocks: [
           table(['命令', '参数', '作用'], [
             ['`/new`', '无', '新开会话（无二次确认；旧会话可 `/resume` 恢复）'],
@@ -34,6 +36,8 @@ const topic: GuideTopic = {
       },
       {
         heading: '状态与诊断',
+        id: 'status',
+        aliases: ['section-2'],
         blocks: [
           table(['命令', '参数', '作用'], [
             ['`/context`', '无', '已加载上下文明细（指令/运行时上下文/技能/工具等）'],
@@ -53,6 +57,7 @@ const topic: GuideTopic = {
       },
       {
         heading: '模型与显示',
+        id: 'model',
         blocks: [
           table(['命令', '参数', '作用'], [
             ['`/model`', '无', '模型选择器；**切换 = fork 会话续聊**（历史保留、仅换路由），选择持久化到 `~/.dsh-tui/model.json`'],
@@ -70,6 +75,8 @@ const topic: GuideTopic = {
       },
       {
         heading: '账号、策略与扩展',
+        id: 'account',
+        aliases: ['section-3'],
         blocks: [
           table(['命令', '参数', '作用'], [
             ['`/provider`', '无', '交互式管理模型提供方（添加 / 编辑 / 删除；捆绑 dsh-auth 时可 **OAuth 订阅登录** ChatGPT / Claude / Grok，免 API key）'],
@@ -88,6 +95,8 @@ const topic: GuideTopic = {
       },
       {
         heading: '技能与占位命令',
+        id: 'skills',
+        aliases: ['section-4'],
         blocks: [
           p('dsh-TUI 不预装通用技能；`/skills` 浏览 DSH 发现的技能，可直调技能以 `/name` 加入命令菜单（详见[会话工作流](../sessions/)）。'),
           p('`/connect`：占位——DSH 暂无远程连接机制。'),
@@ -95,6 +104,7 @@ const topic: GuideTopic = {
       },
       {
         heading: '注册表命令',
+        id: 'registry',
         blocks: [
           p('以下命令来自 DSH 生态，随组合动态并入 `/` 菜单。'),
           table(['命令', '作用'], [
@@ -118,6 +128,8 @@ const topic: GuideTopic = {
     sections: [
       {
         heading: 'Session',
+        id: 'session',
+        aliases: ['section-1'],
         blocks: [
           table(['Command', 'Args', 'Effect'], [
             ['`/new`', 'none', 'start a new session (no confirmation; the old session stays under `/resume`)'],
@@ -141,6 +153,8 @@ const topic: GuideTopic = {
       },
       {
         heading: 'Status and diagnostics',
+        id: 'status',
+        aliases: ['section-2'],
         blocks: [
           table(['Command', 'Args', 'Effect'], [
             ['`/context`', 'none', 'loaded-context detail (instructions/runtime context/skills/tools etc.)'],
@@ -160,6 +174,7 @@ const topic: GuideTopic = {
       },
       {
         heading: 'Model and display',
+        id: 'model',
         blocks: [
           table(['Command', 'Args', 'Effect'], [
             ['`/model`', 'none', 'model selector; **switching = fork the session** (history kept, only routing changes), choice persisted to `~/.dsh-tui/model.json`'],
@@ -177,6 +192,8 @@ const topic: GuideTopic = {
       },
       {
         heading: 'Account, policy, and extensions',
+        id: 'account',
+        aliases: ['section-3'],
         blocks: [
           table(['Command', 'Args', 'Effect'], [
             ['`/provider`', 'none', 'interactive model-provider wizard (add / edit / delete; with dsh-auth bound, **OAuth subscription login** for ChatGPT / Claude / Grok, no API key)'],
@@ -195,6 +212,8 @@ const topic: GuideTopic = {
       },
       {
         heading: 'Skills and placeholder commands',
+        id: 'skills',
+        aliases: ['section-4'],
         blocks: [
           p('dsh-TUI ships no generic skills; `/skills` browses skills DSH discovers, and a direct-call skill joins the command menu as `/name` (see [session workflow](../sessions/)).'),
           p('`/connect`: placeholder — DSH has no remote-connection mechanism yet.'),
@@ -202,6 +221,7 @@ const topic: GuideTopic = {
       },
       {
         heading: 'Registry commands',
+        id: 'registry',
         blocks: [
           p('These come from the DSH ecosystem and are merged into the `/` menu with the composition.'),
           table(['Command', 'Effect'], [

@@ -12,6 +12,7 @@ const topic: GuideTopic = {
       {
         heading: '发送与投递',
         id: 'send',
+        aliases: ['section-1'],
         blocks: [
           p('模型工作时，同一段输入有三种投递语义：steer、follow-up 与 interrupt。'),
           table(['键', '功能'], [
@@ -27,6 +28,7 @@ const topic: GuideTopic = {
       },
       {
         heading: '中断、退出与系统',
+        id: 'interrupt',
         blocks: [
           table(['键', '功能'], [
             ['`Ctrl+C`', '工作中=中断；中断未收敛时再按=强制退出；空闲有输入=清空输入；空闲空输入=双击退出（3 秒窗口）'],
@@ -41,6 +43,8 @@ const topic: GuideTopic = {
       },
       {
         heading: '搜索',
+        id: 'search',
+        aliases: ['section-2'],
         blocks: [
           table(['键', '功能'], [
             ['`Ctrl+R`（⌘R）', '历史消息搜索；重复按或 `↓` 到下一匹配；`Enter` 回填输入框'],
@@ -50,6 +54,7 @@ const topic: GuideTopic = {
       },
       {
         heading: '输入编辑',
+        id: 'editing',
         blocks: [
           table(['键', '功能'], [
             ['`←` / `→`', '按字符移动光标（有选区时坍缩到选区对应边缘）'],
@@ -74,6 +79,7 @@ const topic: GuideTopic = {
       },
       {
         heading: '导航与模式',
+        id: 'navigation',
         blocks: [
           table(['键', '功能'], [
             ['`Shift+Tab`', '循环会话模式（默认 → plan 计划 → full 完全访问）；挂载了第三方权限预设时，它们按 registry 顺序排在循环末尾'],
@@ -86,6 +92,8 @@ const topic: GuideTopic = {
       },
       {
         heading: '鼠标',
+        id: 'mouse',
+        aliases: ['section-3'],
         blocks: [
           p('以下操作用于 fullscreen 全屏模式：拖拽、双击、三击即选即复制。'),
           table(['操作', '功能'], [
@@ -165,6 +173,8 @@ const topic: GuideTopic = {
       },
       {
         heading: '终端兼容性',
+        id: 'terminal-compat',
+        aliases: ['section-4'],
         blocks: [
           p('iTerm2、kitty、WezTerm、Ghostty 和 tmux 等终端可提供更完整的扩展键盘支持。macOS Terminal.app 会消费部分 Command 快捷键，此时继续使用 Ctrl 组合键。更多终端要求见[界面与状态栏](../interface/#terminal)。'),
         ],
@@ -182,6 +192,7 @@ const topic: GuideTopic = {
       {
         heading: 'Send and deliver',
         id: 'send',
+        aliases: ['section-1'],
         blocks: [
           p('While the model is working, the same input can be delivered three ways: steer, follow-up, or interrupt.'),
           table(['Key', 'Action'], [
@@ -197,6 +208,7 @@ const topic: GuideTopic = {
       },
       {
         heading: 'Interrupt, exit, and system',
+        id: 'interrupt',
         blocks: [
           table(['Key', 'Action'], [
             ['`Ctrl+C`', "working = interrupt; if the interrupt won't settle, press again = force quit; idle with input = clear input; idle empty input = double-press exit (3 s window)"],
@@ -211,6 +223,8 @@ const topic: GuideTopic = {
       },
       {
         heading: 'Search',
+        id: 'search',
+        aliases: ['section-2'],
         blocks: [
           table(['Key', 'Action'], [
             ['`Ctrl+R` (⌘R)', 'history search; press again or `↓` for next match; `Enter` fills the input'],
@@ -220,6 +234,7 @@ const topic: GuideTopic = {
       },
       {
         heading: 'Input editing',
+        id: 'editing',
         blocks: [
           table(['Key', 'Action'], [
             ['`←` / `→`', 'move the cursor by character (with a selection, collapse to that edge)'],
@@ -244,6 +259,7 @@ const topic: GuideTopic = {
       },
       {
         heading: 'Navigation and modes',
+        id: 'navigation',
         blocks: [
           table(['Key', 'Action'], [
             ['`Shift+Tab`', 'cycle session mode (default → plan → full access); mounted third-party permission presets follow in registry order at the end of the cycle'],
@@ -256,6 +272,8 @@ const topic: GuideTopic = {
       },
       {
         heading: 'Mouse',
+        id: 'mouse',
+        aliases: ['section-3'],
         blocks: [
           p('These apply in fullscreen mode: drag, double-click, and triple-click select and copy.'),
           table(['Action', 'Effect'], [
@@ -335,6 +353,8 @@ const topic: GuideTopic = {
       },
       {
         heading: 'Terminal compatibility',
+        id: 'terminal-compat',
+        aliases: ['section-4'],
         blocks: [
           p('iTerm2, kitty, WezTerm, Ghostty, and tmux provide the most complete extended-keyboard experience. Terminal.app consumes some Command shortcuts, so use Ctrl there. See [terminal requirements](../interface/#terminal) for more.'),
         ],
