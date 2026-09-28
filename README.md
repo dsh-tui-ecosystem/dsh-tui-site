@@ -40,7 +40,9 @@ SITE_URL=https://example.com/ npm run build
 
 使用指南按主题拆在 `src/content/guides/` 下，每个主题一个文件，同时导出中英两版；`src/content/guides.ts` 决定导航顺序和预渲染路由。新增主题时，还要同步 `scripts/check-seo.mjs` 里的 `guideSlugs` 和 `src/i18n.tsx` 里的 `GUIDE_CARDS`。正文支持 `` `code` ``、`**粗体**`、`[链接](url)` 三种行内写法，以及表格、小标题等块（见 `src/content/guides/types.ts`）。
 
-`/settings/`（设置项参考）不手写：构建时由 `scripts/sync-settings.mjs` 从 **某个确定版本** 的 dsh-tui npm 包里取出 `lib/settings.json`（schema v1），写到 `src/content/settings.generated.json`（不入库）再渲染。数据来源按以下顺序取第一个命中的：
+`/settings/`（设置项参考）不手写：构建时由 `scripts/sync-settings.mjs` 从 **某个确定版本** 的 dsh-tui npm 包里取出 `lib/settings.json`（schema v1），写到 `src/content/settings.generated.json`（不入库）再渲染。
+
+**本地开发与 PR 构建**（`npm run dev` / `npm run build` / CI）按以下顺序取第一个命中的来源：
 
 | 来源 | 用法 |
 |---|---|
@@ -50,14 +52,18 @@ SITE_URL=https://example.com/ npm run build
 | 钉住的版本 | `package.json` 的 `config.dshTuiVersion` |
 | 兜底 | 都没有时用示例清单，页面顶部会标注「预览数据」 |
 
-- 版本必须是精确的 `x.y.z`，不接受 `latest` 等 dist-tag。
-- 一旦指定了版本就不会回退到示例清单：包不存在、包里没有 `lib/settings.json`、`packageVersion` 与请求的版本不一致、`schemaVersion` 不是 1，构建都会失败，线上保留上一版站点。
-- 目前还没有附带 `lib/settings.json` 的 dsh-tui 正式版本，所以 `config.dshTuiVersion` 留空，站点显示示例清单。第一个附带该文件的版本发布后，把它填进 `config.dshTuiVersion` 并提 PR。
+**生产构建**（部署工作流设置 `DSH_TUI_SETTINGS_PRODUCTION=1`）只用已发布的数据，示例清单和本地文件都会被拒绝。版本按 `DSH_TUI_VERSION` → `config.dshTuiVersion` → npm `latest` dist-tag 解析出的精确版本 的顺序确定。
+
+- 「上一次部署的是哪个版本」只记在一个地方：npm 的 `latest`。发版部署（dispatch）用的就是刚发布、已成为 `latest` 的版本，之后普通的 push 部署读到的也是它，不需要回写仓库，也不会悄悄退回示例清单。
+- `config.dshTuiVersion` 平时留空；只有想让线上停在某个版本（例如新版本的清单有问题）时才填，填了会覆盖 `latest`。
+- 只发到 `next` 等其他 dist-tag 的预发布版本，dispatch 那一次会用它，下一次 push 部署回到 `latest`。
+- 版本必须是精确的 `x.y.z`（`latest` 只在生产构建内部解析成精确版本后使用）。一旦确定了版本就不会回退：包不存在、包里没有 `lib/settings.json`、`packageVersion` 与请求的版本不一致、`schemaVersion` 不是 1，构建都会失败，线上保留上一版站点。
+- **合并时机**：目前 npm `latest`（0.11.1）还不带 `lib/settings.json`，生产构建会因此失败。本改动要在第一个附带该文件的 dsh-tui 版本成为 `latest` 之后再合并。
 - 分组标题与顺序取自清单的 `groups`（与 TUI 里 `/settings` 的子页一致）；某个设置项的 `group` 不在 `groups` 里时，以原始 id 作标题排在最后。页面上的设置文字全部取自清单，站点不做翻译。
 
 ### 发版自动更新
 
-`.github/workflows/deploy.yml` 除了 push 到 `main`，还接受两种触发，二者都只影响这一次部署用的版本：
+`.github/workflows/deploy.yml` 除了 push 到 `main`，还接受两种触发：
 
 - `repository_dispatch`，类型 `dsh-tui-published`，payload `{"version": "x.y.z"}`
 - 手动运行（workflow_dispatch），填写 `version` 输入
@@ -70,7 +76,10 @@ gh api repos/dsh-tui-ecosystem/dsh-tui-site/dispatches \
   -f 'client_payload[version]=0.11.2'
 ```
 
-新发布的包可能要几分钟才能从 registry 拉到，所以部署工作流会以 60 秒间隔最多重试 10 次 `npm pack`（`DSH_TUI_PACK_RETRIES`）。之后普通的 push 部署仍按 `config.dshTuiVersion` 构建，所以发版后记得提 PR 把钉住的版本改过去，否则下一次 push 部署会回到旧版本的数据。
+dispatch 往往比 Release 资产和 registry 都快，工作流对两者都有限次等待：
+
+- 一键安装整合包：带版本时先等 `v<version>` Release 上的 `dsh-tui-setup.zip`（60 秒间隔，最多 15 次）；等不到或没带版本时，用最近一个带该资产的正式 Release。
+- 设置清单：`npm pack` 以 60 秒间隔最多重试 10 次（`DSH_TUI_PACK_RETRIES`）。
 
 ## 特性
 

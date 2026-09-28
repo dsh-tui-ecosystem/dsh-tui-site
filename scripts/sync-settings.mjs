@@ -1,19 +1,24 @@
 // Resolve the settings manifest (lib/settings.json, schema v1) that the /settings/ reference page renders,
 // and write it to src/content/settings.generated.json (gitignored).
 //
-// Source, first match wins:
+// Local and PR builds — source, first match wins:
 //   1. DSH_TUI_SETTINGS_FIXTURE=1       → src/content/settings.fixture.json
 //   2. DSH_TUI_SETTINGS_FILE=<path>      → a local settings.json (preview a dsh-TUI build before it ships)
 //   3. DSH_TUI_VERSION=<x.y.z>           → that exact published npm tarball
 //   4. package.json config.dshTuiVersion → that exact published npm tarball
 //   5. otherwise                         → the fixture
 //
-// When a version is requested (3 or 4) there is no fallback: a missing tarball, a missing
-// lib/settings.json, a version mismatch, or an unknown schemaVersion fails the build, so a deploy
-// never replaces the live site with wrong data. DSH_TUI_PACK_RETRIES=<n> retries `npm pack` on a
-// not-yet-visible fresh publish (60 s apart).
+// Production builds (DSH_TUI_SETTINGS_PRODUCTION=1, set by the deploy workflow) never use the fixture
+// or a local file: DSH_TUI_VERSION → config.dshTuiVersion → the npm `latest` dist-tag resolved to an
+// exact version. `latest` is the one record that dispatch deploys and later push deploys both read, so
+// a push after a release deploy keeps the released data instead of drifting back.
+//
+// Whenever a version is used there is no fallback: a missing tarball, a missing lib/settings.json, a
+// version mismatch, or an unknown schemaVersion fails the build, so a deploy never replaces the live
+// site with wrong data. DSH_TUI_PACK_RETRIES=<n> retries `npm pack` on a not-yet-visible fresh
+// publish (60 s apart).
 import { execFile } from 'node:child_process'
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import { appendFile, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { promisify } from 'node:util'
@@ -120,6 +125,18 @@ async function packWithRetry(version, destination) {
   }
 }
 
+/** The exact version the npm `latest` dist-tag points at right now. */
+async function resolveLatest() {
+  try {
+    const { stdout } = await run('npm', ['view', `${PACKAGE}@latest`, 'version', '--json'])
+    const version = JSON.parse(stdout)
+    if (typeof version !== 'string') throw new Error(`unexpected npm view output: ${stdout.trim()}`)
+    return version
+  } catch (error) {
+    fail(`cannot resolve ${PACKAGE}@latest to an exact version: ${error.message}`)
+  }
+}
+
 async function fromNpm(version) {
   if (!VERSION_PATTERN.test(version)) {
     fail(`"${version}" is not an exact version (x.y.z[-pre]); dist-tags such as latest are not accepted`)
@@ -144,11 +161,18 @@ try {
   const envVersion = process.env.DSH_TUI_VERSION?.trim() ?? ''
   const forceFixture = ['1', 'true', 'yes'].includes((process.env.DSH_TUI_SETTINGS_FIXTURE ?? '').trim().toLowerCase())
   const localFile = process.env.DSH_TUI_SETTINGS_FILE?.trim() ?? ''
+  const production = ['1', 'true', 'yes'].includes((process.env.DSH_TUI_SETTINGS_PRODUCTION ?? '').trim().toLowerCase())
 
   let source
   let requestedVersion = null
   let document
-  if (forceFixture) {
+  if (production) {
+    if (forceFixture || localFile) fail('production builds render published data only; unset DSH_TUI_SETTINGS_FIXTURE / DSH_TUI_SETTINGS_FILE')
+    source = 'npm'
+    requestedVersion = envVersion || pinned || await resolveLatest()
+    console.log(`sync-settings: production build uses ${PACKAGE}@${requestedVersion} (${envVersion ? 'DSH_TUI_VERSION' : pinned ? 'config.dshTuiVersion' : 'npm latest'})`)
+    document = await fromNpm(requestedVersion)
+  } else if (forceFixture) {
     source = 'fixture'
     document = await readJson(FIXTURE)
   } else if (localFile) {
@@ -169,6 +193,9 @@ try {
   }
 
   await writeFile(OUTPUT, `${JSON.stringify({ source, document }, null, 2)}\n`)
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    await appendFile(process.env.GITHUB_STEP_SUMMARY, `Settings reference built from \`${source === 'npm' ? `${PACKAGE}@${document.packageVersion}` : source}\`\n`)
+  }
   console.log(`sync-settings: ${document.settings.length} settings from ${source === 'npm' ? `${PACKAGE}@${document.packageVersion}` : source === 'file' ? localFile : 'the fixture'}`)
 } catch (error) {
   if (!(error instanceof SyncError)) throw error
