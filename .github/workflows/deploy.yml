@@ -4,11 +4,29 @@ name: Deploy to Cloudflare Pages
 # 需要先在仓库 Secrets 里配置 CLOUDFLARE_API_TOKEN（Cloudflare 后台 → My Profile → API Tokens，
 # 权限：Cloudflare Pages:Edit + Account:Read，作用域限定本账号）。
 # 也可在 Cloudflare Pages 后台直接连接本仓库（更省事，还自带 PR 预览）。
+#
+# 设置项参考页（/settings/）读取某个 dsh-tui 发布版本 npm 包里的 lib/settings.json：
+# - push：用 package.json 里 config.dshTuiVersion 钉住的版本（为空时用示例清单）
+# - repository_dispatch（dsh-tui-published）：dsh-TUI 发版后发来 {"version": "x.y.z"}，本次构建用该版本
+# - 手动运行：可填 version 输入，效果同上
+# dispatch / 手动传入的版本只作用于这一次部署；要长期生效，需再提 PR 更新 config.dshTuiVersion。
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'dsh-tui version whose lib/settings.json feeds /settings/ (exact x.y.z; empty = package.json pin)'
+        required: false
+        type: string
+  repository_dispatch:
+    types: [dsh-tui-published]
+
+# Never run two deploys at once; a newer run waits instead of cancelling a deploy mid-upload.
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -35,6 +53,10 @@ jobs:
         run: npm run build
         env:
           SITE_URL: https://dshtui.com/
+          # Empty on push → package.json pin. Validated as an exact version by scripts/sync-settings.mjs.
+          DSH_TUI_VERSION: ${{ github.event.client_payload.version || inputs.version }}
+          # A fresh publish can take minutes to become visible on the registry.
+          DSH_TUI_PACK_RETRIES: '10'
           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
           BING_SITE_VERIFICATION: ${{ secrets.BING_SITE_VERIFICATION }}
           BAIDU_SITE_VERIFICATION: ${{ secrets.BAIDU_SITE_VERIFICATION }}

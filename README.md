@@ -55,6 +55,23 @@ SITE_URL=https://example.com/ npm run build
 - 目前还没有附带 `lib/settings.json` 的 dsh-tui 正式版本，所以 `config.dshTuiVersion` 留空，站点显示示例清单。第一个附带该文件的版本发布后，把它填进 `config.dshTuiVersion` 并提 PR。
 - 分组标题（通用 / 底栏设置 / 快捷键 / 会话）由站点维护，对应 TUI 里 `/settings` 的子页 id；其余文字全部取自清单本身，站点不做翻译。
 
+### 发版自动更新
+
+`.github/workflows/deploy.yml` 除了 push 到 `main`，还接受两种触发，二者都只影响这一次部署用的版本：
+
+- `repository_dispatch`，类型 `dsh-tui-published`，payload `{"version": "x.y.z"}`
+- 手动运行（workflow_dispatch），填写 `version` 输入
+
+dsh-TUI 的发布流程在 `npm publish` 之后发出 dispatch 即可，需要一个对本仓库有写权限的 token（classic PAT 的 `repo` scope，或 fine-grained token 的 Contents: Read and write），存为 dsh-TUI 仓库的 secret。本仓库不需要新增任何 secret。
+
+```sh
+gh api repos/dsh-tui-ecosystem/dsh-tui-site/dispatches \
+  -f event_type=dsh-tui-published \
+  -f 'client_payload[version]=0.11.2'
+```
+
+新发布的包可能要几分钟才能从 registry 拉到，所以部署工作流会以 60 秒间隔最多重试 10 次 `npm pack`（`DSH_TUI_PACK_RETRIES`）。之后普通的 push 部署仍按 `config.dshTuiVersion` 构建，所以发版后记得提 PR 把钉住的版本改过去，否则下一次 push 部署会回到旧版本的数据。
+
 ## 特性
 
 - 亮 / 暗双模式（默认亮色，选择记忆在浏览器 localStorage）
