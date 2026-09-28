@@ -52,27 +52,46 @@ jobs:
           repo=ccch1mneyyy/dsh-TUI
           asset=dsh-tui-setup.zip
           mkdir -p public/downloads
-          fetch() { gh release download "$1" --repo "$repo" --pattern "$asset" --dir public/downloads --clobber; }
+          # Download to a scratch directory and keep the file only when gh
+          # succeeded and it is a valid zip: an interrupted download leaves a
+          # truncated file behind, which must never reach the site.
+          fetch() {
+            local tmp
+            tmp="$(mktemp -d)"
+            if gh release download "$1" --repo "$repo" --pattern "$asset" --dir "$tmp" \
+              && unzip -tq "$tmp/$asset" >/dev/null; then
+              mv "$tmp/$asset" "public/downloads/$asset"
+              rm -rf "$tmp"
+              return 0
+            fi
+            rm -rf "$tmp"
+            return 1
+          }
+          got=false
           if [ -n "$VERSION" ]; then
             if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
               echo "version must be an exact x.y.z, got: $VERSION" >&2
               exit 1
             fi
             for attempt in $(seq 1 15); do
-              if fetch "v$VERSION"; then break; fi
-              echo "v$VERSION has no $asset yet; retry $attempt/15 in 60 s"
+              if fetch "v$VERSION"; then got=true; break; fi
+              echo "v$VERSION has no usable $asset yet; retry $attempt/15 in 60 s"
               sleep 60
             done
           fi
-          if [ ! -f "public/downloads/$asset" ]; then
+          if [ "$got" = false ]; then
             for tag in $(gh release list --repo "$repo" --exclude-drafts --exclude-pre-releases --limit 20 --json tagName --jq '.[].tagName'); do
               if fetch "$tag"; then
                 echo "using $asset from $tag"
+                got=true
                 break
               fi
             done
           fi
-          test -f "public/downloads/$asset"
+          if [ "$got" = false ]; then
+            echo "no Release has a usable $asset" >&2
+            exit 1
+          fi
           ls -la public/downloads
         env:
           GH_TOKEN: ${{ github.token }}
