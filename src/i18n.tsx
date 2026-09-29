@@ -138,8 +138,8 @@ export const strings = {
 
   'changelog.title': { zh: '更新动态', en: "What's new" },
   'changelog.desc': {
-    zh: '从 v0.9.0 到 v0.10.1，四周五个版本。事实核对自仓库提交记录与 npm 发布时间；完整发布记录见 GitHub Releases。',
-    en: 'Five releases in four weeks, from v0.9.0 to v0.10.1. Facts cross-checked against repo commits and npm publish times; full notes on GitHub Releases.',
+    zh: '从 v0.9.0 到 v0.11.2，五周八个版本。事实核对自仓库提交记录与 npm 发布时间；完整发布记录见 GitHub Releases。',
+    en: 'Eight releases in five weeks, from v0.9.0 to v0.11.2. Facts cross-checked against repo commits and npm publish times; full notes on GitHub Releases.',
   },
   'changelog.more': { zh: '全部发布记录', en: 'All releases' },
 
@@ -395,6 +395,33 @@ export const COMMAND_GROUPS: { name: Pair; en: string; cmds: string[] }[] = [
 /** 更新动态条目。事实来源：仓库 git 提交记录 + npm 发布时间（详见调研记录），
  *  日期为 npm UTC 发布日。 */
 export const CHANGELOG_ENTRIES: { version: string; date: string; title: Pair; desc: Pair }[] = [
+  {
+    version: 'v0.11.2',
+    date: '2026-09-29',
+    title: { zh: '透明终端图像：公式、立绘与照片', en: 'Transparent terminal images: formulas, portraits & photos' },
+    desc: {
+      zh: 'LaTeX 公式渲染成真图（Kitty/Sixel）并默认透明底，点击放大 2 倍预览；标题女仆娘立绘与聊天照片同样透出终端壁纸，底色每面可配；/settings 整理为浅主题平铺 + 深域子页。',
+      en: 'LaTeX math renders as real images (Kitty/Sixel) with a transparent backing by default and click-to-zoom previews; the maid portrait and chat photos float on your wallpaper too, with per-surface backing settings; /settings reorganised into inline topics plus deep subpages.',
+    },
+  },
+  {
+    version: 'v0.11.1',
+    date: '2026-09-26',
+    title: { zh: '工作线投影化与积压修复', en: 'Working-line projection & backlog fixes' },
+    desc: {
+      zh: '状态线改读 working-activity 投影（0.5.0），修复一批积压问题。',
+      en: 'The status line reads the working-activity projection (0.5.0) plus a round of backlog fixes.',
+    },
+  },
+  {
+    version: 'v0.11.0',
+    date: '2026-09-24',
+    title: { zh: 'DSH 0.1.7-rc.1 适配与三合一会话界面', en: 'DSH 0.1.7-rc.1 support & unified session view' },
+    desc: {
+      zh: '适配 DSH 0.1.7-rc.1，三合一会话界面与 IDE 选区通道。',
+      en: 'DSH 0.1.7-rc.1 support, a unified three-in-one session view, and the IDE selection channel.',
+    },
+  },
   {
     version: 'v0.10.1',
     date: '2026-09-10',
