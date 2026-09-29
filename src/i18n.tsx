@@ -396,6 +396,15 @@ export const COMMAND_GROUPS: { name: Pair; en: string; cmds: string[] }[] = [
  *  日期为 npm UTC 发布日。 */
 export const CHANGELOG_ENTRIES: { version: string; date: string; title: Pair; desc: Pair }[] = [
   {
+    version: 'v0.11.2',
+    date: '2026-09-29',
+    title: { zh: '透明终端图像：公式、立绘与照片', en: 'Transparent terminal images: formulas, portraits & photos' },
+    desc: {
+      zh: 'LaTeX 公式渲染成真图（Kitty/Sixel）并默认透明底，点击放大 2 倍预览；标题女仆娘立绘与聊天照片同样透出终端壁纸，底色每面可配；/settings 整理为浅主题平铺 + 深域子页。',
+      en: 'LaTeX math renders as real images (Kitty/Sixel) with a transparent backing by default and click-to-zoom previews; the maid portrait and chat photos float on your wallpaper too, with per-surface backing settings; /settings reorganised into inline topics plus deep subpages.',
+    },
+  },
+  {
     version: 'v0.11.1',
     date: '2026-09-26',
     title: { zh: '状态线语义归插件、TUI 只读', en: 'Plugin-owned status line semantics' },
