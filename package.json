@@ -3,9 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "config": {
+    "dshTuiVersion": ""
+  },
   "scripts": {
+    "predev": "node scripts/sync-settings.mjs",
     "dev": "vite",
-    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir .ssr && node scripts/prerender.mjs && node scripts/check-seo.mjs",
+    "build": "node scripts/sync-settings.mjs && tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir .ssr && node scripts/prerender.mjs && node scripts/check-seo.mjs",
+    "sync:settings": "node scripts/sync-settings.mjs",
     "check:seo": "node scripts/check-seo.mjs",
     "lint": "eslint .",
     "preview": "vite preview"

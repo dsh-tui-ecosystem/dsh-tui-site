@@ -1,6 +1,11 @@
 import PixelWhale from '../components/PixelWhale'
 import Icon from '../components/Icon'
-import { GUIDE_PAGES, type GuidePageData } from '../content/guides'
+import { GuideBlockView, Inline } from '../components/GuideContent'
+import { GUIDE_PAGES, type GuidePageData, type GuideSection } from '../content/guides'
+
+function sectionId(section: GuideSection, index: number) {
+  return section.id ?? `section-${index + 1}`
+}
 
 function routeLinks(page: GuidePageData) {
   return GUIDE_PAGES.filter((item) => item.locale === page.locale).map((item) => ({
@@ -20,7 +25,7 @@ function GuideDocNav({
 }) {
   const current = links.find((link) => link.current)
   return (
-    <details className="faq-item group border-t border-soft md:hidden">
+    <details className="faq-item group border-t border-soft lg:hidden">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-page py-2 [&::-webkit-details-marker]:hidden">
         <span className="min-w-0 truncate text-[13px] font-medium text-head">{current?.label}</span>
         <Icon
@@ -61,7 +66,7 @@ function TocList({
     <ol className={`space-y-2.5 ${className}`}>
       {page.sections.map((section, index) => (
         <li key={section.heading}>
-          <a href={`#section-${index + 1}`} className="text-[12.5px] leading-relaxed text-dim hover:text-mist3">
+          <a href={`#${sectionId(section, index)}`} className="text-[12.5px] leading-relaxed text-dim hover:text-mist3">
             {section.heading}
           </a>
         </li>
@@ -90,7 +95,7 @@ export default function GuidePage({ page }: { page: GuidePageData }) {
             <PixelWhale float={false} className="h-7 w-9" />
             <span className="font-mono2 font-bold text-head"><span className="text-mist">dsh</span>-TUI</span>
           </a>
-          <nav aria-label={navLabel} className="ms-auto hidden flex-wrap justify-end gap-x-4 gap-y-2 md:flex">
+          <nav aria-label={navLabel} className="ms-auto hidden flex-wrap justify-end gap-x-4 gap-y-2 lg:flex">
             {links.map((link) => (
               <a
                 key={link.href}
@@ -104,7 +109,7 @@ export default function GuidePage({ page }: { page: GuidePageData }) {
           </nav>
           <a
             href={languageHref}
-            className="font-mono2 ms-auto shrink-0 rounded border border-line px-2.5 py-1.5 text-[11.5px] text-dim hover:text-mist3 md:ms-0"
+            className="font-mono2 ms-auto shrink-0 rounded border border-line px-2.5 py-1.5 text-[11.5px] text-dim hover:text-mist3 lg:ms-0"
           >
             {isEnglish ? '中文' : 'EN'}
           </a>
@@ -120,7 +125,7 @@ export default function GuidePage({ page }: { page: GuidePageData }) {
             <span aria-current="page" className="text-dim">{page.navTitle}</span>
           </nav>
           <h1 className="max-w-3xl text-[26px] font-bold leading-[1.25] text-head sm:text-[46px] sm:leading-tight">{page.title}</h1>
-          <p className="mt-4 max-w-3xl text-[15px] leading-[1.9] text-dim sm:mt-5 sm:text-[16px]">{page.intro}</p>
+          <p className="mt-4 max-w-3xl text-[15px] leading-[1.9] text-dim sm:mt-5 sm:text-[16px]"><Inline text={page.intro} /></p>
 
           <details className="faq-item group mt-8 rounded-lg border border-line md:hidden" style={{ background: 'var(--panel)' }}>
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 [&::-webkit-details-marker]:hidden">
@@ -137,7 +142,8 @@ export default function GuidePage({ page }: { page: GuidePageData }) {
 
           <div className="mt-10 space-y-10 sm:mt-12 sm:space-y-12">
             {page.sections.map((section, index) => (
-              <section key={section.heading} id={`section-${index + 1}`} className="scroll-mt-28 md:scroll-mt-24">
+              <section key={section.heading} id={sectionId(section, index)} className="scroll-mt-28 md:scroll-mt-24">
+                {section.aliases?.map((alias) => <span key={alias} id={alias} aria-hidden="true" className="block scroll-mt-28 md:scroll-mt-24" />)}
                 <h2 className="text-[22px] font-bold text-head sm:text-[24px]">{section.heading}</h2>
                 {section.paragraphs?.map((paragraph) => <p key={paragraph} className="mt-4 text-[14.5px] leading-[2] text-dim">{paragraph}</p>)}
                 {section.bullets && (
@@ -150,6 +156,7 @@ export default function GuidePage({ page }: { page: GuidePageData }) {
                     <code>{section.code}</code>
                   </pre>
                 )}
+                {section.blocks?.map((block, blockIndex) => <GuideBlockView key={blockIndex} block={block} lang={isEnglish ? 'en' : 'zh'} />)}
               </section>
             ))}
           </div>

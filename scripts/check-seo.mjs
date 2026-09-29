@@ -2,10 +2,14 @@ import { access, readFile } from 'node:fs/promises'
 import path from 'node:path'
 
 const distDir = path.resolve('dist')
+const guideSlugs = [
+  'getting-started', 'features', 'shortcuts', 'commands', 'sessions', 'interface',
+  'settings', 'customization', 'tips', 'architecture', 'faq',
+]
 const expectedRoutes = [
   '/', '/en/',
-  '/getting-started/', '/features/', '/commands/', '/shortcuts/', '/architecture/', '/faq/',
-  '/en/getting-started/', '/en/features/', '/en/commands/', '/en/shortcuts/', '/en/architecture/', '/en/faq/',
+  ...guideSlugs.map((slug) => `/${slug}/`),
+  ...guideSlugs.map((slug) => `/en/${slug}/`),
 ]
 const DEFAULT_SITE_URL = 'https://dshtui.com/'
 const siteUrl = new URL(process.env.SITE_URL?.trim() || DEFAULT_SITE_URL)
@@ -107,6 +111,27 @@ for (const route of expectedRoutes) {
     const previous = titles.get(title)
     record(!previous, `${route}: duplicate title also used by ${previous}`)
     titles.set(title, route)
+  }
+}
+
+// Anchors published before the guide migration (section-1…N per page) must keep resolving.
+const legacyAnchorCounts = { 'getting-started': 5, features: 4, commands: 4, shortcuts: 4, architecture: 4, faq: 6 }
+for (const [slug, count] of Object.entries(legacyAnchorCounts)) {
+  for (const route of [`/${slug}/`, `/en/${slug}/`]) {
+    const html = await readFile(routeFile(route), 'utf8').catch(() => '')
+    for (let n = 1; n <= count; n += 1) {
+      record((html.match(new RegExp(`id="section-${n}"`, 'g')) ?? []).length === 1, `${route}: legacy anchor #section-${n} missing or duplicated`)
+    }
+  }
+}
+
+// The settings reference must render every key from the manifest it was built with, plus its version.
+const settingsManifest = JSON.parse(await readFile(path.resolve('src/content/settings.generated.json'), 'utf8'))
+for (const route of ['/settings/', '/en/settings/']) {
+  const html = await readFile(routeFile(route), 'utf8').catch(() => '')
+  record(html.includes(settingsManifest.document.packageVersion), `${route}: settings packageVersion not shown`)
+  for (const setting of settingsManifest.document.settings) {
+    record(html.includes(`id="setting-${setting.key}"`), `${route}: setting ${setting.key} not rendered`)
   }
 }
 

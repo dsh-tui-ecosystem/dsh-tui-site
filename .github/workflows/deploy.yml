@@ -4,15 +4,35 @@ name: Deploy to Cloudflare Pages
 # 需要先在仓库 Secrets 里配置 CLOUDFLARE_API_TOKEN（Cloudflare 后台 → My Profile → API Tokens，
 # 权限：Cloudflare Pages:Edit + Account:Read，作用域限定本账号）。
 # 也可在 Cloudflare Pages 后台直接连接本仓库（更省事，还自带 PR 预览）。
+#
+# 设置项参考页（/settings/）读取某个 dsh-tui 发布版本 npm 包里的 lib/settings.json（生产构建不会用示例清单）：
+# - repository_dispatch（dsh-tui-published）：dsh-TUI 发版后发来 {"version": "x.y.z"}，本次构建用该版本
+# - 手动运行：可填 version 输入，效果同上
+# - push / 未填 version：用 package.json 的 config.dshTuiVersion；为空时用 npm `latest` 解析出的精确版本。
+#   发版时 `latest` 已经指向新版本，所以发版部署之后的普通 push 部署仍然是同一份数据。
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'dsh-tui version whose lib/settings.json feeds /settings/ (exact x.y.z; empty = package.json pin, else npm latest)'
+        required: false
+        type: string
+  repository_dispatch:
+    types: [dsh-tui-published]
+
+# Never run two deploys at once; a newer run waits instead of cancelling a deploy mid-upload.
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Covers the bounded waits below (release asset up to 15 min, npm tarball up to 10 min).
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,17 +44,68 @@ jobs:
         run: |
           curl -fsSL https://raw.githubusercontent.com/dsh-tui-ecosystem/dsh-tui-ecosystem/main/plugins.json -o public/plugins/plugins.json
           node -e "const d=JSON.parse(require('fs').readFileSync('public/plugins/plugins.json','utf8')); console.log('plugins.json OK: '+d.plugins.length+' 条')"
-      - name: 拉取最新一键安装整合包（ccch1mneyyy/dsh-TUI Releases）
+      - name: 拉取一键安装整合包（ccch1mneyyy/dsh-TUI Releases）
+        # A dispatch fires right after npm publish, while the v<version> Release may still be building its
+        # assets: wait for that tag's asset (bounded), then fall back to the newest release that has it.
         run: |
+          set -euo pipefail
+          repo=ccch1mneyyy/dsh-TUI
+          asset=dsh-tui-setup.zip
           mkdir -p public/downloads
-          gh release download --repo ccch1mneyyy/dsh-TUI --pattern dsh-tui-setup.zip --dir public/downloads --clobber
+          # Download to a scratch directory and keep the file only when gh
+          # succeeded and it is a valid zip: an interrupted download leaves a
+          # truncated file behind, which must never reach the site.
+          fetch() {
+            local tmp
+            tmp="$(mktemp -d)"
+            if gh release download "$1" --repo "$repo" --pattern "$asset" --dir "$tmp" \
+              && unzip -tq "$tmp/$asset" >/dev/null; then
+              mv "$tmp/$asset" "public/downloads/$asset"
+              rm -rf "$tmp"
+              return 0
+            fi
+            rm -rf "$tmp"
+            return 1
+          }
+          got=false
+          if [ -n "$VERSION" ]; then
+            if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+              echo "version must be an exact x.y.z, got: $VERSION" >&2
+              exit 1
+            fi
+            for attempt in $(seq 1 15); do
+              if fetch "v$VERSION"; then got=true; break; fi
+              echo "v$VERSION has no usable $asset yet; retry $attempt/15 in 60 s"
+              sleep 60
+            done
+          fi
+          if [ "$got" = false ]; then
+            for tag in $(gh release list --repo "$repo" --exclude-drafts --exclude-pre-releases --limit 20 --json tagName --jq '.[].tagName'); do
+              if fetch "$tag"; then
+                echo "using $asset from $tag"
+                got=true
+                break
+              fi
+            done
+          fi
+          if [ "$got" = false ]; then
+            echo "no Release has a usable $asset" >&2
+            exit 1
+          fi
           ls -la public/downloads
         env:
           GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ github.event.client_payload.version || inputs.version }}
       - name: 构建站点与 SEO 产物
         run: npm run build
         env:
           SITE_URL: https://dshtui.com/
+          # Empty on push → package.json pin, else npm latest. Validated as an exact version by scripts/sync-settings.mjs.
+          DSH_TUI_VERSION: ${{ github.event.client_payload.version || inputs.version }}
+          # Refuse the fixture: production renders published data only.
+          DSH_TUI_SETTINGS_PRODUCTION: '1'
+          # A fresh publish can take minutes to become visible on the registry.
+          DSH_TUI_PACK_RETRIES: '10'
           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
           BING_SITE_VERIFICATION: ${{ secrets.BING_SITE_VERIFICATION }}
           BAIDU_SITE_VERIFICATION: ${{ secrets.BAIDU_SITE_VERIFICATION }}
