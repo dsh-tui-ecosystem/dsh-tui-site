@@ -1,40 +1,28 @@
 import type { Lang, Pair } from '../i18n'
+import type { SpriteAnim, SpriteGeometry, SpriteSet } from './sprites/types'
+import { DEEPY_WHALE } from './sprites/deepy-whale'
+import { DEEPY_TERMINAL } from './sprites/deepy-terminal'
+import { WHALE_GIRL } from './sprites/whale-girl-emoji'
 
 /**
  * 桌宠预览页的数据。三套素材的原始页面放在 public/pets/<id>/，
- * 这里只取预览要用的部分：每个动画的标题、状态、触发事件和逐帧时长。
+ * 这里只取预览要用的部分：每个动画的标题、状态和触发事件；逐帧时长在 ./sprites/。
  * 这些数据从三个原始页面的内嵌数据里一次性提取，与原页面保持一致；
  * 改动画时请同时更新原页面和这里。
  */
 
 export type PetId = 'deepy-whale' | 'deepy-terminal' | 'whale-girl-emoji'
 
-/** 逐帧时长，[ms, n] 表示连续 n 帧都是 ms */
-type Durs = (number | [number, number])[]
+/** [key, 标题, 英文标题, Clawd 状态, 触发说明] */
+type Meta = [key: string, title: string, en: string, state: string, trigger: string]
 
-interface RawAnim {
-  key: string
-  file: string
-  title: string
-  en: string
-  state: string
-  trigger: string
-  durs: Durs
-}
-
-export interface PetAnim {
-  key: string
+export interface PetAnim extends SpriteAnim {
   title: Pair
   state: string
   trigger: Pair
-  durs: number[]
-  starts: number[]
-  total: number
-  /** 精灵表，相对 /pets/ 目录 */
-  sheet: string
 }
 
-export interface Pet {
+export interface Pet extends SpriteGeometry {
   id: PetId
   name: Pair
   short: Pair
@@ -43,86 +31,80 @@ export interface Pet {
   facts: Pair[]
   /** 完整拆解页链接文字 */
   more: Pair
-  /** 精灵表里单帧的像素尺寸 */
-  frame: [number, number]
-  /** 逻辑像素网格：按它取整数倍放大，像素边缘才干净 */
-  grid: [number, number]
-  /** 精灵表列数；0 = 一行排完 */
-  cols: number
   surface: 'desk' | 'term'
   anims: PetAnim[]
   byKey: Record<string, PetAnim>
 }
 
-const DEEPY_ANIMS: RawAnim[] = [
-  { key: 'idle', file: 'idle', title: '待机呼吸', en: 'Idle breathing', state: 'idle', trigger: '无任务 / SessionStart', durs: [[50,48]] },
-  { key: 'idle-look', file: 'idle-look', title: '东张西望', en: 'Look around', state: 'idle (随机)', trigger: 'idleAnimations 随机池', durs: [[50,68]] },
-  { key: 'idle-spout', file: 'idle-spout', title: '开心喷水', en: 'Water spout', state: 'idle (随机)', trigger: 'idleAnimations 随机池', durs: [[50,64]] },
-  { key: 'thinking', file: 'thinking', title: '思考中', en: 'Thinking', state: 'thinking', trigger: 'UserPromptSubmit（刚收到提问）', durs: [[50,48]] },
-  { key: 'typing', file: 'typing', title: '敲代码', en: 'Typing', state: 'working', trigger: 'PreToolUse / PostToolUse（1 个会话在跑工具）', durs: [[50,48]] },
-  { key: 'music', file: 'music', title: '戴耳机听歌', en: 'Headphones groove', state: 'juggling / working', trigger: 'SubagentStart（1 个子代理）或 2 个会话并行', durs: [[50,32]] },
-  { key: 'conducting', file: 'conducting', title: '带领小鲸鱼分身', en: 'Sub-agent squad', state: 'juggling (2+)', trigger: 'SubagentStart（≥2 个子代理）', durs: [[50,48]] },
-  { key: 'building', file: 'building', title: '戴安全帽砌砖', en: 'Building', state: 'working (3+)', trigger: '3 个以上会话同时干活', durs: [[50,48]] },
-  { key: 'error', file: 'error', title: '出错啦', en: 'Error', state: 'error', trigger: 'PostToolUseFailure / StopFailure', durs: [[50,48]] },
-  { key: 'happy', file: 'happy', title: '任务完成！', en: 'Task complete', state: 'attention', trigger: 'Stop（任务完成）/ PostCompact', durs: [[50,52]] },
-  { key: 'notification', file: 'notification', title: '需要你确认', en: 'Notification', state: 'notification', trigger: 'PermissionRequest / Notification', durs: [[50,32]] },
-  { key: 'compacting', file: 'compacting', title: '上下文清理（吸入压缩）', en: 'Context compaction', state: 'sweeping', trigger: 'PreCompact（上下文压缩/清理）', durs: [[50,56]] },
-  { key: 'carrying', file: 'carrying', title: '搬箱子', en: 'Carrying', state: 'carrying', trigger: 'WorktreeCreate（新建工作树）', durs: [[50,32]] },
-  { key: 'sleeping', file: 'sleeping', title: '呼呼大睡', en: 'Sleeping', state: 'sleeping', trigger: '鼠标 60s 无操作 / 免打扰', durs: [[50,64]] },
-  { key: 'waking', file: 'waking', title: '惊醒', en: 'Waking up', state: 'waking', trigger: '睡眠中移动鼠标', durs: [[50,30]] },
-  { key: 'poke-left', file: 'react-left', title: '戳左边', en: 'Poke (left)', state: 'reaction', trigger: '双击宠物左半边', durs: [[50,40]] },
-  { key: 'poke-right', file: 'react-right', title: '戳右边', en: 'Poke (right)', state: 'reaction', trigger: '双击宠物右半边', durs: [[50,40]] },
-  { key: 'tickle', file: 'react-double', title: '被挠痒痒', en: 'Tickled', state: 'reaction', trigger: '连续快速点击 4 下', durs: [[50,48]] },
-  { key: 'drag', file: 'react-drag', title: '被拎起来', en: 'Dragged', state: 'reaction', trigger: '按住拖动宠物', durs: [[50,24]] },
-  { key: 'roam', file: 'roam-hop', title: '蹦跶散步', en: 'Roam hop', state: 'roam', trigger: '自由漫步（Free roam）', durs: [[50,24]] },
+const DEEPY_META: Meta[] = [
+  ['idle', '待机呼吸', 'Idle breathing', 'idle', '无任务 / SessionStart'],
+  ['idle-look', '东张西望', 'Look around', 'idle (随机)', 'idleAnimations 随机池'],
+  ['idle-spout', '开心喷水', 'Water spout', 'idle (随机)', 'idleAnimations 随机池'],
+  ['thinking', '思考中', 'Thinking', 'thinking', 'UserPromptSubmit（刚收到提问）'],
+  ['typing', '敲代码', 'Typing', 'working', 'PreToolUse / PostToolUse（1 个会话在跑工具）'],
+  ['music', '戴耳机听歌', 'Headphones groove', 'juggling / working', 'SubagentStart（1 个子代理）或 2 个会话并行'],
+  ['conducting', '带领小鲸鱼分身', 'Sub-agent squad', 'juggling (2+)', 'SubagentStart（≥2 个子代理）'],
+  ['building', '戴安全帽砌砖', 'Building', 'working (3+)', '3 个以上会话同时干活'],
+  ['error', '出错啦', 'Error', 'error', 'PostToolUseFailure / StopFailure'],
+  ['happy', '任务完成！', 'Task complete', 'attention', 'Stop（任务完成）/ PostCompact'],
+  ['notification', '需要你确认', 'Notification', 'notification', 'PermissionRequest / Notification'],
+  ['compacting', '上下文清理（吸入压缩）', 'Context compaction', 'sweeping', 'PreCompact（上下文压缩/清理）'],
+  ['carrying', '搬箱子', 'Carrying', 'carrying', 'WorktreeCreate（新建工作树）'],
+  ['sleeping', '呼呼大睡', 'Sleeping', 'sleeping', '鼠标 60s 无操作 / 免打扰'],
+  ['waking', '惊醒', 'Waking up', 'waking', '睡眠中移动鼠标'],
+  ['poke-left', '戳左边', 'Poke (left)', 'reaction', '双击宠物左半边'],
+  ['poke-right', '戳右边', 'Poke (right)', 'reaction', '双击宠物右半边'],
+  ['tickle', '被挠痒痒', 'Tickled', 'reaction', '连续快速点击 4 下'],
+  ['drag', '被拎起来', 'Dragged', 'reaction', '按住拖动宠物'],
+  ['roam', '蹦跶散步', 'Roam hop', 'roam', '自由漫步（Free roam）'],
 ]
 
-const TERMINAL_ANIMS: RawAnim[] = [
-  { key: 'idle', file: 'idle', title: '待机', en: 'Idle', state: 'idle', trigger: '无任务', durs: [900,90,110,90,700,[160,3],600] },
-  { key: 'idle-look', file: 'idle-look', title: '东张西望', en: 'Look around', state: 'idle (随机)', trigger: '待机随机', durs: [500,600,90,100,400,500,140,600,[140,3],500] },
-  { key: 'idle-spout', file: 'idle-spout', title: '开心喷水', en: 'Water spout', state: 'idle (随机)', trigger: '待机随机', durs: [500,300,[110,2],130,150,[180,3],350,400] },
-  { key: 'thinking', file: 'thinking', title: '思考中', en: 'Thinking', state: 'thinking', trigger: 'UserPromptSubmit', durs: [[220,2],[260,3],300,[180,6],220,[200,3],260] },
-  { key: 'typing', file: 'typing', title: '敲代码', en: 'Typing', state: 'working', trigger: 'PreToolUse / PostToolUse', durs: [[170,4],320,120,[170,3],320] },
-  { key: 'music', file: 'music', title: '戴耳机听歌', en: 'Headphones', state: 'juggling / working', trigger: '1 个子代理 / 2 个会话', durs: [[150,8]] },
-  { key: 'conducting', file: 'conducting', title: '带领小鲸鱼分身', en: 'Sub-agent squad', state: 'juggling (2+)', trigger: 'SubagentStart ×2+', durs: [[150,12]] },
-  { key: 'building', file: 'building', title: '安全帽顶砖', en: 'Building', state: 'working (3+)', trigger: '3 个以上会话', durs: [300,[90,2],170,260,90,170,320,[150,2],200] },
-  { key: 'error', file: 'error', title: '出错啦', en: 'Error', state: 'error', trigger: 'PostToolUseFailure', durs: [[120,2],[200,3],160,200,300] },
-  { key: 'happy', file: 'happy', title: '任务完成', en: 'Task complete', state: 'attention', trigger: 'Stop', durs: [250,130,200,[180,5],400] },
-  { key: 'notification', file: 'notification', title: '需要你确认', en: 'Needs you', state: 'notification', trigger: 'PermissionRequest', durs: [[110,8]] },
-  { key: 'compacting', file: 'compacting', title: '上下文清理', en: 'Context compaction', state: 'sweeping', trigger: 'PreCompact', durs: [300,[140,4],220,140,200,[220,2],260] },
-  { key: 'carrying', file: 'carrying', title: '顶箱子', en: 'Carrying', state: 'carrying', trigger: 'WorktreeCreate', durs: [[170,8]] },
-  { key: 'sleeping', file: 'sleeping', title: '呼呼大睡', en: 'Sleeping', state: 'sleeping', trigger: '60 秒无操作', durs: [[320,6]] },
-  { key: 'waking', file: 'waking', title: '被吵醒', en: 'Waking up', state: 'waking', trigger: '睡眠中移动鼠标', durs: [400,150,[120,3],200,[90,3],500] },
-  { key: 'poke-left', file: 'poke-left', title: '戳左边', en: 'Poke (left)', state: 'reaction', trigger: '点击左半边', durs: [300,[120,2],200,[150,2],260,[200,2],400] },
-  { key: 'poke-right', file: 'poke-right', title: '戳右边', en: 'Poke (right)', state: 'reaction', trigger: '点击右半边', durs: [300,[120,2],200,[150,2],260,[200,2],400] },
-  { key: 'tickle', file: 'tickle', title: '被挠痒痒', en: 'Tickled', state: 'reaction', trigger: '连续点击 4 下', durs: [[110,10],200,400] },
-  { key: 'drag', file: 'drag', title: '被拎起来', en: 'Dragged', state: 'reaction', trigger: '按住拖动', durs: [[100,8]] },
-  { key: 'swim', file: 'swim', title: '游来游去', en: 'Swim', state: 'roam', trigger: '自由漫步 / 空闲', durs: [[160,8]] },
+const TERMINAL_META: Meta[] = [
+  ['idle', '待机', 'Idle', 'idle', '无任务'],
+  ['idle-look', '东张西望', 'Look around', 'idle (随机)', '待机随机'],
+  ['idle-spout', '开心喷水', 'Water spout', 'idle (随机)', '待机随机'],
+  ['thinking', '思考中', 'Thinking', 'thinking', 'UserPromptSubmit'],
+  ['typing', '敲代码', 'Typing', 'working', 'PreToolUse / PostToolUse'],
+  ['music', '戴耳机听歌', 'Headphones', 'juggling / working', '1 个子代理 / 2 个会话'],
+  ['conducting', '带领小鲸鱼分身', 'Sub-agent squad', 'juggling (2+)', 'SubagentStart ×2+'],
+  ['building', '安全帽顶砖', 'Building', 'working (3+)', '3 个以上会话'],
+  ['error', '出错啦', 'Error', 'error', 'PostToolUseFailure'],
+  ['happy', '任务完成', 'Task complete', 'attention', 'Stop'],
+  ['notification', '需要你确认', 'Needs you', 'notification', 'PermissionRequest'],
+  ['compacting', '上下文清理', 'Context compaction', 'sweeping', 'PreCompact'],
+  ['carrying', '顶箱子', 'Carrying', 'carrying', 'WorktreeCreate'],
+  ['sleeping', '呼呼大睡', 'Sleeping', 'sleeping', '60 秒无操作'],
+  ['waking', '被吵醒', 'Waking up', 'waking', '睡眠中移动鼠标'],
+  ['poke-left', '戳左边', 'Poke (left)', 'reaction', '点击左半边'],
+  ['poke-right', '戳右边', 'Poke (right)', 'reaction', '点击右半边'],
+  ['tickle', '被挠痒痒', 'Tickled', 'reaction', '连续点击 4 下'],
+  ['drag', '被拎起来', 'Dragged', 'reaction', '按住拖动'],
+  ['swim', '游来游去', 'Swim', 'roam', '自由漫步 / 空闲'],
 ]
 
-const GIRL_ANIMS: RawAnim[] = [
-  { key: 'idle', file: 'idle', title: '待机眨眼', en: 'Idle', state: 'idle', trigger: 'SessionStart，或者没有活的时候', durs: [700,[280,2],240,360,60,90,60,650,[280,2],240,420,60,80,60,140,60,80,60,800] },
-  { key: 'idle-look', file: 'idle-look', title: '东张西望', en: 'Look around', state: 'idle', trigger: '待机时随机播放', durs: [500,420,70,80,70,380,420,110,420,[140,3],400] },
-  { key: 'idle-spout', file: 'idle-spout', title: '开心喷水', en: 'Water spout', state: 'idle', trigger: 'idleAnimations，待机时随机播放', durs: [450,260,[110,2],130,150,[170,3],350,400] },
-  { key: 'thinking', file: 'thinking', title: '思考中', en: 'Thinking', state: 'thinking', trigger: 'UserPromptSubmit，收到提问', durs: [[220,2],[260,3],300,[170,6],90,110,[200,2],260] },
-  { key: 'typing', file: 'typing', title: '敲代码', en: 'Typing', state: 'working', trigger: 'PreToolUse，1 个会话在跑工具', durs: [150,170,150,170,150,170,210,150,170,150,170,150,170,210] },
-  { key: 'music', file: 'music', title: '戴耳机听歌', en: 'Headphones', state: 'working', trigger: 'PreToolUse，2 个会话同时跑工具', durs: [[150,8]] },
-  { key: 'conducting', file: 'conducting', title: '小鲸鱼分身', en: 'Sub-agents', state: 'juggling', trigger: 'SubagentStart，派出 2 个以上子代理', durs: [[150,12]] },
-  { key: 'building', file: 'building', title: '施工中', en: 'Building', state: 'working', trigger: 'PreToolUse，3 个以上会话同时跑工具', durs: [130,100,80,90,100,120,90,[130,2],100,80,90,100,120,90,[130,2],100,80,90,100,120,90,130] },
-  { key: 'error', file: 'error', title: '出错啦', en: 'Error', state: 'error', trigger: 'PostToolUseFailure，工具执行失败', durs: [90,[80,3],90,[200,2],160,200,300] },
-  { key: 'happy', file: 'happy', title: '任务完成', en: 'Task complete', state: 'attention', trigger: 'Stop / PostCompact，任务完成', durs: [200,[90,2],[100,4],[110,2],120,400] },
-  { key: 'notification', file: 'notification', title: '需要你确认', en: 'Needs you', state: 'notification', trigger: 'PermissionRequest，等你批准', durs: [[110,8]] },
-  { key: 'compacting', file: 'compacting', title: '上下文清理', en: 'Context compaction', state: 'sweeping', trigger: 'PreCompact，压缩上下文之前', durs: [300,[130,4],200,100,160,220,240] },
-  { key: 'carrying', file: 'carrying', title: '抱书搬运', en: 'Carrying', state: 'carrying', trigger: 'WorktreeCreate，新建工作区', durs: [[140,8]] },
-  { key: 'sleeping', file: 'sleeping', title: '呼呼大睡', en: 'Sleeping', state: 'sleeping', trigger: '鼠标 60 秒没动', durs: [[330,6]] },
-  { key: 'waking', file: 'waking', title: '被吵醒', en: 'Waking up', state: 'waking', trigger: '睡着时动鼠标或点她', durs: [420,110,120,[100,2],110,200,70,80,70,500] },
-  { key: 'poke-left', file: 'poke-left', title: '戳左边', en: 'Poke (left)', state: 'reaction', trigger: '单击她的左脸', durs: [300,110,[90,2],200,[140,2],240,[200,2],400] },
-  { key: 'poke-right', file: 'poke-right', title: '戳右边', en: 'Poke (right)', state: 'reaction', trigger: '单击她的右脸', durs: [300,110,[90,2],200,[140,2],240,[200,2],400] },
-  { key: 'tickle', file: 'tickle', title: '被挠痒痒', en: 'Tickled', state: 'reaction', trigger: '连续快速点击（1 秒内 3 下以上）', durs: [[90,12],200,400] },
-  { key: 'drag', file: 'drag', title: '被拎起来', en: 'Dragged', state: 'reaction', trigger: '按住她拖动', durs: [[90,10]] },
-  { key: 'swim', file: 'swim', title: '游来游去', en: 'Swim', state: 'idle · roam', trigger: '自由漫游', durs: [[150,8]] },
-  { key: 'smile-hearts', file: 'smile-hearts', title: '看着微笑冒爱心', en: 'Smile & hearts', state: 'bonus', trigger: '不绑定事件，可做完成时的随机彩蛋', durs: [[100,16]] },
-  { key: 'thumbs-up', file: 'thumbs-up', title: '看着举大拇指', en: 'Thumbs up', state: 'bonus', trigger: '不绑定事件，可做完成时的随机彩蛋', durs: [160,120,90,[80,2],100,[110,2],90,110,320,[100,2],400] },
+const GIRL_META: Meta[] = [
+  ['idle', '待机眨眼', 'Idle', 'idle', 'SessionStart，或者没有活的时候'],
+  ['idle-look', '东张西望', 'Look around', 'idle', '待机时随机播放'],
+  ['idle-spout', '开心喷水', 'Water spout', 'idle', 'idleAnimations，待机时随机播放'],
+  ['thinking', '思考中', 'Thinking', 'thinking', 'UserPromptSubmit，收到提问'],
+  ['typing', '敲代码', 'Typing', 'working', 'PreToolUse，1 个会话在跑工具'],
+  ['music', '戴耳机听歌', 'Headphones', 'working', 'PreToolUse，2 个会话同时跑工具'],
+  ['conducting', '小鲸鱼分身', 'Sub-agents', 'juggling', 'SubagentStart，派出 2 个以上子代理'],
+  ['building', '施工中', 'Building', 'working', 'PreToolUse，3 个以上会话同时跑工具'],
+  ['error', '出错啦', 'Error', 'error', 'PostToolUseFailure，工具执行失败'],
+  ['happy', '任务完成', 'Task complete', 'attention', 'Stop / PostCompact，任务完成'],
+  ['notification', '需要你确认', 'Needs you', 'notification', 'PermissionRequest，等你批准'],
+  ['compacting', '上下文清理', 'Context compaction', 'sweeping', 'PreCompact，压缩上下文之前'],
+  ['carrying', '抱书搬运', 'Carrying', 'carrying', 'WorktreeCreate，新建工作区'],
+  ['sleeping', '呼呼大睡', 'Sleeping', 'sleeping', '鼠标 60 秒没动'],
+  ['waking', '被吵醒', 'Waking up', 'waking', '睡着时动鼠标或点她'],
+  ['poke-left', '戳左边', 'Poke (left)', 'reaction', '单击她的左脸'],
+  ['poke-right', '戳右边', 'Poke (right)', 'reaction', '单击她的右脸'],
+  ['tickle', '被挠痒痒', 'Tickled', 'reaction', '连续快速点击（1 秒内 3 下以上）'],
+  ['drag', '被拎起来', 'Dragged', 'reaction', '按住她拖动'],
+  ['swim', '游来游去', 'Swim', 'idle · roam', '自由漫游'],
+  ['smile-hearts', '看着微笑冒爱心', 'Smile & hearts', 'bonus', '不绑定事件，可做完成时的随机彩蛋'],
+  ['thumbs-up', '看着举大拇指', 'Thumbs up', 'bonus', '不绑定事件，可做完成时的随机彩蛋'],
 ]
 
 /** 英文触发说明：三套素材共用一套 hook 映射，按动画 key 取 */
@@ -152,35 +134,28 @@ const TRIGGER_EN: Record<string, string> = {
   'thumbs-up': 'Bonus — not bound to an event',
 }
 
-function build(
-  id: PetId,
-  raw: RawAnim[],
-  meta: Omit<Pet, 'id' | 'anims' | 'byKey'>,
-): Pet {
-  const anims = raw.map((a): PetAnim => {
-    const durs = a.durs.flatMap((d) => (Array.isArray(d) ? Array<number>(d[1]).fill(d[0]) : [d]))
-    const starts: number[] = []
-    let total = 0
-    for (const d of durs) {
-      starts.push(total)
-      total += d
-    }
-    return {
-      key: a.key,
-      title: { zh: a.title, en: a.en },
-      state: a.state,
-      trigger: { zh: a.trigger, en: TRIGGER_EN[a.key] ?? a.trigger },
-      durs,
-      starts,
-      total,
-      sheet: `${id}/assets/sheets/${a.file}.png`,
-    }
-  })
-  return { id, ...meta, anims, byKey: Object.fromEntries(anims.map((a) => [a.key, a])) }
+type PetInfo = Omit<Pet, keyof SpriteGeometry | 'id' | 'anims' | 'byKey'>
+
+function build(sprites: SpriteSet, meta: Meta[], info: PetInfo): Pet {
+  const anims = meta.map(([key, title, en, state, trigger]): PetAnim => ({
+    ...sprites.anims[key],
+    title: { zh: title, en },
+    state,
+    trigger: { zh: trigger, en: TRIGGER_EN[key] ?? trigger },
+  }))
+  return {
+    id: sprites.id as PetId,
+    frame: sprites.frame,
+    grid: sprites.grid,
+    cols: sprites.cols,
+    ...info,
+    anims,
+    byKey: Object.fromEntries(anims.map((a) => [a.key, a])),
+  }
 }
 
 export const PETS: Pet[] = [
-  build('deepy-whale', DEEPY_ANIMS, {
+  build(DEEPY_WHALE, DEEPY_META, {
     name: { zh: 'Deepy 小鲸鱼', en: 'Deepy the whale' },
     short: { zh: 'Deepy', en: 'Deepy' },
     kind: { zh: '桌面版 · Clawd on Desk 主题包', en: 'Desktop · Clawd on Desk theme' },
@@ -195,12 +170,9 @@ export const PETS: Pet[] = [
       { zh: '通过 Clawd 官方主题校验', en: 'Passes Clawd theme validation' },
     ],
     more: { zh: '逐帧运动逻辑与主题包下载', en: 'Frame-by-frame breakdown & theme pack' },
-    frame: [260, 260],
-    grid: [52, 52],
-    cols: 8,
     surface: 'desk',
   }),
-  build('deepy-terminal', TERMINAL_ANIMS, {
+  build(DEEPY_TERMINAL, TERMINAL_META, {
     name: { zh: 'Deepy 终端版', en: 'Deepy, terminal edition' },
     short: { zh: 'Deepy · 终端', en: 'Deepy · TUI' },
     kind: { zh: '终端版 · 42 列 × 15 行', en: 'Terminal · 42 × 15 cells' },
@@ -215,12 +187,9 @@ export const PETS: Pet[] = [
       { zh: '附 Python / Node 终端播放器', en: 'Python & Node terminal players' },
     ],
     more: { zh: '逐帧拆解与终端素材包', en: 'Frame-by-frame breakdown & terminal kit' },
-    frame: [42, 30],
-    grid: [42, 30],
-    cols: 0,
     surface: 'term',
   }),
-  build('whale-girl-emoji', GIRL_ANIMS, {
+  build(WHALE_GIRL, GIRL_META, {
     name: { zh: '鲸娘像素表情集', en: 'Whale Girl pixel stickers' },
     short: { zh: '鲸娘', en: 'Whale Girl' },
     kind: { zh: '表情集 · 22 个循环', en: 'Sticker set · 22 loops' },
@@ -235,9 +204,6 @@ export const PETS: Pet[] = [
       { zh: '透明底 GIF', en: 'Transparent GIFs' },
     ],
     more: { zh: '逐帧拆解、分层骨骼与 GIF 下载', en: 'Frame breakdown, layer rig & GIF downloads' },
-    frame: [69, 66],
-    grid: [69, 66],
-    cols: 0,
     surface: 'desk',
   }),
 ]

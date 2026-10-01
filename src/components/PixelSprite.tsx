@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react'
-import type { Pet, PetAnim } from '../content/pets'
+import { useEffect, useRef, useState } from 'react'
+import type { SpriteAnim, SpriteGeometry } from '../content/sprites/types'
 
 /* ---------- 一条共享的 rAF：只有可见且在播的精灵订阅，全部停下后自动休眠 ---------- */
 
@@ -40,7 +40,7 @@ function loadSheet(url: string) {
   return p
 }
 
-function frameAt(anim: PetAnim, elapsed: number) {
+function frameAt(anim: SpriteAnim, elapsed: number) {
   const t = ((elapsed % anim.total) + anim.total) % anim.total
   const { starts } = anim
   let lo = 0
@@ -54,7 +54,7 @@ function frameAt(anim: PetAnim, elapsed: number) {
 }
 
 interface Want {
-  anim: PetAnim
+  anim: SpriteAnim
   since: number
   playing: boolean
 }
@@ -64,23 +64,25 @@ interface Want {
  * 每帧都在变的东西走 rAF，不经过 setState。
  */
 class SpriteController {
-  private shown: { anim: PetAnim; img: HTMLImageElement; since: number } | null = null
+  private shown: { anim: SpriteAnim; img: HTMLImageElement; since: number } | null = null
   private want: Want | null = null
   private visible = false
-  private drawn = { anim: null as PetAnim | null, frame: -1, w: 0 }
+  private drawn = { anim: null as SpriteAnim | null, frame: -1, w: 0 }
   private unsubscribe: (() => void) | undefined
   private ro: ResizeObserver
   private io: IntersectionObserver
   private box: HTMLElement
   private canvas: HTMLCanvasElement
-  private pet: Pet
+  private sprite: SpriteGeometry
   private base: string
+  private fill: boolean
 
-  constructor(box: HTMLElement, canvas: HTMLCanvasElement, pet: Pet, base: string) {
+  constructor(box: HTMLElement, canvas: HTMLCanvasElement, sprite: SpriteGeometry, base: string, fill: boolean) {
     this.box = box
     this.canvas = canvas
-    this.pet = pet
+    this.sprite = sprite
     this.base = base
+    this.fill = fill
     this.ro = new ResizeObserver(this.fit)
     this.ro.observe(box)
     this.io = new IntersectionObserver(
@@ -95,17 +97,21 @@ class SpriteController {
     this.fit()
   }
 
-  /** 画布内部分辨率 = 逻辑像素 × 整数设备像素：关掉平滑后每个像素都是等大的方块 */
+  /** 画布内部分辨率 = 逻辑像素 × 整数设备像素：关掉平滑后每个像素都是等大的方块。
+   *  fill 模式下外框尺寸由调用方定死（本身就是网格的整数倍），画布铺满它即可。 */
   private fit = () => {
-    const [gw, gh] = this.pet.grid
+    const [gw, gh] = this.sprite.grid
     const dpr = window.devicePixelRatio || 1
-    const k = Math.max(1, Math.floor(Math.min(this.box.clientWidth / gw, this.box.clientHeight / gh) * dpr))
+    const fitK = Math.min(this.box.clientWidth / gw, this.box.clientHeight / gh) * dpr
+    const k = Math.max(1, this.fill ? Math.round(fitK) : Math.floor(fitK))
     if (this.canvas.width !== gw * k) {
       this.canvas.width = gw * k
       this.canvas.height = gh * k
     }
-    this.canvas.style.width = `${(gw * k) / dpr}px`
-    this.canvas.style.height = `${(gh * k) / dpr}px`
+    if (!this.fill) {
+      this.canvas.style.width = `${(gw * k) / dpr}px`
+      this.canvas.style.height = `${(gh * k) / dpr}px`
+    }
     this.drawn.w = 0
     this.draw(performance.now())
   }
@@ -118,10 +124,12 @@ class SpriteController {
     if (drawn.anim === cur.anim && drawn.frame === frame && drawn.w === canvas.width) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
-    const [fw, fh] = this.pet.frame
-    const cols = this.pet.cols || cur.anim.durs.length
+    const [fw, fh] = this.sprite.frame
+    const cols = this.sprite.cols || cur.anim.durs.length
     ctx.imageSmoothingEnabled = false
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+    // 开始自己画了，服务端渲染时垫的那张首帧背景就撤掉（透明像素会透出它）
+    if (canvas.style.backgroundImage) canvas.style.backgroundImage = ''
     ctx.drawImage(cur.img, (frame % cols) * fw, Math.floor(frame / cols) * fh, fw, fh, 0, 0, canvas.width, canvas.height)
     this.drawn = { anim: cur.anim, frame, w: canvas.width }
   }
@@ -171,38 +179,58 @@ class SpriteController {
 }
 
 interface Props {
-  pet: Pet
-  anim: PetAnim
+  /** 精灵表几何：单帧尺寸、逻辑网格、列数（Pet 或 SpriteSet 都满足） */
+  sprite: SpriteGeometry
+  anim: SpriteAnim
   /** 精灵表所在目录（相对当前页面），例如 "./" 或 "../../pets/" */
   base: string
   /** performance.now() 时间戳：从这一刻起算第 0 帧；0 = 不关心相位 */
   since?: number
   /** false = 停在第 0 帧（reduced-motion 下的默认） */
   playing?: boolean
+  /** 外框尺寸由调用方定死（须是网格的整数倍），画布铺满外框 */
+  fill?: boolean
+  /** 首屏用：服务端渲染时就用 CSS 背景垫出第 0 帧，JS 没跑起来前也有画面 */
+  poster?: boolean
   label: string
   className?: string
 }
 
 /** 像素精灵播放器：读精灵表逐帧画到 canvas，帧时长取自原始导出数据。 */
-export default function PixelSprite({ pet, anim, base, since = 0, playing = true, label, className = '' }: Props) {
+export default function PixelSprite({
+  sprite,
+  anim,
+  base,
+  since = 0,
+  playing = true,
+  fill = false,
+  poster = false,
+  label,
+  className = '',
+}: Props) {
   const boxRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const ctl = useRef<SpriteController | null>(null)
+  // 垫底首帧只取挂载时的动画：之后换动画时样式值不变，React 就不会把背景重新写回去
+  const [first] = useState(anim)
 
   useEffect(() => {
-    const c = new SpriteController(boxRef.current!, canvasRef.current!, pet, base)
+    const c = new SpriteController(boxRef.current!, canvasRef.current!, sprite, base, fill)
     ctl.current = c
     return () => {
       c.destroy()
       ctl.current = null
     }
-  }, [pet, base])
+  }, [sprite, base, fill])
 
   useEffect(() => {
     ctl.current?.update({ anim, since, playing })
-  }, [pet, base, anim, since, playing])
+  }, [sprite, base, fill, anim, since, playing])
 
-  const [gw, gh] = pet.grid
+  const [gw, gh] = sprite.grid
+  const n = first.durs.length
+  const cols = sprite.cols || n
+  const rows = Math.ceil(n / cols)
   return (
     <div ref={boxRef} className={`grid place-items-center overflow-hidden ${className}`}>
       <canvas
@@ -211,8 +239,16 @@ export default function PixelSprite({ pet, anim, base, since = 0, playing = true
         height={gh}
         role="img"
         aria-label={label}
-        className="pixel-canvas block max-h-full max-w-full"
-        style={{ aspectRatio: `${gw} / ${gh}` }}
+        className={`pixel-canvas block ${fill ? 'h-full w-full' : 'max-h-full max-w-full'}`}
+        style={{
+          aspectRatio: `${gw} / ${gh}`,
+          ...(poster && {
+            backgroundImage: `url(${base}${first.sheet})`,
+            backgroundSize: `${cols * 100}% ${rows * 100}%`,
+            backgroundPosition: '0 0',
+            backgroundRepeat: 'no-repeat',
+          }),
+        }}
       />
     </div>
   )

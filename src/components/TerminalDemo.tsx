@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import PixelWhale from './PixelWhale'
+import PixelSprite from './PixelSprite'
+import { DEEPY_TERMINAL } from '../content/sprites/deepy-terminal'
+import { useReducedMotion } from '../lib/useReducedMotion'
 import { strings, useLang, useT } from '../i18n'
 
 type Stage = 'boot' | 'userbar' | 'thinking' | 'answering' | 'done'
@@ -35,13 +37,31 @@ function Wordmark() {
   )
 }
 
-function BootHeader() {
+/** 顶栏里的 Deepy 终端版（素材见 /pets/deepy-terminal/），动作跟着演示走 */
+interface DeepyState {
+  key: string
+  since: number
+}
+
+function BootHeader({ deepy }: { deepy: DeepyState }) {
   const lang = useLang()
   const t = useT()
+  const reduced = useReducedMotion()
   return (
     <div className="chunk-in px-4 pt-4 sm:px-5 sm:pt-5">
       <div className="flex items-start gap-4 sm:gap-7">
-        <PixelWhale float={false} className="mt-1 w-[76px] shrink-0 sm:w-[120px]" />
+        {/* 42×30 网格按 2× / 3× 整数倍放大，像素边缘才干净 */}
+        <PixelSprite
+          sprite={DEEPY_TERMINAL}
+          anim={DEEPY_TERMINAL.anims[deepy.key]}
+          since={deepy.since}
+          base={lang === 'en' ? '../pets/' : './pets/'}
+          playing={!reduced}
+          fill
+          poster
+          label={lang === 'en' ? 'Deepy, the dsh-TUI pixel whale' : 'dsh-TUI 像素小鲸鱼 Deepy'}
+          className="term-sprite mt-1 h-[60px] w-[84px] shrink-0 sm:h-[90px] sm:w-[126px]"
+        />
         <div className="min-w-0">
           <Wordmark />
           <div className="font-mono2 mt-3 space-y-0.5 text-[11px] leading-[1.7] sm:text-[12px]">
@@ -129,29 +149,45 @@ export default function TerminalDemo() {
   const [thinkS, setThinkS] = useState(0)
   const [lines, setLines] = useState(0)
   const [run, setRun] = useState(0)
+  const [deepy, setDeepy] = useState<DeepyState>({ key: 'idle', since: 0 })
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const timers: ReturnType<typeof setTimeout>[] = []
     const at = (ms: number, fn: () => void) => timers.push(setTimeout(fn, ms))
+    // 小鲸鱼跟着演示换动作：看你打字 → 思考 → 敲代码回答 → 完成庆祝一下 → 待机
+    const pose = (key: string) => setDeepy({ key, since: performance.now() })
+    const happyMs = DEEPY_TERMINAL.anims.happy.total
 
     at(0, () => {
       setStage('boot')
       setThinkS(0)
       setLines(0)
+      pose('idle')
     })
 
-    at(500, () => setStage('userbar'))
-    at(2000, () => setStage('thinking'))
+    at(500, () => {
+      setStage('userbar')
+      pose('idle-look')
+    })
+    at(2000, () => {
+      setStage('thinking')
+      pose('thinking')
+    })
     at(4700, () => {
       setStage('answering')
       setLines(1)
+      pose('typing')
     })
     at(5400, () => setLines(2))
     at(5900, () => setLines(3))
     at(6400, () => setLines(4))
     at(7000, () => setLines(5))
-    at(7700, () => setStage('done'))
+    at(7700, () => {
+      setStage('done')
+      pose('happy')
+    })
+    at(7700 + happyMs, () => pose('idle'))
     at(14000, () => setRun((r) => r + 1))
 
     return () => timers.forEach(clearTimeout)
@@ -192,7 +228,7 @@ export default function TerminalDemo() {
         </span>
       </div>
 
-      <BootHeader />
+      <BootHeader deepy={deepy} />
 
       {/* transcript */}
       <div

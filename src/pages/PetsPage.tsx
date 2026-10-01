@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type KeyboardEvent, type MouseEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react'
 import PixelWhale from '../components/PixelWhale'
 import PixelSprite from '../components/PixelSprite'
 import Icon from '../components/Icon'
 import { LangProvider, useLang, useT, type Lang } from '../i18n'
 import { toggleTheme } from '../lib/theme'
+import { useReducedMotion } from '../lib/useReducedMotion'
 import {
   PETS,
   PET_ANIM_COUNT,
@@ -28,18 +29,6 @@ function paths(lang: Lang) {
     /** 精灵表与完整拆解页都在中文路径 /pets/<id>/ 下 */
     pets: lang === 'en' ? '../../pets/' : './',
   }
-}
-
-/* ---------- prefers-reduced-motion：服务端快照恒为 false，水合后再按真实值重渲染 ---------- */
-
-const REDUCED = '(prefers-reduced-motion: reduce)'
-function subscribeReduced(cb: () => void) {
-  const mq = matchMedia(REDUCED)
-  mq.addEventListener('change', cb)
-  return () => mq.removeEventListener('change', cb)
-}
-function useReducedMotion() {
-  return useSyncExternalStore(subscribeReduced, () => matchMedia(REDUCED).matches, () => false)
 }
 
 /* ---------------------------------------------------------------- header */
@@ -268,13 +257,13 @@ function LiveDesk({ reduced }: { reduced: boolean }) {
                   className={`pet-surface pet-surface-${pet.surface} relative block aspect-square w-full cursor-pointer sm:aspect-[5/4]`}
                 >
                   <PixelSprite
-                    pet={pet}
+                    sprite={pet}
                     anim={anim}
                     since={slot.since}
                     base={base}
                     playing={playing}
                     label={`${t(pet.name)} · ${t(anim.title)}`}
-                    className={`absolute ${pet.surface === 'term' ? 'inset-x-[6%] inset-y-[16%] sm:inset-x-[10%] sm:inset-y-[18%]' : 'inset-[2%] sm:inset-[7%]'}`}
+                    className={`absolute ${pet.surface === 'term' ? 'term-sprite inset-x-[6%] inset-y-[16%] sm:inset-x-[10%] sm:inset-y-[18%]' : 'inset-[2%] sm:inset-[7%]'}`}
                   />
                   {pet.surface === 'term' && (
                     <span className="font-mono2 absolute bottom-1.5 left-2 text-[10px] text-[var(--term-faint)] sm:bottom-2 sm:left-3 sm:text-[11px]" aria-hidden="true">
@@ -354,12 +343,12 @@ function AnimCard({ pet, animKey, reduced, base }: { pet: Pet; animKey: string; 
     >
       <div className={`pet-surface pet-surface-${pet.surface} relative aspect-[5/4]`}>
         <PixelSprite
-          pet={pet}
+          sprite={pet}
           anim={anim}
           base={base}
           playing={!reduced || hover}
           label={`${t(pet.name)} · ${t(anim.title)}`}
-          className={`absolute ${pet.surface === 'term' ? 'inset-x-[9%] inset-y-[16%]' : 'inset-[6%]'}`}
+          className={`absolute ${pet.surface === 'term' ? 'term-sprite inset-x-[9%] inset-y-[16%]' : 'inset-[6%]'}`}
         />
       </div>
       <div className="flex flex-1 flex-col border-t border-line px-3 py-2.5">

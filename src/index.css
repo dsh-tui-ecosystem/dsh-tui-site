@@ -655,6 +655,18 @@ body {
 .pet-surface-term {
   background: var(--term-bg);
 }
+/* 终端版是照深色终端画的：白色的云、气泡、眼白放在亮色终端底上会消失。
+   亮色主题下给所有不透明像素描一圈 1px 的硬边，深色主题不需要。 */
+.term-sprite canvas {
+  filter: drop-shadow(1px 0 0 var(--term-sprite-edge)) drop-shadow(-1px 0 0 var(--term-sprite-edge))
+    drop-shadow(0 1px 0 var(--term-sprite-edge)) drop-shadow(0 -1px 0 var(--term-sprite-edge));
+}
+:root {
+  --term-sprite-edge: rgba(54, 83, 214, 0.32);
+}
+:root[data-theme='dark'] .term-sprite canvas {
+  filter: none;
+}
 
 /* kbd chip */
 .kbd {
