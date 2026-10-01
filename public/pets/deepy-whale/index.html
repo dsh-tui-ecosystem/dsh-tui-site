@@ -1,0 +1,956 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>try{var t=localStorage.getItem('dsh-tui-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Deepy 小鲸鱼</title>
+<meta name="description" content="Deepy：给 DeepSeek 用的像素小鲸鱼桌宠，Clawd on Desk 主题包。20 个弹性动图，每一帧的运动逻辑都能拆开看。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Silkscreen&family=ZCOOL+QingKe+HuangYou&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Silkscreen&family=ZCOOL+QingKe+HuangYou&display=swap"></noscript>
+<style>
+:root {
+  --paper: #F3F5FC;
+  --paper-2: #E9EDFA;
+  --card: #FFFFFF;
+  --ink: #142660;
+  --ink-2: #46538A;
+  --ink-3: #7A84AE;
+  --line: #D6DDF3;
+  --line-2: #C3CCEC;
+  --grid: rgba(78, 111, 255, 0.075);
+  --accent: #4E6FFF;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #E3E9FF;
+  --blush: #FF8FB8;
+  --playhead: #E89A00;
+  --playhead-soft: rgba(242, 162, 12, 0.16);
+  --series-1: #4E6FFF;
+  --series-2: #E0467A;
+  --stage-light: #F7F9FF;
+  --stage-dark: #0A0F26;
+  --stage-bg: #F7F9FF;
+  --check-a: #EEF1FA;
+  --check-b: #FFFFFF;
+  --good: #1E9B5B;
+  --shadow: 0 1px 0 rgba(20, 38, 96, 0.06), 0 8px 24px -12px rgba(20, 38, 96, 0.18);
+  --f-display: "ZCOOL QingKe HuangYou", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --f-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --f-pixel: "Silkscreen", "JetBrains Mono", ui-monospace, monospace;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #0D1330;
+    --paper-2: #121A3D;
+    --card: #151D42;
+    --ink: #E8ECFF;
+    --ink-2: #AEB8E2;
+    --ink-3: #7883B3;
+    --line: #253160;
+    --line-2: #33407A;
+    --grid: rgba(124, 149, 255, 0.07);
+    --accent: #7C95FF;
+    --accent-ink: #0D1330;
+    --accent-soft: #1F2A5E;
+    --playhead: #FFC43D;
+    --playhead-soft: rgba(255, 196, 61, 0.14);
+    --series-1: #6A86FF;
+    --series-2: #E85584;
+    --stage-light: #F7F9FF;
+    --stage-dark: #0A0F26;
+    --stage-bg: #0A0F26;
+    --check-a: #1A2350;
+    --check-b: #141C43;
+    --good: #3DDC84;
+    --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 10px 28px -14px rgba(0, 0, 0, 0.6);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0D1330;
+  --paper-2: #121A3D;
+  --card: #151D42;
+  --ink: #E8ECFF;
+  --ink-2: #AEB8E2;
+  --ink-3: #7883B3;
+  --line: #253160;
+  --line-2: #33407A;
+  --grid: rgba(124, 149, 255, 0.07);
+  --accent: #7C95FF;
+  --accent-ink: #0D1330;
+  --accent-soft: #1F2A5E;
+  --playhead: #FFC43D;
+  --playhead-soft: rgba(255, 196, 61, 0.14);
+  --series-1: #6A86FF;
+  --series-2: #E85584;
+  --stage-light: #F7F9FF;
+  --stage-dark: #0A0F26;
+  --stage-bg: #0A0F26;
+  --check-a: #1A2350;
+  --check-b: #141C43;
+  --good: #3DDC84;
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 10px 28px -14px rgba(0, 0, 0, 0.6);
+}
+
+* { box-sizing: border-box; }
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.65;
+  padding-inline: 20px;
+  padding-block: 0 48px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 72px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; text-wrap: balance; margin: 0; letter-spacing: 0.01em; }
+h1 { font-size: clamp(44px, 7vw, 76px); line-height: 1.02; }
+h2 { font-size: clamp(30px, 4vw, 40px); line-height: 1.1; }
+h3 { font-size: 22px; line-height: 1.2; }
+p { margin: 0; }
+.px { font-family: var(--f-pixel); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--ink-3); }
+.lede { color: var(--ink-2); max-width: 62ch; font-size: 16px; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--playhead); outline-offset: 2px; }
+button, select, input { font: inherit; color: inherit; }
+
+/* ---------- top bar ---------- */
+.top {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding-block: 18px; border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand canvas { width: 40px; height: 40px; image-rendering: pixelated; }
+.brand b { font-family: var(--f-display); font-weight: 400; font-size: 22px; }
+.top nav { display: flex; gap: 18px; flex-wrap: wrap; }
+.top nav a { color: var(--ink-2); text-decoration: none; font-size: 14px; }
+.top nav a:hover { color: var(--accent); }
+
+/* ---------- hero ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.hero-copy { display: flex; flex-direction: column; gap: 20px; padding-top: 12px; }
+.hero-copy .kicker { color: var(--accent); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; }
+.fact {
+  display: inline-flex; align-items: baseline; gap: 6px; padding: 6px 10px;
+  border: 1px solid var(--line-2); border-radius: 3px; background: var(--card); font-size: 13px; color: var(--ink-2);
+}
+.fact b { font-family: var(--f-mono); font-weight: 600; color: var(--ink); }
+.fact.ok b { color: var(--good); }
+
+.desk {
+  background: var(--card); border: 1px solid var(--line-2); border-radius: 6px; box-shadow: var(--shadow);
+  overflow: hidden; display: flex; flex-direction: column;
+}
+.desk-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--paper-2);
+}
+.dots { display: flex; gap: 6px; }
+.dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-2); display: block; }
+.desk-stage {
+  position: relative; display: grid; place-items: center; padding: 8px;
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 15px 15px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 15px 15px,
+    var(--stage-bg);
+}
+#stage { width: 390px; max-width: 100%; aspect-ratio: 1; image-rendering: pixelated; cursor: pointer; }
+.stage-state {
+  position: absolute; left: 12px; top: 10px; display: flex; flex-direction: column; gap: 2px;
+}
+.stage-state .px { color: var(--ink-3); }
+.stage-state b { font-family: var(--f-display); font-weight: 400; font-size: 20px; color: var(--ink); }
+.stage-hint { position: absolute; right: 12px; bottom: 10px; font-size: 12px; color: var(--ink-3); }
+.log {
+  font-family: var(--f-mono); font-size: 12px; line-height: 1.7; padding: 10px 14px; margin: 0;
+  border-top: 1px solid var(--line); background: var(--paper-2); color: var(--ink-2); min-height: 92px;
+  white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.log .ev { color: var(--accent); }
+.log .st { color: var(--ink); font-weight: 600; }
+.events { display: flex; flex-direction: column; gap: 10px; }
+.events-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.ev-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }
+.ev-btn {
+  text-align: left; padding: 8px 10px; border-radius: 4px; border: 1px solid var(--line-2);
+  background: var(--card); cursor: pointer; display: flex; flex-direction: column; gap: 1px; min-width: 0;
+  transition: border-color .15s, background .15s;
+}
+.ev-btn:hover { border-color: var(--accent); }
+.ev-btn[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.ev-btn .code { font-family: var(--f-mono); font-size: 11px; color: var(--ink-3); overflow-wrap: anywhere; }
+.ev-btn .name { font-size: 13px; font-weight: 500; }
+.toggle {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); cursor: pointer;
+  border: 1px solid var(--line-2); border-radius: 999px; padding: 4px 12px; background: var(--card);
+}
+.toggle[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
+.toggle .led { width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); }
+.toggle[aria-pressed="true"] .led { background: var(--accent); }
+
+/* ---------- section heads ---------- */
+.sec-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.sec-head .px { color: var(--accent); }
+
+/* ---------- gallery ---------- */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(208px, 1fr)); gap: 14px; }
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
+  display: flex; flex-direction: column; cursor: pointer; text-align: left; padding: 0;
+  transition: border-color .15s, transform .15s;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card[aria-current="true"] { border-color: var(--playhead); box-shadow: 0 0 0 2px var(--playhead-soft); }
+.card .gif {
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 12px 12px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 12px 12px,
+    var(--paper);
+  border-bottom: 1px solid var(--line); display: grid; place-items: center;
+}
+.card img { width: 100%; max-width: 260px; aspect-ratio: 1; image-rendering: pixelated; display: block; }
+.card .meta { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px; }
+.card .row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.card .title { font-weight: 700; font-size: 15px; }
+.card .fr { font-family: var(--f-mono); font-size: 11px; color: var(--ink-3); white-space: nowrap; }
+.chip {
+  display: inline-block; font-family: var(--f-mono); font-size: 11px; padding: 1px 6px; border-radius: 3px;
+  background: var(--accent-soft); color: var(--accent); white-space: nowrap;
+}
+.card .trig { font-size: 12px; color: var(--ink-2); line-height: 1.5; }
+
+/* ---------- inspector ---------- */
+.inspector {
+  background: var(--card); border: 1px solid var(--line-2); border-radius: 8px; box-shadow: var(--shadow);
+  display: flex; flex-direction: column;
+}
+.insp-top {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 18px; border-bottom: 1px solid var(--line);
+}
+.insp-top label { font-size: 13px; color: var(--ink-2); }
+select {
+  border: 1px solid var(--line-2); background: var(--paper); border-radius: 4px; padding: 6px 10px; font-size: 14px;
+  max-width: 100%; min-width: 0;
+}
+#pick { flex: 0 1 320px; }
+#slot { white-space: normal; }
+.insp-main { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 0; }
+.insp-left { padding: 18px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; }
+.insp-right { padding: 18px 20px; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.viewer { position: relative; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+#view { width: 100%; aspect-ratio: 1; display: block; image-rendering: pixelated; }
+.frame-badge {
+  position: absolute; left: 8px; top: 8px; font-family: var(--f-pixel); font-size: 12px; letter-spacing: .06em;
+  background: var(--ink); color: var(--paper); padding: 2px 7px; border-radius: 2px;
+}
+.transport { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.tbtn {
+  border: 1px solid var(--line-2); background: var(--paper); border-radius: 4px; height: 34px; min-width: 38px;
+  padding: 0 10px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px;
+}
+.tbtn:hover { border-color: var(--accent); }
+.tbtn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); min-width: 72px; }
+#scrub { width: 100%; accent-color: var(--playhead); }
+.opts { display: flex; flex-wrap: wrap; gap: 6px; }
+.opts .toggle { font-size: 12px; padding: 3px 10px; }
+.summary { color: var(--ink-2); max-width: 70ch; }
+.readout { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.cell { border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px; background: var(--paper); min-width: 0; }
+.cell .k { font-family: var(--f-mono); font-size: 11px; color: var(--ink-3); }
+.cell .v { font-family: var(--f-mono); font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.now { display: flex; flex-direction: column; gap: 4px; }
+.now .phase { font-family: var(--f-display); font-size: 26px; line-height: 1.1; }
+.now .note { font-family: var(--f-mono); font-size: 12px; color: var(--ink-2); overflow-wrap: anywhere; }
+.block-title { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.block-title h3 { font-size: 18px; }
+.phases { display: flex; flex-direction: column; gap: 6px; }
+.ph {
+  display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 4px 12px; align-items: center;
+  padding: 6px 8px; border-radius: 4px; border: 1px solid transparent;
+}
+.ph.on { background: var(--playhead-soft); border-color: var(--playhead); }
+.ph .nm { font-weight: 700; font-size: 13px; }
+.ph .track { position: relative; height: 10px; background: var(--paper-2); border-radius: 2px; }
+.ph .bar { position: absolute; top: 0; bottom: 0; background: var(--accent); border-radius: 2px; opacity: .85; }
+.ph .cursor { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--playhead); }
+.ph .fx { grid-column: 2; font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-2); overflow-wrap: anywhere; line-height: 1.5; }
+
+.charts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.chart { border: 1px solid var(--line); border-radius: 4px; padding: 10px 10px 4px; background: var(--paper); min-width: 0; position: relative; }
+.chart h4 { margin: 0 0 2px; font-size: 13px; font-weight: 700; }
+.legend { display: flex; gap: 12px; font-size: 11px; color: var(--ink-2); font-family: var(--f-mono); }
+.legend i { display: inline-block; width: 14px; height: 2px; vertical-align: middle; margin-right: 4px; border-radius: 1px; }
+.chart svg { width: 100%; height: auto; display: block; overflow: visible; cursor: crosshair; }
+.chart .tick { font-family: var(--f-mono); font-size: 9px; fill: var(--ink-3); }
+.chart .gridl { stroke: var(--line); stroke-width: 1; }
+.chart .base { stroke: var(--line-2); stroke-width: 1; }
+.chart .dl { font-family: var(--f-mono); font-size: 9.5px; fill: var(--ink-2); }
+.tip {
+  position: absolute; pointer-events: none; background: var(--ink); color: var(--paper); font-family: var(--f-mono);
+  font-size: 11px; padding: 4px 7px; border-radius: 3px; white-space: nowrap; transform: translate(-50%, -110%);
+}
+
+.strip-wrap { border-top: 1px solid var(--line); padding: 14px 18px; display: flex; flex-direction: column; gap: 10px; }
+.strip { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+.thumb {
+  flex: 0 0 auto; width: 66px; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  border: 1px solid var(--line); border-radius: 3px; padding: 2px; background: var(--paper); cursor: pointer;
+}
+.thumb .im { width: 60px; height: 60px; background-repeat: no-repeat; image-rendering: pixelated; }
+.thumb span { font-family: var(--f-mono); font-size: 10px; color: var(--ink-3); }
+.thumb.key span { color: var(--accent); font-weight: 600; }
+.thumb.on { border-color: var(--playhead); box-shadow: 0 0 0 2px var(--playhead-soft); }
+
+.sheet-wrap { border-top: 1px solid var(--line); padding: 14px 18px 18px; }
+.xsheet { max-height: 360px; overflow: auto; border: 1px solid var(--line); border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+th, td { padding: 5px 10px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { position: sticky; top: 0; background: var(--paper-2); font-weight: 700; font-size: 12px; color: var(--ink-2); z-index: 1; }
+td.num, th.num { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+td.note { white-space: normal; min-width: 220px; font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-2); }
+tr.on td { background: var(--playhead-soft); }
+tr { cursor: pointer; }
+.keymark { color: var(--accent); font-size: 12px; }
+
+/* ---------- theme pack ---------- */
+.pack { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.tbl { background: var(--card); border: 1px solid var(--line); border-radius: 6px; overflow-x: auto; }
+.tbl td code, .tbl td .mono { font-size: 12px; }
+.tbl td { white-space: normal; vertical-align: top; }
+.side { display: flex; flex-direction: column; gap: 16px; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+.panel ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+pre.code {
+  margin: 0; font-family: var(--f-mono); font-size: 12px; line-height: 1.6; background: var(--paper-2); color: var(--ink);
+  border-radius: 4px; padding: 10px 12px; overflow-x: auto;
+}
+pre.code .ok { color: var(--good); font-weight: 600; }
+.path { font-family: var(--f-mono); font-size: 12px; overflow-wrap: anywhere; background: var(--paper-2); padding: 1px 5px; border-radius: 3px; }
+
+footer { border-top: 1px solid var(--line); padding-top: 18px; color: var(--ink-3); font-size: 13px; display: flex; flex-direction: column; gap: 6px; }
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; gap: 28px; }
+  .insp-main { grid-template-columns: 1fr; }
+  .insp-left { border-right: 0; border-bottom: 1px solid var(--line); }
+  .charts { grid-template-columns: 1fr; }
+  .pack { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  body { padding-inline: 16px; }
+  .readout { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ph { grid-template-columns: 72px minmax(0, 1fr); }
+  .top nav { display: none; }
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .card .meta { padding: 8px 10px 10px; }
+  .card .row { flex-direction: column; gap: 0; }
+  .ev-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .ev-btn { transition: none; }
+  .card:hover { transform: none; }
+}
+</style>
+
+</head>
+<body>
+<script>const ASSET = {"idle": {"gif": "assets/gifs/idle.gif", "sheet": "assets/sheets/idle.png"}, "idle-look": {"gif": "assets/gifs/idle-look.gif", "sheet": "assets/sheets/idle-look.png"}, "idle-spout": {"gif": "assets/gifs/idle-spout.gif", "sheet": "assets/sheets/idle-spout.png"}, "thinking": {"gif": "assets/gifs/thinking.gif", "sheet": "assets/sheets/thinking.png"}, "typing": {"gif": "assets/gifs/typing.gif", "sheet": "assets/sheets/typing.png"}, "music": {"gif": "assets/gifs/music.gif", "sheet": "assets/sheets/music.png"}, "conducting": {"gif": "assets/gifs/conducting.gif", "sheet": "assets/sheets/conducting.png"}, "building": {"gif": "assets/gifs/building.gif", "sheet": "assets/sheets/building.png"}, "error": {"gif": "assets/gifs/error.gif", "sheet": "assets/sheets/error.png"}, "happy": {"gif": "assets/gifs/happy.gif", "sheet": "assets/sheets/happy.png"}, "notification": {"gif": "assets/gifs/notification.gif", "sheet": "assets/sheets/notification.png"}, "compacting": {"gif": "assets/gifs/compacting.gif", "sheet": "assets/sheets/compacting.png"}, "carrying": {"gif": "assets/gifs/carrying.gif", "sheet": "assets/sheets/carrying.png"}, "sleeping": {"gif": "assets/gifs/sleeping.gif", "sheet": "assets/sheets/sleeping.png"}, "waking": {"gif": "assets/gifs/waking.gif", "sheet": "assets/sheets/waking.png"}, "react-left": {"gif": "assets/gifs/react-left.gif", "sheet": "assets/sheets/react-left.png"}, "react-right": {"gif": "assets/gifs/react-right.gif", "sheet": "assets/sheets/react-right.png"}, "react-double": {"gif": "assets/gifs/react-double.gif", "sheet": "assets/sheets/react-double.png"}, "react-drag": {"gif": "assets/gifs/react-drag.gif", "sheet": "assets/sheets/react-drag.png"}, "roam-hop": {"gif": "assets/gifs/roam-hop.gif", "sheet": "assets/sheets/roam-hop.png"}};</script>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><canvas id="logo" width="80" height="80" aria-hidden="true"></canvas><b>Deepy</b><span class="px muted">whale on desk</span></div>
+    <nav aria-label="页面导航">
+      <a href="../" class="pets-back">← 全部桌宠</a><a href="#gallery">动图一览</a>
+      <a href="#inspector">逐帧运动逻辑</a>
+      <a href="#pack">主题包</a>
+    </nav>
+  </header>
+
+  <section class="hero" aria-label="实时演示">
+    <div class="hero-copy">
+      <span class="px kicker">Clawd on Desk theme · pixel whale</span>
+      <h1>Deepy 小鲸鱼</h1>
+      <p class="lede">给 DeepSeek 驱动的编程 agent 做的像素桌宠，对标 Clawd 的小螃蟹。它盯着你的 agent 干活：思考时冒云，跑工具时趴在键盘后写代码，开子代理就用尾巴打拍子带一群小分身干活，出错冒烟，完成了就空翻庆祝。所有动作都用 squash &amp; stretch 和阻尼弹簧做出 Q 弹手感。</p>
+      <div class="facts">
+        <span class="fact"><b>20</b>个动图</span>
+        <span class="fact"><b>52×52</b>像素网格</span>
+        <span class="fact"><b>20</b>fps · 50ms/帧</span>
+        <span class="fact"><b>1</b>个眼神跟随 SVG</span>
+        <span class="fact ok"><b>✓</b>通过 Clawd 官方主题校验</span>
+      </div>
+      <div class="events">
+        <div class="events-head">
+          <h3>模拟 agent 事件</h3>
+          <button class="toggle" id="autoBtn" aria-pressed="true" type="button"><span class="led"></span>自动演示</button>
+        </div>
+        <div class="ev-grid" id="evGrid"></div>
+      </div>
+    </div>
+    <div class="desk">
+      <div class="desk-bar"><div class="dots"><i></i><i></i><i></i></div><span class="px muted">desktop · hook listener</span></div>
+      <div class="desk-stage">
+        <canvas id="stage" width="780" height="780" aria-label="小鲸鱼当前状态动画"></canvas>
+        <div class="stage-state"><span class="px" id="stageState">state: idle</span><b id="stageTitle">待机呼吸</b></div>
+        <span class="stage-hint">点一下小鲸鱼试试</span>
+      </div>
+      <pre class="log" id="log" aria-live="polite"></pre>
+    </div>
+  </section>
+
+  <section id="gallery" aria-labelledby="g-h">
+    <div class="sec-head">
+      <span class="px">Gallery · 20 gifs</span>
+      <h2 id="g-h">动图一览</h2>
+      <p class="lede">每张卡片都是导出的 GIF 原件，260×260，透明背景，阴影做了棋盘抖动，放在深色或浅色桌面上都能看清。点卡片会在下方逐帧打开。</p>
+    </div>
+    <div class="gallery" id="gal"></div>
+  </section>
+
+  <section id="inspector" aria-labelledby="i-h">
+    <div class="sec-head">
+      <span class="px">Dope sheet · frame by frame</span>
+      <h2 id="i-h">逐帧运动逻辑</h2>
+      <p class="lede">动画师的摄影表：左边一帧一帧地播放和拖动，右边看这一帧处在哪个动作阶段、用了什么缓动公式、形变和位移是多少。下面的曲线和表格把整段动画的每一帧都列了出来。</p>
+    </div>
+    <div class="inspector">
+      <div class="insp-top">
+        <label for="pick">动画</label>
+        <select id="pick"></select>
+        <span class="chip" id="slot"></span>
+        <span class="muted mono" id="dur" style="font-size:12px"></span>
+      </div>
+      <div class="insp-main">
+        <div class="insp-left">
+          <div class="viewer">
+            <canvas id="view" width="520" height="520" aria-label="当前帧"></canvas>
+            <span class="frame-badge" id="fbadge">F 0 / 0</span>
+          </div>
+          <input type="range" id="scrub" min="0" max="1" value="0" step="1" aria-label="拖动选择帧">
+          <div class="transport">
+            <button class="tbtn" id="prev" type="button" aria-label="上一帧">◀︎</button>
+            <button class="tbtn primary" id="play" type="button">暂停</button>
+            <button class="tbtn" id="next" type="button" aria-label="下一帧">▶︎</button>
+            <label for="speed" class="muted" style="font-size:13px;margin-left:6px">速度</label>
+            <select id="speed">
+              <option value="0.25">0.25×</option>
+              <option value="0.5">0.5×</option>
+              <option value="1" selected>1×</option>
+            </select>
+          </div>
+          <div class="opts">
+            <button class="toggle" id="optOnion" aria-pressed="false" type="button"><span class="led"></span>洋葱皮</button>
+            <button class="toggle" id="optGrid" aria-pressed="false" type="button"><span class="led"></span>像素网格</button>
+            <button class="toggle" id="optBg" aria-pressed="false" type="button"><span class="led"></span>换背景</button>
+          </div>
+          <p class="muted" style="font-size:12px">快捷键：空格播放/暂停，← → 逐帧。</p>
+        </div>
+        <div class="insp-right">
+          <p class="summary" id="summary"></p>
+          <div class="now">
+            <span class="px muted" id="nowT">frame 0 · t = 0.00s</span>
+            <span class="phase" id="nowPhase"></span>
+            <span class="note" id="nowNote"></span>
+          </div>
+          <div class="readout" id="readout"></div>
+          <div>
+            <div class="block-title"><h3>动作阶段与缓动</h3><span class="muted" style="font-size:12px">高亮 = 当前帧所在阶段</span></div>
+            <div class="phases" id="phases"></div>
+          </div>
+          <div>
+            <div class="block-title"><h3>运动曲线</h3><span class="muted" style="font-size:12px">悬停看数值，点击跳到那一帧</span></div>
+            <div class="charts" id="charts"></div>
+          </div>
+        </div>
+      </div>
+      <div class="strip-wrap">
+        <div class="block-title"><h3>胶片条</h3><span class="muted" style="font-size:12px">蓝色帧号 = 关键帧（动作阶段切换处）</span></div>
+        <div class="strip" id="strip"></div>
+      </div>
+      <div class="sheet-wrap">
+        <div class="block-title"><h3>摄影表</h3><span class="muted" style="font-size:12px">sx / sy 为横纵缩放，dy / dx 为位移（逻辑像素），rot 为旋转角度</span></div>
+        <div class="xsheet" id="xsheet"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pack" aria-labelledby="p-h">
+    <div class="sec-head">
+      <span class="px">Theme pack · deepy-whale</span>
+      <h2 id="p-h">Clawd on Desk 主题包</h2>
+      <p class="lede">按照 Clawd 的主题规范制作：<span class="path">theme.json</span> 加 <span class="path">assets/</span>。待机用带 <span class="path">#eyes-js</span> / <span class="path">#body-js</span> / <span class="path">#shadow-js</span> 的 SVG，眼睛会跟着鼠标转；其余状态用带真半透明阴影的 APNG。</p>
+    </div>
+    <div class="pack">
+      <div class="tbl" id="mapTbl"></div>
+      <div class="side">
+        <div class="panel">
+          <h3>下载</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <a class="tbtn primary" style="text-decoration:none" href="assets/deepy-whale-theme.zip" download="deepy-whale-theme.zip">主题包 · 1.0 MB</a>
+            <a class="tbtn" style="text-decoration:none;color:var(--ink)" href="assets/deepy-whale-gifs.zip" download="deepy-whale-gifs.zip">全部 GIF · 1.5 MB</a>
+          </div>
+          <p class="muted" style="font-size:13px">单个动图也可以在上面的卡片上右键另存。</p>
+        </div>
+        <div class="panel">
+          <h3>安装</h3>
+          <ol>
+            <li>解压 <span class="path">deepy-whale-theme.zip</span>，得到顶层带 <span class="path">theme.json</span> 的 <span class="path">deepy-whale/</span> 文件夹。</li>
+            <li>放进 Clawd 的用户主题目录：<br>
+              Windows <span class="path">%APPDATA%/clawd-on-desk/themes/</span><br>
+              macOS <span class="path">~/Library/Application Support/clawd-on-desk/themes/</span><br>
+              Linux <span class="path">~/.config/clawd-on-desk/themes/</span></li>
+            <li>打开 <b>Settings… → Theme</b>，选择 Deepy 小鲸鱼。列表里没有的话重启一次 Clawd。</li>
+            <li>想让它跟着 DeepSeek 动，可以在 <b>Settings… → Agents</b> 里接入 DeepSeek Harness（实验性集成）。</li>
+          </ol>
+        </div>
+        <div class="panel">
+          <h3>官方校验结果</h3>
+          <pre class="code">$ node scripts/validate-theme.js deepy-whale
+[Schema]        ✓ 12 项
+[Eye Tracking]  ✓ idle-follow.svg 含 #eyes-js
+[Assets]        ✓ 21 个引用文件全部存在
+[Capabilities]  idleMode: tracked · sleepMode: direct
+<span class="ok">All checks passed!</span> Theme "Deepy 小鲸鱼" is ready.</pre>
+          <p class="muted" style="font-size:13px">另外用 Clawd 自己的 <span class="path">theme-loader</span> 严格模式加载过一遍，SVG 过安全清洗后内容没有任何改动，CSS 呼吸、眨眼、摆尾动画都保留。</p>
+        </div>
+        <div class="panel">
+          <h3>暂未支持</h3>
+          <p class="muted" style="font-size:13px">Mini 模式（需要再画 8 个 mini 状态）、头饰/嘴部配件目录。睡眠用 <span class="path">direct</span> 模式：60 秒无操作直接睡，被鼠标吵醒时播放惊醒动画。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Deepy 是非官方的粉丝桌宠主题，与 DeepSeek、Anthropic 以及 Clawd on Desk 项目均无隶属关系。像素造型来自你提供的小鲸鱼原图，逐帧程序化绘制。</span>
+    <span class="mono" style="font-size:12px">52×52 logical px · 5× export · 20 fps · APNG + GIF + SVG</span>
+  </footer>
+</div>
+
+<script type="application/json" id="data">[{"key":"idle","file":"idle","title":"待机呼吸","en":"Idle breathing","state":"idle","trigger":"无任务 / SessionStart","seconds":2.4,"n":48,"frame_ms":50,"summary":"正弦呼吸：身体随呼气压扁、吸气拉长（体积守恒 sx≈1/sy），尾巴慵懒摆一次，末尾眨眼。","theme_slot":"idle (GIF 版，主题里用 idle-follow.svg 追踪眼神)","phases":[{"t0":0.0,"t1":2.4,"name":"呼吸","formula":"sy = 1 + 0.035·sin(2πt/2.4)，sx = 1 − 0.03·sin(…)"},{"t0":0.55,"t1":1.35,"name":"摆尾","formula":"尾巴姿态 rest→tail1→tail2→tail1→rest"},{"t0":1.9,"t1":2.1,"name":"眨眼","formula":"open → half → closed → half → open"}],"sheet":{"cols":8,"rows":6,"w":260,"h":260},"frames":[{"phase":"呼吸","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":0,"t":0.0},{"phase":"呼吸","sx":0.996,"sy":1.005,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":1,"t":0.05},{"phase":"呼吸","sx":0.992,"sy":1.009,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":2,"t":0.1},{"phase":"呼吸","sx":0.989,"sy":1.013,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":3,"t":0.15},{"phase":"呼吸","sx":0.985,"sy":1.018,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":4,"t":0.2},{"phase":"呼吸","sx":0.982,"sy":1.021,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":5,"t":0.25},{"phase":"呼吸","sx":0.979,"sy":1.025,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":6,"t":0.3},{"phase":"呼吸","sx":0.976,"sy":1.028,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":7,"t":0.35},{"phase":"呼吸","sx":0.974,"sy":1.03,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":8,"t":0.4},{"phase":"呼吸","sx":0.972,"sy":1.032,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":9,"t":0.45},{"phase":"呼吸","sx":0.971,"sy":1.034,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":10,"t":0.5},{"phase":"呼吸","sx":0.97,"sy":1.035,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":11,"t":0.55},{"phase":"摆尾","sx":0.97,"sy":1.035,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail1 眼睛=open","i":12,"t":0.6},{"phase":"摆尾","sx":0.97,"sy":1.035,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail1 眼睛=open","i":13,"t":0.65},{"phase":"摆尾","sx":0.971,"sy":1.034,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail1 眼睛=open","i":14,"t":0.7},{"phase":"摆尾","sx":0.972,"sy":1.032,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail1 眼睛=open","i":15,"t":0.75},{"phase":"摆尾","sx":0.974,"sy":1.03,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail2 眼睛=open","i":16,"t":0.8},{"phase":"摆尾","sx":0.976,"sy":1.028,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail2 眼睛=open","i":17,"t":0.85},{"phase":"摆尾","sx":0.979,"sy":1.025,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail2 眼睛=open","i":18,"t":0.9},{"phase":"摆尾","sx":0.982,"sy":1.021,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail2 眼睛=open","i":19,"t":0.95},{"phase":"摆尾","sx":0.985,"sy":1.018,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail2 眼睛=open","i":20,"t":1.0},{"phase":"摆尾","sx":0.989,"sy":1.013,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail2 眼睛=open","i":21,"t":1.05},{"phase":"摆尾","sx":0.992,"sy":1.009,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail2 眼睛=open","i":22,"t":1.1},{"phase":"摆尾","sx":0.996,"sy":1.005,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail2 眼睛=open","i":23,"t":1.15},{"phase":"摆尾","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail1 眼睛=open","i":24,"t":1.2},{"phase":"摆尾","sx":1.004,"sy":0.995,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail1 眼睛=open","i":25,"t":1.25},{"phase":"摆尾","sx":1.008,"sy":0.991,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=tail1 眼睛=open","i":26,"t":1.3},{"phase":"呼吸","sx":1.011,"sy":0.987,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":27,"t":1.35},{"phase":"呼吸","sx":1.015,"sy":0.983,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":28,"t":1.4},{"phase":"呼吸","sx":1.018,"sy":0.979,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":29,"t":1.45},{"phase":"呼吸","sx":1.021,"sy":0.975,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":30,"t":1.5},{"phase":"呼吸","sx":1.024,"sy":0.972,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":31,"t":1.55},{"phase":"呼吸","sx":1.026,"sy":0.97,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":32,"t":1.6},{"phase":"呼吸","sx":1.028,"sy":0.968,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":33,"t":1.65},{"phase":"呼吸","sx":1.029,"sy":0.966,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":34,"t":1.7},{"phase":"呼吸","sx":1.03,"sy":0.965,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":35,"t":1.75},{"phase":"呼吸","sx":1.03,"sy":0.965,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":36,"t":1.8},{"phase":"呼吸","sx":1.03,"sy":0.965,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":37,"t":1.85},{"phase":"眨眼","sx":1.029,"sy":0.966,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=half","i":38,"t":1.9},{"phase":"眨眼","sx":1.028,"sy":0.968,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=closed","i":39,"t":1.95},{"phase":"眨眼","sx":1.026,"sy":0.97,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=closed","i":40,"t":2.0},{"phase":"眨眼","sx":1.024,"sy":0.972,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=half","i":41,"t":2.05},{"phase":"呼吸","sx":1.021,"sy":0.975,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":42,"t":2.1},{"phase":"呼吸","sx":1.018,"sy":0.979,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":43,"t":2.15},{"phase":"呼吸","sx":1.015,"sy":0.983,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":44,"t":2.2},{"phase":"呼吸","sx":1.011,"sy":0.987,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":45,"t":2.25},{"phase":"呼吸","sx":1.008,"sy":0.991,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":46,"t":2.3},{"phase":"呼吸","sx":1.004,"sy":0.995,"dy":0.0,"dx":0.0,"rot":0.0,"note":"尾巴=rest 眼睛=open","i":47,"t":2.35}]},{"key":"idle-look","file":"idle-look","title":"东张西望","en":"Look around","state":"idle (随机)","trigger":"idleAnimations 随机池","seconds":3.4,"n":68,"frame_ms":50,"summary":"眼睛先左看再右看，身体跟着带弹簧回弹的倾斜；好奇心冒出“?”后原地小跳一下。","theme_slot":"idleAnimations","phases":[{"t0":0.0,"t1":0.5,"name":"向左看","formula":"rot → −4°，spring(f=2.2, ζ-damp=5) 带过冲"},{"t0":1.1,"t1":1.6,"name":"向右看","formula":"rot → +4°，眼睛右移 1px，同样的弹簧"},{"t0":1.7,"t1":2.1,"name":"冒问号","formula":"“?” scale = outElastic(t)"},{"t0":2.2,"t1":2.9,"name":"好奇小跳","formula":"蓄力压扁 0.12 → 起跳拉伸 → 抛物线 3px → 落地挤压回弹"},{"t0":2.9,"t1":3.4,"name":"回正","formula":"眼睛回中，问号 alpha 淡出"}],"sheet":{"cols":8,"rows":9,"w":260,"h":260},"frames":[{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-0.0,"note":"look=(0, 0)","i":0,"t":0.0},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-1.5,"note":"look=(0, 0)","i":1,"t":0.05},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-3.3,"note":"look=(-1, 0)","i":2,"t":0.1},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-4.6,"note":"look=(-1, 0)","i":3,"t":0.15},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-5.2,"note":"look=(-1, 0)","i":4,"t":0.2},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-5.1,"note":"look=(-1, 0)","i":5,"t":0.25},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-4.7,"note":"look=(-1, 0)","i":6,"t":0.3},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-4.2,"note":"look=(-1, 0)","i":7,"t":0.35},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-3.8,"note":"look=(-1, 0)","i":8,"t":0.4},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-3.7,"note":"look=(-1, 0)","i":9,"t":0.45},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-3.7,"note":"look=(-1, 0)","i":10,"t":0.5},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-3.8,"note":"look=(-1, 0)","i":11,"t":0.55},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-3.9,"note":"look=(-1, 0)","i":12,"t":0.6},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-4.0,"note":"look=(-1, 0)","i":13,"t":0.65},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-4.1,"note":"look=(-1, 0)","i":14,"t":0.7},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-4.1,"note":"look=(-1, 0)","i":15,"t":0.75},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-4.1,"note":"look=(-1, 0)","i":16,"t":0.8},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-4.0,"note":"look=(-1, 0)","i":17,"t":0.85},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-4.0,"note":"look=(-1, 0)","i":18,"t":0.9},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-4.0,"note":"look=(-1, 0)","i":19,"t":0.95},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-4.0,"note":"look=(-1, 0)","i":20,"t":1.0},{"phase":"向左看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-4.0,"note":"look=(-1, 0)","i":21,"t":1.05},{"phase":"向右看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-4.0,"note":"look=(1, 0)","i":22,"t":1.1},{"phase":"向右看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-1.0,"note":"look=(1, 0)","i":23,"t":1.15},{"phase":"向右看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":2.5,"note":"look=(1, 0)","i":24,"t":1.2},{"phase":"向右看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":5.2,"note":"look=(1, 0)","i":25,"t":1.25},{"phase":"向右看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":6.4,"note":"look=(1, 0)","i":26,"t":1.3},{"phase":"向右看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":6.3,"note":"look=(1, 0)","i":27,"t":1.35},{"phase":"向右看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":5.4,"note":"look=(1, 0)","i":28,"t":1.4},{"phase":"向右看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":4.4,"note":"look=(1, 0)","i":29,"t":1.45},{"phase":"向右看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":3.7,"note":"look=(1, 0)","i":30,"t":1.5},{"phase":"向右看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":3.3,"note":"look=(1, 0)","i":31,"t":1.55},{"phase":"向右看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":3.3,"note":"look=(1, 0)","i":32,"t":1.6},{"phase":"向右看","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":3.6,"note":"look=(1, 0)","i":33,"t":1.65},{"phase":"冒问号","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":3.9,"note":"look=(1, 0)","i":34,"t":1.7},{"phase":"冒问号","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":4.1,"note":"look=(1, 0)","i":35,"t":1.75},{"phase":"冒问号","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":4.2,"note":"look=(1, 0)","i":36,"t":1.8},{"phase":"冒问号","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":4.2,"note":"look=(1, 0)","i":37,"t":1.85},{"phase":"冒问号","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":4.1,"note":"look=(1, 0)","i":38,"t":1.9},{"phase":"冒问号","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":39,"t":1.95},{"phase":"冒问号","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":40,"t":2.0},{"phase":"冒问号","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":3.9,"note":"look=(1, 0)","i":41,"t":2.05},{"phase":"冒问号","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":3.9,"note":"look=(1, 0)","i":42,"t":2.1},{"phase":"冒问号","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":43,"t":2.15},{"phase":"好奇小跳","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":44,"t":2.2},{"phase":"好奇小跳","sx":1.025,"sy":0.97,"dy":0.0,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":45,"t":2.25},{"phase":"好奇小跳","sx":1.076,"sy":0.91,"dy":0.0,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":46,"t":2.3},{"phase":"好奇小跳","sx":0.898,"sy":1.12,"dy":-0.0,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":47,"t":2.35},{"phase":"好奇小跳","sx":0.915,"sy":1.1,"dy":-1.78,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":48,"t":2.4},{"phase":"好奇小跳","sx":0.932,"sy":1.08,"dy":-2.84,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":49,"t":2.45},{"phase":"好奇小跳","sx":0.949,"sy":1.06,"dy":-3.2,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":50,"t":2.5},{"phase":"好奇小跳","sx":0.966,"sy":1.04,"dy":-2.84,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":51,"t":2.55},{"phase":"好奇小跳","sx":0.983,"sy":1.02,"dy":-1.78,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":52,"t":2.6},{"phase":"好奇小跳","sx":1.119,"sy":0.86,"dy":0.0,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":53,"t":2.65},{"phase":"好奇小跳","sx":1.052,"sy":0.939,"dy":0.0,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":54,"t":2.7},{"phase":"好奇小跳","sx":0.98,"sy":1.024,"dy":0.0,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":55,"t":2.75},{"phase":"好奇小跳","sx":0.954,"sy":1.054,"dy":0.0,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":56,"t":2.8},{"phase":"好奇小跳","sx":0.971,"sy":1.034,"dy":0.0,"dx":0.0,"rot":4.0,"note":"look=(1, 0)","i":57,"t":2.85},{"phase":"回正","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":4.0,"note":"look=(0, 0)","i":58,"t":2.9},{"phase":"回正","sx":1.016,"sy":0.981,"dy":0.0,"dx":0.0,"rot":2.7,"note":"look=(0, 0)","i":59,"t":2.95},{"phase":"回正","sx":1.014,"sy":0.984,"dy":0.0,"dx":0.0,"rot":1.7,"note":"look=(0, 0)","i":60,"t":3.0},{"phase":"回正","sx":1.003,"sy":0.996,"dy":0.0,"dx":0.0,"rot":1.0,"note":"look=(0, 0)","i":61,"t":3.05},{"phase":"回正","sx":0.995,"sy":1.006,"dy":0.0,"dx":0.0,"rot":0.5,"note":"look=(0, 0)","i":62,"t":3.1},{"phase":"回正","sx":0.994,"sy":1.007,"dy":0.0,"dx":0.0,"rot":0.2,"note":"look=(0, 0)","i":63,"t":3.15},{"phase":"回正","sx":0.997,"sy":1.003,"dy":0.0,"dx":0.0,"rot":0.1,"note":"look=(0, 0)","i":64,"t":3.2},{"phase":"回正","sx":1.001,"sy":0.999,"dy":0.0,"dx":0.0,"rot":0.0,"note":"look=(0, 0)","i":65,"t":3.25},{"phase":"回正","sx":1.002,"sy":0.997,"dy":0.0,"dx":0.0,"rot":0.0,"note":"look=(0, 0)","i":66,"t":3.3},{"phase":"回正","sx":1.001,"sy":0.998,"dy":0.0,"dx":0.0,"rot":0.0,"note":"look=(0, 0)","i":67,"t":3.35}]},{"key":"idle-spout","file":"idle-spout","title":"开心喷水","en":"Water spout","state":"idle (随机)","trigger":"idleAnimations 随机池","seconds":3.2,"n":64,"frame_ms":50,"summary":"鲸鱼专属动作：吸气蓄力把身体压扁，释放瞬间拉长并从喷气孔喷出水柱，水花沿抛物线四散落地。","theme_slot":"idleAnimations","phases":[{"t0":0.0,"t1":0.55,"name":"吸气蓄力","formula":"amt: 0 → −0.16，inQuad；眼睛 >< 用力"},{"t0":0.55,"t1":0.7,"name":"释放拉伸","formula":"amt → +0.18，outBack(s=1.9)"},{"t0":0.55,"t1":1.1,"name":"水柱冲高","formula":"高度 = 7·outElastic(t)，顶部分叉成水花"},{"t0":0.7,"t1":1.8,"name":"回弹","formula":"impact(): −A·e^(−5.5t)·cos(2π·3.2t) 阻尼振荡"},{"t0":1.8,"t1":2.3,"name":"水柱回落","formula":"高度 × (1 − inQuad)"},{"t0":0.7,"t1":2.8,"name":"水花","formula":"粒子：vx≈±4~9 px/s, vy≈−7~−11 px/s, g=42 px/s²，落地溅起"}],"sheet":{"cols":8,"rows":8,"w":260,"h":260},"frames":[{"phase":"吸气蓄力","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":0,"t":0.0},{"phase":"吸气蓄力","sx":1.001,"sy":0.999,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":1,"t":0.05},{"phase":"吸气蓄力","sx":1.004,"sy":0.995,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":2,"t":0.1},{"phase":"吸气蓄力","sx":1.01,"sy":0.988,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":3,"t":0.15},{"phase":"吸气蓄力","sx":1.018,"sy":0.979,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":4,"t":0.2},{"phase":"吸气蓄力","sx":1.028,"sy":0.967,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":5,"t":0.25},{"phase":"吸气蓄力","sx":1.04,"sy":0.952,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":6,"t":0.3},{"phase":"吸气蓄力","sx":1.055,"sy":0.935,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":7,"t":0.35},{"phase":"吸气蓄力","sx":1.072,"sy":0.915,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":8,"t":0.4},{"phase":"吸气蓄力","sx":1.091,"sy":0.893,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":9,"t":0.45},{"phase":"吸气蓄力","sx":1.112,"sy":0.868,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":10,"t":0.5},{"phase":"释放拉伸","sx":1.136,"sy":0.84,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":11,"t":0.55},{"phase":"释放拉伸","sx":0.881,"sy":1.14,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=6.5px","i":12,"t":0.6},{"phase":"释放拉伸","sx":0.832,"sy":1.198,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=8.9px","i":13,"t":0.65},{"phase":"回弹+水花","sx":0.847,"sy":1.18,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.4px","i":14,"t":0.7},{"phase":"回弹+水花","sx":0.938,"sy":1.073,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=6.5px","i":15,"t":0.75},{"phase":"回弹+水花","sx":1.038,"sy":0.956,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=6.8px","i":16,"t":0.8},{"phase":"回弹+水花","sx":1.067,"sy":0.922,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.1px","i":17,"t":0.85},{"phase":"回弹+水花","sx":1.032,"sy":0.962,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.1px","i":18,"t":0.9},{"phase":"回弹+水花","sx":0.988,"sy":1.014,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.0px","i":19,"t":0.95},{"phase":"回弹+水花","sx":0.972,"sy":1.033,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.0px","i":20,"t":1.0},{"phase":"回弹+水花","sx":0.984,"sy":1.019,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.0px","i":21,"t":1.05},{"phase":"回弹+水花","sx":1.003,"sy":0.996,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.0px","i":22,"t":1.1},{"phase":"回弹+水花","sx":1.012,"sy":0.986,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.4px","i":23,"t":1.15},{"phase":"回弹+水花","sx":1.008,"sy":0.991,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.5px","i":24,"t":1.2},{"phase":"回弹+水花","sx":1.0,"sy":1.001,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.2px","i":25,"t":1.25},{"phase":"回弹+水花","sx":0.995,"sy":1.006,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=6.8px","i":26,"t":1.3},{"phase":"回弹+水花","sx":0.996,"sy":1.004,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=6.5px","i":27,"t":1.35},{"phase":"回弹+水花","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=6.6px","i":28,"t":1.4},{"phase":"回弹+水花","sx":1.002,"sy":0.998,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.0px","i":29,"t":1.45},{"phase":"回弹+水花","sx":1.002,"sy":0.998,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.4px","i":30,"t":1.5},{"phase":"回弹+水花","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.5px","i":31,"t":1.55},{"phase":"回弹+水花","sx":0.999,"sy":1.001,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.2px","i":32,"t":1.6},{"phase":"回弹+水花","sx":0.999,"sy":1.001,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=6.7px","i":33,"t":1.65},{"phase":"回弹+水花","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=6.5px","i":34,"t":1.7},{"phase":"回弹+水花","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=6.6px","i":35,"t":1.75},{"phase":"水柱回落","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.0px","i":36,"t":1.8},{"phase":"水柱回落","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.4px","i":37,"t":1.85},{"phase":"水柱回落","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=7.2px","i":38,"t":1.9},{"phase":"水柱回落","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=6.6px","i":39,"t":1.95},{"phase":"水柱回落","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=5.7px","i":40,"t":2.0},{"phase":"水柱回落","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=4.8px","i":41,"t":2.05},{"phase":"水柱回落","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=4.2px","i":42,"t":2.1},{"phase":"水柱回落","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=3.6px","i":43,"t":2.15},{"phase":"水柱回落","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=2.7px","i":44,"t":2.2},{"phase":"水柱回落","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=1.4px","i":45,"t":2.25},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":46,"t":2.3},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":47,"t":2.35},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":48,"t":2.4},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":49,"t":2.45},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":50,"t":2.5},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":51,"t":2.55},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":52,"t":2.6},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":53,"t":2.65},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":54,"t":2.7},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":55,"t":2.75},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":56,"t":2.8},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":57,"t":2.85},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":58,"t":2.9},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":59,"t":2.95},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":60,"t":3.0},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":61,"t":3.05},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":62,"t":3.1},{"phase":"满足","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"水柱高度=0.0px","i":63,"t":3.15}]},{"key":"thinking","file":"thinking","title":"思考中","en":"Thinking","state":"thinking","trigger":"UserPromptSubmit（刚收到提问）","seconds":2.4,"n":48,"frame_ms":50,"summary":"头顶思考云缓慢漂浮，三个点依次弹出再做波浪跳；鲸鱼抬眼望云、身体左右轻摇，偶尔灵光一闪。","theme_slot":"states.thinking","phases":[{"t0":0.0,"t1":2.4,"name":"身体轻摇","formula":"rot = 3°·sin(2πt/2.4)，呼吸 sy = 1+0.025·sin"},{"t0":0.0,"t1":0.9,"name":"点点弹出","formula":"第 k 个点在 0.2k s 出现，scale = outBack"},{"t0":0.9,"t1":1.9,"name":"波浪跳","formula":"点 k 的 dy = −1.5·max(0, sin(2π(t−0.12k)/0.5))"},{"t0":1.95,"t1":2.4,"name":"灵光一闪","formula":"灯泡 scale 弹出 + 光芒闪烁，然后淡出"},{"t0":0.0,"t1":2.4,"name":"云朵漂浮","formula":"cloud dy = 0.8·sin(2πt/1.2)"}],"sheet":{"cols":8,"rows":6,"w":260,"h":260},"frames":[{"phase":"点点弹出","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"眼睛向左上看 look=(-1,-1)","i":0,"t":0.0},{"phase":"点点弹出","sx":0.995,"sy":1.006,"dy":0,"dx":0.0,"rot":0.4,"note":"眼睛向左上看 look=(-1,-1)","i":1,"t":0.05},{"phase":"点点弹出","sx":0.99,"sy":1.012,"dy":0,"dx":0.0,"rot":0.8,"note":"眼睛向左上看 look=(-1,-1)","i":2,"t":0.1},{"phase":"点点弹出","sx":0.986,"sy":1.018,"dy":0,"dx":0.0,"rot":1.1,"note":"眼睛向左上看 look=(-1,-1)","i":3,"t":0.15},{"phase":"点点弹出","sx":0.983,"sy":1.022,"dy":0,"dx":0.0,"rot":1.5,"note":"眼睛向左上看 look=(-1,-1)","i":4,"t":0.2},{"phase":"点点弹出","sx":0.981,"sy":1.024,"dy":0,"dx":0.0,"rot":1.8,"note":"眼睛向左上看 look=(-1,-1)","i":5,"t":0.25},{"phase":"点点弹出","sx":0.98,"sy":1.025,"dy":0,"dx":0.0,"rot":2.1,"note":"眼睛向左上看 look=(-1,-1)","i":6,"t":0.3},{"phase":"点点弹出","sx":0.981,"sy":1.024,"dy":0,"dx":0.0,"rot":2.4,"note":"眼睛向左上看 look=(-1,-1)","i":7,"t":0.35},{"phase":"点点弹出","sx":0.983,"sy":1.022,"dy":0,"dx":0.0,"rot":2.6,"note":"眼睛向左上看 look=(-1,-1)","i":8,"t":0.4},{"phase":"点点弹出","sx":0.986,"sy":1.018,"dy":0,"dx":0.0,"rot":2.8,"note":"眼睛向左上看 look=(-1,-1)","i":9,"t":0.45},{"phase":"点点弹出","sx":0.99,"sy":1.012,"dy":0,"dx":0.0,"rot":2.9,"note":"眼睛向左上看 look=(-1,-1)","i":10,"t":0.5},{"phase":"点点弹出","sx":0.995,"sy":1.006,"dy":0,"dx":0.0,"rot":3.0,"note":"眼睛向左上看 look=(-1,-1)","i":11,"t":0.55},{"phase":"点点弹出","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":3.0,"note":"眼睛向左上看 look=(-1,-1)","i":12,"t":0.6},{"phase":"点点弹出","sx":1.005,"sy":0.994,"dy":0,"dx":0.0,"rot":3.0,"note":"眼睛向左上看 look=(-1,-1)","i":13,"t":0.65},{"phase":"点点弹出","sx":1.01,"sy":0.988,"dy":0,"dx":0.0,"rot":2.9,"note":"眼睛向左上看 look=(-1,-1)","i":14,"t":0.7},{"phase":"点点弹出","sx":1.014,"sy":0.982,"dy":0,"dx":0.0,"rot":2.8,"note":"眼睛向左上看 look=(-1,-1)","i":15,"t":0.75},{"phase":"点点弹出","sx":1.017,"sy":0.978,"dy":0,"dx":0.0,"rot":2.6,"note":"眼睛向左上看 look=(-1,-1)","i":16,"t":0.8},{"phase":"点点弹出","sx":1.019,"sy":0.976,"dy":0,"dx":0.0,"rot":2.4,"note":"眼睛向左上看 look=(-1,-1)","i":17,"t":0.85},{"phase":"波浪跳","sx":1.02,"sy":0.975,"dy":0,"dx":0.0,"rot":2.1,"note":"眼睛向左上看 look=(-1,-1)","i":18,"t":0.9},{"phase":"波浪跳","sx":1.019,"sy":0.976,"dy":0,"dx":0.0,"rot":1.8,"note":"眼睛向左上看 look=(-1,-1)","i":19,"t":0.95},{"phase":"波浪跳","sx":1.017,"sy":0.978,"dy":0,"dx":0.0,"rot":1.5,"note":"眼睛向左上看 look=(-1,-1)","i":20,"t":1.0},{"phase":"波浪跳","sx":1.014,"sy":0.982,"dy":0,"dx":0.0,"rot":1.1,"note":"眼睛向左上看 look=(-1,-1)","i":21,"t":1.05},{"phase":"波浪跳","sx":1.01,"sy":0.988,"dy":0,"dx":0.0,"rot":0.8,"note":"眼睛向左上看 look=(-1,-1)","i":22,"t":1.1},{"phase":"波浪跳","sx":1.005,"sy":0.994,"dy":0,"dx":0.0,"rot":0.4,"note":"眼睛向左上看 look=(-1,-1)","i":23,"t":1.15},{"phase":"波浪跳","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"眼睛向左上看 look=(-1,-1)","i":24,"t":1.2},{"phase":"波浪跳","sx":0.995,"sy":1.006,"dy":0,"dx":0.0,"rot":-0.4,"note":"眼睛向左上看 look=(-1,-1)","i":25,"t":1.25},{"phase":"波浪跳","sx":0.99,"sy":1.012,"dy":0,"dx":0.0,"rot":-0.8,"note":"眼睛向左上看 look=(-1,-1)","i":26,"t":1.3},{"phase":"波浪跳","sx":0.986,"sy":1.018,"dy":0,"dx":0.0,"rot":-1.1,"note":"眼睛向左上看 look=(-1,-1)","i":27,"t":1.35},{"phase":"波浪跳","sx":0.983,"sy":1.022,"dy":0,"dx":0.0,"rot":-1.5,"note":"眼睛向左上看 look=(-1,-1)","i":28,"t":1.4},{"phase":"波浪跳","sx":0.981,"sy":1.024,"dy":0,"dx":0.0,"rot":-1.8,"note":"眼睛向左上看 look=(-1,-1)","i":29,"t":1.45},{"phase":"波浪跳","sx":0.98,"sy":1.025,"dy":0,"dx":0.0,"rot":-2.1,"note":"眼睛向左上看 look=(-1,-1)","i":30,"t":1.5},{"phase":"波浪跳","sx":0.981,"sy":1.024,"dy":0,"dx":0.0,"rot":-2.4,"note":"眼睛向左上看 look=(-1,-1)","i":31,"t":1.55},{"phase":"波浪跳","sx":0.983,"sy":1.022,"dy":0,"dx":0.0,"rot":-2.6,"note":"眼睛向左上看 look=(-1,-1)","i":32,"t":1.6},{"phase":"波浪跳","sx":0.986,"sy":1.018,"dy":0,"dx":0.0,"rot":-2.8,"note":"眼睛向左上看 look=(-1,-1)","i":33,"t":1.65},{"phase":"波浪跳","sx":0.99,"sy":1.012,"dy":0,"dx":0.0,"rot":-2.9,"note":"眼睛向左上看 look=(-1,-1)","i":34,"t":1.7},{"phase":"波浪跳","sx":0.995,"sy":1.006,"dy":0,"dx":0.0,"rot":-3.0,"note":"眼睛向左上看 look=(-1,-1)","i":35,"t":1.75},{"phase":"波浪跳","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-3.0,"note":"眼睛向左上看 look=(-1,-1)","i":36,"t":1.8},{"phase":"波浪跳","sx":1.005,"sy":0.994,"dy":0,"dx":0.0,"rot":-3.0,"note":"眼睛向左上看 look=(-1,-1)","i":37,"t":1.85},{"phase":"波浪跳","sx":1.01,"sy":0.987,"dy":0,"dx":0.0,"rot":-2.9,"note":"眼睛向左上看 look=(-1,-1)","i":38,"t":1.9},{"phase":"灵光一闪","sx":1.014,"sy":0.982,"dy":0,"dx":0.0,"rot":-2.8,"note":"眼睛向左上看 look=(-1,-1)","i":39,"t":1.95},{"phase":"灵光一闪","sx":1.017,"sy":0.978,"dy":0,"dx":0.0,"rot":-2.6,"note":"眼睛向左上看 look=(-1,-1)","i":40,"t":2.0},{"phase":"灵光一闪","sx":1.019,"sy":0.976,"dy":0,"dx":0.0,"rot":-2.4,"note":"眼睛向左上看 look=(-1,-1)","i":41,"t":2.05},{"phase":"灵光一闪","sx":1.02,"sy":0.975,"dy":0,"dx":0.0,"rot":-2.1,"note":"眼睛向左上看 look=(-1,-1)","i":42,"t":2.1},{"phase":"灵光一闪","sx":1.019,"sy":0.976,"dy":0,"dx":0.0,"rot":-1.8,"note":"眼睛向左上看 look=(-1,-1)","i":43,"t":2.15},{"phase":"灵光一闪","sx":1.017,"sy":0.978,"dy":0,"dx":0.0,"rot":-1.5,"note":"眼睛向左上看 look=(-1,-1)","i":44,"t":2.2},{"phase":"灵光一闪","sx":1.014,"sy":0.982,"dy":0,"dx":0.0,"rot":-1.1,"note":"眼睛向左上看 look=(-1,-1)","i":45,"t":2.25},{"phase":"灵光一闪","sx":1.01,"sy":0.987,"dy":0,"dx":0.0,"rot":-0.8,"note":"眼睛向左上看 look=(-1,-1)","i":46,"t":2.3},{"phase":"灵光一闪","sx":1.005,"sy":0.994,"dy":0,"dx":0.0,"rot":-0.4,"note":"眼睛向左上看 look=(-1,-1)","i":47,"t":2.35}]},{"key":"typing","file":"typing","title":"敲代码","en":"Typing","state":"working","trigger":"PreToolUse / PostToolUse（1 个会话在跑工具）","seconds":2.4,"n":48,"frame_ms":50,"summary":"趴在键盘后面慢悠悠地写代码：跟着打字节奏轻轻点头，显示器里代码一行行长出来；写完一段就开心地小跳一下，屏幕亮出 ✓。","theme_slot":"states.working + workingTiers[1]","phases":[{"t0":0.0,"t1":2.4,"name":"点头打字","formula":"每 0.4s 一次：amt = −0.03·sin(π·u)，rot = −1.5° − 1.5°·sin(π·u)"},{"t0":0.0,"t1":2.4,"name":"代码生长","formula":"每 0.4s 换一行，最后一行逐字长出；键盘上的高亮键每 0.2s 跳一格"},{"t0":1.2,"t1":1.3,"name":"眨眼","formula":"half → closed → half"},{"t0":1.6,"t1":1.95,"name":"写完小跳","formula":"dy = −1.8·jumpArc(u)，眯眼 ^^ + 脸红，屏幕 ✓ outBack 弹出"},{"t0":1.95,"t1":2.4,"name":"落地回稳","formula":"impact(A=0.08, f=3, damp=7)"},{"t0":0.0,"t1":2.4,"name":"代码符号飘出","formula":"{ } < / > ; 每 0.4s 冒出一个，1.6s 内上升淡出"}],"sheet":{"cols":8,"rows":6,"w":260,"h":260},"frames":[{"phase":"点头打字","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-1.5,"note":"高亮键 #3 尾巴=rest","i":0,"t":0.0},{"phase":"点头打字","sx":1.01,"sy":0.989,"dy":0.0,"dx":0.0,"rot":-2.1,"note":"高亮键 #3 尾巴=rest","i":1,"t":0.05},{"phase":"点头打字","sx":1.018,"sy":0.979,"dy":0.0,"dx":0.0,"rot":-2.6,"note":"高亮键 #3 尾巴=rest","i":2,"t":0.1},{"phase":"点头打字","sx":1.024,"sy":0.972,"dy":0.0,"dx":0.0,"rot":-2.9,"note":"高亮键 #3 尾巴=rest","i":3,"t":0.15},{"phase":"点头打字","sx":1.026,"sy":0.97,"dy":0.0,"dx":0.0,"rot":-3.0,"note":"高亮键 #5 尾巴=tail1","i":4,"t":0.2},{"phase":"点头打字","sx":1.024,"sy":0.972,"dy":0.0,"dx":0.0,"rot":-2.9,"note":"高亮键 #5 尾巴=tail1","i":5,"t":0.25},{"phase":"点头打字","sx":1.018,"sy":0.979,"dy":0.0,"dx":0.0,"rot":-2.6,"note":"高亮键 #5 尾巴=tail1","i":6,"t":0.3},{"phase":"点头打字","sx":1.01,"sy":0.989,"dy":0.0,"dx":0.0,"rot":-2.1,"note":"高亮键 #5 尾巴=tail1","i":7,"t":0.35},{"phase":"点头打字","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-1.5,"note":"高亮键 #1 尾巴=tail2","i":8,"t":0.4},{"phase":"点头打字","sx":1.01,"sy":0.989,"dy":0.0,"dx":0.0,"rot":-2.1,"note":"高亮键 #1 尾巴=tail2","i":9,"t":0.45},{"phase":"点头打字","sx":1.018,"sy":0.979,"dy":0.0,"dx":0.0,"rot":-2.6,"note":"高亮键 #1 尾巴=tail2","i":10,"t":0.5},{"phase":"点头打字","sx":1.024,"sy":0.972,"dy":0.0,"dx":0.0,"rot":-2.9,"note":"高亮键 #1 尾巴=tail2","i":11,"t":0.55},{"phase":"点头打字","sx":1.026,"sy":0.97,"dy":0.0,"dx":0.0,"rot":-3.0,"note":"高亮键 #1 尾巴=tail1","i":12,"t":0.6},{"phase":"点头打字","sx":1.024,"sy":0.972,"dy":0.0,"dx":0.0,"rot":-2.9,"note":"高亮键 #6 尾巴=tail1","i":13,"t":0.65},{"phase":"点头打字","sx":1.018,"sy":0.979,"dy":0.0,"dx":0.0,"rot":-2.6,"note":"高亮键 #6 尾巴=tail1","i":14,"t":0.7},{"phase":"点头打字","sx":1.01,"sy":0.989,"dy":0.0,"dx":0.0,"rot":-2.1,"note":"高亮键 #6 尾巴=tail1","i":15,"t":0.75},{"phase":"点头打字","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-1.5,"note":"高亮键 #2 尾巴=rest","i":16,"t":0.8},{"phase":"点头打字","sx":1.01,"sy":0.989,"dy":0.0,"dx":0.0,"rot":-2.1,"note":"高亮键 #2 尾巴=rest","i":17,"t":0.85},{"phase":"点头打字","sx":1.018,"sy":0.979,"dy":0.0,"dx":0.0,"rot":-2.6,"note":"高亮键 #2 尾巴=rest","i":18,"t":0.9},{"phase":"点头打字","sx":1.024,"sy":0.972,"dy":0.0,"dx":0.0,"rot":-2.9,"note":"高亮键 #2 尾巴=rest","i":19,"t":0.95},{"phase":"点头打字","sx":1.026,"sy":0.97,"dy":0.0,"dx":0.0,"rot":-3.0,"note":"高亮键 #4 尾巴=tail1","i":20,"t":1.0},{"phase":"点头打字","sx":1.024,"sy":0.972,"dy":0.0,"dx":0.0,"rot":-2.9,"note":"高亮键 #4 尾巴=tail1","i":21,"t":1.05},{"phase":"点头打字","sx":1.018,"sy":0.979,"dy":0.0,"dx":0.0,"rot":-2.6,"note":"高亮键 #4 尾巴=tail1","i":22,"t":1.1},{"phase":"点头打字","sx":1.01,"sy":0.989,"dy":0.0,"dx":0.0,"rot":-2.1,"note":"高亮键 #4 尾巴=tail1","i":23,"t":1.15},{"phase":"点头打字","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-1.5,"note":"高亮键 #4 尾巴=tail2","i":24,"t":1.2},{"phase":"点头打字","sx":1.01,"sy":0.989,"dy":0.0,"dx":0.0,"rot":-2.1,"note":"高亮键 #0 尾巴=tail2","i":25,"t":1.25},{"phase":"点头打字","sx":1.018,"sy":0.979,"dy":0.0,"dx":0.0,"rot":-2.6,"note":"高亮键 #0 尾巴=tail2","i":26,"t":1.3},{"phase":"点头打字","sx":1.024,"sy":0.972,"dy":0.0,"dx":0.0,"rot":-2.9,"note":"高亮键 #0 尾巴=tail2","i":27,"t":1.35},{"phase":"点头打字","sx":1.026,"sy":0.97,"dy":0.0,"dx":0.0,"rot":-3.0,"note":"高亮键 #0 尾巴=tail1","i":28,"t":1.4},{"phase":"点头打字","sx":1.024,"sy":0.972,"dy":0.0,"dx":0.0,"rot":-2.9,"note":"高亮键 #5 尾巴=tail1","i":29,"t":1.45},{"phase":"点头打字","sx":1.018,"sy":0.979,"dy":0.0,"dx":0.0,"rot":-2.6,"note":"高亮键 #5 尾巴=tail1","i":30,"t":1.5},{"phase":"点头打字","sx":1.01,"sy":0.989,"dy":0.0,"dx":0.0,"rot":-2.1,"note":"高亮键 #5 尾巴=tail1","i":31,"t":1.55},{"phase":"写完小跳","sx":1.0,"sy":1.0,"dy":-0.0,"dx":0.0,"rot":-1.5,"note":"高亮键 #3 尾巴=rest","i":32,"t":1.6},{"phase":"写完小跳","sx":0.982,"sy":1.022,"dy":-0.88,"dx":0.0,"rot":-1.5,"note":"高亮键 #3 尾巴=rest","i":33,"t":1.65},{"phase":"写完小跳","sx":0.967,"sy":1.039,"dy":-1.47,"dx":0.0,"rot":-1.5,"note":"高亮键 #3 尾巴=rest","i":34,"t":1.7},{"phase":"写完小跳","sx":0.959,"sy":1.049,"dy":-1.76,"dx":0.0,"rot":-1.5,"note":"高亮键 #3 尾巴=rest","i":35,"t":1.75},{"phase":"写完小跳","sx":0.959,"sy":1.049,"dy":-1.76,"dx":0.0,"rot":-1.5,"note":"高亮键 #6 尾巴=tail1","i":36,"t":1.8},{"phase":"写完小跳","sx":0.967,"sy":1.039,"dy":-1.47,"dx":0.0,"rot":-1.5,"note":"高亮键 #6 尾巴=tail1","i":37,"t":1.85},{"phase":"写完小跳","sx":0.982,"sy":1.022,"dy":-0.88,"dx":0.0,"rot":-1.5,"note":"高亮键 #6 尾巴=tail1","i":38,"t":1.9},{"phase":"落地回稳","sx":1.068,"sy":0.92,"dy":0.0,"dx":0.0,"rot":-2.1,"note":"高亮键 #6 尾巴=tail1","i":39,"t":1.95},{"phase":"落地回稳","sx":1.028,"sy":0.967,"dy":0.0,"dx":0.0,"rot":-1.5,"note":"高亮键 #1 尾巴=tail2","i":40,"t":2.0},{"phase":"落地回稳","sx":0.99,"sy":1.012,"dy":0.0,"dx":0.0,"rot":-2.1,"note":"高亮键 #1 尾巴=tail2","i":41,"t":2.05},{"phase":"落地回稳","sx":0.977,"sy":1.027,"dy":0.0,"dx":0.0,"rot":-2.6,"note":"高亮键 #1 尾巴=tail2","i":42,"t":2.1},{"phase":"落地回稳","sx":0.986,"sy":1.016,"dy":0.0,"dx":0.0,"rot":-2.9,"note":"高亮键 #1 尾巴=tail2","i":43,"t":2.15},{"phase":"点头打字","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":-3.0,"note":"高亮键 #4 尾巴=tail1","i":44,"t":2.2},{"phase":"点头打字","sx":1.013,"sy":0.985,"dy":0.0,"dx":0.0,"rot":-2.9,"note":"高亮键 #4 尾巴=tail1","i":45,"t":2.25},{"phase":"点头打字","sx":1.013,"sy":0.985,"dy":0.0,"dx":0.0,"rot":-2.6,"note":"高亮键 #4 尾巴=tail1","i":46,"t":2.3},{"phase":"点头打字","sx":1.008,"sy":0.991,"dy":0.0,"dx":0.0,"rot":-2.1,"note":"高亮键 #4 尾巴=tail1","i":47,"t":2.35}]},{"key":"music","file":"music","title":"戴耳机听歌","en":"Headphones groove","state":"juggling / working","trigger":"SubagentStart（1 个子代理）或 2 个会话并行","seconds":1.6,"n":32,"frame_ms":50,"summary":"150 BPM 的律动：每一拍先压扁再弹起，身体左右摇摆，音符从耳机里冒出、摇摆上升后淡出。","theme_slot":"jugglingTiers[1] + workingTiers[2]","phases":[{"t0":0.0,"t1":1.6,"name":"节拍弹跳","formula":"每拍 0.4s：amt = impact(t_beat)（挤压→过冲拉伸→阻尼回稳），dy = −1.8·outQuad 衰减"},{"t0":0.0,"t1":1.6,"name":"左右摇摆","formula":"rot = 6°·sin(πt/0.4)，两拍一个来回"},{"t0":0.0,"t1":1.6,"name":"音符","formula":"每拍发射 1 个：x += 6t + 1.5·sin(8t)，y −= 14t，1.1s 后淡出"},{"t0":0.0,"t1":1.6,"name":"尾巴打拍子","formula":"拍点 tail2，其余 rest/tail1"}],"sheet":{"cols":8,"rows":4,"w":260,"h":260},"frames":[{"phase":"第 1 拍","sx":1.119,"sy":0.86,"dy":-0.0,"dx":0.0,"rot":0.0,"note":"拍内时间 0.00s","i":0,"t":0.0},{"phase":"第 1 拍","sx":1.057,"sy":0.932,"dy":-0.85,"dx":0.0,"rot":2.3,"note":"拍内时间 0.05s","i":1,"t":0.05},{"phase":"第 1 拍","sx":0.996,"sy":1.004,"dy":-0.81,"dx":0.0,"rot":4.2,"note":"拍内时间 0.10s","i":2,"t":0.1},{"phase":"第 1 拍","sx":0.968,"sy":1.038,"dy":-0.38,"dx":0.0,"rot":5.5,"note":"拍内时间 0.15s","i":3,"t":0.15},{"phase":"第 1 拍","sx":0.971,"sy":1.034,"dy":0.0,"dx":0.0,"rot":6.0,"note":"拍内时间 0.20s","i":4,"t":0.2},{"phase":"第 1 拍","sx":0.988,"sy":1.014,"dy":0.0,"dx":0.0,"rot":5.5,"note":"拍内时间 0.25s","i":5,"t":0.25},{"phase":"第 1 拍","sx":1.003,"sy":0.997,"dy":0.0,"dx":0.0,"rot":4.2,"note":"拍内时间 0.30s","i":6,"t":0.3},{"phase":"第 1 拍","sx":1.009,"sy":0.99,"dy":0.0,"dx":0.0,"rot":2.3,"note":"拍内时间 0.35s","i":7,"t":0.35},{"phase":"第 2 拍","sx":1.119,"sy":0.86,"dy":-0.0,"dx":0.0,"rot":0.0,"note":"拍内时间 0.00s","i":8,"t":0.4},{"phase":"第 2 拍","sx":1.057,"sy":0.932,"dy":-0.85,"dx":0.0,"rot":-2.3,"note":"拍内时间 0.05s","i":9,"t":0.45},{"phase":"第 2 拍","sx":0.996,"sy":1.004,"dy":-0.81,"dx":0.0,"rot":-4.2,"note":"拍内时间 0.10s","i":10,"t":0.5},{"phase":"第 2 拍","sx":0.968,"sy":1.038,"dy":-0.38,"dx":0.0,"rot":-5.5,"note":"拍内时间 0.15s","i":11,"t":0.55},{"phase":"第 2 拍","sx":0.971,"sy":1.034,"dy":-0.0,"dx":0.0,"rot":-6.0,"note":"拍内时间 0.20s","i":12,"t":0.6},{"phase":"第 2 拍","sx":0.988,"sy":1.014,"dy":0.0,"dx":0.0,"rot":-5.5,"note":"拍内时间 0.25s","i":13,"t":0.65},{"phase":"第 2 拍","sx":1.003,"sy":0.997,"dy":0.0,"dx":0.0,"rot":-4.2,"note":"拍内时间 0.30s","i":14,"t":0.7},{"phase":"第 2 拍","sx":1.009,"sy":0.99,"dy":0.0,"dx":0.0,"rot":-2.3,"note":"拍内时间 0.35s","i":15,"t":0.75},{"phase":"第 3 拍","sx":1.119,"sy":0.86,"dy":-0.0,"dx":0.0,"rot":-0.0,"note":"拍内时间 0.00s","i":16,"t":0.8},{"phase":"第 3 拍","sx":1.057,"sy":0.932,"dy":-0.85,"dx":0.0,"rot":2.3,"note":"拍内时间 0.05s","i":17,"t":0.85},{"phase":"第 3 拍","sx":0.996,"sy":1.004,"dy":-0.81,"dx":0.0,"rot":4.2,"note":"拍内时间 0.10s","i":18,"t":0.9},{"phase":"第 3 拍","sx":0.968,"sy":1.038,"dy":-0.38,"dx":0.0,"rot":5.5,"note":"拍内时间 0.15s","i":19,"t":0.95},{"phase":"第 3 拍","sx":0.971,"sy":1.034,"dy":-0.0,"dx":0.0,"rot":6.0,"note":"拍内时间 0.20s","i":20,"t":1.0},{"phase":"第 3 拍","sx":0.988,"sy":1.014,"dy":0.0,"dx":0.0,"rot":5.5,"note":"拍内时间 0.25s","i":21,"t":1.05},{"phase":"第 3 拍","sx":1.003,"sy":0.997,"dy":0.0,"dx":0.0,"rot":4.2,"note":"拍内时间 0.30s","i":22,"t":1.1},{"phase":"第 3 拍","sx":1.009,"sy":0.99,"dy":0.0,"dx":0.0,"rot":2.3,"note":"拍内时间 0.35s","i":23,"t":1.15},{"phase":"第 3 拍","sx":1.007,"sy":0.992,"dy":0.0,"dx":0.0,"rot":0.0,"note":"拍内时间 0.40s","i":24,"t":1.2},{"phase":"第 4 拍","sx":1.057,"sy":0.932,"dy":-0.85,"dx":0.0,"rot":-2.3,"note":"拍内时间 0.05s","i":25,"t":1.25},{"phase":"第 4 拍","sx":0.996,"sy":1.004,"dy":-0.81,"dx":0.0,"rot":-4.2,"note":"拍内时间 0.10s","i":26,"t":1.3},{"phase":"第 4 拍","sx":0.968,"sy":1.038,"dy":-0.38,"dx":0.0,"rot":-5.5,"note":"拍内时间 0.15s","i":27,"t":1.35},{"phase":"第 4 拍","sx":0.971,"sy":1.034,"dy":-0.0,"dx":0.0,"rot":-6.0,"note":"拍内时间 0.20s","i":28,"t":1.4},{"phase":"第 4 拍","sx":0.988,"sy":1.014,"dy":0.0,"dx":0.0,"rot":-5.5,"note":"拍内时间 0.25s","i":29,"t":1.45},{"phase":"第 4 拍","sx":1.003,"sy":0.997,"dy":0.0,"dx":0.0,"rot":-4.2,"note":"拍内时间 0.30s","i":30,"t":1.5},{"phase":"第 4 拍","sx":1.009,"sy":0.99,"dy":0.0,"dx":0.0,"rot":-2.3,"note":"拍内时间 0.35s","i":31,"t":1.55}]},{"key":"conducting","file":"conducting","title":"带领小鲸鱼分身","en":"Sub-agent squad","state":"juggling (2+)","trigger":"SubagentStart（≥2 个子代理）","seconds":2.4,"n":48,"frame_ms":50,"summary":"大鲸鱼趴着跟拍子摇摆，用尾巴一甩一甩地打节拍；三只小鲸鱼分身漂在小浪花上依次弹跳干活，头顶进度条各自推进，满格变成 ✓ 再重置。","theme_slot":"jugglingTiers[0]","phases":[{"t0":0.0,"t1":2.4,"name":"尾巴打拍子","formula":"每 0.8s 一拍：尾巴 tail1→tail3→tail4→tail3→tail1，甩到最远时尾尖闪星"},{"t0":0.0,"t1":2.4,"name":"身体律动","formula":"amt = 0.05·sin(2πt/0.8)，rot = 3°·sin(2πt/0.8)，眼睛看向分身"},{"t0":0.0,"t1":2.4,"name":"分身波浪跳","formula":"第 k 只延迟 0.27k s，每 0.8s 一跳：蓄力 0.1s → 4px 抛物线 → impact 回弹"},{"t0":0.0,"t1":2.4,"name":"进度条","formula":"fill_k = frac(t/2.4·speed_k + offset_k)，> 0.88 时换成 ✓（outBack 弹出）"},{"t0":0.0,"t1":2.4,"name":"浪花","formula":"浪尖像素每 0.1s 平移 1px"}],"sheet":{"cols":8,"rows":6,"w":260,"h":260},"frames":[{"phase":"尾巴打拍子","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"尾巴=tail1；#1 dy=0.0 10%，#2 dy=0.0 55%，#3 dy=-4.0 80%","i":0,"t":0.0},{"phase":"尾巴打拍子","sx":0.984,"sy":1.019,"dy":0,"dx":0.0,"rot":1.1,"note":"尾巴=tail1；#1 dy=0.0 12%，#2 dy=0.0 59%，#3 dy=-3.4 82%","i":1,"t":0.05},{"phase":"尾巴打拍子","sx":0.97,"sy":1.035,"dy":0,"dx":0.0,"rot":2.1,"note":"尾巴=tail3；#1 dy=-0.0 14%，#2 dy=0.0 63%，#3 dy=-2.1 84%","i":2,"t":0.1},{"phase":"尾巴打拍子","sx":0.961,"sy":1.046,"dy":0,"dx":0.0,"rot":2.8,"note":"尾巴=tail3；#1 dy=-2.1 16%，#2 dy=0.0 67%，#3 dy=0.0 86%","i":3,"t":0.15},{"phase":"尾巴打拍子","sx":0.958,"sy":1.05,"dy":0,"dx":0.0,"rot":3.0,"note":"尾巴=tail4；#1 dy=-3.4 18%，#2 dy=0.0 71%，#3 dy=0.0 88%","i":4,"t":0.2},{"phase":"尾巴打拍子","sx":0.961,"sy":1.046,"dy":0,"dx":0.0,"rot":2.8,"note":"尾巴=tail4；#1 dy=-4.0 20%，#2 dy=0.0 75%，#3 dy=0.0 90%","i":5,"t":0.25},{"phase":"尾巴打拍子","sx":0.97,"sy":1.035,"dy":0,"dx":0.0,"rot":2.1,"note":"尾巴=tail4；#1 dy=-3.8 22%，#2 dy=0.0 80%，#3 dy=0.0 92%","i":6,"t":0.3},{"phase":"尾巴打拍子","sx":0.984,"sy":1.019,"dy":0,"dx":0.0,"rot":1.1,"note":"尾巴=tail3；#1 dy=-2.7 24%，#2 dy=0.0 84%，#3 dy=0.0 94%","i":7,"t":0.35},{"phase":"尾巴打拍子","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"尾巴=tail1；#1 dy=-0.9 26%，#2 dy=-1.4 88%，#3 dy=0.0 96%","i":8,"t":0.4},{"phase":"尾巴打拍子","sx":1.016,"sy":0.981,"dy":0,"dx":0.0,"rot":-1.1,"note":"尾巴=tail1；#1 dy=0.0 28%，#2 dy=-3.0 92%，#3 dy=0.0 98%","i":9,"t":0.45},{"phase":"尾巴打拍子","sx":1.03,"sy":0.965,"dy":0,"dx":0.0,"rot":-2.1,"note":"尾巴=rest；#1 dy=0.0 30%，#2 dy=-3.9 96%，#3 dy=0.0 0%","i":10,"t":0.5},{"phase":"尾巴打拍子","sx":1.039,"sy":0.954,"dy":0,"dx":0.0,"rot":-2.8,"note":"尾巴=rest；#1 dy=0.0 32%，#2 dy=-3.9 0%，#3 dy=0.0 2%","i":11,"t":0.55},{"phase":"尾巴打拍子","sx":1.042,"sy":0.95,"dy":0,"dx":0.0,"rot":-3.0,"note":"尾巴=rest；#1 dy=0.0 35%，#2 dy=-3.2 5%，#3 dy=0.0 5%","i":12,"t":0.6},{"phase":"尾巴打拍子","sx":1.039,"sy":0.954,"dy":0,"dx":0.0,"rot":-2.8,"note":"尾巴=rest；#1 dy=0.0 37%，#2 dy=-1.7 9%，#3 dy=-0.9 7%","i":13,"t":0.65},{"phase":"尾巴打拍子","sx":1.03,"sy":0.965,"dy":0,"dx":0.0,"rot":-2.1,"note":"尾巴=rest；#1 dy=0.0 39%，#2 dy=0.0 13%，#3 dy=-2.7 9%","i":14,"t":0.7},{"phase":"尾巴打拍子","sx":1.016,"sy":0.981,"dy":0,"dx":0.0,"rot":-1.1,"note":"尾巴=rest；#1 dy=0.0 41%，#2 dy=0.0 17%，#3 dy=-3.7 11%","i":15,"t":0.75},{"phase":"尾巴打拍子","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-0.0,"note":"尾巴=tail1；#1 dy=0.0 43%，#2 dy=0.0 21%，#3 dy=-4.0 13%","i":16,"t":0.8},{"phase":"尾巴打拍子","sx":0.984,"sy":1.019,"dy":0,"dx":0.0,"rot":1.1,"note":"尾巴=tail1；#1 dy=0.0 45%，#2 dy=0.0 25%，#3 dy=-3.4 15%","i":17,"t":0.85},{"phase":"尾巴打拍子","sx":0.97,"sy":1.035,"dy":0,"dx":0.0,"rot":2.1,"note":"尾巴=tail3；#1 dy=0.0 47%，#2 dy=0.0 30%，#3 dy=-2.1 17%","i":18,"t":0.9},{"phase":"尾巴打拍子","sx":0.961,"sy":1.046,"dy":0,"dx":0.0,"rot":2.8,"note":"尾巴=tail3；#1 dy=-2.1 49%，#2 dy=0.0 34%，#3 dy=-0.0 19%","i":19,"t":0.95},{"phase":"尾巴打拍子","sx":0.958,"sy":1.05,"dy":0,"dx":0.0,"rot":3.0,"note":"尾巴=tail4；#1 dy=-3.4 51%，#2 dy=0.0 38%，#3 dy=0.0 21%","i":20,"t":1.0},{"phase":"尾巴打拍子","sx":0.961,"sy":1.046,"dy":0,"dx":0.0,"rot":2.8,"note":"尾巴=tail4；#1 dy=-4.0 53%，#2 dy=0.0 42%，#3 dy=0.0 23%","i":21,"t":1.05},{"phase":"尾巴打拍子","sx":0.97,"sy":1.035,"dy":0,"dx":0.0,"rot":2.1,"note":"尾巴=tail4；#1 dy=-3.7 55%，#2 dy=0.0 46%，#3 dy=0.0 25%","i":22,"t":1.1},{"phase":"尾巴打拍子","sx":0.984,"sy":1.019,"dy":0,"dx":0.0,"rot":1.1,"note":"尾巴=tail3；#1 dy=-2.7 57%，#2 dy=0.0 50%，#3 dy=0.0 27%","i":23,"t":1.15},{"phase":"尾巴打拍子","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"尾巴=tail3；#1 dy=-0.9 60%，#2 dy=-1.4 55%，#3 dy=0.0 30%","i":24,"t":1.2},{"phase":"尾巴打拍子","sx":1.016,"sy":0.981,"dy":0,"dx":0.0,"rot":-1.1,"note":"尾巴=tail1；#1 dy=0.0 62%，#2 dy=-3.0 59%，#3 dy=0.0 32%","i":25,"t":1.25},{"phase":"尾巴打拍子","sx":1.03,"sy":0.965,"dy":0,"dx":0.0,"rot":-2.1,"note":"尾巴=rest；#1 dy=0.0 64%，#2 dy=-3.9 63%，#3 dy=0.0 34%","i":26,"t":1.3},{"phase":"尾巴打拍子","sx":1.039,"sy":0.954,"dy":0,"dx":0.0,"rot":-2.8,"note":"尾巴=rest；#1 dy=0.0 66%，#2 dy=-3.9 67%，#3 dy=0.0 36%","i":27,"t":1.35},{"phase":"尾巴打拍子","sx":1.042,"sy":0.95,"dy":0,"dx":0.0,"rot":-3.0,"note":"尾巴=rest；#1 dy=0.0 68%，#2 dy=-3.2 71%，#3 dy=0.0 38%","i":28,"t":1.4},{"phase":"尾巴打拍子","sx":1.039,"sy":0.954,"dy":0,"dx":0.0,"rot":-2.8,"note":"尾巴=rest；#1 dy=0.0 70%，#2 dy=-1.8 75%，#3 dy=-0.9 40%","i":29,"t":1.45},{"phase":"尾巴打拍子","sx":1.03,"sy":0.965,"dy":0,"dx":0.0,"rot":-2.1,"note":"尾巴=rest；#1 dy=0.0 72%，#2 dy=0.0 80%，#3 dy=-2.7 42%","i":30,"t":1.5},{"phase":"尾巴打拍子","sx":1.016,"sy":0.981,"dy":0,"dx":0.0,"rot":-1.1,"note":"尾巴=rest；#1 dy=0.0 74%，#2 dy=0.0 84%，#3 dy=-3.7 44%","i":31,"t":1.55},{"phase":"尾巴打拍子","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-0.0,"note":"尾巴=tail1；#1 dy=0.0 76%，#2 dy=0.0 88%，#3 dy=-4.0 46%","i":32,"t":1.6},{"phase":"尾巴打拍子","sx":0.984,"sy":1.019,"dy":0,"dx":0.0,"rot":1.1,"note":"尾巴=tail1；#1 dy=0.0 78%，#2 dy=0.0 92%，#3 dy=-3.4 48%","i":33,"t":1.65},{"phase":"尾巴打拍子","sx":0.97,"sy":1.035,"dy":0,"dx":0.0,"rot":2.1,"note":"尾巴=tail3；#1 dy=0.0 80%，#2 dy=0.0 96%，#3 dy=-2.1 50%","i":34,"t":1.7},{"phase":"尾巴打拍子","sx":0.961,"sy":1.046,"dy":0,"dx":0.0,"rot":2.8,"note":"尾巴=tail3；#1 dy=-2.1 82%，#2 dy=0.0 0%，#3 dy=-0.0 52%","i":35,"t":1.75},{"phase":"尾巴打拍子","sx":0.958,"sy":1.05,"dy":0,"dx":0.0,"rot":3.0,"note":"尾巴=tail4；#1 dy=-3.4 85%，#2 dy=0.0 4%，#3 dy=0.0 55%","i":36,"t":1.8},{"phase":"尾巴打拍子","sx":0.961,"sy":1.046,"dy":0,"dx":0.0,"rot":2.8,"note":"尾巴=tail4；#1 dy=-4.0 87%，#2 dy=0.0 9%，#3 dy=0.0 57%","i":37,"t":1.85},{"phase":"尾巴打拍子","sx":0.97,"sy":1.035,"dy":0,"dx":0.0,"rot":2.1,"note":"尾巴=tail4；#1 dy=-3.8 89%，#2 dy=0.0 13%，#3 dy=0.0 59%","i":38,"t":1.9},{"phase":"尾巴打拍子","sx":0.984,"sy":1.019,"dy":0,"dx":0.0,"rot":1.1,"note":"尾巴=tail3；#1 dy=-2.7 91%，#2 dy=0.0 17%，#3 dy=0.0 61%","i":39,"t":1.95},{"phase":"尾巴打拍子","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"尾巴=tail3；#1 dy=-0.9 93%，#2 dy=-1.4 21%，#3 dy=0.0 63%","i":40,"t":2.0},{"phase":"尾巴打拍子","sx":1.016,"sy":0.981,"dy":0,"dx":0.0,"rot":-1.1,"note":"尾巴=tail1；#1 dy=0.0 95%，#2 dy=-3.0 25%，#3 dy=0.0 65%","i":41,"t":2.05},{"phase":"尾巴打拍子","sx":1.03,"sy":0.965,"dy":0,"dx":0.0,"rot":-2.1,"note":"尾巴=rest；#1 dy=0.0 97%，#2 dy=-3.9 30%，#3 dy=0.0 67%","i":42,"t":2.1},{"phase":"尾巴打拍子","sx":1.039,"sy":0.954,"dy":0,"dx":0.0,"rot":-2.8,"note":"尾巴=rest；#1 dy=0.0 99%，#2 dy=-3.9 34%，#3 dy=0.0 69%","i":43,"t":2.15},{"phase":"尾巴打拍子","sx":1.042,"sy":0.95,"dy":0,"dx":0.0,"rot":-3.0,"note":"尾巴=rest；#1 dy=0.0 1%，#2 dy=-3.2 38%，#3 dy=0.0 71%","i":44,"t":2.2},{"phase":"尾巴打拍子","sx":1.039,"sy":0.954,"dy":0,"dx":0.0,"rot":-2.8,"note":"尾巴=rest；#1 dy=0.0 3%，#2 dy=-1.8 42%，#3 dy=-0.9 73%","i":45,"t":2.25},{"phase":"尾巴打拍子","sx":1.03,"sy":0.965,"dy":0,"dx":0.0,"rot":-2.1,"note":"尾巴=rest；#1 dy=0.0 5%，#2 dy=0.0 46%，#3 dy=-2.7 75%","i":46,"t":2.3},{"phase":"尾巴打拍子","sx":1.016,"sy":0.981,"dy":0,"dx":0.0,"rot":-1.1,"note":"尾巴=rest；#1 dy=0.0 7%，#2 dy=0.0 50%，#3 dy=-3.7 77%","i":47,"t":2.35}]},{"key":"building","file":"building","title":"戴安全帽砌砖","en":"Building","state":"working (3+)","trigger":"3 个以上会话同时干活","seconds":2.4,"n":48,"frame_ms":50,"summary":"戴安全帽的小鲸鱼趴在砖柱旁边：新砖从天而降歪在一边，小鲸鱼后仰蓄力，用安全帽“咚”地把砖顶正，火花四溅；每块砖砌好后整根柱子下沉一格，无缝循环。","theme_slot":"workingTiers[0]","phases":[{"t0":0.0,"t1":0.3,"name":"砖块落下","formula":"新砖从画面外自由落体 y = 目标 − 32·(1 − u²)，落地挤扁回弹，横向歪出 3px"},{"t0":0.3,"t1":0.6,"name":"后仰蓄力","formula":"rot → +6°，amt → −0.08，inOutSine；皱眉使劲"},{"t0":0.6,"t1":0.7,"name":"安全帽顶砖","formula":"rot → −9°，dx → −2.5，inCubic（越顶越快）"},{"t0":0.7,"t1":1.2,"name":"咚！回弹","formula":"砖 x 偏移 3 → 0（outBack），火花 + 烟尘；身体 impact 挤压，spring 回正"},{"t0":0.85,"t1":1.15,"name":"柱子下沉","formula":"整根柱子 y += 3·inOutSine，底部被地面裁掉"},{"t0":1.2,"t1":2.4,"name":"第二块砖","formula":"同样节奏再来一次"}],"sheet":{"cols":8,"rows":6,"w":260,"h":260},"frames":[{"phase":"砖块落下","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":0,"t":0.0},{"phase":"砖块落下","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":1,"t":0.05},{"phase":"砖块落下","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":2,"t":0.1},{"phase":"砖块落下","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":3,"t":0.15},{"phase":"砖块落下","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":4,"t":0.2},{"phase":"砖块落下","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":5,"t":0.25},{"phase":"后仰蓄力","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":6,"t":0.3},{"phase":"后仰蓄力","sx":1.005,"sy":0.995,"dy":0,"dx":0.04,"rot":0.4,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":7,"t":0.35},{"phase":"后仰蓄力","sx":1.017,"sy":0.98,"dy":0,"dx":0.15,"rot":1.5,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":8,"t":0.4},{"phase":"后仰蓄力","sx":1.034,"sy":0.96,"dy":0,"dx":0.3,"rot":3.0,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":9,"t":0.45},{"phase":"后仰蓄力","sx":1.051,"sy":0.94,"dy":0,"dx":0.45,"rot":4.5,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":10,"t":0.5},{"phase":"后仰蓄力","sx":1.063,"sy":0.925,"dy":0,"dx":0.56,"rot":5.6,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":11,"t":0.55},{"phase":"安全帽顶砖","sx":1.068,"sy":0.92,"dy":0,"dx":0.6,"rot":6.0,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":12,"t":0.6},{"phase":"安全帽顶砖","sx":1.055,"sy":0.935,"dy":0,"dx":0.21,"rot":4.1,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":13,"t":0.65},{"phase":"咚！回弹","sx":1.119,"sy":0.86,"dy":0,"dx":-2.5,"rot":-9.0,"note":"第 1 块砖 横向偏移=3.0px 下沉=0.0px","i":14,"t":0.7},{"phase":"咚！回弹","sx":1.04,"sy":0.952,"dy":0,"dx":-1.03,"rot":-3.7,"note":"第 1 块砖 横向偏移=-0.0px 下沉=0.0px","i":15,"t":0.75},{"phase":"咚！回弹","sx":0.968,"sy":1.037,"dy":0,"dx":0.26,"rot":0.9,"note":"第 1 块砖 横向偏移=-0.3px 下沉=0.0px","i":16,"t":0.8},{"phase":"咚！回弹","sx":0.958,"sy":1.049,"dy":0,"dx":0.68,"rot":2.4,"note":"第 1 块砖 横向偏移=0.0px 下沉=0.0px","i":17,"t":0.85},{"phase":"咚！回弹","sx":0.988,"sy":1.015,"dy":0,"dx":0.44,"rot":1.6,"note":"第 1 块砖 横向偏移=0.0px 下沉=0.2px","i":18,"t":0.9},{"phase":"咚！回弹","sx":1.012,"sy":0.986,"dy":0,"dx":0.06,"rot":0.2,"note":"第 1 块砖 横向偏移=0.0px 下沉=0.7px","i":19,"t":0.95},{"phase":"咚！回弹","sx":1.014,"sy":0.983,"dy":0,"dx":-0.14,"rot":-0.5,"note":"第 1 块砖 横向偏移=0.0px 下沉=1.5px","i":20,"t":1.0},{"phase":"咚！回弹","sx":1.004,"sy":0.996,"dy":0,"dx":-0.15,"rot":-0.5,"note":"第 1 块砖 横向偏移=0.0px 下沉=2.3px","i":21,"t":1.05},{"phase":"咚！回弹","sx":0.995,"sy":1.005,"dy":0,"dx":-0.06,"rot":-0.2,"note":"第 1 块砖 横向偏移=0.0px 下沉=2.8px","i":22,"t":1.1},{"phase":"咚！回弹","sx":0.995,"sy":1.006,"dy":0,"dx":0.02,"rot":0.1,"note":"第 1 块砖 横向偏移=0.0px 下沉=3.0px","i":23,"t":1.15},{"phase":"砖块落下","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":24,"t":1.2},{"phase":"砖块落下","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":25,"t":1.25},{"phase":"砖块落下","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":26,"t":1.3},{"phase":"砖块落下","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":27,"t":1.35},{"phase":"砖块落下","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":28,"t":1.4},{"phase":"砖块落下","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":29,"t":1.45},{"phase":"后仰蓄力","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":30,"t":1.5},{"phase":"后仰蓄力","sx":1.005,"sy":0.995,"dy":0,"dx":0.04,"rot":0.4,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":31,"t":1.55},{"phase":"后仰蓄力","sx":1.017,"sy":0.98,"dy":0,"dx":0.15,"rot":1.5,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":32,"t":1.6},{"phase":"后仰蓄力","sx":1.034,"sy":0.96,"dy":0,"dx":0.3,"rot":3.0,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":33,"t":1.65},{"phase":"后仰蓄力","sx":1.051,"sy":0.94,"dy":0,"dx":0.45,"rot":4.5,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":34,"t":1.7},{"phase":"后仰蓄力","sx":1.063,"sy":0.925,"dy":0,"dx":0.56,"rot":5.6,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":35,"t":1.75},{"phase":"安全帽顶砖","sx":1.068,"sy":0.92,"dy":0,"dx":0.6,"rot":6.0,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":36,"t":1.8},{"phase":"安全帽顶砖","sx":1.055,"sy":0.935,"dy":0,"dx":0.21,"rot":4.1,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":37,"t":1.85},{"phase":"咚！回弹","sx":1.119,"sy":0.86,"dy":0,"dx":-2.5,"rot":-9.0,"note":"第 2 块砖 横向偏移=3.0px 下沉=0.0px","i":38,"t":1.9},{"phase":"咚！回弹","sx":1.04,"sy":0.952,"dy":0,"dx":-1.03,"rot":-3.7,"note":"第 2 块砖 横向偏移=-0.0px 下沉=0.0px","i":39,"t":1.95},{"phase":"咚！回弹","sx":0.968,"sy":1.037,"dy":0,"dx":0.26,"rot":0.9,"note":"第 2 块砖 横向偏移=-0.3px 下沉=0.0px","i":40,"t":2.0},{"phase":"咚！回弹","sx":0.958,"sy":1.049,"dy":0,"dx":0.68,"rot":2.4,"note":"第 2 块砖 横向偏移=0.0px 下沉=0.0px","i":41,"t":2.05},{"phase":"咚！回弹","sx":0.988,"sy":1.015,"dy":0,"dx":0.44,"rot":1.6,"note":"第 2 块砖 横向偏移=0.0px 下沉=0.2px","i":42,"t":2.1},{"phase":"咚！回弹","sx":1.012,"sy":0.986,"dy":0,"dx":0.06,"rot":0.2,"note":"第 2 块砖 横向偏移=0.0px 下沉=0.7px","i":43,"t":2.15},{"phase":"咚！回弹","sx":1.014,"sy":0.983,"dy":0,"dx":-0.14,"rot":-0.5,"note":"第 2 块砖 横向偏移=0.0px 下沉=1.5px","i":44,"t":2.2},{"phase":"咚！回弹","sx":1.004,"sy":0.996,"dy":0,"dx":-0.15,"rot":-0.5,"note":"第 2 块砖 横向偏移=0.0px 下沉=2.3px","i":45,"t":2.25},{"phase":"咚！回弹","sx":0.995,"sy":1.005,"dy":0,"dx":-0.06,"rot":-0.2,"note":"第 2 块砖 横向偏移=0.0px 下沉=2.8px","i":46,"t":2.3},{"phase":"咚！回弹","sx":0.995,"sy":1.006,"dy":0,"dx":0.02,"rot":0.1,"note":"第 2 块砖 横向偏移=0.0px 下沉=3.0px","i":47,"t":2.35}]},{"key":"error","file":"error","title":"出错啦","en":"Error","state":"error","trigger":"PostToolUseFailure / StopFailure","seconds":2.4,"n":48,"frame_ms":50,"summary":"受惊一抖：先猛地压扁再弹起，左右剧烈抖动后衰减；头顶红色 ✕ 弹性弹出，喷气孔冒黑烟，眼冒金星转圈。","theme_slot":"states.error","phases":[{"t0":0.0,"t1":0.12,"name":"受惊","formula":"amt → −0.22（瞬间压扁），眼睛 ○ ○"},{"t0":0.12,"t1":0.9,"name":"抖动","formula":"dx = 2.2·e^(−5t)·sin(2π·9t)，amt 阻尼回弹"},{"t0":0.05,"t1":0.6,"name":"✕ 弹出","formula":"scale = outElastic(t, period 0.3)，之后以 1 ± 0.08 脉动"},{"t0":0.3,"t1":2.4,"name":"冒烟","formula":"烟团每 0.35s 一个，上升 + 放大 + 淡出"},{"t0":0.8,"t1":2.4,"name":"眼冒金星","formula":"3 颗星沿椭圆 (rx 9, ry 2.5) 绕头旋转，身体 rot = 4°·sin 晕乎乎"}],"sheet":{"cols":8,"rows":6,"w":260,"h":260},"frames":[{"phase":"受惊","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"✕ scale=0.00","i":0,"t":0.0},{"phase":"受惊","sx":1.123,"sy":0.855,"dy":0,"dx":0.0,"rot":0.0,"note":"✕ scale=0.00","i":1,"t":0.05},{"phase":"受惊","sx":1.182,"sy":0.786,"dy":0,"dx":0.0,"rot":0.0,"note":"✕ scale=1.17","i":2,"t":0.1},{"phase":"抖动","sx":1.134,"sy":0.843,"dy":0,"dx":1.88,"rot":0.0,"note":"✕ scale=1.22","i":3,"t":0.15},{"phase":"抖动","sx":1.008,"sy":0.991,"dy":0,"dx":-1.45,"rot":0.0,"note":"✕ scale=0.87","i":4,"t":0.2},{"phase":"抖动","sx":0.93,"sy":1.083,"dy":0,"dx":1.01,"rot":0.0,"note":"✕ scale=0.98","i":5,"t":0.25},{"phase":"抖动","sx":0.933,"sy":1.079,"dy":0,"dx":-0.61,"rot":0.0,"note":"✕ scale=1.04","i":6,"t":0.3},{"phase":"抖动","sx":0.981,"sy":1.023,"dy":0,"dx":0.3,"rot":0.0,"note":"✕ scale=0.99","i":7,"t":0.35},{"phase":"抖动","sx":1.021,"sy":0.975,"dy":0,"dx":-0.07,"rot":0.0,"note":"✕ scale=0.99","i":8,"t":0.4},{"phase":"抖动","sx":1.03,"sy":0.964,"dy":0,"dx":-0.08,"rot":0.0,"note":"✕ scale=1.01","i":9,"t":0.45},{"phase":"抖动","sx":1.015,"sy":0.983,"dy":0,"dx":0.16,"rot":0.0,"note":"✕ scale=1.00","i":10,"t":0.5},{"phase":"抖动","sx":0.996,"sy":1.005,"dy":0,"dx":-0.19,"rot":0.0,"note":"✕ scale=1.00","i":11,"t":0.55},{"phase":"抖动","sx":0.988,"sy":1.015,"dy":0,"dx":0.18,"rot":0.0,"note":"✕ scale=1.00","i":12,"t":0.6},{"phase":"抖动","sx":0.991,"sy":1.01,"dy":0,"dx":-0.15,"rot":0.0,"note":"✕ scale=1.04","i":13,"t":0.65},{"phase":"抖动","sx":1.0,"sy":1.001,"dy":0,"dx":0.12,"rot":0.0,"note":"✕ scale=1.07","i":14,"t":0.7},{"phase":"抖动","sx":1.005,"sy":0.995,"dy":0,"dx":-0.08,"rot":0.0,"note":"✕ scale=1.08","i":15,"t":0.75},{"phase":"眼冒金星","sx":1.004,"sy":0.995,"dy":0,"dx":0.05,"rot":0.0,"note":"✕ scale=1.07","i":16,"t":0.8},{"phase":"眼冒金星","sx":1.001,"sy":0.999,"dy":0,"dx":-0.02,"rot":0.2,"note":"✕ scale=1.04","i":17,"t":0.85},{"phase":"眼冒金星","sx":0.999,"sy":1.002,"dy":0,"dx":0.01,"rot":0.7,"note":"✕ scale=1.00","i":18,"t":0.9},{"phase":"眼冒金星","sx":0.998,"sy":1.002,"dy":0,"dx":0.01,"rot":1.4,"note":"✕ scale=0.96","i":19,"t":0.95},{"phase":"眼冒金星","sx":0.999,"sy":1.001,"dy":0,"dx":-0.01,"rot":2.3,"note":"✕ scale=0.93","i":20,"t":1.0},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":0.02,"rot":3.2,"note":"✕ scale=0.92","i":21,"t":1.05},{"phase":"眼冒金星","sx":1.001,"sy":0.999,"dy":0,"dx":-0.01,"rot":4.0,"note":"✕ scale=0.93","i":22,"t":1.1},{"phase":"眼冒金星","sx":1.001,"sy":0.999,"dy":0,"dx":0.01,"rot":3.9,"note":"✕ scale=0.96","i":23,"t":1.15},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":-0.01,"rot":3.5,"note":"✕ scale=1.00","i":24,"t":1.2},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":0.01,"rot":2.8,"note":"✕ scale=1.04","i":25,"t":1.25},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":2.0,"note":"✕ scale=1.07","i":26,"t":1.3},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":1.0,"note":"✕ scale=1.08","i":27,"t":1.35},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":0.0,"note":"✕ scale=1.07","i":28,"t":1.4},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":-1.0,"note":"✕ scale=1.04","i":29,"t":1.45},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-2.0,"note":"✕ scale=1.00","i":30,"t":1.5},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":-2.8,"note":"✕ scale=0.96","i":31,"t":1.55},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-3.5,"note":"✕ scale=0.93","i":32,"t":1.6},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":-3.9,"note":"✕ scale=0.92","i":33,"t":1.65},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-4.0,"note":"✕ scale=0.93","i":34,"t":1.7},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":-3.9,"note":"✕ scale=0.96","i":35,"t":1.75},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-3.5,"note":"✕ scale=1.00","i":36,"t":1.8},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":-2.8,"note":"✕ scale=1.04","i":37,"t":1.85},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-2.0,"note":"✕ scale=1.07","i":38,"t":1.9},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-1.0,"note":"✕ scale=1.08","i":39,"t":1.95},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":-0.0,"note":"✕ scale=1.07","i":40,"t":2.0},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":1.0,"note":"✕ scale=1.04","i":41,"t":2.05},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":2.0,"note":"✕ scale=1.00","i":42,"t":2.1},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":2.8,"note":"✕ scale=0.96","i":43,"t":2.15},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":3.5,"note":"✕ scale=0.93","i":44,"t":2.2},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":3.9,"note":"✕ scale=0.92","i":45,"t":2.25},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":4.0,"note":"✕ scale=0.93","i":46,"t":2.3},{"phase":"眼冒金星","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":3.9,"note":"✕ scale=0.96","i":47,"t":2.35}]},{"key":"happy","file":"happy","title":"任务完成！","en":"Task complete","state":"attention","trigger":"Stop（任务完成）/ PostCompact","seconds":2.6,"n":52,"frame_ms":50,"summary":"完成任务的庆祝：深蹲蓄力→弹射拉长→空中转体一圈→落地 Q 弹挤压，彩纸在最高点炸开，绿色 ✓ 弹出。","theme_slot":"states.attention","phases":[{"t0":0.0,"t1":0.3,"name":"深蹲蓄力","formula":"amt: 0 → −0.24，inQuad；眼睛 >< "},{"t0":0.3,"t1":0.38,"name":"弹射","formula":"amt → +0.26，outBack"},{"t0":0.38,"t1":1.0,"name":"腾空转体","formula":"dy = −13·jumpArc(u)，rot = 360°·outCubic(u)（绕身体中心）"},{"t0":1.0,"t1":1.7,"name":"Q 弹落地","formula":"amt = impact(t)：−0.26·e^(−5t)·cos(2π·3t)"},{"t0":0.62,"t1":1.8,"name":"彩纸爆炸","formula":"20 片彩纸：初速随机 12~26 px/s，重力 30 px/s²，自身旋转"},{"t0":1.0,"t1":2.6,"name":"✓ 弹出","formula":"scale = outBack(s=2.5)，上下 bob，最后淡出"}],"sheet":{"cols":8,"rows":7,"w":260,"h":260},"frames":[{"phase":"深蹲蓄力","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":0,"t":0.0},{"phase":"深蹲蓄力","sx":1.006,"sy":0.993,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":1,"t":0.05},{"phase":"深蹲蓄力","sx":1.023,"sy":0.973,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":2,"t":0.1},{"phase":"深蹲蓄力","sx":1.051,"sy":0.94,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":3,"t":0.15},{"phase":"深蹲蓄力","sx":1.091,"sy":0.893,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":4,"t":0.2},{"phase":"深蹲蓄力","sx":1.142,"sy":0.833,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":5,"t":0.25},{"phase":"弹射","sx":1.204,"sy":0.76,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":6,"t":0.3},{"phase":"弹射","sx":0.73,"sy":1.317,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":7,"t":0.35},{"phase":"腾空转体","sx":0.793,"sy":1.243,"dy":-1.62,"dx":0.0,"rot":0.0,"note":"","i":8,"t":0.4},{"phase":"腾空转体","sx":0.826,"sy":1.205,"dy":-5.21,"dx":0.0,"rot":78.4,"note":"","i":9,"t":0.45},{"phase":"腾空转体","sx":0.856,"sy":1.169,"dy":-8.12,"dx":0.0,"rot":161.1,"note":"","i":10,"t":0.5},{"phase":"腾空转体","sx":0.884,"sy":1.137,"dy":-10.35,"dx":0.0,"rot":225.8,"note":"","i":11,"t":0.55},{"phase":"腾空转体","sx":0.908,"sy":1.108,"dy":-11.9,"dx":0.0,"rot":274.6,"note":"","i":12,"t":0.6},{"phase":"腾空转体","sx":0.93,"sy":1.083,"dy":-12.78,"dx":0.0,"rot":309.9,"note":"","i":13,"t":0.65},{"phase":"腾空转体","sx":0.948,"sy":1.061,"dy":-12.99,"dx":0.0,"rot":333.8,"note":"","i":14,"t":0.7},{"phase":"腾空转体","sx":0.964,"sy":1.042,"dy":-12.51,"dx":0.0,"rot":348.6,"note":"","i":15,"t":0.75},{"phase":"腾空转体","sx":0.977,"sy":1.027,"dy":-11.36,"dx":0.0,"rot":356.4,"note":"","i":16,"t":0.8},{"phase":"腾空转体","sx":0.987,"sy":1.015,"dy":-9.54,"dx":0.0,"rot":359.5,"note":"","i":17,"t":0.85},{"phase":"腾空转体","sx":1.002,"sy":0.997,"dy":-7.03,"dx":0.0,"rot":360.0,"note":"","i":18,"t":0.9},{"phase":"腾空转体","sx":1.024,"sy":0.972,"dy":-3.86,"dx":0.0,"rot":360.0,"note":"","i":19,"t":0.95},{"phase":"Q 弹落地","sx":1.221,"sy":0.74,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":20,"t":1.0},{"phase":"Q 弹落地","sx":1.101,"sy":0.881,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":21,"t":1.05},{"phase":"Q 弹落地","sx":0.959,"sy":1.049,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":22,"t":1.1},{"phase":"Q 弹落地","sx":0.901,"sy":1.117,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":23,"t":1.15},{"phase":"Q 弹落地","sx":0.934,"sy":1.077,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":24,"t":1.2},{"phase":"Q 弹落地","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":25,"t":1.25},{"phase":"Q 弹落地","sx":1.04,"sy":0.953,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":26,"t":1.3},{"phase":"Q 弹落地","sx":1.037,"sy":0.957,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":27,"t":1.35},{"phase":"Q 弹落地","sx":1.009,"sy":0.989,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":28,"t":1.4},{"phase":"Q 弹落地","sx":0.986,"sy":1.016,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":29,"t":1.45},{"phase":"Q 弹落地","sx":0.982,"sy":1.021,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":30,"t":1.5},{"phase":"Q 弹落地","sx":0.992,"sy":1.01,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":31,"t":1.55},{"phase":"Q 弹落地","sx":1.003,"sy":0.996,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":32,"t":1.6},{"phase":"Q 弹落地","sx":1.008,"sy":0.99,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":33,"t":1.65},{"phase":"庆祝","sx":1.005,"sy":0.994,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":34,"t":1.7},{"phase":"庆祝","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":35,"t":1.75},{"phase":"庆祝","sx":0.997,"sy":1.004,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":36,"t":1.8},{"phase":"庆祝","sx":0.997,"sy":1.004,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":37,"t":1.85},{"phase":"庆祝","sx":0.999,"sy":1.001,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":38,"t":1.9},{"phase":"庆祝","sx":1.001,"sy":0.999,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":39,"t":1.95},{"phase":"庆祝","sx":1.001,"sy":0.998,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":40,"t":2.0},{"phase":"庆祝","sx":1.001,"sy":0.999,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":41,"t":2.05},{"phase":"庆祝","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":42,"t":2.1},{"phase":"庆祝","sx":0.999,"sy":1.001,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":43,"t":2.15},{"phase":"庆祝","sx":1.0,"sy":1.001,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":44,"t":2.2},{"phase":"庆祝","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":45,"t":2.25},{"phase":"庆祝","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":46,"t":2.3},{"phase":"庆祝","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":47,"t":2.35},{"phase":"庆祝","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":48,"t":2.4},{"phase":"庆祝","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":49,"t":2.45},{"phase":"庆祝","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":50,"t":2.5},{"phase":"庆祝","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":51,"t":2.55}]},{"key":"notification","file":"notification","title":"需要你确认","en":"Notification","state":"notification","trigger":"PermissionRequest / Notification","seconds":1.6,"n":32,"frame_ms":50,"summary":"黄色感叹气泡像铃铛一样左右摇晃、有节奏地放大；小鲸鱼瞪大眼睛原地连跳两下，拼命甩尾巴喊你回来。","theme_slot":"states.notification","phases":[{"t0":0.0,"t1":1.6,"name":"连跳两下","formula":"每 0.8s：蓄力 0.08s → 3px 抛物线 0.3s → 落地 impact"},{"t0":0.0,"t1":1.6,"name":"气泡摇铃","formula":"rot = 12°·sin(2π·2.5t)·(0.4+0.6|sin(πt/0.8)|)"},{"t0":0.0,"t1":1.6,"name":"气泡脉动","formula":"scale = 1 + 0.12·max(0, sin(2πt/0.8))"},{"t0":0.0,"t1":1.6,"name":"甩尾招呼","formula":"尾巴姿态每帧切换 tail1→tail4→tail1，像在拼命挥手"}],"sheet":{"cols":8,"rows":4,"w":260,"h":260},"frames":[{"phase":"跳跃+摇铃","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=0° scale=1.00；尾巴=tail1","i":0,"t":0.0},{"phase":"跳跃+摇铃","sx":1.071,"sy":0.917,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=4° scale=1.05；尾巴=tail2","i":1,"t":0.05},{"phase":"跳跃+摇铃","sx":0.905,"sy":1.112,"dy":-0.87,"dx":0.0,"rot":0,"note":"气泡 rot=8° scale=1.08；尾巴=tail3","i":2,"t":0.1},{"phase":"跳跃+摇铃","sx":0.922,"sy":1.092,"dy":-2.5,"dx":0.0,"rot":0,"note":"气泡 rot=6° scale=1.11；尾巴=tail4","i":3,"t":0.15},{"phase":"跳跃+摇铃","sx":0.939,"sy":1.072,"dy":-3.36,"dx":0.0,"rot":0,"note":"气泡 rot=0° scale=1.12；尾巴=tail4","i":4,"t":0.2},{"phase":"跳跃+摇铃","sx":0.956,"sy":1.052,"dy":-3.44,"dx":0.0,"rot":0,"note":"气泡 rot=-8° scale=1.11；尾巴=tail3","i":5,"t":0.25},{"phase":"跳跃+摇铃","sx":0.973,"sy":1.032,"dy":-2.74,"dx":0.0,"rot":0,"note":"气泡 rot=-11° scale=1.08；尾巴=tail2","i":6,"t":0.3},{"phase":"跳跃+摇铃","sx":0.99,"sy":1.012,"dy":-1.26,"dx":0.0,"rot":0,"note":"气泡 rot=-8° scale=1.05；尾巴=tail1","i":7,"t":0.35},{"phase":"跳跃+摇铃","sx":1.102,"sy":0.88,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=-0° scale=1.00；尾巴=tail1","i":8,"t":0.4},{"phase":"跳跃+摇铃","sx":1.013,"sy":0.985,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=8° scale=1.00；尾巴=tail2","i":9,"t":0.45},{"phase":"跳跃+摇铃","sx":0.959,"sy":1.048,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=11° scale=1.00；尾巴=tail3","i":10,"t":0.5},{"phase":"跳跃+摇铃","sx":0.963,"sy":1.044,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=8° scale=1.00；尾巴=tail4","i":11,"t":0.55},{"phase":"跳跃+摇铃","sx":0.992,"sy":1.009,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=0° scale=1.00；尾巴=tail4","i":12,"t":0.6},{"phase":"跳跃+摇铃","sx":1.013,"sy":0.985,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=-6° scale=1.00；尾巴=tail3","i":13,"t":0.65},{"phase":"跳跃+摇铃","sx":1.013,"sy":0.984,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=-8° scale=1.00；尾巴=tail2","i":14,"t":0.7},{"phase":"跳跃+摇铃","sx":1.004,"sy":0.995,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=-4° scale=1.00；尾巴=tail1","i":15,"t":0.75},{"phase":"跳跃+摇铃","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=-0° scale=1.00；尾巴=tail1","i":16,"t":0.8},{"phase":"跳跃+摇铃","sx":1.071,"sy":0.917,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=4° scale=1.05；尾巴=tail2","i":17,"t":0.85},{"phase":"跳跃+摇铃","sx":0.905,"sy":1.112,"dy":-0.87,"dx":0.0,"rot":0,"note":"气泡 rot=8° scale=1.08；尾巴=tail3","i":18,"t":0.9},{"phase":"跳跃+摇铃","sx":0.922,"sy":1.092,"dy":-2.5,"dx":0.0,"rot":0,"note":"气泡 rot=6° scale=1.11；尾巴=tail4","i":19,"t":0.95},{"phase":"跳跃+摇铃","sx":0.939,"sy":1.072,"dy":-3.36,"dx":0.0,"rot":0,"note":"气泡 rot=0° scale=1.12；尾巴=tail4","i":20,"t":1.0},{"phase":"跳跃+摇铃","sx":0.956,"sy":1.052,"dy":-3.44,"dx":0.0,"rot":0,"note":"气泡 rot=-8° scale=1.11；尾巴=tail3","i":21,"t":1.05},{"phase":"跳跃+摇铃","sx":0.973,"sy":1.032,"dy":-2.74,"dx":0.0,"rot":0,"note":"气泡 rot=-11° scale=1.08；尾巴=tail2","i":22,"t":1.1},{"phase":"跳跃+摇铃","sx":0.99,"sy":1.012,"dy":-1.26,"dx":0.0,"rot":0,"note":"气泡 rot=-8° scale=1.05；尾巴=tail1","i":23,"t":1.15},{"phase":"跳跃+摇铃","sx":1.102,"sy":0.88,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=-0° scale=1.00；尾巴=tail1","i":24,"t":1.2},{"phase":"跳跃+摇铃","sx":1.013,"sy":0.985,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=8° scale=1.00；尾巴=tail2","i":25,"t":1.25},{"phase":"跳跃+摇铃","sx":0.959,"sy":1.048,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=11° scale=1.00；尾巴=tail3","i":26,"t":1.3},{"phase":"跳跃+摇铃","sx":0.963,"sy":1.044,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=8° scale=1.00；尾巴=tail4","i":27,"t":1.35},{"phase":"跳跃+摇铃","sx":0.992,"sy":1.009,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=0° scale=1.00；尾巴=tail4","i":28,"t":1.4},{"phase":"跳跃+摇铃","sx":1.013,"sy":0.985,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=-6° scale=1.00；尾巴=tail3","i":29,"t":1.45},{"phase":"跳跃+摇铃","sx":1.013,"sy":0.984,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=-8° scale=1.00；尾巴=tail2","i":30,"t":1.5},{"phase":"跳跃+摇铃","sx":1.004,"sy":0.995,"dy":0.0,"dx":0.0,"rot":0,"note":"气泡 rot=-4° scale=1.00；尾巴=tail1","i":31,"t":1.55}]},{"key":"compacting","file":"compacting","title":"上下文清理（吸入压缩）","en":"Context compaction","state":"sweeping","trigger":"PreCompact（上下文压缩/清理）","seconds":2.8,"n":56,"frame_ms":50,"summary":"把 “上下文碎片” 从喷气孔反向吸进肚子：碎片沿螺旋加速飞入，身体像气球一样越吸越鼓、抖一抖，再用力一挤，吐出一块整整齐齐的压缩方块。","theme_slot":"states.sweeping","phases":[{"t0":0.0,"t1":0.3,"name":"碎片出现","formula":"8 块彩色 token 依次 outBack 弹出"},{"t0":0.3,"t1":1.2,"name":"螺旋吸入","formula":"token 半径 r = r0·(1 − inQuad(u))，角度 += 2.2π·u，越近越小"},{"t0":0.3,"t1":1.2,"name":"越吸越鼓","formula":"amt: 0 → 鼓起 sx=sy=1+0.13·吸入进度（体积变大，不守恒）"},{"t0":1.2,"t1":1.5,"name":"憋气抖动","formula":"sx += 0.035·sin(2π·9t)，sy 反相，眼睛 ><"},{"t0":1.5,"t1":1.65,"name":"用力一挤","formula":"amt → −0.2（压扁），压缩方块从喷气孔 outBack 弹出"},{"t0":1.65,"t1":2.4,"name":"方块落地 + 回弹","formula":"方块抛物线落到左边，身体 impact 阻尼回弹"},{"t0":2.4,"t1":2.8,"name":"收尾","formula":"方块 ✦ 闪光后缩小消失，回到循环起点"}],"sheet":{"cols":8,"rows":7,"w":260,"h":260},"frames":[{"phase":"碎片出现","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":0,"t":0.0},{"phase":"碎片出现","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":1,"t":0.05},{"phase":"碎片出现","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":2,"t":0.1},{"phase":"碎片出现","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":3,"t":0.15},{"phase":"碎片出现","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":4,"t":0.2},{"phase":"碎片出现","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":5,"t":0.25},{"phase":"螺旋吸入","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":6,"t":0.3},{"phase":"螺旋吸入","sx":1.001,"sy":1.001,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":7,"t":0.35},{"phase":"螺旋吸入","sx":1.004,"sy":1.004,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":8,"t":0.4},{"phase":"螺旋吸入","sx":1.009,"sy":1.009,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.01","i":9,"t":0.45},{"phase":"螺旋吸入","sx":1.015,"sy":1.015,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.02","i":10,"t":0.5},{"phase":"螺旋吸入","sx":1.023,"sy":1.023,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.02","i":11,"t":0.55},{"phase":"螺旋吸入","sx":1.032,"sy":1.032,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.03","i":12,"t":0.6},{"phase":"螺旋吸入","sx":1.043,"sy":1.043,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.04","i":13,"t":0.65},{"phase":"螺旋吸入","sx":1.054,"sy":1.054,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.05","i":14,"t":0.7},{"phase":"螺旋吸入","sx":1.065,"sy":1.065,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.07","i":15,"t":0.75},{"phase":"螺旋吸入","sx":1.076,"sy":1.076,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.08","i":16,"t":0.8},{"phase":"螺旋吸入","sx":1.087,"sy":1.087,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.09","i":17,"t":0.85},{"phase":"螺旋吸入","sx":1.098,"sy":1.098,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.10","i":18,"t":0.9},{"phase":"螺旋吸入","sx":1.107,"sy":1.107,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.11","i":19,"t":0.95},{"phase":"螺旋吸入","sx":1.115,"sy":1.115,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.11","i":20,"t":1.0},{"phase":"螺旋吸入","sx":1.121,"sy":1.121,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.12","i":21,"t":1.05},{"phase":"螺旋吸入","sx":1.126,"sy":1.126,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.13","i":22,"t":1.1},{"phase":"螺旋吸入","sx":1.129,"sy":1.129,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.13","i":23,"t":1.15},{"phase":"憋气抖动","sx":1.13,"sy":1.13,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.13","i":24,"t":1.2},{"phase":"憋气抖动","sx":1.141,"sy":1.119,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.13","i":25,"t":1.25},{"phase":"憋气抖动","sx":1.109,"sy":1.151,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.13","i":26,"t":1.3},{"phase":"憋气抖动","sx":1.158,"sy":1.102,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.13","i":27,"t":1.35},{"phase":"憋气抖动","sx":1.097,"sy":1.163,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.13","i":28,"t":1.4},{"phase":"憋气抖动","sx":1.165,"sy":1.095,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.13","i":29,"t":1.45},{"phase":"用力一挤","sx":1.13,"sy":1.13,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.13","i":30,"t":1.5},{"phase":"用力一挤","sx":1.158,"sy":0.94,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.06","i":31,"t":1.55},{"phase":"用力一挤","sx":1.168,"sy":0.834,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.01","i":32,"t":1.6},{"phase":"方块落地+回弹","sx":1.17,"sy":0.8,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":33,"t":1.65},{"phase":"方块落地+回弹","sx":1.078,"sy":0.908,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":34,"t":1.7},{"phase":"方块落地+回弹","sx":0.968,"sy":1.037,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":35,"t":1.75},{"phase":"方块落地+回弹","sx":0.924,"sy":1.09,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":36,"t":1.8},{"phase":"方块落地+回弹","sx":0.949,"sy":1.06,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":37,"t":1.85},{"phase":"方块落地+回弹","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":38,"t":1.9},{"phase":"方块落地+回弹","sx":1.031,"sy":0.964,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":39,"t":1.95},{"phase":"方块落地+回弹","sx":1.028,"sy":0.967,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":40,"t":2.0},{"phase":"方块落地+回弹","sx":1.007,"sy":0.992,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":41,"t":2.05},{"phase":"方块落地+回弹","sx":0.989,"sy":1.012,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":42,"t":2.1},{"phase":"方块落地+回弹","sx":0.986,"sy":1.016,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":43,"t":2.15},{"phase":"方块落地+回弹","sx":0.994,"sy":1.008,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":44,"t":2.2},{"phase":"方块落地+回弹","sx":1.003,"sy":0.997,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":45,"t":2.25},{"phase":"方块落地+回弹","sx":1.006,"sy":0.993,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":46,"t":2.3},{"phase":"方块落地+回弹","sx":1.004,"sy":0.995,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":47,"t":2.35},{"phase":"收尾","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":48,"t":2.4},{"phase":"收尾","sx":0.997,"sy":1.003,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":49,"t":2.45},{"phase":"收尾","sx":0.998,"sy":1.003,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":50,"t":2.5},{"phase":"收尾","sx":0.999,"sy":1.001,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":51,"t":2.55},{"phase":"收尾","sx":1.001,"sy":0.999,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":52,"t":2.6},{"phase":"收尾","sx":1.001,"sy":0.999,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":53,"t":2.65},{"phase":"收尾","sx":1.001,"sy":0.999,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":54,"t":2.7},{"phase":"收尾","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0,"note":"鼓起 0.00","i":55,"t":2.75}]},{"key":"carrying","file":"carrying","title":"搬箱子","en":"Carrying","state":"carrying","trigger":"WorktreeCreate（新建工作树）","seconds":1.6,"n":32,"frame_ms":50,"summary":"头顶一箱新分支，一蹦一蹦地赶路：每一步压扁→弹起；箱子有惯性，比身体慢半拍落下并反向歪斜（次级动作）。","theme_slot":"states.carrying","phases":[{"t0":0.0,"t1":1.6,"name":"蹦跳赶路","formula":"每 0.4s 一步：蓄力 → 2.5px 抛物线 → 落地 impact"},{"t0":0.0,"t1":1.6,"name":"箱子跟随","formula":"箱子 dy = 身体 dy 延迟 0.06s + 弹簧；rot = −6°·身体速度"},{"t0":0.0,"t1":1.6,"name":"尘土","formula":"每次落地从尾部喷出 2 团小烟尘，向右后方飘散"},{"t0":0.0,"t1":1.6,"name":"汗滴","formula":"汗珠沿头侧滑落并淡出"}],"sheet":{"cols":8,"rows":4,"w":260,"h":260},"frames":[{"phase":"蹦跳赶路","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.0°","i":0,"t":0.0},{"phase":"蹦跳赶路","sx":1.069,"sy":0.919,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.0°","i":1,"t":0.05},{"phase":"蹦跳赶路","sx":0.928,"sy":1.085,"dy":-1.27,"dx":0.0,"rot":0,"note":"箱子滞后 1.27px 倾斜 6.4°","i":2,"t":0.1},{"phase":"蹦跳赶路","sx":0.949,"sy":1.06,"dy":-2.4,"dx":0.0,"rot":0,"note":"箱子滞后 1.50px 倾斜 5.6°","i":3,"t":0.15},{"phase":"蹦跳赶路","sx":0.97,"sy":1.035,"dy":-2.27,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.6°","i":4,"t":0.2},{"phase":"蹦跳赶路","sx":0.992,"sy":1.01,"dy":-0.9,"dx":0.0,"rot":0,"note":"箱子滞后 -1.50px 倾斜 -6.9°","i":5,"t":0.25},{"phase":"蹦跳赶路","sx":1.063,"sy":0.925,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 -1.28px 倾斜 -4.5°","i":6,"t":0.3},{"phase":"蹦跳赶路","sx":0.99,"sy":1.012,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.0°","i":7,"t":0.35},{"phase":"蹦跳赶路","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.0°","i":8,"t":0.4},{"phase":"蹦跳赶路","sx":1.069,"sy":0.919,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.0°","i":9,"t":0.45},{"phase":"蹦跳赶路","sx":0.928,"sy":1.085,"dy":-1.27,"dx":0.0,"rot":0,"note":"箱子滞后 1.27px 倾斜 6.4°","i":10,"t":0.5},{"phase":"蹦跳赶路","sx":0.949,"sy":1.06,"dy":-2.4,"dx":0.0,"rot":0,"note":"箱子滞后 1.50px 倾斜 5.6°","i":11,"t":0.55},{"phase":"蹦跳赶路","sx":0.97,"sy":1.035,"dy":-2.28,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.6°","i":12,"t":0.6},{"phase":"蹦跳赶路","sx":0.992,"sy":1.01,"dy":-0.9,"dx":0.0,"rot":0,"note":"箱子滞后 -1.50px 倾斜 -6.9°","i":13,"t":0.65},{"phase":"蹦跳赶路","sx":1.063,"sy":0.925,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 -1.28px 倾斜 -4.5°","i":14,"t":0.7},{"phase":"蹦跳赶路","sx":0.99,"sy":1.012,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.0°","i":15,"t":0.75},{"phase":"蹦跳赶路","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.0°","i":16,"t":0.8},{"phase":"蹦跳赶路","sx":1.069,"sy":0.919,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.0°","i":17,"t":0.85},{"phase":"蹦跳赶路","sx":0.928,"sy":1.085,"dy":-1.27,"dx":0.0,"rot":0,"note":"箱子滞后 1.27px 倾斜 6.4°","i":18,"t":0.9},{"phase":"蹦跳赶路","sx":0.949,"sy":1.06,"dy":-2.4,"dx":0.0,"rot":0,"note":"箱子滞后 1.50px 倾斜 5.6°","i":19,"t":0.95},{"phase":"蹦跳赶路","sx":0.97,"sy":1.035,"dy":-2.28,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.6°","i":20,"t":1.0},{"phase":"蹦跳赶路","sx":0.992,"sy":1.01,"dy":-0.9,"dx":0.0,"rot":0,"note":"箱子滞后 -1.50px 倾斜 -6.9°","i":21,"t":1.05},{"phase":"蹦跳赶路","sx":1.063,"sy":0.925,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 -1.28px 倾斜 -4.5°","i":22,"t":1.1},{"phase":"蹦跳赶路","sx":0.99,"sy":1.012,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.0°","i":23,"t":1.15},{"phase":"蹦跳赶路","sx":0.965,"sy":1.041,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.0°","i":24,"t":1.2},{"phase":"蹦跳赶路","sx":1.069,"sy":0.919,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.0°","i":25,"t":1.25},{"phase":"蹦跳赶路","sx":0.928,"sy":1.085,"dy":-1.27,"dx":0.0,"rot":0,"note":"箱子滞后 1.27px 倾斜 6.4°","i":26,"t":1.3},{"phase":"蹦跳赶路","sx":0.949,"sy":1.06,"dy":-2.4,"dx":0.0,"rot":0,"note":"箱子滞后 1.50px 倾斜 5.6°","i":27,"t":1.35},{"phase":"蹦跳赶路","sx":0.97,"sy":1.035,"dy":-2.28,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.6°","i":28,"t":1.4},{"phase":"蹦跳赶路","sx":0.991,"sy":1.01,"dy":-0.9,"dx":0.0,"rot":0,"note":"箱子滞后 -1.50px 倾斜 -6.9°","i":29,"t":1.45},{"phase":"蹦跳赶路","sx":1.063,"sy":0.925,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 -1.28px 倾斜 -4.5°","i":30,"t":1.5},{"phase":"蹦跳赶路","sx":0.99,"sy":1.012,"dy":0.0,"dx":0.0,"rot":0,"note":"箱子滞后 0.00px 倾斜 -0.0°","i":31,"t":1.55}]},{"key":"sleeping","file":"sleeping","title":"呼呼大睡","en":"Sleeping","state":"sleeping","trigger":"鼠标 60s 无操作 / 免打扰","seconds":3.2,"n":64,"frame_ms":50,"summary":"戴着睡帽趴着睡：缓慢深呼吸，身体随呼吸起伏；鼻子吹出一个鼻涕泡越鼓越大然后“啵”地破掉，Zzz 摇摆着飘上去。","theme_slot":"states.sleeping","phases":[{"t0":0.0,"t1":3.2,"name":"深呼吸","formula":"sy = 0.96 + 0.04·sin(2πt/1.6)，sx 反向；睡帽尖跟着晃"},{"t0":0.0,"t1":2.3,"name":"吹鼻涕泡","formula":"泡泡半径 = 1 + 3.5·inOutSine(u)，随呼吸微颤"},{"t0":2.3,"t1":2.5,"name":"泡泡破","formula":"碎成 6 个水点向外飞散"},{"t0":0.0,"t1":3.2,"name":"Zzz","formula":"每 1.07s 一个 Z：y −= 9t，x += 1.5·sin(4t)，尺寸由小变大后淡出"}],"sheet":{"cols":8,"rows":8,"w":260,"h":260},"frames":[{"phase":"吹鼻涕泡","sx":1.02,"sy":0.96,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":0,"t":0.0},{"phase":"吹鼻涕泡","sx":1.014,"sy":0.968,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":1,"t":0.05},{"phase":"吹鼻涕泡","sx":1.009,"sy":0.975,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":2,"t":0.1},{"phase":"吹鼻涕泡","sx":1.003,"sy":0.982,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":3,"t":0.15},{"phase":"吹鼻涕泡","sx":0.999,"sy":0.988,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":4,"t":0.2},{"phase":"吹鼻涕泡","sx":0.995,"sy":0.993,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":5,"t":0.25},{"phase":"吹鼻涕泡","sx":0.992,"sy":0.997,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":6,"t":0.3},{"phase":"吹鼻涕泡","sx":0.991,"sy":0.999,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":7,"t":0.35},{"phase":"吹鼻涕泡","sx":0.99,"sy":1.0,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":8,"t":0.4},{"phase":"吹鼻涕泡","sx":0.991,"sy":0.999,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":9,"t":0.45},{"phase":"吹鼻涕泡","sx":0.992,"sy":0.997,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":10,"t":0.5},{"phase":"吹鼻涕泡","sx":0.995,"sy":0.993,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":11,"t":0.55},{"phase":"吹鼻涕泡","sx":0.999,"sy":0.988,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":12,"t":0.6},{"phase":"吹鼻涕泡","sx":1.003,"sy":0.982,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":13,"t":0.65},{"phase":"吹鼻涕泡","sx":1.009,"sy":0.975,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":14,"t":0.7},{"phase":"吹鼻涕泡","sx":1.014,"sy":0.968,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":15,"t":0.75},{"phase":"吹鼻涕泡","sx":1.02,"sy":0.96,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":16,"t":0.8},{"phase":"吹鼻涕泡","sx":1.026,"sy":0.952,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":17,"t":0.85},{"phase":"吹鼻涕泡","sx":1.031,"sy":0.945,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":18,"t":0.9},{"phase":"吹鼻涕泡","sx":1.037,"sy":0.938,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":19,"t":0.95},{"phase":"吹鼻涕泡","sx":1.041,"sy":0.932,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":20,"t":1.0},{"phase":"吹鼻涕泡","sx":1.045,"sy":0.927,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":21,"t":1.05},{"phase":"吹鼻涕泡","sx":1.048,"sy":0.923,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":22,"t":1.1},{"phase":"吹鼻涕泡","sx":1.049,"sy":0.921,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":23,"t":1.15},{"phase":"吹鼻涕泡","sx":1.05,"sy":0.92,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":24,"t":1.2},{"phase":"吹鼻涕泡","sx":1.049,"sy":0.921,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":25,"t":1.25},{"phase":"吹鼻涕泡","sx":1.048,"sy":0.923,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":26,"t":1.3},{"phase":"吹鼻涕泡","sx":1.045,"sy":0.927,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":27,"t":1.35},{"phase":"吹鼻涕泡","sx":1.041,"sy":0.932,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":28,"t":1.4},{"phase":"吹鼻涕泡","sx":1.037,"sy":0.938,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":29,"t":1.45},{"phase":"吹鼻涕泡","sx":1.031,"sy":0.945,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":30,"t":1.5},{"phase":"吹鼻涕泡","sx":1.026,"sy":0.952,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":31,"t":1.55},{"phase":"吹鼻涕泡","sx":1.02,"sy":0.96,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":32,"t":1.6},{"phase":"吹鼻涕泡","sx":1.014,"sy":0.968,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":33,"t":1.65},{"phase":"吹鼻涕泡","sx":1.009,"sy":0.975,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":34,"t":1.7},{"phase":"吹鼻涕泡","sx":1.003,"sy":0.982,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":35,"t":1.75},{"phase":"吹鼻涕泡","sx":0.999,"sy":0.988,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":36,"t":1.8},{"phase":"吹鼻涕泡","sx":0.995,"sy":0.993,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":37,"t":1.85},{"phase":"吹鼻涕泡","sx":0.992,"sy":0.997,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":38,"t":1.9},{"phase":"吹鼻涕泡","sx":0.991,"sy":0.999,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":39,"t":1.95},{"phase":"吹鼻涕泡","sx":0.99,"sy":1.0,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":40,"t":2.0},{"phase":"吹鼻涕泡","sx":0.991,"sy":0.999,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":41,"t":2.05},{"phase":"吹鼻涕泡","sx":0.992,"sy":0.997,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":42,"t":2.1},{"phase":"吹鼻涕泡","sx":0.995,"sy":0.993,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":43,"t":2.15},{"phase":"吹鼻涕泡","sx":0.999,"sy":0.988,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":44,"t":2.2},{"phase":"吹鼻涕泡","sx":1.003,"sy":0.982,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":45,"t":2.25},{"phase":"泡泡破","sx":1.009,"sy":0.975,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":46,"t":2.3},{"phase":"泡泡破","sx":1.014,"sy":0.968,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":47,"t":2.35},{"phase":"泡泡破","sx":1.02,"sy":0.96,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":48,"t":2.4},{"phase":"泡泡破","sx":1.026,"sy":0.952,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":49,"t":2.45},{"phase":"深呼吸","sx":1.031,"sy":0.945,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":50,"t":2.5},{"phase":"深呼吸","sx":1.037,"sy":0.938,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":51,"t":2.55},{"phase":"深呼吸","sx":1.041,"sy":0.932,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":52,"t":2.6},{"phase":"深呼吸","sx":1.045,"sy":0.927,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":53,"t":2.65},{"phase":"深呼吸","sx":1.048,"sy":0.923,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":54,"t":2.7},{"phase":"深呼吸","sx":1.049,"sy":0.921,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":55,"t":2.75},{"phase":"深呼吸","sx":1.05,"sy":0.92,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":56,"t":2.8},{"phase":"深呼吸","sx":1.049,"sy":0.921,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":57,"t":2.85},{"phase":"深呼吸","sx":1.048,"sy":0.923,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":58,"t":2.9},{"phase":"深呼吸","sx":1.045,"sy":0.927,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":59,"t":2.95},{"phase":"深呼吸","sx":1.041,"sy":0.932,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":60,"t":3.0},{"phase":"深呼吸","sx":1.037,"sy":0.938,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":61,"t":3.05},{"phase":"深呼吸","sx":1.031,"sy":0.945,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":62,"t":3.1},{"phase":"深呼吸","sx":1.026,"sy":0.952,"dy":0,"dx":0.0,"rot":0,"note":"呼吸周期 1.6s","i":63,"t":3.15}]},{"key":"waking","file":"waking","title":"惊醒","en":"Waking up","state":"waking","trigger":"睡眠中移动鼠标","seconds":1.5,"n":30,"frame_ms":50,"summary":"被鼠标吵醒：眼睛“唰”地睁大，吓得原地弹起，睡帽被甩飞出画面；落地挤压回弹后甩甩头恢复精神。","theme_slot":"states.waking","phases":[{"t0":0.0,"t1":0.15,"name":"睁眼","formula":"closed → ring（瞪大），头顶弹出“!”"},{"t0":0.15,"t1":0.25,"name":"蓄力","formula":"amt → −0.2"},{"t0":0.25,"t1":0.7,"name":"弹起","formula":"dy = −9·jumpArc，amt 由 +0.24 衰减；睡帽沿抛物线飞走并旋转 540°"},{"t0":0.7,"t1":1.2,"name":"落地回弹","formula":"impact(A=0.24, f=3, damp=5)"},{"t0":1.1,"t1":1.5,"name":"甩头","formula":"rot = 6°·e^(−6t)·sin(2π·4t)，眼睛眨一下变回 open"}],"sheet":{"cols":8,"rows":4,"w":260,"h":260},"frames":[{"phase":"睁眼","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":0,"t":0.0},{"phase":"睁眼","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":1,"t":0.05},{"phase":"睁眼","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":2,"t":0.1},{"phase":"蓄力","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":3,"t":0.15},{"phase":"蓄力","sx":1.042,"sy":0.95,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":4,"t":0.2},{"phase":"弹起","sx":0.796,"sy":1.24,"dy":-0.0,"dx":0.0,"rot":0.0,"note":"","i":5,"t":0.25},{"phase":"弹起","sx":0.839,"sy":1.19,"dy":-3.56,"dx":0.0,"rot":0.0,"note":"","i":6,"t":0.3},{"phase":"弹起","sx":0.877,"sy":1.145,"dy":-6.22,"dx":0.0,"rot":0.0,"note":"","i":7,"t":0.35},{"phase":"弹起","sx":0.909,"sy":1.107,"dy":-8.0,"dx":0.0,"rot":0.0,"note":"","i":8,"t":0.4},{"phase":"弹起","sx":0.937,"sy":1.074,"dy":-8.89,"dx":0.0,"rot":0.0,"note":"","i":9,"t":0.45},{"phase":"弹起","sx":0.96,"sy":1.047,"dy":-8.89,"dx":0.0,"rot":0.0,"note":"","i":10,"t":0.5},{"phase":"弹起","sx":0.977,"sy":1.027,"dy":-8.0,"dx":0.0,"rot":0.0,"note":"","i":11,"t":0.55},{"phase":"弹起","sx":0.99,"sy":1.012,"dy":-6.22,"dx":0.0,"rot":0.0,"note":"","i":12,"t":0.6},{"phase":"弹起","sx":0.997,"sy":1.003,"dy":-3.56,"dx":0.0,"rot":0.0,"note":"","i":13,"t":0.65},{"phase":"落地回弹","sx":1.204,"sy":0.76,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":14,"t":0.7},{"phase":"落地回弹","sx":1.093,"sy":0.89,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":15,"t":0.75},{"phase":"落地回弹","sx":0.962,"sy":1.045,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":16,"t":0.8},{"phase":"落地回弹","sx":0.908,"sy":1.108,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":17,"t":0.85},{"phase":"落地回弹","sx":0.939,"sy":1.071,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":18,"t":0.9},{"phase":"落地回弹","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":19,"t":0.95},{"phase":"落地回弹","sx":1.037,"sy":0.957,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":20,"t":1.0},{"phase":"落地回弹","sx":1.034,"sy":0.96,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":21,"t":1.05},{"phase":"甩头","sx":1.009,"sy":0.99,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":22,"t":1.1},{"phase":"甩头","sx":0.987,"sy":1.015,"dy":0.0,"dx":0.0,"rot":4.2,"note":"","i":23,"t":1.15},{"phase":"甩头","sx":0.983,"sy":1.02,"dy":0.0,"dx":0.0,"rot":1.9,"note":"","i":24,"t":1.2},{"phase":"甩头","sx":0.992,"sy":1.009,"dy":0.0,"dx":0.0,"rot":-1.4,"note":"","i":25,"t":1.25},{"phase":"甩头","sx":1.003,"sy":0.996,"dy":0.0,"dx":0.0,"rot":-1.7,"note":"","i":26,"t":1.3},{"phase":"甩头","sx":1.008,"sy":0.991,"dy":0.0,"dx":0.0,"rot":-0.0,"note":"","i":27,"t":1.35},{"phase":"甩头","sx":1.005,"sy":0.994,"dy":0.0,"dx":0.0,"rot":0.9,"note":"","i":28,"t":1.4},{"phase":"甩头","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.4,"note":"","i":29,"t":1.45}]},{"key":"poke-left","file":"react-left","title":"戳左边","en":"Poke (left)","state":"reaction","trigger":"双击宠物左半边","seconds":2.0,"n":40,"frame_ms":50,"summary":"被戳到脸：像果冻一样被挤扁并向另一侧歪倒，然后以阻尼振荡 Q 弹回正，害羞地冒出一颗爱心。","theme_slot":"reactions.clickLeft","phases":[{"t0":0.0,"t1":0.12,"name":"被戳","formula":"amt → −0.16，rot → 7°（倒向被戳的反方向），dx 被推开 1.5px"},{"t0":0.12,"t1":1.0,"name":"果冻回弹","formula":"rot = 7°·e^(−4t)·cos(2π·3.2t)，amt = −0.16·e^(−4.5t)·cos(2π·3.6t)"},{"t0":0.5,"t1":1.6,"name":"害羞冒心","formula":"爱心 outBack 弹出后上浮淡出，脸颊变红"}],"sheet":{"cols":8,"rows":5,"w":260,"h":260},"frames":[{"phase":"被戳","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"","i":0,"t":0.0},{"phase":"被戳","sx":1.09,"sy":0.894,"dy":0,"dx":0.99,"rot":4.6,"note":"","i":1,"t":0.05},{"phase":"被戳","sx":1.132,"sy":0.844,"dy":0,"dx":1.46,"rot":6.8,"note":"","i":2,"t":0.1},{"phase":"果冻回弹","sx":1.093,"sy":0.891,"dy":0,"dx":1.29,"rot":5.1,"note":"","i":3,"t":0.15},{"phase":"果冻回弹","sx":0.978,"sy":1.026,"dy":0,"dx":1.01,"rot":-0.2,"note":"","i":4,"t":0.2},{"phase":"果冻回弹","sx":0.926,"sy":1.087,"dy":0,"dx":0.78,"rot":-3.6,"note":"","i":5,"t":0.25},{"phase":"果冻回弹","sx":0.964,"sy":1.043,"dy":0,"dx":0.61,"rot":-3.0,"note":"","i":6,"t":0.3},{"phase":"果冻回弹","sx":1.023,"sy":0.973,"dy":0,"dx":0.47,"rot":-0.2,"note":"","i":7,"t":0.35},{"phase":"果冻回弹","sx":1.039,"sy":0.955,"dy":0,"dx":0.37,"rot":1.8,"note":"","i":8,"t":0.4},{"phase":"果冻回弹","sx":1.012,"sy":0.986,"dy":0,"dx":0.29,"rot":1.8,"note":"","i":9,"t":0.45},{"phase":"果冻回弹","sx":0.983,"sy":1.02,"dy":0,"dx":0.22,"rot":0.3,"note":"","i":10,"t":0.5},{"phase":"果冻回弹","sx":0.981,"sy":1.022,"dy":0,"dx":0.17,"rot":-0.9,"note":"","i":11,"t":0.55},{"phase":"果冻回弹","sx":0.998,"sy":1.003,"dy":0,"dx":0.14,"rot":-1.0,"note":"","i":12,"t":0.6},{"phase":"果冻回弹","sx":1.01,"sy":0.988,"dy":0,"dx":0.11,"rot":-0.3,"note":"","i":13,"t":0.65},{"phase":"果冻回弹","sx":1.009,"sy":0.99,"dy":0,"dx":0.08,"rot":0.4,"note":"","i":14,"t":0.7},{"phase":"果冻回弹","sx":0.999,"sy":1.001,"dy":0,"dx":0.06,"rot":0.6,"note":"","i":15,"t":0.75},{"phase":"果冻回弹","sx":0.994,"sy":1.007,"dy":0,"dx":0.05,"rot":0.2,"note":"","i":16,"t":0.8},{"phase":"果冻回弹","sx":0.996,"sy":1.004,"dy":0,"dx":0.04,"rot":-0.2,"note":"","i":17,"t":0.85},{"phase":"果冻回弹","sx":1.001,"sy":0.998,"dy":0,"dx":0.03,"rot":-0.3,"note":"","i":18,"t":0.9},{"phase":"果冻回弹","sx":1.003,"sy":0.996,"dy":0,"dx":0.02,"rot":-0.1,"note":"","i":19,"t":0.95},{"phase":"害羞冒心","sx":1.001,"sy":0.998,"dy":0,"dx":0.02,"rot":0.1,"note":"","i":20,"t":1.0},{"phase":"害羞冒心","sx":0.999,"sy":1.001,"dy":0,"dx":0.01,"rot":0.2,"note":"","i":21,"t":1.05},{"phase":"害羞冒心","sx":0.998,"sy":1.002,"dy":0,"dx":0.01,"rot":0.1,"note":"","i":22,"t":1.1},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.01,"rot":-0.0,"note":"","i":23,"t":1.15},{"phase":"害羞冒心","sx":1.001,"sy":0.999,"dy":0,"dx":0.01,"rot":-0.1,"note":"","i":24,"t":1.2},{"phase":"害羞冒心","sx":1.001,"sy":0.999,"dy":0,"dx":0.01,"rot":-0.1,"note":"","i":25,"t":1.25},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"","i":26,"t":1.3},{"phase":"害羞冒心","sx":1.0,"sy":1.001,"dy":0,"dx":0.0,"rot":0.0,"note":"","i":27,"t":1.35},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"","i":28,"t":1.4},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-0.0,"note":"","i":29,"t":1.45},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-0.0,"note":"","i":30,"t":1.5},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-0.0,"note":"","i":31,"t":1.55},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-0.0,"note":"","i":32,"t":1.6},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"","i":33,"t":1.65},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"","i":34,"t":1.7},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"","i":35,"t":1.75},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-0.0,"note":"","i":36,"t":1.8},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-0.0,"note":"","i":37,"t":1.85},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":-0.0,"note":"","i":38,"t":1.9},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":0.0,"rot":0.0,"note":"","i":39,"t":1.95}]},{"key":"poke-right","file":"react-right","title":"戳右边","en":"Poke (right)","state":"reaction","trigger":"双击宠物右半边","seconds":2.0,"n":40,"frame_ms":50,"summary":"被戳到尾巴：同样的果冻阻尼回弹，但向相反方向倒。","theme_slot":"reactions.clickRight","phases":[{"t0":0.0,"t1":0.12,"name":"被戳","formula":"amt → −0.16，rot → −7°，dx 被推开"},{"t0":0.12,"t1":1.0,"name":"果冻回弹","formula":"同左，方向相反"},{"t0":0.5,"t1":1.6,"name":"害羞冒心","formula":"爱心弹出上浮"}],"sheet":{"cols":8,"rows":5,"w":260,"h":260},"frames":[{"phase":"被戳","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":-0.0,"note":"","i":0,"t":0.0},{"phase":"被戳","sx":1.09,"sy":0.894,"dy":0,"dx":-0.99,"rot":-4.6,"note":"","i":1,"t":0.05},{"phase":"被戳","sx":1.132,"sy":0.844,"dy":0,"dx":-1.46,"rot":-6.8,"note":"","i":2,"t":0.1},{"phase":"果冻回弹","sx":1.093,"sy":0.891,"dy":0,"dx":-1.29,"rot":-5.1,"note":"","i":3,"t":0.15},{"phase":"果冻回弹","sx":0.978,"sy":1.026,"dy":0,"dx":-1.01,"rot":0.2,"note":"","i":4,"t":0.2},{"phase":"果冻回弹","sx":0.926,"sy":1.087,"dy":0,"dx":-0.78,"rot":3.6,"note":"","i":5,"t":0.25},{"phase":"果冻回弹","sx":0.964,"sy":1.043,"dy":0,"dx":-0.61,"rot":3.0,"note":"","i":6,"t":0.3},{"phase":"果冻回弹","sx":1.023,"sy":0.973,"dy":0,"dx":-0.47,"rot":0.2,"note":"","i":7,"t":0.35},{"phase":"果冻回弹","sx":1.039,"sy":0.955,"dy":0,"dx":-0.37,"rot":-1.8,"note":"","i":8,"t":0.4},{"phase":"果冻回弹","sx":1.012,"sy":0.986,"dy":0,"dx":-0.29,"rot":-1.8,"note":"","i":9,"t":0.45},{"phase":"果冻回弹","sx":0.983,"sy":1.02,"dy":0,"dx":-0.22,"rot":-0.3,"note":"","i":10,"t":0.5},{"phase":"果冻回弹","sx":0.981,"sy":1.022,"dy":0,"dx":-0.17,"rot":0.9,"note":"","i":11,"t":0.55},{"phase":"果冻回弹","sx":0.998,"sy":1.003,"dy":0,"dx":-0.14,"rot":1.0,"note":"","i":12,"t":0.6},{"phase":"果冻回弹","sx":1.01,"sy":0.988,"dy":0,"dx":-0.11,"rot":0.3,"note":"","i":13,"t":0.65},{"phase":"果冻回弹","sx":1.009,"sy":0.99,"dy":0,"dx":-0.08,"rot":-0.4,"note":"","i":14,"t":0.7},{"phase":"果冻回弹","sx":0.999,"sy":1.001,"dy":0,"dx":-0.06,"rot":-0.6,"note":"","i":15,"t":0.75},{"phase":"果冻回弹","sx":0.994,"sy":1.007,"dy":0,"dx":-0.05,"rot":-0.2,"note":"","i":16,"t":0.8},{"phase":"果冻回弹","sx":0.996,"sy":1.004,"dy":0,"dx":-0.04,"rot":0.2,"note":"","i":17,"t":0.85},{"phase":"果冻回弹","sx":1.001,"sy":0.998,"dy":0,"dx":-0.03,"rot":0.3,"note":"","i":18,"t":0.9},{"phase":"果冻回弹","sx":1.003,"sy":0.996,"dy":0,"dx":-0.02,"rot":0.1,"note":"","i":19,"t":0.95},{"phase":"害羞冒心","sx":1.001,"sy":0.998,"dy":0,"dx":-0.02,"rot":-0.1,"note":"","i":20,"t":1.0},{"phase":"害羞冒心","sx":0.999,"sy":1.001,"dy":0,"dx":-0.01,"rot":-0.2,"note":"","i":21,"t":1.05},{"phase":"害羞冒心","sx":0.998,"sy":1.002,"dy":0,"dx":-0.01,"rot":-0.1,"note":"","i":22,"t":1.1},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.01,"rot":0.0,"note":"","i":23,"t":1.15},{"phase":"害羞冒心","sx":1.001,"sy":0.999,"dy":0,"dx":-0.01,"rot":0.1,"note":"","i":24,"t":1.2},{"phase":"害羞冒心","sx":1.001,"sy":0.999,"dy":0,"dx":-0.01,"rot":0.1,"note":"","i":25,"t":1.25},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":-0.0,"note":"","i":26,"t":1.3},{"phase":"害羞冒心","sx":1.0,"sy":1.001,"dy":0,"dx":-0.0,"rot":-0.0,"note":"","i":27,"t":1.35},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":-0.0,"note":"","i":28,"t":1.4},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":0.0,"note":"","i":29,"t":1.45},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":0.0,"note":"","i":30,"t":1.5},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":0.0,"note":"","i":31,"t":1.55},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":0.0,"note":"","i":32,"t":1.6},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":-0.0,"note":"","i":33,"t":1.65},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":-0.0,"note":"","i":34,"t":1.7},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":-0.0,"note":"","i":35,"t":1.75},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":0.0,"note":"","i":36,"t":1.8},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":0.0,"note":"","i":37,"t":1.85},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":0.0,"note":"","i":38,"t":1.9},{"phase":"害羞冒心","sx":1.0,"sy":1.0,"dy":0,"dx":-0.0,"rot":-0.0,"note":"","i":39,"t":1.95}]},{"key":"tickle","file":"react-double","title":"被挠痒痒","en":"Tickled","state":"reaction","trigger":"连续快速点击 4 下","seconds":2.4,"n":48,"frame_ms":50,"summary":"被连点到笑出声：身体高频抖动、左右扭动、尾巴乱拍，笑到眯眼张嘴，冒出爱心和星星；最后长舒一口气回稳。","theme_slot":"reactions.double","phases":[{"t0":0.0,"t1":1.5,"name":"狂笑抖动","formula":"amt = 0.1·sin(2π·7t)，rot = 8°·sin(2π·2.5t)，dy = −1.5·|sin(2π·3.5t)|"},{"t0":0.0,"t1":1.5,"name":"乱拍尾巴","formula":"尾巴姿态随机切换（固定种子）"},{"t0":0.1,"t1":1.6,"name":"冒心冒星","formula":"每 0.25s 发射一个，随机方向飘散"},{"t0":1.5,"t1":2.4,"name":"长舒一口气","formula":"振幅 × e^(−5t) 衰减，眼睛 ^^ → open"}],"sheet":{"cols":8,"rows":6,"w":260,"h":260},"frames":[{"phase":"狂笑抖动","sx":1.0,"sy":1.0,"dy":-0.0,"dx":0.0,"rot":0.0,"note":"振幅系数 1.00 尾巴=fin2","i":0,"t":0.0},{"phase":"狂笑抖动","sx":0.931,"sy":1.081,"dy":-1.34,"dx":0.0,"rot":5.7,"note":"振幅系数 1.00 尾巴=fin2","i":1,"t":0.05},{"phase":"狂笑抖动","sx":1.081,"sy":0.905,"dy":-1.21,"dx":0.0,"rot":8.0,"note":"振幅系数 1.00 尾巴=fin2","i":2,"t":0.1},{"phase":"狂笑抖动","sx":0.974,"sy":1.031,"dy":-0.23,"dx":0.0,"rot":5.7,"note":"振幅系数 1.00 尾巴=fin2","i":3,"t":0.15},{"phase":"狂笑抖动","sx":0.95,"sy":1.059,"dy":-1.43,"dx":0.0,"rot":0.0,"note":"振幅系数 1.00 尾巴=tail3","i":4,"t":0.2},{"phase":"狂笑抖动","sx":1.085,"sy":0.9,"dy":-1.06,"dx":0.0,"rot":-5.7,"note":"振幅系数 1.00 尾巴=tail3","i":5,"t":0.25},{"phase":"狂笑抖动","sx":0.95,"sy":1.059,"dy":-0.46,"dx":0.0,"rot":-8.0,"note":"振幅系数 1.00 尾巴=tail2","i":6,"t":0.3},{"phase":"狂笑抖动","sx":0.974,"sy":1.031,"dy":-1.48,"dx":0.0,"rot":-5.7,"note":"振幅系数 1.00 尾巴=tail2","i":7,"t":0.35},{"phase":"狂笑抖动","sx":1.081,"sy":0.905,"dy":-0.88,"dx":0.0,"rot":-0.0,"note":"振幅系数 1.00 尾巴=tail4","i":8,"t":0.4},{"phase":"狂笑抖动","sx":0.931,"sy":1.081,"dy":-0.68,"dx":0.0,"rot":5.7,"note":"振幅系数 1.00 尾巴=tail4","i":9,"t":0.45},{"phase":"狂笑抖动","sx":1.0,"sy":1.0,"dy":-1.5,"dx":0.0,"rot":8.0,"note":"振幅系数 1.00 尾巴=fin2","i":10,"t":0.5},{"phase":"狂笑抖动","sx":1.069,"sy":0.919,"dy":-0.68,"dx":0.0,"rot":5.7,"note":"振幅系数 1.00 尾巴=fin2","i":11,"t":0.55},{"phase":"狂笑抖动","sx":0.919,"sy":1.095,"dy":-0.88,"dx":0.0,"rot":0.0,"note":"振幅系数 1.00 尾巴=tail4","i":12,"t":0.6},{"phase":"狂笑抖动","sx":1.026,"sy":0.969,"dy":-1.48,"dx":0.0,"rot":-5.7,"note":"振幅系数 1.00 尾巴=tail4","i":13,"t":0.65},{"phase":"狂笑抖动","sx":1.05,"sy":0.941,"dy":-0.46,"dx":0.0,"rot":-8.0,"note":"振幅系数 1.00 尾巴=tail4","i":14,"t":0.7},{"phase":"狂笑抖动","sx":0.915,"sy":1.1,"dy":-1.06,"dx":0.0,"rot":-5.7,"note":"振幅系数 1.00 尾巴=tail4","i":15,"t":0.75},{"phase":"狂笑抖动","sx":1.05,"sy":0.941,"dy":-1.43,"dx":0.0,"rot":-0.0,"note":"振幅系数 1.00 尾巴=tail3","i":16,"t":0.8},{"phase":"狂笑抖动","sx":1.026,"sy":0.969,"dy":-0.23,"dx":0.0,"rot":5.7,"note":"振幅系数 1.00 尾巴=tail3","i":17,"t":0.85},{"phase":"狂笑抖动","sx":0.919,"sy":1.095,"dy":-1.21,"dx":0.0,"rot":8.0,"note":"振幅系数 1.00 尾巴=tail1","i":18,"t":0.9},{"phase":"狂笑抖动","sx":1.069,"sy":0.919,"dy":-1.34,"dx":0.0,"rot":5.7,"note":"振幅系数 1.00 尾巴=tail1","i":19,"t":0.95},{"phase":"狂笑抖动","sx":1.0,"sy":1.0,"dy":-0.0,"dx":0.0,"rot":0.0,"note":"振幅系数 1.00 尾巴=tail2","i":20,"t":1.0},{"phase":"狂笑抖动","sx":0.931,"sy":1.081,"dy":-1.34,"dx":0.0,"rot":-5.7,"note":"振幅系数 1.00 尾巴=tail2","i":21,"t":1.05},{"phase":"狂笑抖动","sx":1.081,"sy":0.905,"dy":-1.21,"dx":0.0,"rot":-8.0,"note":"振幅系数 1.00 尾巴=tail3","i":22,"t":1.1},{"phase":"狂笑抖动","sx":0.974,"sy":1.031,"dy":-0.23,"dx":0.0,"rot":-5.7,"note":"振幅系数 1.00 尾巴=tail3","i":23,"t":1.15},{"phase":"狂笑抖动","sx":0.95,"sy":1.059,"dy":-1.43,"dx":0.0,"rot":-0.0,"note":"振幅系数 1.00 尾巴=fin2","i":24,"t":1.2},{"phase":"狂笑抖动","sx":1.085,"sy":0.9,"dy":-1.06,"dx":0.0,"rot":5.7,"note":"振幅系数 1.00 尾巴=fin2","i":25,"t":1.25},{"phase":"狂笑抖动","sx":0.95,"sy":1.059,"dy":-0.46,"dx":0.0,"rot":8.0,"note":"振幅系数 1.00 尾巴=tail2","i":26,"t":1.3},{"phase":"狂笑抖动","sx":0.974,"sy":1.031,"dy":-1.48,"dx":0.0,"rot":5.7,"note":"振幅系数 1.00 尾巴=tail2","i":27,"t":1.35},{"phase":"狂笑抖动","sx":1.081,"sy":0.905,"dy":-0.88,"dx":0.0,"rot":0.0,"note":"振幅系数 1.00 尾巴=tail1","i":28,"t":1.4},{"phase":"狂笑抖动","sx":0.931,"sy":1.081,"dy":-0.68,"dx":0.0,"rot":-5.7,"note":"振幅系数 1.00 尾巴=tail1","i":29,"t":1.45},{"phase":"长舒一口气","sx":1.0,"sy":1.0,"dy":-1.5,"dx":0.0,"rot":-8.0,"note":"振幅系数 1.00 尾巴=rest","i":30,"t":1.5},{"phase":"长舒一口气","sx":1.054,"sy":0.937,"dy":-0.53,"dx":0.0,"rot":-4.4,"note":"振幅系数 0.78 尾巴=rest","i":31,"t":1.55},{"phase":"长舒一口气","sx":0.951,"sy":1.058,"dy":-0.53,"dx":0.0,"rot":-0.0,"note":"振幅系数 0.61 尾巴=rest","i":32,"t":1.6},{"phase":"长舒一口气","sx":1.012,"sy":0.985,"dy":-0.7,"dx":0.0,"rot":2.7,"note":"振幅系数 0.47 尾巴=rest","i":33,"t":1.65},{"phase":"长舒一口气","sx":1.018,"sy":0.978,"dy":-0.17,"dx":0.0,"rot":2.9,"note":"振幅系数 0.37 尾巴=rest","i":34,"t":1.7},{"phase":"长舒一口气","sx":0.976,"sy":1.029,"dy":-0.3,"dx":0.0,"rot":1.6,"note":"振幅系数 0.29 尾巴=rest","i":35,"t":1.75},{"phase":"长舒一口气","sx":1.011,"sy":0.987,"dy":-0.32,"dx":0.0,"rot":0.0,"note":"振幅系数 0.22 尾巴=rest","i":36,"t":1.8},{"phase":"长舒一口气","sx":1.005,"sy":0.995,"dy":-0.04,"dx":0.0,"rot":-1.0,"note":"振幅系数 0.17 尾巴=rest","i":37,"t":1.85},{"phase":"长舒一口气","sx":0.989,"sy":1.013,"dy":-0.16,"dx":0.0,"rot":-1.1,"note":"振幅系数 0.14 尾巴=rest","i":38,"t":1.9},{"phase":"长舒一口气","sx":1.007,"sy":0.991,"dy":-0.14,"dx":0.0,"rot":-0.6,"note":"振幅系数 0.11 尾巴=rest","i":39,"t":1.95},{"phase":"长舒一口气","sx":1.0,"sy":1.0,"dy":-0.0,"dx":0.0,"rot":-0.0,"note":"振幅系数 0.08 尾巴=rest","i":40,"t":2.0},{"phase":"长舒一口气","sx":0.996,"sy":1.005,"dy":-0.09,"dx":0.0,"rot":0.4,"note":"振幅系数 0.06 尾巴=rest","i":41,"t":2.05},{"phase":"长舒一口气","sx":1.004,"sy":0.995,"dy":-0.06,"dx":0.0,"rot":0.4,"note":"振幅系数 0.05 尾巴=rest","i":42,"t":2.1},{"phase":"长舒一口气","sx":0.999,"sy":1.001,"dy":-0.01,"dx":0.0,"rot":0.2,"note":"振幅系数 0.04 尾巴=rest","i":43,"t":2.15},{"phase":"长舒一口气","sx":0.998,"sy":1.002,"dy":-0.04,"dx":0.0,"rot":-0.0,"note":"振幅系数 0.03 尾巴=rest","i":44,"t":2.2},{"phase":"长舒一口气","sx":1.002,"sy":0.998,"dy":-0.02,"dx":0.0,"rot":-0.1,"note":"振幅系数 0.02 尾巴=rest","i":45,"t":2.25},{"phase":"长舒一口气","sx":0.999,"sy":1.001,"dy":-0.01,"dx":0.0,"rot":-0.1,"note":"振幅系数 0.02 尾巴=rest","i":46,"t":2.3},{"phase":"长舒一口气","sx":1.0,"sy":1.0,"dy":-0.02,"dx":0.0,"rot":-0.1,"note":"振幅系数 0.01 尾巴=rest","i":47,"t":2.35}]},{"key":"drag","file":"react-drag","title":"被拎起来","en":"Dragged","state":"reaction","trigger":"按住拖动宠物","seconds":1.2,"n":24,"frame_ms":50,"summary":"被捏住后背拎在半空：身体因重力被拉长，像钟摆一样来回晃，尾巴慌张地乱扑腾，汗都吓出来了。","theme_slot":"reactions.drag","phases":[{"t0":0.0,"t1":1.2,"name":"钟摆","formula":"以抓取点为轴 rot = 9°·sin(2πt/1.2)"},{"t0":0.0,"t1":1.2,"name":"重力拉伸","formula":"sy = 1.1 + 0.03·sin(2π·2.5t)，sx = 0.93"},{"t0":0.0,"t1":1.2,"name":"扑腾","formula":"尾巴每帧切换姿态 tail1→tail4→tail1"},{"t0":0.0,"t1":1.2,"name":"冒汗","formula":"两滴汗珠交替甩出"}],"sheet":{"cols":8,"rows":3,"w":260,"h":260},"frames":[{"phase":"钟摆+扑腾","sx":0.93,"sy":1.1,"dy":0,"dx":0.0,"rot":0.0,"note":"尾巴=tail1","i":0,"t":0.0},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.121,"dy":0,"dx":0.0,"rot":2.3,"note":"尾巴=tail2","i":1,"t":0.05},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.13,"dy":0,"dx":0.0,"rot":4.5,"note":"尾巴=tail3","i":2,"t":0.1},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.121,"dy":0,"dx":0.0,"rot":6.4,"note":"尾巴=tail4","i":3,"t":0.15},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.1,"dy":0,"dx":0.0,"rot":7.8,"note":"尾巴=tail3","i":4,"t":0.2},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.079,"dy":0,"dx":0.0,"rot":8.7,"note":"尾巴=tail2","i":5,"t":0.25},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.07,"dy":0,"dx":0.0,"rot":9.0,"note":"尾巴=tail1","i":6,"t":0.3},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.079,"dy":0,"dx":0.0,"rot":8.7,"note":"尾巴=tail2","i":7,"t":0.35},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.1,"dy":0,"dx":0.0,"rot":7.8,"note":"尾巴=tail3","i":8,"t":0.4},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.121,"dy":0,"dx":0.0,"rot":6.4,"note":"尾巴=tail4","i":9,"t":0.45},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.13,"dy":0,"dx":0.0,"rot":4.5,"note":"尾巴=tail3","i":10,"t":0.5},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.121,"dy":0,"dx":0.0,"rot":2.3,"note":"尾巴=tail2","i":11,"t":0.55},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.1,"dy":0,"dx":0.0,"rot":0.0,"note":"尾巴=tail1","i":12,"t":0.6},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.079,"dy":0,"dx":0.0,"rot":-2.3,"note":"尾巴=tail2","i":13,"t":0.65},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.07,"dy":0,"dx":0.0,"rot":-4.5,"note":"尾巴=tail3","i":14,"t":0.7},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.079,"dy":0,"dx":0.0,"rot":-6.4,"note":"尾巴=tail4","i":15,"t":0.75},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.1,"dy":0,"dx":0.0,"rot":-7.8,"note":"尾巴=tail3","i":16,"t":0.8},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.121,"dy":0,"dx":0.0,"rot":-8.7,"note":"尾巴=tail2","i":17,"t":0.85},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.13,"dy":0,"dx":0.0,"rot":-9.0,"note":"尾巴=tail1","i":18,"t":0.9},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.121,"dy":0,"dx":0.0,"rot":-8.7,"note":"尾巴=tail2","i":19,"t":0.95},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.1,"dy":0,"dx":0.0,"rot":-7.8,"note":"尾巴=tail3","i":20,"t":1.0},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.079,"dy":0,"dx":0.0,"rot":-6.4,"note":"尾巴=tail4","i":21,"t":1.05},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.07,"dy":0,"dx":0.0,"rot":-4.5,"note":"尾巴=tail3","i":22,"t":1.1},{"phase":"钟摆+扑腾","sx":0.93,"sy":1.079,"dy":0,"dx":0.0,"rot":-2.3,"note":"尾巴=tail2","i":23,"t":1.15}]},{"key":"roam","file":"roam-hop","title":"蹦跶散步","en":"Roam hop","state":"roam","trigger":"自由漫步（Free roam）","seconds":1.2,"n":24,"frame_ms":50,"summary":"自由漫步时的走路动画：小鲸鱼用肚皮一弹一弹往前蹦，每一步都有蓄力、腾空拉伸、落地挤压和尾巴摆动。","theme_slot":"states.roam（roamFlipAssets: true）","phases":[{"t0":0.0,"t1":1.2,"name":"一步","formula":"每 0.6s：蓄力 0.1s（amt −0.14）→ 腾空 0.3s（dy = −4·jumpArc，前倾 −6°）→ 落地 impact"},{"t0":0.0,"t1":1.2,"name":"尾巴","formula":"腾空时 tail2，落地 rest"},{"t0":0.0,"t1":1.2,"name":"影子","formula":"宽度随高度收缩 (1 − 0.028·h)"}],"sheet":{"cols":8,"rows":3,"w":260,"h":260},"frames":[{"phase":"蓄力","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":0,"t":0.0},{"phase":"蓄力","sx":1.059,"sy":0.93,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":1,"t":0.05},{"phase":"腾空","sx":0.881,"sy":1.14,"dy":-0.0,"dx":0.0,"rot":-0.0,"note":"","i":2,"t":0.1},{"phase":"腾空","sx":0.901,"sy":1.117,"dy":-2.22,"dx":0.0,"rot":-3.0,"note":"","i":3,"t":0.15},{"phase":"腾空","sx":0.921,"sy":1.093,"dy":-3.56,"dx":0.0,"rot":-5.2,"note":"","i":4,"t":0.2},{"phase":"腾空","sx":0.941,"sy":1.07,"dy":-4.0,"dx":0.0,"rot":-6.0,"note":"","i":5,"t":0.25},{"phase":"腾空","sx":0.96,"sy":1.047,"dy":-3.56,"dx":0.0,"rot":-5.2,"note":"","i":6,"t":0.3},{"phase":"腾空","sx":0.98,"sy":1.023,"dy":-2.22,"dx":0.0,"rot":-3.0,"note":"","i":7,"t":0.35},{"phase":"落地","sx":1.136,"sy":0.84,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":8,"t":0.4},{"phase":"落地","sx":1.051,"sy":0.94,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":9,"t":0.45},{"phase":"落地","sx":0.971,"sy":1.034,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":10,"t":0.5},{"phase":"落地","sx":0.953,"sy":1.056,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":11,"t":0.55},{"phase":"蓄力","sx":1.0,"sy":1.0,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":12,"t":0.6},{"phase":"蓄力","sx":1.06,"sy":0.93,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":13,"t":0.65},{"phase":"蓄力","sx":1.119,"sy":0.86,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":14,"t":0.7},{"phase":"腾空","sx":0.901,"sy":1.117,"dy":-2.22,"dx":0.0,"rot":-3.0,"note":"","i":15,"t":0.75},{"phase":"腾空","sx":0.921,"sy":1.093,"dy":-3.56,"dx":0.0,"rot":-5.2,"note":"","i":16,"t":0.8},{"phase":"腾空","sx":0.941,"sy":1.07,"dy":-4.0,"dx":0.0,"rot":-6.0,"note":"","i":17,"t":0.85},{"phase":"腾空","sx":0.96,"sy":1.047,"dy":-3.56,"dx":0.0,"rot":-5.2,"note":"","i":18,"t":0.9},{"phase":"腾空","sx":0.98,"sy":1.023,"dy":-2.22,"dx":0.0,"rot":-3.0,"note":"","i":19,"t":0.95},{"phase":"落地","sx":1.136,"sy":0.84,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":20,"t":1.0},{"phase":"落地","sx":1.051,"sy":0.94,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":21,"t":1.05},{"phase":"落地","sx":0.971,"sy":1.034,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":22,"t":1.1},{"phase":"落地","sx":0.953,"sy":1.056,"dy":0.0,"dx":0.0,"rot":0.0,"note":"","i":23,"t":1.15}]}]</script>
+<script>
+(() => {
+  const DATA = JSON.parse(document.getElementById('data').textContent);
+  const BY_KEY = Object.fromEntries(DATA.map(a => [a.key, a]));
+  const FRAME = 260;
+  const $ = (id) => document.getElementById(id);
+  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+  // ---------- sprite sheets ----------
+  const sheets = {};
+  function sheet(a) {
+    if (!sheets[a.file]) {
+      const img = new Image();
+      img.src = ASSET[a.file].sheet;
+      sheets[a.file] = img;
+    }
+    return sheets[a.file];
+  }
+  function drawFrame(ctx, a, i, size, alpha = 1) {
+    const img = sheet(a);
+    if (!img.complete || !img.naturalWidth) return false;
+    const c = a.sheet.cols;
+    ctx.globalAlpha = alpha;
+    ctx.drawImage(img, (i % c) * FRAME, Math.floor(i / c) * FRAME, FRAME, FRAME, 0, 0, size, size);
+    ctx.globalAlpha = 1;
+    return true;
+  }
+
+  // ---------- brand logo (first idle frame) ----------
+  const logo = $('logo').getContext('2d');
+  logo.imageSmoothingEnabled = false;
+  const lgImg = sheet(BY_KEY['idle']);
+  lgImg.addEventListener('load', () => {
+    logo.drawImage(lgImg, 12 * 5 - 4, 26 * 5, 34 * 5, 22 * 5, 0, 14, 80, 52);
+  });
+
+  // ---------- hero stage + event simulator ----------
+  const EVENTS = [
+    { code: 'SessionStart', name: '空闲待机', key: 'idle', hold: 0 },
+    { code: 'UserPromptSubmit', name: '收到提问', key: 'thinking', hold: 0 },
+    { code: 'PreToolUse', name: '1 个会话跑工具', key: 'typing', hold: 0 },
+    { code: 'PreToolUse ×2', name: '2 个会话并行', key: 'music', hold: 0 },
+    { code: 'PreToolUse ×3', name: '3+ 会话施工', key: 'building', hold: 0 },
+    { code: 'SubagentStart ×3', name: '开子代理分身', key: 'conducting', hold: 0 },
+    { code: 'PostToolUseFailure', name: '工具报错', key: 'error', hold: 4800 },
+    { code: 'Stop', name: '任务完成', key: 'happy', hold: 5200 },
+    { code: 'PermissionRequest', name: '需要你确认', key: 'notification', hold: 3200 },
+    { code: 'PreCompact', name: '上下文清理', key: 'compacting', hold: 0 },
+    { code: 'WorktreeCreate', name: '新建工作树', key: 'carrying', hold: 3200 },
+    { code: 'idle 60s', name: '睡着了', key: 'sleeping', hold: 0 },
+    { code: 'mousemove', name: '把它吵醒', key: 'waking', hold: 1500 },
+    { code: 'idleAnimations', name: '开心喷水', key: 'idle-spout', hold: 3200 },
+    { code: 'free roam', name: '蹦跶散步', key: 'roam', hold: 0 },
+    { code: 'drag', name: '拎起来', key: 'drag', hold: 0 },
+  ];
+  const DEMO = [
+    ['SessionStart', 2400], ['UserPromptSubmit', 2400], ['PreToolUse', 3200], ['SubagentStart ×3', 4800],
+    ['PostToolUseFailure', 2400], ['PreToolUse ×3', 4800], ['PermissionRequest', 3200], ['PreCompact', 5600],
+    ['Stop', 2600], ['idleAnimations', 3200], ['idle 60s', 6400], ['mousemove', 1500],
+  ];
+  const evGrid = $('evGrid');
+  const evBtns = {};
+  EVENTS.forEach(ev => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'ev-btn';
+    b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = `<span class="name">${ev.name}</span><span class="code">${ev.code}</span>`;
+    b.addEventListener('click', () => { setAuto(false); fire(ev); });
+    evGrid.appendChild(b);
+    evBtns[ev.code] = b;
+  });
+
+  const stage = $('stage').getContext('2d');
+  stage.imageSmoothingEnabled = false;
+  let st = { a: BY_KEY['idle'], start: performance.now(), base: BY_KEY['idle'], until: 0 };
+  const logLines = [];
+  function log(ev, a) {
+    const t = new Date();
+    const hh = String(t.getHours()).padStart(2, '0'), mm = String(t.getMinutes()).padStart(2, '0'), ss = String(t.getSeconds()).padStart(2, '0');
+    logLines.unshift(`${hh}:${mm}:${ss}  <span class="ev">${ev}</span> → <span class="st">${a.state}</span> · ${a.file}.apng`);
+    logLines.length = Math.min(logLines.length, 4);
+    $('log').innerHTML = logLines.join('\n');
+  }
+  function show(a) {
+    st.a = a; st.start = performance.now();
+    $('stageState').textContent = 'state: ' + a.state;
+    $('stageTitle').textContent = a.title;
+  }
+  function fire(ev) {
+    const a = BY_KEY[ev.key];
+    Object.values(evBtns).forEach(b => b.setAttribute('aria-pressed', 'false'));
+    if (evBtns[ev.code]) evBtns[ev.code].setAttribute('aria-pressed', 'true');
+    if (ev.hold) {
+      if (!st.until) st.base = st.a;              // remember the persistent state we interrupt
+      if (ev.key === 'waking' || st.base.key === 'sleeping') st.base = BY_KEY['idle'];
+      st.until = performance.now() + ev.hold;
+    } else {
+      st.base = a; st.until = 0;
+    }
+    show(a);
+    log(ev.code, a);
+  }
+  $('stage').addEventListener('click', (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const left = (e.clientX - r.left) < r.width * 0.55;
+    const a = BY_KEY[left ? 'poke-left' : 'poke-right'];
+    setAuto(false);
+    if (!st.until) st.base = st.a;
+    st.until = performance.now() + 2000;
+    show(a);
+    log(left ? 'click (left)' : 'click (right)', a);
+  });
+
+  let auto = true, demoIdx = 0, demoNext = 0;
+  function setAuto(on) {
+    auto = on;
+    $('autoBtn').setAttribute('aria-pressed', on ? 'true' : 'false');
+    if (on) { demoIdx = 0; demoNext = 0; }
+  }
+  $('autoBtn').addEventListener('click', () => setAuto(!auto));
+
+  function stageTick(now) {
+    if (auto && now >= demoNext) {
+      const [code, hold] = DEMO[demoIdx % DEMO.length];
+      const ev = EVENTS.find(e => e.code === code);
+      fire({ ...ev, hold: 0 });
+      demoNext = now + hold;
+      demoIdx++;
+    }
+    if (st.until && now >= st.until) { st.until = 0; show(st.base); }
+    const a = st.a;
+    const i = Math.floor((now - st.start) / a.frame_ms) % a.n;
+    stage.clearRect(0, 0, 780, 780);
+    drawFrame(stage, a, i, 780);
+    requestAnimationFrame(stageTick);
+  }
+  requestAnimationFrame(stageTick);
+
+  // ---------- gallery ----------
+  const gal = $('gal');
+  const cards = {};
+  DATA.forEach(a => {
+    const c = document.createElement('div');
+    c.className = 'card';
+    c.setAttribute('role', 'button');
+    c.tabIndex = 0;
+    c.innerHTML = `<div class="gif"><img src="${ASSET[a.file].gif}" alt="${a.title}动图" loading="lazy" width="260" height="260"></div>
+      <div class="meta">
+        <div class="row"><span class="title">${a.title}</span><span class="fr">${a.n} 帧 · ${a.seconds.toFixed(1)}s</span></div>
+        <div><span class="chip">${a.state}</span></div>
+        <span class="trig">${a.trigger}</span>
+      </div>`;
+    const open = () => { load(a.key, true); document.getElementById('inspector').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); };
+    c.addEventListener('click', open);
+    c.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    gal.appendChild(c);
+    cards[a.key] = c;
+  });
+
+  // ---------- inspector ----------
+  const pick = $('pick');
+  DATA.forEach(a => { const o = document.createElement('option'); o.value = a.key; o.textContent = `${a.title} · ${a.en}`; pick.appendChild(o); });
+  pick.addEventListener('change', () => load(pick.value, true));
+  const view = $('view').getContext('2d');
+  view.imageSmoothingEnabled = false;
+  const scrub = $('scrub');
+  let cur = null, fi = 0, playing = true, speed = 1, acc = 0, last = 0;
+  const opt = { onion: false, grid: false, dark: false };
+  function toggleOpt(btn, k) { opt[k] = !opt[k]; btn.setAttribute('aria-pressed', String(opt[k])); render(); }
+  $('optOnion').addEventListener('click', e => toggleOpt(e.currentTarget, 'onion'));
+  $('optGrid').addEventListener('click', e => toggleOpt(e.currentTarget, 'grid'));
+  $('optBg').addEventListener('click', e => toggleOpt(e.currentTarget, 'dark'));
+  $('speed').addEventListener('change', e => speed = parseFloat(e.target.value));
+  $('play').addEventListener('click', () => setPlay(!playing));
+  $('prev').addEventListener('click', () => { setPlay(false); seek(fi - 1); });
+  $('next').addEventListener('click', () => { setPlay(false); seek(fi + 1); });
+  scrub.addEventListener('input', () => { setPlay(false); seek(parseInt(scrub.value, 10)); });
+  function setPlay(p) { playing = p; $('play').textContent = p ? '暂停' : '播放'; }
+  document.addEventListener('keydown', (e) => {
+    const r = document.getElementById('inspector').getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) return;
+    if (['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement.tagName) && e.key === ' ') return;
+    if (e.key === ' ') { e.preventDefault(); setPlay(!playing); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); setPlay(false); seek(fi - 1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); setPlay(false); seek(fi + 1); }
+  });
+
+  const fmt = (v, d = 3) => (v >= 0 ? ' ' : '') + v.toFixed(d);
+  const isKey = (a, i) => i === 0 || a.frames[i].phase !== a.frames[i - 1].phase;
+
+  function load(key, userInitiated) {
+    cur = BY_KEY[key];
+    pick.value = key;
+    Object.entries(cards).forEach(([k, c]) => c.setAttribute('aria-current', k === key ? 'true' : 'false'));
+    $('slot').textContent = cur.theme_slot;
+    $('dur').textContent = `${cur.n} 帧 × ${cur.frame_ms}ms = ${cur.seconds.toFixed(2)}s · ${cur.file}.gif`;
+    $('summary').textContent = cur.summary;
+    scrub.max = cur.n - 1;
+    buildPhases(); buildCharts(); buildStrip(); buildSheet();
+    fi = 0; acc = 0;
+    if (userInitiated) setPlay(true);
+    const img = sheet(cur);
+    if (!img.complete) img.addEventListener('load', () => { render(); buildStrip(); }, { once: true });
+    render();
+  }
+
+  function buildPhases() {
+    const T = cur.seconds;
+    $('phases').innerHTML = cur.phases.map((p, k) => `
+      <div class="ph" data-k="${k}">
+        <span class="nm">${p.name}</span>
+        <div class="track"><div class="bar" style="left:${p.t0 / T * 100}%;width:${Math.max(1, (p.t1 - p.t0) / T * 100)}%"></div><div class="cursor"></div></div>
+        <span class="fx">${p.t0.toFixed(2)}–${p.t1.toFixed(2)}s · ${p.formula}</span>
+      </div>`).join('');
+  }
+
+  // charts: three small multiples, one unit each (no dual axis)
+  const CHARTS = [
+    { id: 'c1', title: '形变 · 缩放倍数', series: [['sx', 'sx', '--series-1'], ['sy', 'sy', '--series-2']], unit: '×', dec: 2 },
+    { id: 'c2', title: '位移 · 逻辑像素', series: [['dy', 'dy', '--series-1'], ['dx', 'dx', '--series-2']], unit: 'px', dec: 1 },
+    { id: 'c3', title: '旋转 · 角度', series: [['rot', 'rot', '--series-1']], unit: '°', dec: 0 },
+  ];
+  const W = 240, H = 112, PL = 28, PR = 22, PT = 8, PB = 18;
+  function niceRange(vals, minSpan) {
+    let lo = Math.min(...vals), hi = Math.max(...vals);
+    if (hi - lo < minSpan) { const m = (hi + lo) / 2; lo = m - minSpan / 2; hi = m + minSpan / 2; }
+    const pad = (hi - lo) * 0.08; lo -= pad; hi += pad;
+    return [lo, hi];
+  }
+  function ticks(lo, hi, n = 3) {
+    const raw = (hi - lo) / n;
+    const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    const step = [1, 2, 2.5, 5, 10].map(s => s * mag).find(s => s >= raw) || raw;
+    const out = [];
+    for (let v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) out.push(+v.toFixed(6));
+    return out;
+  }
+  let chartGeo = {};
+  function buildCharts() {
+    const box = $('charts');
+    box.innerHTML = '';
+    const n = cur.n;
+    const X = (i) => PL + (W - PL - PR) * (n === 1 ? 0 : i / (n - 1));
+    CHARTS.forEach(ch => {
+      const vals = [];
+      ch.series.forEach(([k]) => cur.frames.forEach(f => vals.push(f[k])));
+      const minSpan = ch.unit === '×' ? 0.1 : ch.unit === 'px' ? 2 : 4;
+      const [lo, hi] = niceRange(vals, minSpan);
+      const Y = (v) => PT + (H - PT - PB) * (1 - (v - lo) / (hi - lo));
+      const tk = ticks(lo, hi);
+      let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${ch.title}曲线">`;
+      tk.forEach(v => { svg += `<line class="gridl" x1="${PL}" x2="${W - PR}" y1="${Y(v)}" y2="${Y(v)}"/><text class="tick" x="${PL - 4}" y="${Y(v) + 3}" text-anchor="end">${+v.toFixed(ch.dec === 0 ? 0 : 2)}</text>`; });
+      const xt = [0, Math.floor((n - 1) / 2), n - 1];
+      xt.forEach(i => { svg += `<text class="tick" x="${X(i)}" y="${H - 4}" text-anchor="middle">F${i}</text>`; });
+      svg += `<line class="base" x1="${PL}" x2="${W - PR}" y1="${H - PB}" y2="${H - PB}"/>`;
+      ch.series.forEach(([k, label, col], si) => {
+        const d = cur.frames.map((f, i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)},${Y(f[k]).toFixed(1)}`).join('');
+        svg += `<path d="${d}" fill="none" style="stroke:var(${col})" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+        const lf = cur.frames[n - 1][k];
+        svg += `<text class="dl" x="${W - PR + 3}" y="${Y(lf) + 3 + (si ? 7 : -1)}">${label}</text>`;
+      });
+      svg += `<line class="ph-line" x1="0" x2="0" y1="${PT}" y2="${H - PB}" style="stroke:var(--playhead)" stroke-width="2"/>`;
+      ch.series.forEach(([k, , col], si) => { svg += `<circle class="dot${si}" r="3.5" style="fill:var(${col});stroke:var(--paper)" stroke-width="2"/>`; });
+      svg += `<rect class="hit" x="${PL}" y="0" width="${W - PL - PR}" height="${H}" fill="transparent"/></svg>`;
+      const el = document.createElement('div');
+      el.className = 'chart';
+      const legend = ch.series.length > 1 ? `<div class="legend">${ch.series.map(([k, l, c]) => `<span><i style="background:var(${c})"></i>${l}</span>`).join('')}</div>` : '';
+      el.innerHTML = `<h4>${ch.title}</h4>${legend}${svg}<div class="tip" hidden></div>`;
+      box.appendChild(el);
+      chartGeo[ch.id] = { el, X, Y, ch };
+      const s = el.querySelector('svg');
+      const tip = el.querySelector('.tip');
+      const idxAt = (ev) => {
+        const r = s.getBoundingClientRect();
+        const x = (ev.clientX - r.left) / r.width * W;
+        return Math.max(0, Math.min(n - 1, Math.round((x - PL) / (W - PL - PR) * (n - 1))));
+      };
+      s.addEventListener('mousemove', (ev) => {
+        const i = idxAt(ev);
+        const f = cur.frames[i];
+        const r = s.getBoundingClientRect(), er = el.getBoundingClientRect();
+        tip.hidden = false;
+        tip.textContent = `F${i}  ` + ch.series.map(([k]) => `${k} ${f[k].toFixed(ch.dec === 0 ? 1 : ch.dec + 1)}${ch.unit === '×' ? '' : ch.unit}`).join('  ');
+        tip.style.left = (X(i) / W * r.width + (r.left - er.left)) + 'px';
+        tip.style.top = (r.top - er.top + 4) + 'px';
+      });
+      s.addEventListener('mouseleave', () => { tip.hidden = true; });
+      s.addEventListener('click', (ev) => { setPlay(false); seek(idxAt(ev)); });
+    });
+  }
+
+  function buildStrip() {
+    const strip = $('strip');
+    const img = sheet(cur);
+    const scale = 60 / FRAME;
+    const c = cur.sheet.cols, r = cur.sheet.rows;
+    strip.innerHTML = cur.frames.map((f, i) => {
+      const x = (i % c) * 60, y = Math.floor(i / c) * 60;
+      return `<button type="button" class="thumb${isKey(cur, i) ? ' key' : ''}" data-i="${i}" aria-label="第 ${i} 帧"><span class="im" style="background-image:url(${ASSET[cur.file].sheet});background-size:${c * 60}px ${r * 60}px;background-position:-${x}px -${y}px"></span><span>${isKey(cur, i) ? '◆' : ''}${i}</span></button>`;
+    }).join('');
+    strip.querySelectorAll('.thumb').forEach(b => b.addEventListener('click', () => { setPlay(false); seek(+b.dataset.i); }));
+  }
+
+  function buildSheet() {
+    const rows = cur.frames.map((f, i) => `<tr data-i="${i}"><td class="num">${i}</td><td class="num">${f.t.toFixed(2)}</td><td>${isKey(cur, i) ? '<span class="keymark">◆ 关键</span>' : ''}</td><td>${f.phase}</td><td class="num">${f.sx.toFixed(3)}</td><td class="num">${f.sy.toFixed(3)}</td><td class="num">${f.dy.toFixed(2)}</td><td class="num">${f.dx.toFixed(2)}</td><td class="num">${f.rot.toFixed(1)}</td><td class="note">${f.note || ''}</td></tr>`).join('');
+    $('xsheet').innerHTML = `<table><thead><tr><th class="num">帧</th><th class="num">t (s)</th><th>关键帧</th><th>动作</th><th class="num">sx</th><th class="num">sy</th><th class="num">dy</th><th class="num">dx</th><th class="num">rot°</th><th>说明</th></tr></thead><tbody>${rows}</tbody></table>`;
+    $('xsheet').querySelectorAll('tbody tr').forEach(tr => tr.addEventListener('click', () => { setPlay(false); seek(+tr.dataset.i); }));
+  }
+
+  function seek(i) { fi = ((i % cur.n) + cur.n) % cur.n; acc = 0; render(); }
+
+  function render() {
+    if (!cur) return;
+    const a = cur, f = a.frames[fi];
+    const S = 520;
+    const baseBg = css('--stage-bg');
+    const alt = baseBg.toUpperCase() === css('--stage-dark').toUpperCase() ? css('--stage-light') : css('--stage-dark');
+    const bgNow = opt.dark ? alt : baseBg;
+    const bgIsDark = bgNow.toUpperCase() === css('--stage-dark').toUpperCase();
+    view.fillStyle = bgNow;
+    view.fillRect(0, 0, S, S);
+    if (opt.onion) {
+      for (let k = 2; k >= 1; k--) if (fi - k >= 0) drawFrame(view, a, fi - k, S, k === 1 ? 0.28 : 0.14);
+    }
+    drawFrame(view, a, fi, S);
+    if (opt.grid) {
+      view.strokeStyle = bgIsDark ? 'rgba(124,149,255,0.22)' : 'rgba(20,38,96,0.13)';
+      view.lineWidth = 1;
+      view.beginPath();
+      for (let g = 0; g <= 52; g++) { const p = Math.round(g * 10) + 0.5; view.moveTo(p, 0); view.lineTo(p, S); view.moveTo(0, p); view.lineTo(S, p); }
+      view.stroke();
+    }
+    $('fbadge').textContent = `F ${fi} / ${a.n - 1}`;
+    scrub.value = fi;
+    $('nowT').textContent = `frame ${fi} · t = ${f.t.toFixed(2)}s${isKey(a, fi) ? ' · ◆ key' : ''}`;
+    $('nowPhase').textContent = f.phase;
+    $('nowNote').textContent = f.note || ' ';
+    $('readout').innerHTML = [['sx', f.sx.toFixed(3)], ['sy', f.sy.toFixed(3)], ['dy', f.dy.toFixed(2)], ['dx', f.dx.toFixed(2)], ['rot', f.rot.toFixed(1) + '°']]
+      .map(([k, v]) => `<div class="cell"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
+    const T = a.seconds;
+    document.querySelectorAll('#phases .ph').forEach((el, k) => {
+      const p = a.phases[k];
+      el.classList.toggle('on', f.t >= p.t0 - 1e-6 && f.t <= p.t1 + 1e-6);
+      el.querySelector('.cursor').style.left = `calc(${f.t / T * 100}% - 1px)`;
+    });
+    Object.values(chartGeo).forEach(({ el, X, Y, ch }) => {
+      const x = X(fi);
+      const l = el.querySelector('.ph-line');
+      if (!l) return;
+      l.setAttribute('x1', x); l.setAttribute('x2', x);
+      ch.series.forEach(([k], si) => { const c = el.querySelector('.dot' + si); c.setAttribute('cx', x); c.setAttribute('cy', Y(f[k])); });
+    });
+    const strip = $('strip');
+    strip.querySelectorAll('.thumb.on').forEach(t => t.classList.remove('on'));
+    const th = strip.querySelector(`.thumb[data-i="${fi}"]`);
+    if (th) {
+      th.classList.add('on');
+      const l = th.offsetLeft - strip.offsetLeft, w = strip.clientWidth;
+      if (l < strip.scrollLeft || l + th.offsetWidth > strip.scrollLeft + w) strip.scrollLeft = l - w / 2;
+    }
+    const xs = $('xsheet');
+    xs.querySelectorAll('tr.on').forEach(t => t.classList.remove('on'));
+    const tr = xs.querySelector(`tbody tr[data-i="${fi}"]`);
+    if (tr) {
+      tr.classList.add('on');
+      const top = tr.offsetTop, h = xs.clientHeight;
+      if (top < xs.scrollTop + 30 || top + tr.offsetHeight > xs.scrollTop + h) xs.scrollTop = top - h / 2;
+    }
+  }
+
+  function loop(now) {
+    const dt = last ? now - last : 0;
+    last = now;
+    if (playing && cur) {
+      acc += dt * speed;
+      const step = cur.frame_ms;
+      if (acc >= step) {
+        const adv = Math.floor(acc / step);
+        acc -= adv * step;
+        fi = (fi + adv) % cur.n;
+        render();
+      }
+    }
+    requestAnimationFrame(loop);
+  }
+  load('happy', false);
+  requestAnimationFrame(loop);
+
+  // ---------- theme mapping table ----------
+  const MAP = [
+    ['idle', '无任务', 'idle-follow.svg', '眼睛跟随鼠标 + 呼吸 / 眨眼 / 摆尾'],
+    ['idleAnimations', '待机随机', 'idle · idle-look · idle-spout', '呼吸、东张西望、开心喷水'],
+    ['thinking', 'UserPromptSubmit', 'thinking.apng', '思考云 + 灵光一闪'],
+    ['working · 1 会话', 'PreToolUse / PostToolUse', 'typing.apng', '敲代码'],
+    ['working · 2 会话', '同上', 'music.apng', '戴耳机律动'],
+    ['working · 3+ 会话', '同上', 'building.apng', '戴安全帽把砖顶正'],
+    ['juggling · 1 子代理', 'SubagentStart', 'music.apng', '戴耳机律动'],
+    ['juggling · 2+ 子代理', 'SubagentStart', 'conducting.apng', '尾巴打拍子，带领小鲸鱼分身'],
+    ['error', 'PostToolUseFailure', 'error.apng', '受惊、冒烟、眼冒金星'],
+    ['attention', 'Stop / PostCompact', 'happy.apng', '空翻庆祝 + 彩纸 + ✓'],
+    ['notification', 'PermissionRequest', 'notification.apng', '感叹气泡摇铃'],
+    ['sweeping', 'PreCompact', 'compacting.apng', '吸入压缩上下文'],
+    ['carrying', 'WorktreeCreate', 'carrying.apng', '顶箱子赶路'],
+    ['sleeping', '60s 无操作', 'sleeping.apng', '睡帽 + 鼻涕泡'],
+    ['waking', '睡眠中移动鼠标', 'waking.apng', '惊醒，睡帽飞走'],
+    ['roam', '自由漫步', 'roam-hop.apng', '一弹一弹往前蹦'],
+    ['reactions', '双击 / 连点 / 拖动', 'react-left · react-right · react-double · react-drag', '果冻回弹、挠痒痒、被拎起'],
+  ];
+  $('mapTbl').innerHTML = `<table><thead><tr><th>Clawd 状态</th><th>触发</th><th>文件</th><th>动作</th></tr></thead><tbody>${MAP.map(r => `<tr><td><b>${r[0]}</b></td><td class="mono" style="font-size:12px">${r[1]}</td><td class="mono" style="font-size:12px">${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody></table>`;
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1139 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>try{var t=localStorage.getItem('dsh-tui-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+<title>鲸娘像素表情集</title>
+<meta name="description" content="鲸娘像素表情集：22 个像素弹性动图，每一帧拆开看每一层怎么动。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Silkscreen&family=ZCOOL+KuaiLe&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Silkscreen&family=ZCOOL+KuaiLe&display=swap"></noscript>
+<style>
+:root {
+  --paper: #F2F3FA;
+  --paper-2: #E7E9F6;
+  --card: #FFFFFF;
+  --ink: #1A1B4B;
+  --ink-2: #4B4F7F;
+  --ink-3: #7F84AB;
+  --line: #DCDFF0;
+  --line-2: #C6CAE6;
+  --accent: #3F5BD8;
+  --accent-soft: #E3E7FF;
+  --accent-ink: #FFFFFF;
+  --blush: #DC4F74;
+  --blush-soft: #FCE4EB;
+  --amber: #C98A00;
+  --stage-light: #FFFFFF;
+  --stage-dark: #12163A;
+  --stage-bg: #FAFBFF;
+  --check-a: #E8EAF5;
+  --check-b: #FFFFFF;
+  --c-head: #4E6FFF;
+  --c-ahoge: #D69800;
+  --c-fin: #1FA873;
+  --c-tail: #1597B8;
+  --c-strands: #E0578E;
+  --c-hand: #E8741F;
+  --c-whole: #7B7FA6;
+  --c-body: #96A0C8;
+  --shadow: 0 1px 0 rgba(26, 27, 75, 0.05), 0 10px 26px -16px rgba(26, 27, 75, 0.35);
+  --f-display: "ZCOOL KuaiLe", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --f-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --f-pixel: "Silkscreen", "JetBrains Mono", ui-monospace, monospace;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #0D0F2B;
+    --paper-2: #14173A;
+    --card: #171A42;
+    --ink: #ECEEFF;
+    --ink-2: #B3B8E0;
+    --ink-3: #7D83B3;
+    --line: #262B5C;
+    --line-2: #353B75;
+    --accent: #8EA0FF;
+    --accent-soft: #232A66;
+    --accent-ink: #0D0F2B;
+    --blush: #FF86A5;
+    --blush-soft: #3A1F45;
+    --amber: #FFC24A;
+    --check-a: #262B5E;
+    --check-b: #1E2352;
+    --stage-bg: #11143A;
+    --c-head: #7C95FF;
+    --c-ahoge: #FFC43D;
+    --c-fin: #3CD294;
+    --c-tail: #3CCBEA;
+    --c-strands: #FF7FB0;
+    --c-hand: #FF9A55;
+    --c-whole: #A3A8D4;
+    --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 12px 30px -16px rgba(0, 0, 0, 0.7);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0D0F2B;
+  --paper-2: #14173A;
+  --card: #171A42;
+  --ink: #ECEEFF;
+  --ink-2: #B3B8E0;
+  --ink-3: #7D83B3;
+  --line: #262B5C;
+  --line-2: #353B75;
+  --accent: #8EA0FF;
+  --accent-soft: #232A66;
+  --accent-ink: #0D0F2B;
+  --blush: #FF86A5;
+  --blush-soft: #3A1F45;
+  --amber: #FFC24A;
+  --check-a: #262B5E;
+  --check-b: #1E2352;
+  --stage-bg: #11143A;
+  --c-head: #7C95FF;
+  --c-ahoge: #FFC43D;
+  --c-fin: #3CD294;
+  --c-tail: #3CCBEA;
+  --c-strands: #FF7FB0;
+  --c-hand: #FF9A55;
+  --c-whole: #A3A8D4;
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 12px 30px -16px rgba(0, 0, 0, 0.7);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.7;
+  padding-inline: 20px;
+  padding-block: 0 56px;
+}
+.wrap { max-width: 1160px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; margin: 0; text-wrap: balance; letter-spacing: 0.02em; }
+h1 { font-size: clamp(42px, 7.4vw, 78px); line-height: 1.05; }
+h2 { font-size: clamp(28px, 4vw, 38px); line-height: 1.15; }
+h3 { font-size: 21px; line-height: 1.25; }
+p { margin: 0; }
+a { color: var(--accent); }
+button, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.px { font-family: var(--f-pixel); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--ink-3); }
+.lede { color: var(--ink-2); font-size: 16px; max-width: 64ch; }
+canvas.pix { image-rendering: pixelated; image-rendering: crisp-edges; display: block; }
+
+/* ---------- header with a lace (maid headdress) edge ---------- */
+.top {
+  position: relative;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  padding-block: 14px 22px;
+}
+.top::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 9px;
+  background:
+    radial-gradient(circle at 8px 0, var(--line-2) 0 6px, transparent 6.5px) 0 0 / 16px 9px repeat-x;
+  opacity: 0.9;
+}
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.brand canvas { width: 46px; height: 44px; }
+.brand b { font-family: var(--f-display); font-weight: 400; font-size: 22px; }
+.top nav { display: flex; gap: 18px; flex-wrap: wrap; }
+.top nav a { color: var(--ink-2); text-decoration: none; font-size: 14px; }
+.top nav a:hover { color: var(--accent); }
+
+/* ---------- hero ---------- */
+.hero {
+  display: grid; gap: 22px 40px; padding-top: 18px; align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 430px);
+  grid-template-areas: "copy desk" "events desk";
+}
+.hero-copy { grid-area: copy; display: flex; flex-direction: column; gap: 18px; }
+.hero .kicker { color: var(--accent); }
+.events { grid-area: events; display: flex; flex-direction: column; gap: 12px; }
+.events-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.ev-group { display: flex; flex-direction: column; gap: 6px; }
+.ev-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(138px, 1fr)); gap: 6px; }
+.ev-btn {
+  text-align: left; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--line-2);
+  background: var(--card); cursor: pointer; display: flex; flex-direction: column; gap: 0; min-width: 0;
+  transition: border-color .15s, background .15s;
+}
+.ev-btn:hover { border-color: var(--accent); }
+.ev-btn[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.ev-btn .name { font-size: 13px; font-weight: 500; line-height: 1.4; }
+.ev-btn .code { font-family: var(--f-mono); font-size: 10.5px; color: var(--ink-3); overflow-wrap: anywhere; line-height: 1.4; }
+.toggle {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); cursor: pointer;
+  border: 1px solid var(--line-2); border-radius: 999px; padding: 4px 12px; background: var(--card);
+}
+.toggle[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
+.toggle .led { width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); }
+.toggle[aria-pressed="true"] .led { background: var(--accent); }
+.desk { grid-area: desk; overflow: hidden; display: flex; flex-direction: column; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); }
+.desk-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--paper-2);
+}
+.dots { display: flex; gap: 6px; }
+.dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-2); display: block; }
+.desk-stage {
+  position: relative; display: grid; place-items: center; padding: 40px 14px 30px;
+  background:
+    linear-gradient(to right, var(--line) 1px, transparent 1px) 0 0 / 18px 18px,
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px) 0 0 / 18px 18px,
+    var(--stage-bg);
+}
+.desk-stage canvas {
+  width: 100%; max-width: 380px; aspect-ratio: 69 / 66; cursor: grab; touch-action: none;
+  -webkit-user-select: none; user-select: none;
+}
+.desk-stage canvas.dragging { cursor: grabbing; }
+.stage-state { position: absolute; left: 14px; top: 10px; display: flex; flex-direction: column; gap: 0; }
+.stage-state .px { color: var(--ink-3); }
+.stage-state b { font-family: var(--f-display); font-weight: 400; font-size: 20px; color: var(--ink); line-height: 1.3; }
+.stage-hint { position: absolute; right: 14px; bottom: 8px; font-size: 12px; color: var(--ink-3); }
+.click-count {
+  position: absolute; right: 14px; top: 12px; font-family: var(--f-pixel); font-size: 11px; color: var(--blush);
+  opacity: 0; transition: opacity .2s;
+}
+.click-count.on { opacity: 1; }
+.log {
+  font-family: var(--f-mono); font-size: 12px; line-height: 1.7; padding: 10px 14px; margin: 0;
+  border-top: 1px solid var(--line); background: var(--paper-2); color: var(--ink-2); min-height: 92px;
+  white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.log .ev { color: var(--accent); }
+.log .st { color: var(--ink); font-weight: 600; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; }
+.fact {
+  display: inline-flex; align-items: baseline; gap: 6px; padding: 5px 10px;
+  border: 1px solid var(--line-2); border-radius: 999px; background: var(--card); font-size: 13px; color: var(--ink-2);
+}
+.fact b { font-family: var(--f-mono); font-weight: 600; color: var(--ink); }
+
+/* ---------- sticker wall ---------- */
+.wall-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  border: 1px solid var(--line-2); background: var(--card); border-radius: 999px; padding: 4px 12px;
+  font-size: 13px; cursor: pointer; color: var(--ink-2);
+}
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chip .n { font-family: var(--f-mono); font-size: 12px; opacity: 0.7; margin-left: 4px; }
+.wall {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 12px; margin-top: 18px;
+}
+.card {
+  display: flex; flex-direction: column; gap: 8px; padding: 10px 10px 12px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  cursor: pointer; text-align: left; transition: border-color .15s, transform .15s;
+}
+.card:hover { border-color: var(--line-2); transform: translateY(-2px); }
+.card[aria-current="true"] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.card .shot {
+  border-radius: 6px; aspect-ratio: 69 / 66; width: 100%;
+  background: conic-gradient(var(--check-a) 25%, var(--check-b) 0 50%, var(--check-a) 0 75%, var(--check-b) 0) 0 0 / 16px 16px;
+}
+.card .shot canvas { width: 100%; height: 100%; }
+.card .t { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; }
+.card .t b { font-weight: 500; font-size: 15px; line-height: 1.3; }
+.card .num { font-family: var(--f-pixel); font-size: 10px; color: var(--ink-3); }
+.card .sub { font-size: 12px; color: var(--ink-3); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0 8px; line-height: 1.5; }
+.card .sub span { white-space: nowrap; }
+.card .sub .mono { font-size: 11px; }
+
+.card .trig { font-size: 11.5px; color: var(--accent); line-height: 1.45; }
+
+/* ---------- inspector ---------- */
+.sec-head { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.insp { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
+.player { display: flex; flex-direction: column; overflow: hidden; }
+.player-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+  padding: 10px 12px; border-bottom: 1px solid var(--line);
+}
+.pick { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.pick select {
+  max-width: 220px; min-width: 0; padding: 5px 8px; border-radius: 8px; border: 1px solid var(--line-2);
+  background: var(--paper); font-size: 14px;
+}
+.state-chip { font-family: var(--f-mono); font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+.stage-wrap { padding: 14px; display: grid; place-items: center; }
+.stage {
+  position: relative; width: 100%; max-width: 552px; aspect-ratio: 69 / 66; border-radius: 8px; overflow: hidden;
+}
+.stage.bg-check { background: conic-gradient(var(--check-a) 25%, var(--check-b) 0 50%, var(--check-a) 0 75%, var(--check-b) 0) 0 0 / 24px 24px; }
+.stage.bg-light { background: var(--stage-light); }
+.stage.bg-dark { background: var(--stage-dark); }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.stage .grid {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background:
+    linear-gradient(to right, rgba(120, 128, 190, 0.28) 1px, transparent 1px) 0 0 / calc(100% / 69) 100%,
+    linear-gradient(to bottom, rgba(120, 128, 190, 0.28) 1px, transparent 1px) 0 0 / 100% calc(100% / 66);
+}
+.stage.show-grid .grid { opacity: 1; }
+.transport {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px 12px; border-top: 1px solid var(--line);
+}
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-width: 36px; height: 34px; padding: 0 10px; border-radius: 8px;
+  border: 1px solid var(--line-2); background: var(--paper); cursor: pointer; font-size: 14px;
+}
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); min-width: 64px; }
+.btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.seg { display: inline-flex; border: 1px solid var(--line-2); border-radius: 8px; overflow: hidden; }
+.seg button { border: 0; background: var(--paper); padding: 0 9px; height: 32px; cursor: pointer; font-size: 13px; }
+.seg button + button { border-left: 1px solid var(--line-2); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.transport .sp { flex: 1 1 auto; }
+.fcount { font-family: var(--f-pixel); font-size: 11px; color: var(--ink-2); white-space: nowrap; }
+
+.film { display: flex; gap: 6px; overflow-x: auto; padding: 10px 12px 12px; border-top: 1px solid var(--line); scrollbar-width: thin; }
+.film button {
+  flex: 0 0 auto; width: 62px; padding: 3px 3px 2px; border-radius: 6px; border: 1px solid var(--line); background: var(--paper);
+  cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.film button canvas { width: 56px; height: 53px; }
+.film button span { font-family: var(--f-pixel); font-size: 9px; color: var(--ink-3); letter-spacing: 0.04em; }
+.film button[aria-current="true"] { border-color: var(--amber); box-shadow: 0 0 0 2px color-mix(in srgb, var(--amber) 35%, transparent); }
+
+.info { display: flex; flex-direction: column; }
+.info-top { padding: 14px 16px 12px; display: flex; flex-direction: column; gap: 8px; border-bottom: 1px solid var(--line); }
+.info-top .row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.frame-no { font-family: var(--f-pixel); font-size: 12px; color: var(--amber); letter-spacing: 0.06em; }
+.note { font-size: 17px; font-weight: 500; line-height: 1.5; min-height: 1.5em; }
+.summary { color: var(--ink-2); font-size: 14px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: 12px; padding: 2px 8px; border-radius: 6px; background: var(--paper-2); color: var(--ink-2); }
+.tag b { font-weight: 500; color: var(--ink); margin-left: 3px; }
+.tag.prop { background: var(--blush-soft); }
+.diffline { font-size: 13px; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+.diffline i { width: 10px; height: 10px; background: var(--blush); display: inline-block; border-radius: 2px; }
+
+.chart { padding: 12px 16px 16px; display: flex; flex-direction: column; gap: 4px; }
+.chart-cap { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.trow { display: grid; grid-template-columns: 78px minmax(0, 1fr) 34px; gap: 8px; align-items: center; min-height: 30px; }
+.trow .lab { font-size: 12px; color: var(--ink-2); display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.trow .lab i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; flex: none; }
+.trow .val { font-family: var(--f-mono); font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; }
+.trow .plot { position: relative; height: 30px; }
+.trow .plot svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.trow .ph { position: absolute; top: -2px; bottom: -2px; width: 2px; margin-left: -1px; background: var(--amber); left: calc(var(--ph, 0) * 100%); border-radius: 1px; }
+.tbar { display: flex; height: 18px; border-radius: 4px; overflow: hidden; cursor: pointer; }
+.tbar div { min-width: 1px; border-right: 1px solid var(--card); background: var(--paper-2); font-family: var(--f-pixel); font-size: 8px; color: var(--ink-3); display: grid; place-items: center; overflow: hidden; }
+.tbar div.on { background: color-mix(in srgb, var(--amber) 45%, var(--paper-2)); color: var(--ink); }
+.chart .legend { font-size: 12px; color: var(--ink-3); margin-top: 8px; }
+
+/* ---------- rig ---------- */
+.rig { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 20px; align-items: start; }
+.maps { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.map { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.map .pic { aspect-ratio: 1; background: conic-gradient(var(--check-a) 25%, var(--check-b) 0 50%, var(--check-a) 0 75%, var(--check-b) 0) 0 0 / 16px 16px; border-radius: 6px; position: relative; }
+.map .pic img { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; transition: opacity .2s; }
+.map .pic img.base { opacity: 0; }
+.map .pic:hover img.base, .map .pic:focus-within img.base { opacity: 1; }
+.map figcaption { font-size: 13px; color: var(--ink-2); }
+.rules { padding: 6px 0; }
+.rules li { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--line); list-style: none; }
+.rules li:last-child { border-bottom: 0; }
+.rules ul { margin: 0; padding: 0; }
+.rules .k { display: flex; align-items: center; gap: 8px; font-weight: 500; }
+.rules .k i { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+.rules p { color: var(--ink-2); font-size: 14px; }
+.beats { margin-top: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.beats-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.beat { display: flex; flex-direction: column; gap: 6px; }
+.beat .shot { aspect-ratio: 69 / 66; border-radius: 6px; background: var(--stage-light); border: 1px solid var(--line); position: relative; overflow: hidden; }
+.beat .shot canvas { width: 100%; height: 100%; }
+.beat b { font-weight: 500; font-size: 14px; }
+.beat span { font-size: 12px; color: var(--ink-3); line-height: 1.5; }
+
+/* ---------- files ---------- */
+.files { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+.spec { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.spec div { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: var(--paper); }
+.spec b { display: block; font-family: var(--f-mono); font-size: 15px; font-weight: 600; }
+.spec span { font-size: 12px; color: var(--ink-3); }
+.dl { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; }
+.dl a { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--paper); text-decoration: none; color: var(--ink); font-size: 13px; }
+.dl a:hover { border-color: var(--accent); }
+.dl a .mono { color: var(--ink-3); font-size: 11px; margin-left: auto; }
+footer { color: var(--ink-3); font-size: 13px; border-top: 1px solid var(--line); padding-top: 18px; }
+
+@media (max-width: 900px) {
+  .insp, .rig { grid-template-columns: minmax(0, 1fr); }
+  .hero { grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "desk" "events"; }
+  .desk { position: static; }
+}
+@media (max-width: 560px) {
+  body { padding-inline: 16px; }
+  .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .card { padding: 8px 8px 10px; }
+  .card .t b { font-size: 14px; }
+  .beats-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .maps { grid-template-columns: 1fr 1fr; }
+  .rules li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .trow { grid-template-columns: 64px minmax(0, 1fr) 30px; }
+  .top nav { gap: 12px; }
+  .pick select { max-width: 160px; }
+  .ev-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .desk-stage { padding: 44px 10px 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .map .pic img { transition: none; }
+  .card:hover { transform: none; }
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top" id="top-link"><canvas class="pix" id="brand" width="69" height="66" aria-hidden="true"></canvas><b>鲸娘表情集</b></a>
+    <nav aria-label="页面导航">
+      <a href="../" class="pets-back">← 全部桌宠</a><a href="#wall">表情墙</a>
+      <a href="#frames">逐帧拆解</a>
+      <a href="#rig">分层骨骼</a>
+      <a href="#files">文件</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="top">
+   <div class="hero-copy">
+    <span class="px kicker">Whale girl · pixel stickers · 22 loops</span>
+    <h1>鲸娘像素表情集</h1>
+    <p class="lede">同一个鲸娘，22 个动作：待机、思考、敲代码、戴耳机听歌、小鲸鱼分身、搭积木施工、抱书搬运、出错、任务完成、被戳、被拎起来、泡在水里……弹性全部靠整格像素做出来：头往下压 1 格再弹起，两侧头发跟着往外鼓，呆毛、耳鳍、长发都晚一拍甩，尾巴绕着根部摆。点任意一个表情，下面会逐帧拆开，看每一层在这一帧怎么动。</p>
+    <div class="facts">
+      <span class="fact"><b>22</b> 个循环动图</span>
+      <span class="fact"><b>69×66</b> 逻辑像素</span>
+      <span class="fact">导出放大 <b>8×</b></span>
+      <span class="fact">透明底 <b>GIF</b></span>
+      <span class="fact"><b id="fact-frames">0</b> 帧逐帧标注</span>
+    </div>
+   </div>
+    <div class="events">
+      <div class="events-head">
+        <h3>模拟 agent 事件</h3>
+        <button class="toggle" id="auto-btn" aria-pressed="true" type="button"><span class="led"></span>自动演示</button>
+      </div>
+      <p class="muted" style="font-size:13px">按 Clawd on Desk 的事件对应关系：点一个事件，右边的鲸娘就切到对应的状态。报错、完成、确认、搬家、被吵醒这类是临时状态，播一会儿会回到之前的状态。</p>
+      <div class="ev-group"><span class="px muted">Agent hooks</span><div class="ev-grid" id="ev-agent"></div></div>
+      <div class="ev-group"><span class="px muted">Mouse · 也可以直接在她身上点</span><div class="ev-grid" id="ev-mouse"></div></div>
+    </div>
+    <div class="panel desk">
+      <div class="desk-bar"><div class="dots"><i></i><i></i><i></i></div><span class="px muted">desktop · hook listener</span></div>
+      <div class="desk-stage">
+        <canvas class="pix" id="desk-cv" width="69" height="66" tabindex="0" aria-label="鲸娘桌宠：单击戳她，连续点击挠痒痒，按住拖动会把她拎起来"></canvas>
+        <div class="stage-state"><span class="px" id="desk-state">state: idle</span><b id="desk-title">待机眨眼</b></div>
+        <span class="click-count" id="click-count">×0</span>
+        <span class="stage-hint">单击戳她 · 连点挠痒 · 按住拖动</span>
+      </div>
+      <pre class="log" id="desk-log" aria-live="polite"></pre>
+    </div>
+  </section>
+
+  <section id="wall">
+    <div class="wall-head">
+      <div class="sec-head" style="margin:0">
+        <h2>表情墙</h2>
+        <p class="muted">每张卡片都在按导出时的真实时长循环播放。点一下，在下面拆开看。每张卡片底下标着它对应的 agent 状态和触发事件（照 Clawd on Desk 的事件对应关系）。</p>
+      </div>
+      <div class="chips" id="groups" role="group" aria-label="按分组筛选"></div>
+    </div>
+    <div class="wall" id="wall-grid"></div>
+  </section>
+
+  <section id="frames">
+    <div class="sec-head">
+      <h2>逐帧拆解</h2>
+      <p class="muted">左边是播放器，可以暂停、单步、放慢，打开“变化像素”会把这一帧相对上一帧改动过的像素标成粉色。右边是这一帧的说明和每一层的位移曲线（向下、向右为正，单位是 1 像素）。键盘：空格 播放/暂停，← → 单步。</p>
+    </div>
+    <div class="insp">
+      <div class="panel player">
+        <div class="player-bar">
+          <div class="pick">
+            <button class="btn" id="prev-anim" aria-label="上一个表情">‹</button>
+            <label class="px muted" for="anim-select" style="position:absolute;left:-9999px">选择表情</label>
+            <select id="anim-select"></select>
+            <button class="btn" id="next-anim" aria-label="下一个表情">›</button>
+          </div>
+          <span class="state-chip" id="state-chip">idle</span>
+        </div>
+        <div class="stage-wrap">
+          <div class="stage bg-check" id="stage">
+            <canvas class="pix" id="stage-cv" width="69" height="66"></canvas>
+            <canvas class="pix" id="diff-cv" width="69" height="66" aria-hidden="true"></canvas>
+            <div class="grid" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="transport">
+          <button class="btn" id="step-back" aria-label="上一帧">◀︎</button>
+          <button class="btn primary" id="play">暂停</button>
+          <button class="btn" id="step-fwd" aria-label="下一帧">▶︎</button>
+          <div class="seg" role="group" aria-label="速度" id="speed">
+            <button data-v="0.25">¼×</button><button data-v="0.5">½×</button><button data-v="1" aria-pressed="true">1×</button>
+          </div>
+          <span class="sp"></span>
+          <span class="fcount" id="fcount">01/21</span>
+        </div>
+        <div class="transport" style="border-top:0;padding-top:0">
+          <button class="btn" id="tg-diff" aria-pressed="false">变化像素</button>
+          <button class="btn" id="tg-onion" aria-pressed="false">上一帧虚影</button>
+          <button class="btn" id="tg-grid" aria-pressed="false">像素网格</button>
+          <span class="sp"></span>
+          <div class="seg" role="group" aria-label="背景" id="bg">
+            <button data-v="check" aria-pressed="true">透明</button><button data-v="light">浅</button><button data-v="dark">深</button>
+          </div>
+        </div>
+        <div class="film" id="film" aria-label="全部帧"></div>
+      </div>
+
+      <div class="panel info">
+        <div class="info-top">
+          <div class="row">
+            <h3 id="anim-title">待机眨眼</h3>
+            <span class="frame-no" id="frame-no">FRAME 01 · 700MS</span>
+          </div>
+          <p class="summary" id="anim-summary"></p>
+          <p class="note" id="frame-note"></p>
+          <div class="tags" id="frame-tags"></div>
+          <div class="tags" id="frame-props"></div>
+          <p class="diffline"><i></i><span id="diff-count">这一帧改动了 0 个像素</span></p>
+        </div>
+        <div class="chart">
+          <div class="chart-cap"><span class="px muted">Motion · 每层位移</span><span class="mono muted" id="total-ms" style="font-size:12px">0 ms</span></div>
+          <div class="trow">
+            <span class="lab">时间轴</span>
+            <div class="plot" style="height:18px"><div class="tbar" id="tbar" aria-label="每帧时长"></div><div class="ph"></div></div>
+            <span class="val muted" id="t-now">0</span>
+          </div>
+          <div id="tracks"></div>
+          <p class="legend" id="track-legend"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rig">
+    <div class="sec-head">
+      <h2>分层骨骼</h2>
+      <p class="muted">两张原图（握拳的、双手合十的）先还原成 57×57 / 58×58 的像素网格。常驻姿势是把握拳图睁着眼的头，接到合十图双手放在胸前的身体上，拼成一张“胸前合手”底图；敲代码、挥手、搬书、比赞这几个要单独用手的动作，才换回握拳图。每张底图再按颜色分成几层。每一帧都从原图重新拼：图层只做整格平移或整格剪切，不缩放、不旋转、不抗锯齿，所以永远是干净的像素。把鼠标放到图上可以看原图。</p>
+    </div>
+    <div class="rig">
+      <div class="maps">
+        <figure class="panel map" style="margin:0">
+          <div class="pic" tabindex="0" aria-label="胸前合手底图的分层"><img id="map-thumb" alt="胸前合手底图，按图层上色"><img class="base" id="base-thumb" alt="胸前合手底图原图"></div>
+          <figcaption>胸前合手底图 · 大部分动作用它</figcaption>
+        </figure>
+        <figure class="panel map" style="margin:0">
+          <div class="pic" tabindex="0" aria-label="合十底图的分层"><img id="map-heart" alt="合十底图，按图层上色"><img class="base" id="base-heart" alt="合十底图原图"></div>
+          <figcaption>合十底图 · 任务完成、挠痒、冒爱心</figcaption>
+        </figure>
+      </div>
+      <div class="panel rules">
+        <ul id="rules"></ul>
+      </div>
+    </div>
+    <div class="panel beats">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+        <h3>弹性四拍</h3>
+        <span class="muted" style="font-size:13px">取自“任务完成”第 2 到 5 帧，几乎每个动作都套这个节奏</span>
+      </div>
+      <div class="beats-row" id="beats"></div>
+    </div>
+  </section>
+
+  <section id="files">
+    <div class="sec-head">
+      <h2>文件</h2>
+      <p class="muted">GIF 都是透明底、无限循环，每帧时长和上面播放的一致。</p>
+    </div>
+    <div class="panel files">
+      <div class="spec">
+        <div><b>69 × 66</b><span>逻辑像素画布（含道具留白）</span></div>
+        <div><b>552 × 528</b><span>GIF 尺寸，最近邻放大 8 倍</span></div>
+        <div><b id="spec-frames">0 帧</b><span>全部 22 个动图合计</span></div>
+        <div><b id="spec-range">ms</b><span>单帧时长范围，按动作节奏逐帧设定</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <h3>下载 GIF</h3>
+        <p class="muted" style="font-size:13px">点一下就会保存对应的 GIF（552×528，透明底）。</p>
+        <div class="dl"><a href="assets/gifs/01-idle.gif" download="01-待机眨眼-idle.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">01</span>待机眨眼<span class="mono">226 KB</span></a><a href="assets/gifs/02-idle-look.gif" download="02-东张西望-idle-look.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">02</span>东张西望<span class="mono">142 KB</span></a><a href="assets/gifs/03-idle-spout.gif" download="03-开心喷水-idle-spout.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">03</span>开心喷水<span class="mono">123 KB</span></a><a href="assets/gifs/04-thinking.gif" download="04-思考中-thinking.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">04</span>思考中<span class="mono">204 KB</span></a><a href="assets/gifs/05-typing.gif" download="05-敲代码-typing.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">05</span>敲代码<span class="mono">156 KB</span></a><a href="assets/gifs/06-music.gif" download="06-戴耳机听歌-music.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">06</span>戴耳机听歌<span class="mono">94 KB</span></a><a href="assets/gifs/07-conducting.gif" download="07-小鲸鱼分身-conducting.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">07</span>小鲸鱼分身<span class="mono">153 KB</span></a><a href="assets/gifs/08-building.gif" download="08-施工中-building.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">08</span>施工中<span class="mono">291 KB</span></a><a href="assets/gifs/09-error.gif" download="09-出错啦-error.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">09</span>出错啦<span class="mono">117 KB</span></a><a href="assets/gifs/10-happy.gif" download="10-任务完成-happy.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">10</span>任务完成<span class="mono">124 KB</span></a><a href="assets/gifs/11-notification.gif" download="11-需要你确认-notification.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">11</span>需要你确认<span class="mono">93 KB</span></a><a href="assets/gifs/12-compacting.gif" download="12-上下文清理-compacting.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">12</span>上下文清理<span class="mono">116 KB</span></a><a href="assets/gifs/13-carrying.gif" download="13-抱书搬运-carrying.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">13</span>抱书搬运<span class="mono">87 KB</span></a><a href="assets/gifs/14-sleeping.gif" download="14-呼呼大睡-sleeping.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">14</span>呼呼大睡<span class="mono">66 KB</span></a><a href="assets/gifs/15-waking.gif" download="15-被吵醒-waking.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">15</span>被吵醒<span class="mono">119 KB</span></a><a href="assets/gifs/16-poke-left.gif" download="16-戳左边-poke-left.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">16</span>戳左边<span class="mono">121 KB</span></a><a href="assets/gifs/17-poke-right.gif" download="17-戳右边-poke-right.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">17</span>戳右边<span class="mono">121 KB</span></a><a href="assets/gifs/18-tickle.gif" download="18-被挠痒痒-tickle.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">18</span>被挠痒痒<span class="mono">154 KB</span></a><a href="assets/gifs/19-drag.gif" download="19-被拎起来-drag.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">19</span>被拎起来<span class="mono">117 KB</span></a><a href="assets/gifs/20-swim.gif" download="20-游来游去-swim.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">20</span>游来游去<span class="mono">92 KB</span></a><a href="assets/gifs/21-smile-hearts.gif" download="21-看着微笑冒爱心-smile-hearts.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">21</span>看着微笑冒爱心<span class="mono">178 KB</span></a><a href="assets/gifs/22-thumbs-up.gif" download="22-看着举大拇指-thumbs-up.gif"><span class="px" style="font-size:10px;color:var(--ink-3)">22</span>看着举大拇指<span class="mono">148 KB</span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>鲸娘像素表情集 · 由两张原图还原像素网格后逐帧拼装，全部 22 个动图共用一套分层规则。</footer>
+</div>
+
+<script type="application/json" id="set-data">{"w":69,"h":66,"anims":[{"i":1,"key":"idle","title":"待机眨眼","en":"Idle","state":"idle","trigger":"SessionStart，或者没有活的时候","summary":"跟着呼吸轻轻起伏，尾巴慢慢摆，隔一会儿眨一次眼，再连眨两下。","group":"daily","file":"01-待机眨眼-idle","durs":[700,280,280,240,360,60,90,60,650,280,280,240,420,60,80,60,140,60,80,60,800],"meta":[{"note":"安静看着","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"呼气：头沉 1 格，头发往两边鼓，呆毛落后","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":1,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":[]},{"note":"长发跟着沉下去","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[1,0],"fins":0,"tail":1,"strands":1,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":[]},{"note":"吸气回位，呆毛往下晃","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,1],"fins":1,"tail":2,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"站稳","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"眨眼：半闭","base":"lady","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"眨眼：闭上","base":"lady","eyes":"closed","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"眨眼：半睁","base":"lady","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"睁开","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"呼气","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":-1,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":[]},{"note":"长发下沉","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[-1,0],"fins":0,"tail":-1,"strands":1,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":[]},{"note":"吸气回位","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,1],"fins":1,"tail":-2,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"站稳","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"连眨两下","base":"lady","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"","base":"lady","eyes":"closed","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"","base":"lady","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"","base":"lady","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"","base":"lady","eyes":"closed","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"","base":"lady","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"睁开，继续看着","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]}]},{"i":2,"key":"idle-look","title":"东张西望","en":"Look around","state":"idle","trigger":"待机时随机播放","summary":"眼珠往左瞟、眨眨眼，再往右上看，头顶冒出问号，呆毛和尾巴好奇地晃。","group":"daily","file":"02-东张西望-idle-look","durs":[500,420,70,80,70,380,420,110,420,140,140,140,400],"meta":[{"note":"看着你","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"往左瞟","base":"lady","eyes":"look_l","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"眨眼","base":"lady","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"眨眼","base":"lady","eyes":"closed","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"眨眼","base":"lady","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"还在往左看","base":"lady","eyes":"look_l","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"往右看","base":"lady","eyes":"look_r","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"好奇地抬头：头往上拉 1 格","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":-1,"hdx":0,"ahoge":[1,1],"fins":1,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小星"]},{"note":"冒问号，呆毛往上一弹","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,-1],"fins":-1,"tail":0,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["问号"]},{"note":"尾巴好奇地晃","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["问号"]},{"note":"","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":2,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["问号"]},{"note":"","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["问号"]},{"note":"回过神","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]}]},{"i":3,"key":"idle-spout","title":"开心喷水","en":"Water spout","state":"idle","trigger":"idleAnimations，待机时随机播放","summary":"先憋一口气（眯眼鼓腮、头往下压扁），再“噗”地从头顶喷出一股小水柱，水花散成两道弧线落下。","group":"daily","file":"03-开心喷水-idle-spout","durs":[450,260,110,110,130,150,170,170,170,350,400],"meta":[{"note":"看着你","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"憋气：头下沉、头发鼓起、眯眼脸红","base":"lady","eyes":"squeeze","mouth":"flat","blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":0,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":[]},{"note":"水滴冒头，头往上一弹","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":-1,"hdx":0,"ahoge":[1,1],"fins":1,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["水柱"]},{"note":"水柱变高","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,-1],"fins":-1,"tail":0,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["水柱"]},{"note":"水花成十字","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["水柱"]},{"note":"水柱冲到最高","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["水柱"]},{"note":"水花向两边散开","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":2,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["水柱"]},{"note":"水花成两道弧线落下","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["水柱"]},{"note":"水花变深、落下","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["水柱"]},{"note":"满足","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"回到待机","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]}]},{"i":4,"key":"thinking","title":"思考中","en":"Thinking","state":"thinking","trigger":"UserPromptSubmit，收到提问","summary":"眼睛往上看，右上方冒出两颗小泡泡和一朵思考云，三个点依次出现再波浪跳，最后变成亮起来的灯泡。","group":"work","file":"04-思考中-thinking","durs":[220,220,260,260,260,300,170,170,170,170,170,170,90,110,200,200,260],"meta":[{"note":"冒小泡","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡"]},{"note":"冒中泡","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡"]},{"note":"云出现","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","思考云"]},{"note":"第 1 个点","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","思考云","点1"]},{"note":"第 2 个点","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","思考云","点1","点2"]},{"note":"第 3 个点","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","思考云","点1","点2","点3"]},{"note":"点 1 跳","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","思考云","点1","点2","点3"]},{"note":"点 2 跳","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","思考云","点1","点2","点3"]},{"note":"点 3 跳","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","思考云","点1","点2","点3"]},{"note":"点 1 跳","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","思考云","点1","点2","点3"]},{"note":"点 2 跳","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","思考云","点1","点2","点3"]},{"note":"点 3 跳","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","思考云","点1","点2","点3"]},{"note":"灵光一闪：头往下一沉","base":"lady","eyes":"shock","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":0,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["小泡","中泡","灯泡"]},{"note":"弹起来","base":"lady","eyes":"shock","mouth":"o","blush":false,"hand":"fist","head":-1,"hdx":0,"ahoge":[1,1],"fins":1,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","灯泡","光芒"]},{"note":"想到了！","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,-1],"fins":-1,"tail":0,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","灯泡"]},{"note":"灯泡发光","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","灯泡","光芒"]},{"note":"想明白了","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小泡","中泡","灯泡"]}]},{"i":5,"key":"typing","title":"敲代码","en":"Typing","state":"working","trigger":"PreToolUse，1 个会话在跑工具","summary":"长时间干活的循环：面前摆着键盘，半垂着眼，左右两只手轮流一下一下敲，右上角一个字一个字冒出代码，写满一行就往上滚、变灰，头跟着轻轻点一下，偶尔眨眨眼，一直敲下去。","group":"work","file":"05-敲代码-typing","durs":[150,170,150,170,150,170,210,150,170,150,170,150,170,210],"meta":[{"note":"左手敲下 “<”","base":"thumb","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":1,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["键盘","按下的键","上一行 {","上一行 ;","上一行 }","代码 <","右手和袖子"]},{"note":"抬手","base":"thumb","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["键盘","上一行 {","上一行 ;","上一行 }","代码 <","右手和袖子"]},{"note":"右手敲下 “/”","base":"thumb","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["键盘","按下的键","上一行 {","上一行 ;","上一行 }","代码 <","代码 /","右手和袖子"]},{"note":"抬手","base":"thumb","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["键盘","上一行 {","上一行 ;","上一行 }","代码 <","代码 /","右手和袖子"]},{"note":"左手敲下 “>”","base":"thumb","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["键盘","按下的键","上一行 {","上一行 ;","上一行 }","代码 <","代码 /","代码 >","右手和袖子"]},{"note":"抬手","base":"thumb","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["键盘","上一行 {","上一行 ;","上一行 }","代码 <","代码 /","代码 >","右手和袖子"]},{"note":"换行：这一行往上滚、变灰，头轻轻点一下","base":"thumb","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["键盘","上一行 <","上一行 /","上一行 >","右手和袖子"]},{"note":"右手敲下 “{”","base":"thumb","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["键盘","按下的键","上一行 <","上一行 /","上一行 >","代码 {","右手和袖子"]},{"note":"抬手","base":"thumb","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["键盘","上一行 <","上一行 /","上一行 >","代码 {","右手和袖子"]},{"note":"左手敲下 “;”","base":"thumb","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["键盘","按下的键","上一行 <","上一行 /","上一行 >","代码 {","代码 ;","右手和袖子"]},{"note":"眨一下眼，继续","base":"thumb","eyes":"closed","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["键盘","上一行 <","上一行 /","上一行 >","代码 {","代码 ;","右手和袖子"]},{"note":"右手敲下 “}”","base":"thumb","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["键盘","按下的键","上一行 <","上一行 /","上一行 >","代码 {","代码 ;","代码 }","右手和袖子"]},{"note":"抬手","base":"thumb","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["键盘","上一行 <","上一行 /","上一行 >","代码 {","代码 ;","代码 }","右手和袖子"]},{"note":"换行：这一行往上滚、变灰，头轻轻点一下","base":"thumb","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["键盘","上一行 {","上一行 ;","上一行 }","右手和袖子"]}]},{"i":6,"key":"music","title":"戴耳机听歌","en":"Headphones","state":"working","trigger":"PreToolUse，2 个会话同时跑工具","summary":"戴上红色耳机，眯眼抿着小嘴笑，跟着节拍一沉一弹，呆毛和耳鳍晚半拍甩，音符从两边耳罩轮流飘上去。","group":"work","file":"06-戴耳机听歌-music","durs":[150,150,150,150,150,150,150,150],"meta":[{"note":"第 1 拍：下沉挤压","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":1,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":"phones","puff":1,"held":null,"props":["音符","音符"]},{"note":"第 1 拍","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[1,1],"fins":1,"tail":1,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":"phones","puff":0,"held":null,"props":["音符"]},{"note":"第 2 拍：弹起拉伸","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":-1,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":"phones","puff":0,"held":null,"props":["音符"]},{"note":"第 2 拍","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,-1],"fins":-1,"tail":-1,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":"phones","puff":0,"held":null,"props":["音符"]},{"note":"第 3 拍：下沉挤压","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":-1,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":"phones","puff":1,"held":null,"props":["音符","音符"]},{"note":"第 3 拍","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,1],"fins":1,"tail":-1,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":"phones","puff":0,"held":null,"props":["音符"]},{"note":"第 4 拍：弹起拉伸","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":-1,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":"phones","puff":0,"held":null,"props":["音符"]},{"note":"第 4 拍","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[1,-1],"fins":-1,"tail":1,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":"phones","puff":0,"held":null,"props":["音符"]}]},{"i":7,"key":"conducting","title":"小鲸鱼分身","en":"Sub-agents","state":"juggling","trigger":"SubagentStart，派出 2 个以上子代理","summary":"派出去的分身变成三只迷你小鲸鱼，在她身后慢慢地一上一下漂着，时不时吐个泡泡；她抿嘴笑着，眼睛跟着它们从左看到右。","group":"work","file":"07-小鲸鱼分身-conducting","durs":[150,150,150,150,150,150,150,150,150,150,150,150],"meta":[{"note":"三只小鲸鱼分身在身后一上一下地漂","base":"lady","eyes":"look_l","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小鲸鱼 1","小鲸鱼 2","小鲸鱼 3"]},{"note":"","base":"lady","eyes":"look_l","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小鲸鱼 1","泡泡 1","小鲸鱼 2","小鲸鱼 3"]},{"note":"","base":"lady","eyes":"look_l","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小鲸鱼 1","泡泡 1","小鲸鱼 2","小鲸鱼 3"]},{"note":"","base":"lady","eyes":"look_l","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小鲸鱼 1","泡泡 1","小鲸鱼 2","小鲸鱼 3"]},{"note":"三只小鲸鱼分身在身后一上一下地漂","base":"lady","eyes":"look_up","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小鲸鱼 1","小鲸鱼 2","小鲸鱼 3"]},{"note":"","base":"lady","eyes":"look_up","mouth":"smile","blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["小鲸鱼 1","小鲸鱼 2","小鲸鱼 3","泡泡 3"]},{"note":"","base":"lady","eyes":"look_up","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小鲸鱼 1","小鲸鱼 2","小鲸鱼 3","泡泡 3"]},{"note":"","base":"lady","eyes":"look_up","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小鲸鱼 1","小鲸鱼 2","小鲸鱼 3","泡泡 3"]},{"note":"三只小鲸鱼分身在身后一上一下地漂","base":"lady","eyes":"look_r","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小鲸鱼 1","小鲸鱼 2","小鲸鱼 3"]},{"note":"","base":"lady","eyes":"look_r","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小鲸鱼 1","小鲸鱼 2","泡泡 2","小鲸鱼 3"]},{"note":"","base":"lady","eyes":"look_r","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["小鲸鱼 1","小鲸鱼 2","泡泡 2","小鲸鱼 3"]},{"note":"","base":"lady","eyes":"look_r","mouth":"smile","blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["小鲸鱼 1","小鲸鱼 2","泡泡 2","小鲸鱼 3"]}]},{"i":8,"key":"building","title":"施工中","en":"Building","state":"working","trigger":"PreToolUse，3 个以上会话同时跑工具","summary":"同时有 3 个以上会话在跑工具时出现：每个会话“丢”下一块彩色积木，她双手合在胸前、眼睛跟着看，积木砸实时身体一沉再弹起；最底下一层搭好就闪一下收走，楼往下落一格，下一块又来了，一直循环。","group":"work","file":"08-施工中-building","durs":[130,100,80,90,100,120,90,130,130,100,80,90,100,120,90,130,130,100,80,90,100,120,90,130],"meta":[{"note":"又一个会话丢下一块蓝积木，合在胸前的手跟着往上一提","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":0,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（绿）","积木（紫）","积木（蓝）"]},{"note":"积木往下掉，眼睛跟着看","base":"lady","eyes":"look_l","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（绿）","积木（紫）","积木（蓝）"]},{"note":"","base":"lady","eyes":"look_l","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（绿）","积木（紫）","积木（蓝）"]},{"note":"“咚”地砸实：身体被震得一沉，头发往两边鼓","base":"lady","eyes":"squeeze","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":-1,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["积木（绿）","积木（紫）","积木（蓝）","灰尘","灰尘"]},{"note":"弹回来，呆毛这才甩下来","base":"lady","eyes":"happy","mouth":"smile","blush":false,"hand":"fist","head":-1,"hdx":0,"ahoge":[1,1],"fins":1,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（绿）","积木（紫）","积木（蓝）"]},{"note":"最底下一层搭好了，闪一下","base":"lady","eyes":"happy","mouth":"smile","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,-1],"fins":-1,"tail":1,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（绿）","积木（紫）","积木（蓝）","闪光","闪光"]},{"note":"这一层被收走","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（紫）","积木（蓝）"]},{"note":"楼往下落一格，等下一块","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（紫）","积木（蓝）","灰尘","灰尘"]},{"note":"又一个会话丢下一块绿积木，合在胸前的手跟着往上一提","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":0,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（紫）","积木（蓝）","积木（绿）"]},{"note":"积木往下掉，眼睛跟着看","base":"lady","eyes":"look_l","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（紫）","积木（蓝）","积木（绿）"]},{"note":"","base":"lady","eyes":"look_l","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（紫）","积木（蓝）","积木（绿）"]},{"note":"“咚”地砸实：身体被震得一沉，头发往两边鼓","base":"lady","eyes":"squeeze","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":-1,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["积木（紫）","积木（蓝）","积木（绿）","灰尘","灰尘"]},{"note":"弹回来，呆毛这才甩下来","base":"lady","eyes":"happy","mouth":"smile","blush":false,"hand":"fist","head":-1,"hdx":0,"ahoge":[1,1],"fins":1,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（紫）","积木（蓝）","积木（绿）"]},{"note":"最底下一层搭好了，闪一下","base":"lady","eyes":"happy","mouth":"smile","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,-1],"fins":-1,"tail":1,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（紫）","积木（蓝）","积木（绿）","闪光","闪光"]},{"note":"这一层被收走","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（蓝）","积木（绿）"]},{"note":"楼往下落一格，等下一块","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（蓝）","积木（绿）","灰尘","灰尘"]},{"note":"又一个会话丢下一块紫积木，合在胸前的手跟着往上一提","base":"lady","eyes":"look_up","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":0,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（蓝）","积木（绿）","积木（紫）"]},{"note":"积木往下掉，眼睛跟着看","base":"lady","eyes":"look_l","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（蓝）","积木（绿）","积木（紫）"]},{"note":"","base":"lady","eyes":"look_l","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（蓝）","积木（绿）","积木（紫）"]},{"note":"“咚”地砸实：身体被震得一沉，头发往两边鼓","base":"lady","eyes":"squeeze","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":-1,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["积木（蓝）","积木（绿）","积木（紫）","灰尘","灰尘"]},{"note":"弹回来，呆毛这才甩下来","base":"lady","eyes":"happy","mouth":"smile","blush":false,"hand":"fist","head":-1,"hdx":0,"ahoge":[1,1],"fins":1,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（蓝）","积木（绿）","积木（紫）"]},{"note":"最底下一层搭好了，闪一下","base":"lady","eyes":"happy","mouth":"smile","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,-1],"fins":-1,"tail":1,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（蓝）","积木（绿）","积木（紫）","闪光","闪光"]},{"note":"这一层被收走","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（绿）","积木（紫）"]},{"note":"楼往下落一格，等下一块","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["积木（绿）","积木（紫）","灰尘","灰尘"]}]},{"i":9,"key":"error","title":"出错啦","en":"Error","state":"error","trigger":"PostToolUseFailure，工具执行失败","summary":"吓得一抖：头猛地往上一窜再左右乱晃（晃动逐渐减小），眼睛变成 x x，头顶冒烟，左上角弹出红色 ✕，额角滑下一滴汗。","group":"alert","file":"09-出错啦-error","durs":[90,80,80,80,90,200,200,160,200,300],"meta":[{"note":"受惊：头往上窜 1 格，尾巴一抽","base":"lady","eyes":"shock","mouth":"o","blush":false,"hand":"fist","head":-1,"hdx":0,"ahoge":[0,1],"fins":1,"tail":2,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✕"]},{"note":"左右乱晃 +1","base":"lady","eyes":"shock","mouth":"o","blush":false,"hand":"fist","head":0,"hdx":1,"ahoge":[-1,-1],"fins":-1,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✕"]},{"note":"晃 −1","base":"lady","eyes":"x","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":-1,"ahoge":[1,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✕"]},{"note":"晃 +1","base":"lady","eyes":"x","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":1,"ahoge":[-1,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✕","烟"]},{"note":"晃 0，站稳","base":"lady","eyes":"x","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✕","烟","汗珠"]},{"note":"冒烟","base":"lady","eyes":"x","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✕","烟","汗珠"]},{"note":"冒烟","base":"lady","eyes":"x","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✕","烟","烟","汗珠"]},{"note":"✕ 闪一下","base":"lady","eyes":"x","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["烟","汗珠"]},{"note":"冒烟","base":"lady","eyes":"x","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✕","烟"]},{"note":"缓一缓","base":"lady","eyes":"closed","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✕"]}]},{"i":10,"key":"happy","title":"任务完成","en":"Task complete","state":"attention","trigger":"Stop / PostCompact，任务完成","summary":"双手合十笑成 ^^：先往下压、再弹起来，头发和耳鳍跟着甩；右上角弹出绿色 ✓，彩纸从头顶落下。","group":"alert","file":"10-任务完成-happy","durs":[200,90,90,100,100,100,100,110,110,120,400],"meta":[{"note":"开心","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"下沉蓄力：头压扁、头发鼓起","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["✓"]},{"note":"弹起拉伸：✓ 弹出","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":-1,"hdx":0,"ahoge":[1,1],"fins":1,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✓","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸"]},{"note":"回弹：呆毛往上甩","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,-1],"fins":-1,"tail":1,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✓","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸"]},{"note":"余震","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":2,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✓","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸"]},{"note":"第二次弹","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["✓","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸"]},{"note":"","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":-1,"hdx":0,"ahoge":[1,1],"fins":1,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✓","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸"]},{"note":"","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,-1],"fins":-1,"tail":-1,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✓","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸"]},{"note":"","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✓","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸"]},{"note":"","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✓","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸","彩纸"]},{"note":"满足","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["✓"]}]},{"i":11,"key":"notification","title":"需要你确认","en":"Needs you","state":"notification","trigger":"PermissionRequest，等你批准","summary":"瞪圆眼睛张着嘴，张开小手上下挥，右上角黄色感叹气泡左右摇晃一闪一闪，尾巴拼命甩。","group":"alert","file":"11-需要你确认-notification","durs":[110,110,110,110,110,110,110,110],"meta":[{"note":"挥手喊你","base":"thumb","eyes":"shock","mouth":"o","blush":false,"hand":"palm","head":1,"hdx":0,"ahoge":[-1,0],"fins":0,"tail":2,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["感叹气泡","提示线","提示线","提示线"]},{"note":"挥手喊你","base":"thumb","eyes":"shock","mouth":"o","blush":false,"hand":"palm","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["感叹气泡"]},{"note":"挥手喊你","base":"thumb","eyes":"shock","mouth":"o","blush":false,"hand":"palm","head":0,"hdx":0,"ahoge":[-1,0],"fins":0,"tail":-1,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["感叹气泡"]},{"note":"挥手喊你（气泡闪灭）","base":"thumb","eyes":"shock","mouth":"o","blush":false,"hand":"palm","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":-2,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"挥手喊你","base":"thumb","eyes":"shock","mouth":"o","blush":false,"hand":"palm","head":1,"hdx":0,"ahoge":[-1,0],"fins":0,"tail":-1,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["感叹气泡","提示线","提示线","提示线"]},{"note":"挥手喊你","base":"thumb","eyes":"shock","mouth":"o","blush":false,"hand":"palm","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["感叹气泡"]},{"note":"挥手喊你","base":"thumb","eyes":"shock","mouth":"o","blush":false,"hand":"palm","head":0,"hdx":0,"ahoge":[-1,0],"fins":0,"tail":2,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["感叹气泡"]},{"note":"挥手喊你（气泡闪灭）","base":"thumb","eyes":"shock","mouth":"o","blush":false,"hand":"palm","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]}]},{"i":12,"key":"compacting","title":"上下文清理","en":"Context compaction","state":"sweeping","trigger":"PreCompact，压缩上下文之前","summary":"四周散着彩色的上下文碎片，眯眼憋气把它们一格格吸进头顶，憋到头都压扁了，再“噗”地挤出一块整整齐齐的压缩方块。","group":"work","file":"12-上下文清理-compacting","durs":[300,130,130,130,130,200,100,160,220,240],"meta":[{"note":"上下文碎片散在四周","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["上下文碎片","上下文碎片","上下文碎片","上下文碎片","上下文碎片","上下文碎片"]},{"note":"吸进来 1/5","base":"lady","eyes":"squeeze","mouth":"flat","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["上下文碎片","上下文碎片","上下文碎片","上下文碎片","上下文碎片","上下文碎片"]},{"note":"吸进来 2/5","base":"lady","eyes":"squeeze","mouth":"flat","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["上下文碎片","上下文碎片","上下文碎片","上下文碎片","上下文碎片","上下文碎片"]},{"note":"吸进来 3/5","base":"lady","eyes":"squeeze","mouth":"flat","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["上下文碎片","上下文碎片","上下文碎片","上下文碎片","上下文碎片","上下文碎片"]},{"note":"吸进来 4/5","base":"lady","eyes":"squeeze","mouth":"flat","blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":0,"tail":0,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["上下文碎片","上下文碎片","上下文碎片","上下文碎片","上下文碎片","上下文碎片"]},{"note":"全吸进去了，憋着","base":"lady","eyes":"squeeze","mouth":"flat","blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[0,0],"fins":-1,"tail":0,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":[]},{"note":"“噗”地挤出方块，头往上一弹","base":"lady","eyes":"happy","mouth":"o","blush":true,"hand":"fist","head":-1,"hdx":0,"ahoge":[1,1],"fins":1,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["压缩方块"]},{"note":"方块往上飘","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,-1],"fins":-1,"tail":0,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["压缩方块","闪光"]},{"note":"整整齐齐","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["压缩方块","闪光","闪光"]},{"note":"收工","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]}]},{"i":13,"key":"carrying","title":"抱书搬运","en":"Carrying","state":"carrying","trigger":"WorktreeCreate，新建工作区","summary":"新建工作区（worktree）时出现：像女仆搬书房一样，她两只手从两边捧着一摞粉、白、蓝三本书（夹着粉色书签），原地一步一颠地往新工作区走；底下两本跟着手走，最上面那本晚一拍才落下，身后拖出几道速度线。","group":"work","file":"13-抱书搬运-carrying","durs":[140,140,140,140,140,140,140,140],"meta":[{"note":"抬起来，最上面那本还没跟上","base":"thumb","eyes":"open","mouth":"flat","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["速度线","速度线","速度线","底下的书","中间的书","最上面的书（晚一拍）","右手和袖子"]},{"note":"一步：往下一颠，头发往两边鼓","base":"thumb","eyes":"open","mouth":"flat","blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":1,"wear":null,"puff":1,"held":null,"props":["速度线","速度线","速度线","底下的书","中间的书","最上面的书（晚一拍）","右手和袖子"]},{"note":"双手跟着身体下沉，最上面那本晚一拍才落下","base":"thumb","eyes":"open","mouth":"flat","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":2,"strands":1,"hand_dy":0,"gdx":0,"gdy":1,"wear":null,"puff":0,"held":null,"props":["速度线","速度线","速度线","底下的书","中间的书","最上面的书（晚一拍）","右手和袖子"]},{"note":"抬起来，最上面那本还没跟上","base":"thumb","eyes":"open","mouth":"flat","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,1],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["速度线","速度线","速度线","底下的书","中间的书","最上面的书（晚一拍）","右手和袖子"]},{"note":"抬起来，最上面那本还没跟上","base":"thumb","eyes":"open","mouth":"flat","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["速度线","速度线","速度线","底下的书","中间的书","最上面的书（晚一拍）","右手和袖子"]},{"note":"一步：往下一颠，头发往两边鼓","base":"thumb","eyes":"open","mouth":"flat","blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":1,"wear":null,"puff":1,"held":null,"props":["速度线","速度线","速度线","底下的书","中间的书","最上面的书（晚一拍）","右手和袖子"]},{"note":"双手跟着身体下沉，最上面那本晚一拍才落下","base":"thumb","eyes":"closed","mouth":"flat","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-2,"strands":1,"hand_dy":0,"gdx":0,"gdy":1,"wear":null,"puff":0,"held":null,"props":["速度线","速度线","速度线","底下的书","中间的书","最上面的书（晚一拍）","右手和袖子"]},{"note":"抬起来，最上面那本还没跟上","base":"thumb","eyes":"open","mouth":"flat","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,1],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["速度线","速度线","速度线","底下的书","中间的书","最上面的书（晚一拍）","右手和袖子"]}]},{"i":14,"key":"sleeping","title":"呼呼大睡","en":"Sleeping","state":"sleeping","trigger":"鼠标 60 秒没动","summary":"闭着眼睛睡着，脸红红的，头随呼吸慢慢垂下去再抬回来，鼻子上的鼻涕泡跟着一鼓一缩，Zzz 一个接一个往右上飘。","group":"daily","file":"14-呼呼大睡-sleeping","durs":[330,330,330,330,330,330],"meta":[{"note":"呼气：头慢慢垂下去，鼻涕泡冒出来","base":"lady","eyes":"closed","mouth":null,"blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":0,"tail":0,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["z","鼻涕泡"]},{"note":"鼻涕泡变大","base":"lady","eyes":"closed","mouth":null,"blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":1,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["z","—","鼻涕泡"]},{"note":"鼻涕泡鼓到最大","base":"lady","eyes":"closed","mouth":null,"blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":1,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["Z","z","鼻涕泡"]},{"note":"吸气：头抬回来，泡泡变小","base":"lady","eyes":"closed","mouth":null,"blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["Z","z","—","鼻涕泡"]},{"note":"泡泡缩回去","base":"lady","eyes":"closed","mouth":null,"blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["z","—","鼻涕泡"]},{"note":"泡泡没了，Zzz 散开","base":"lady","eyes":"closed","mouth":null,"blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["—"]}]},{"i":15,"key":"waking","title":"被吵醒","en":"Waking up","state":"waking","trigger":"睡着时动鼠标或点她","summary":"睡得正香，鼻涕泡“啵”地破了：眼睛一下瞪圆、冒出红色感叹号，吓得往上一窜，呆毛弹起来又回弹，眨两下眼恢复精神。","group":"daily","file":"15-被吵醒-waking","durs":[420,110,120,100,100,110,200,70,80,70,500],"meta":[{"note":"还在睡，鼻涕泡鼓到最大","base":"lady","eyes":"closed","mouth":null,"blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["鼻涕泡"]},{"note":"泡泡“啵”地破了","base":"lady","eyes":"closed","mouth":null,"blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["破掉的泡泡"]},{"note":"惊醒：眼睛瞪圆","base":"lady","eyes":"shock","mouth":"o","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["!"]},{"note":"往上一窜，呆毛竖起来","base":"lady","eyes":"shock","mouth":"o","blush":false,"hand":"fist","head":-1,"hdx":0,"ahoge":[0,2],"fins":1,"tail":2,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["!"]},{"note":"落回来，呆毛往上甩","base":"lady","eyes":"shock","mouth":"o","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[-2,-1],"fins":-1,"tail":1,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["!"]},{"note":"呆毛回弹","base":"lady","eyes":"shock","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"愣住","base":"lady","eyes":"shock","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"眨眼","base":"lady","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"眨眼","base":"lady","eyes":"closed","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"眨眼","base":"lady","eyes":"half","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"清醒了","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]}]},{"i":16,"key":"poke-left","title":"戳左边","en":"Poke (left)","state":"reaction","trigger":"单击她的左脸","summary":"被戳到左脸：眯眼抿嘴，头被推开 1 格、弹回来冲过头再回正；然后脸红笑起来，冒出一颗爱心。","group":"touch","file":"16-戳左边-poke-left","durs":[300,110,90,90,200,140,140,240,200,200,400],"meta":[{"note":"看着你","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"被戳：头被推开 1 格","base":"lady","eyes":"squeeze","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":1,"ahoge":[-1,0],"fins":-1,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["戳点"]},{"note":"弹回来，冲过头","base":"lady","eyes":"squeeze","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":-1,"ahoge":[1,1],"fins":1,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["戳点"]},{"note":"回正","base":"lady","eyes":"squeeze","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"害羞","base":"lady","eyes":"open","mouth":null,"blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"冒心","base":"lady","eyes":"open","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心 小"]},{"note":"冒心","base":"lady","eyes":"open","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心 中"]},{"note":"冒心","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心 大"]},{"note":"心往上飘","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心 大"]},{"note":"心飘走","base":"lady","eyes":"open","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心 中"]},{"note":"看着你","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]}]},{"i":17,"key":"poke-right","title":"戳右边","en":"Poke (right)","state":"reaction","trigger":"单击她的右脸","summary":"被戳到右脸：头往另一边弹，同样害羞冒心。","group":"touch","file":"17-戳右边-poke-right","durs":[300,110,90,90,200,140,140,240,200,200,400],"meta":[{"note":"看着你","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"被戳：头被推开 1 格","base":"lady","eyes":"squeeze","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":-1,"ahoge":[1,0],"fins":-1,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["戳点"]},{"note":"弹回来，冲过头","base":"lady","eyes":"squeeze","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":1,"ahoge":[-1,1],"fins":1,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["戳点"]},{"note":"回正","base":"lady","eyes":"squeeze","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"害羞","base":"lady","eyes":"open","mouth":null,"blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"冒心","base":"lady","eyes":"open","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心 小"]},{"note":"冒心","base":"lady","eyes":"open","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心 中"]},{"note":"冒心","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心 大"]},{"note":"心往上飘","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心 大"]},{"note":"心飘走","base":"lady","eyes":"open","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心 中"]},{"note":"看着你","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]}]},{"i":18,"key":"tickle","title":"被挠痒痒","en":"Tickled","state":"reaction","trigger":"连续快速点击（1 秒内 3 下以上）","summary":"笑得合不拢嘴，头上下左右乱颤，呆毛、耳鳍、尾巴一起乱甩，小爱心和星星到处冒；笑够了长舒一口气。","group":"touch","file":"18-被挠痒痒-tickle","durs":[90,90,90,90,90,90,90,90,90,90,90,90,200,400],"meta":[{"note":"笑到乱颤","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[-1,0],"fins":1,"tail":-1,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["心","星"]},{"note":"笑到乱颤","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":-1,"hdx":1,"ahoge":[-2,-1],"fins":-1,"tail":-1,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心","星"]},{"note":"笑到乱颤","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":-1,"ahoge":[-1,0],"fins":-1,"tail":2,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心","星"]},{"note":"笑到乱颤","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[2,0],"fins":1,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["心","星"]},{"note":"笑到乱颤","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":-1,"hdx":-1,"ahoge":[-2,0],"fins":-1,"tail":-2,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心","星"]},{"note":"笑到乱颤","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":1,"ahoge":[1,1],"fins":1,"tail":2,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心","星"]},{"note":"笑到乱颤","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[-2,1],"fins":1,"tail":-2,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["心","星"]},{"note":"笑到乱颤","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":-1,"hdx":1,"ahoge":[2,1],"fins":1,"tail":-2,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心","星"]},{"note":"笑到乱颤","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":-1,"ahoge":[-2,0],"fins":-1,"tail":-2,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心","星"]},{"note":"笑到乱颤","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[-1,1],"fins":-1,"tail":-2,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["心","星"]},{"note":"笑到乱颤","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":-1,"hdx":-1,"ahoge":[-2,0],"fins":-1,"tail":-1,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心","星"]},{"note":"笑到乱颤","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":1,"ahoge":[2,1],"fins":1,"tail":1,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心","星"]},{"note":"笑够了，长舒一口气","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["心"]},{"note":"平静","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]}]},{"i":19,"key":"drag","title":"被拎起来","en":"Dragged","state":"reaction","trigger":"按住她拖动","summary":"被鼠标拎住时原地不动，只是慌了：眼睛瞪圆、嘴抿成小波浪，头左右乱晃，胸前的双手紧张地一抖一抖，尾巴乱扑腾，汗珠往两边飞，头顶冒出红色“!!”。","group":"touch","file":"19-被拎起来-drag","durs":[90,90,90,90,90,90,90,90,90,90],"meta":[{"note":"被拎住了！原地慌张地扑腾","base":"lady","eyes":"shock","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":1,"ahoge":[-2,-1],"fins":-1,"tail":2,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["慌张","汗珠","汗珠"]},{"note":"","base":"lady","eyes":"shock","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":-1,"ahoge":[2,1],"fins":1,"tail":-2,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["慌张","汗珠","汗珠"]},{"note":"","base":"lady","eyes":"shock","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":1,"ahoge":[-2,-1],"fins":-1,"tail":2,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["慌张","汗珠","汗珠"]},{"note":"","base":"lady","eyes":"shock","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":-1,"ahoge":[2,1],"fins":1,"tail":-1,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["汗珠","汗珠"]},{"note":"","base":"lady","eyes":"shock","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":1,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["汗珠","汗珠"]},{"note":"","base":"lady","eyes":"shock","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":1,"ahoge":[-2,1],"fins":1,"tail":-2,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["慌张","汗珠","汗珠"]},{"note":"","base":"lady","eyes":"shock","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":-1,"ahoge":[2,-1],"fins":-1,"tail":2,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["慌张","汗珠","汗珠"]},{"note":"","base":"lady","eyes":"shock","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":1,"ahoge":[-2,1],"fins":1,"tail":-2,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["慌张","汗珠","汗珠"]},{"note":"","base":"lady","eyes":"shock","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":-1,"ahoge":[2,-1],"fins":-1,"tail":1,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["汗珠","汗珠"]},{"note":"","base":"lady","eyes":"shock","mouth":"wavy","blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,1],"fins":1,"tail":-1,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["汗珠","汗珠"]}]},{"i":20,"key":"swim","title":"游来游去","en":"Swim","state":"idle · roam","trigger":"自由漫游","summary":"下半身泡在一片会滚动的水波里，整个人跟着水一沉一浮，尾巴露出水面左右划水，身边冒小气泡。","group":"daily","file":"20-游来游去-swim","durs":[150,150,150,150,150,150,150,150],"meta":[{"note":"漂着","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["水面"]},{"note":"漂着","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["气泡","水面"]},{"note":"随水沉下","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[1,0],"fins":0,"tail":2,"strands":0,"hand_dy":1,"gdx":0,"gdy":1,"wear":null,"puff":0,"held":null,"props":["气泡","水面"]},{"note":"随水沉下","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":1,"hand_dy":0,"gdx":0,"gdy":1,"wear":null,"puff":0,"held":null,"props":["气泡","水面"]},{"note":"漂着","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["气泡","水面"]},{"note":"漂着","base":"lady","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["气泡","水面"]},{"note":"随水浮起","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":1,"hdx":0,"ahoge":[-1,0],"fins":0,"tail":-2,"strands":0,"hand_dy":1,"gdx":0,"gdy":-1,"wear":null,"puff":0,"held":null,"props":["气泡","水面"]},{"note":"随水浮起","base":"lady","eyes":"happy","mouth":"smile","blush":true,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":1,"hand_dy":0,"gdx":0,"gdy":-1,"wear":null,"puff":0,"held":null,"props":["水面"]}]},{"i":21,"key":"smile-hearts","title":"看着微笑冒爱心","en":"Smile & hearts","state":"bonus","trigger":"不绑定事件，可做完成时的随机彩蛋","summary":"双手合十笑眯眯，连着弹两下，四颗爱心轮流冒出来：小 → 大 → 回弹 → 飘走。","group":"love","file":"21-看着微笑冒爱心-smile-hearts","durs":[100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],"meta":[{"note":"静止","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 3","爱心 4"]},{"note":"下沉挤压：头往下 1 格，呆毛和耳鳍落后一拍","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["爱心 1","爱心 3","爱心 4"]},{"note":"弹起拉伸：头往上 1 格，长发跟着往下坠","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":-1,"hdx":0,"ahoge":[1,1],"fins":1,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 1","爱心 4"]},{"note":"回弹：呆毛和耳鳍往上甩，长发回弹","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,-1],"fins":-1,"tail":1,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 1","爱心 4"]},{"note":"余震：呆毛向另一边晃","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 1","爱心 4"]},{"note":"站稳","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 1","爱心 2","爱心 4"]},{"note":"尾巴晃","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 1","爱心 2"]},{"note":"尾巴晃","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 1","爱心 2"]},{"note":"第二次下沉","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":["爱心 1","爱心 2"]},{"note":"第二次弹起","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":-1,"hdx":0,"ahoge":[1,1],"fins":1,"tail":1,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 1","爱心 2","爱心 3"]},{"note":"回弹，尾巴甩到最右","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[-1,-1],"fins":-1,"tail":2,"strands":-1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 2","爱心 3"]},{"note":"余震","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 2","爱心 3"]},{"note":"站稳","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 2","爱心 3"]},{"note":"尾巴晃","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 2","爱心 3","爱心 4"]},{"note":"尾巴晃","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 3","爱心 4"]},{"note":"静止","base":"heart","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["爱心 3","爱心 4"]}]},{"i":22,"key":"thumbs-up","title":"看着举大拇指","en":"Thumbs up","state":"bonus","trigger":"不绑定事件，可做完成时的随机彩蛋","summary":"看着你握拳蓄力，“嘿”地竖起大拇指，冲过头再回落站稳，脸一红，旁边闪星星。","group":"love","file":"22-看着举大拇指-thumbs-up","durs":[160,120,90,80,80,100,110,110,90,110,320,100,100,400],"meta":[{"note":"看着你","base":"thumb","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"尾巴轻晃","base":"thumb","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"蓄力：头和拳头一起往下沉 1 格，头发往两边鼓","base":"thumb","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":-1,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":[]},{"note":"出手：大拇指冒出一半，头往上拉长，呆毛落后","base":"thumb","eyes":"open","mouth":"smile","blush":true,"hand":"thumb_half","head":-1,"hdx":0,"ahoge":[1,1],"fins":1,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"过冲：拳头多顶上去 1 格，大拇指竖直，呆毛往上甩","base":"thumb","eyes":"open","mouth":"smile","blush":true,"hand":"thumb","head":0,"hdx":0,"ahoge":[-1,-1],"fins":-1,"tail":1,"strands":-1,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["星星"]},{"note":"回落站稳，星星闪亮","base":"thumb","eyes":"open","mouth":"smile","blush":true,"hand":"thumb","head":0,"hdx":0,"ahoge":[1,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["星星"]},{"note":"星星散开，尾巴甩到最右","base":"thumb","eyes":"open","mouth":"smile","blush":true,"hand":"thumb","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":2,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["星星"]},{"note":"下面再闪一颗","base":"thumb","eyes":"open","mouth":"smile","blush":true,"hand":"thumb","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["星星"]},{"note":"再用力比一下","base":"thumb","eyes":"open","mouth":"smile","blush":true,"hand":"thumb","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":-1,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":["星星"]},{"note":"回落","base":"thumb","eyes":"open","mouth":"smile","blush":true,"hand":"thumb","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"保持：看着你比赞","base":"thumb","eyes":"open","mouth":"smile","blush":true,"hand":"thumb","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":-1,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"收手：大拇指收回一半","base":"thumb","eyes":"open","mouth":"smile","blush":true,"hand":"thumb_half","head":0,"hdx":0,"ahoge":[0,0],"fins":0,"tail":0,"strands":0,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]},{"note":"放下，头轻轻一沉","base":"thumb","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":1,"hdx":0,"ahoge":[0,-1],"fins":-1,"tail":0,"strands":0,"hand_dy":1,"gdx":0,"gdy":0,"wear":null,"puff":1,"held":null,"props":[]},{"note":"回到原位，长发和呆毛最后晃一下","base":"thumb","eyes":"open","mouth":null,"blush":false,"hand":"fist","head":0,"hdx":0,"ahoge":[0,1],"fins":1,"tail":0,"strands":1,"hand_dy":0,"gdx":0,"gdy":0,"wear":null,"puff":0,"held":null,"props":[]}]}],"sheets":{"idle":"assets/sheets/idle.png","idle-look":"assets/sheets/idle-look.png","idle-spout":"assets/sheets/idle-spout.png","thinking":"assets/sheets/thinking.png","typing":"assets/sheets/typing.png","music":"assets/sheets/music.png","conducting":"assets/sheets/conducting.png","building":"assets/sheets/building.png","error":"assets/sheets/error.png","happy":"assets/sheets/happy.png","notification":"assets/sheets/notification.png","compacting":"assets/sheets/compacting.png","carrying":"assets/sheets/carrying.png","sleeping":"assets/sheets/sleeping.png","waking":"assets/sheets/waking.png","poke-left":"assets/sheets/poke-left.png","poke-right":"assets/sheets/poke-right.png","tickle":"assets/sheets/tickle.png","drag":"assets/sheets/drag.png","swim":"assets/sheets/swim.png","smile-hearts":"assets/sheets/smile-hearts.png","thumbs-up":"assets/sheets/thumbs-up.png"},"layers":{"lady":"assets/rig/layer-lady.png","heart":"assets/rig/layer-heart.png"},"bases":{"lady":"assets/rig/base-lady.png","heart":"assets/rig/base-heart.png"}}</script>
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById('set-data').textContent);
+  const W = D.w, H = D.h;
+  const A = D.anims;
+  const byKey = {};
+  let totalFrames = 0;
+  A.forEach(a => {
+    byKey[a.key] = a;
+    a.starts = [];
+    let t = 0;
+    a.durs.forEach(d => { a.starts.push(t); t += d; });
+    a.total = t;
+    totalFrames += a.durs.length;
+  });
+  document.getElementById('fact-frames').textContent = totalFrames;
+  document.getElementById('spec-frames').textContent = totalFrames + ' 帧';
+  const allDurs = A.flatMap(a => a.durs);
+  document.getElementById('spec-range').textContent = `${Math.min(...allDurs)}–${Math.max(...allDurs)} ms`;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pad = n => String(n).padStart(2, '0');
+
+  function frameAt(a, t) {
+    t = ((t % a.total) + a.total) % a.total;
+    let i = 0;
+    while (i + 1 < a.starts.length && a.starts[i + 1] <= t) i++;
+    return i;
+  }
+  function loadImg(src) {
+    return new Promise(res => { const im = new Image(); im.onload = () => res(im); im.onerror = () => res(null); im.src = src; });
+  }
+  function drawFrame(ctx, a, i) {
+    ctx.clearRect(0, 0, W, H);
+    if (a.img) ctx.drawImage(a.img, i * W, 0, W, H, 0, 0, W, H);
+  }
+
+  // ---------------- labels ----------------
+  const EYES = { open: '睁眼', half: '半闭', closed: '闭眼', happy: '笑眼 ^ ^', squeeze: '眯眼 > <', x: '× ×', shock: '瞪圆', look_l: '往左瞟', look_r: '往右看', look_up: '往上看' };
+  const MOUTH = { smile: '微笑', o: '张嘴 o', laugh: '大笑', wavy: '波浪嘴', flat: '抿嘴', cat: 'ω 嘴' };
+  const HAND = { fist: '拳头', thumb: '大拇指', thumb_half: '拇指半竖', palm: '张开小手' };
+  const WEAR = { phones: '耳机', hat: '安全帽', cap: '睡帽', box: '纸箱' };
+  const HELD = { baton: '指挥棒', hammer: '小锤子' };
+  const POSE = { l: '挥到左', u: '举到上', r: '挥到右', up: '举起', hit: '砸下' };
+  const GROUPS = [
+    ['all', '全部'],
+    ['daily', '日常'],
+    ['work', '干活'],
+    ['alert', '提醒'],
+    ['touch', '互动'],
+    ['love', '比心'],
+  ];
+  const TRACKS = [
+    { k: 'head', name: '头 上下', c: '--c-head', get: m => m.head },
+    { k: 'hdx', name: '头 左右', c: '--c-head', get: m => m.hdx },
+    { k: 'ahx', name: '呆毛 尖端', c: '--c-ahoge', get: m => m.ahoge[0] },
+    { k: 'ahy', name: '呆毛 上下', c: '--c-ahoge', get: m => m.ahoge[1] },
+    { k: 'fins', name: '耳鳍', c: '--c-fin', get: m => m.fins },
+    { k: 'strands', name: '长发', c: '--c-strands', get: m => m.strands },
+    { k: 'tail', name: '尾巴', c: '--c-tail', get: m => m.tail },
+    { k: 'hand', name: '小手', c: '--c-hand', get: m => m.hand_dy },
+    { k: 'gdx', name: '整体 左右', c: '--c-whole', get: m => m.gdx },
+    { k: 'gdy', name: '整体 上下', c: '--c-whole', get: m => m.gdy },
+  ];
+  const RULES = [
+    ['头', '--c-head', '头发、脸、头饰是一整块，只整格上下（挤压 +1 / 拉伸 −1），受惊或被戳时左右偏 1 格。挤压那一帧，两侧头发再各往外鼓 1 格，看起来像被压扁。'],
+    ['呆毛', '--c-ahoge', '以根部为支点做整格剪切，越往尖端偏得越多。总比头晚一拍：头往下，它还在上面；头弹起，它才甩下来，然后反向回弹。'],
+    ['耳鳍', '--c-fin', '跟着头走，再额外上下 1 格，节奏同样慢半拍。'],
+    ['长发', '--c-strands', '下巴以下的长发比头晚一帧，头弹起时它往下坠 1 格，下一帧回来。'],
+    ['尾巴', '--c-tail', '绕尾根剪切，偏移随高度按 u^1.3 增大，尾鳍摆得最远，根部不动。'],
+    ['小手', '--c-hand', '平时双手合在胸前，是单独一层：头往下压时，手也被压下 1 格，下一拍再回来。要用手的动作换成握拳图：左手可以上下、换成大拇指或张开的手掌，右手补了一只带袖子的手，用来敲键盘、捧书。'],
+    ['身体', '--c-body', '身体不变形，只有抱书走路、泡在水里时整体上下颠 1 格。头往上拉伸时，在头下面补两行和衣领同色的像素，脖子处不会露出空缝。'],
+  ];
+  const BEATS = [
+    [1, '蓄力挤压', '头下沉 1 格，头发往两边鼓，呆毛和耳鳍还停在上面'],
+    [2, '弹起拉伸', '头往上 1 格，呆毛、耳鳍这才甩下来，长发往下坠'],
+    [3, '回弹过冲', '头回原位，呆毛、耳鳍反向往上甩，长发回弹'],
+    [4, '余震站稳', '呆毛往另一边轻晃一下，尾巴摆到最远，然后站稳'],
+  ];
+
+  // ---------------- brand ----------------
+  const brandCtx = document.getElementById('brand').getContext('2d');
+
+  // ---------------- wall ----------------
+  const groupsEl = document.getElementById('groups');
+  const wallEl = document.getElementById('wall-grid');
+  let group = 'all';
+  GROUPS.forEach(([g, label]) => {
+    const n = g === 'all' ? A.length : A.filter(a => a.group === g).length;
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.type = 'button';
+    b.dataset.g = g;
+    b.setAttribute('aria-pressed', g === 'all' ? 'true' : 'false');
+    b.innerHTML = `${label}<span class="n">${n}</span>`;
+    b.addEventListener('click', () => {
+      group = g;
+      groupsEl.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.g === g ? 'true' : 'false'));
+      cards.forEach(c => { c.el.hidden = !(g === 'all' || c.a.group === g); });
+    });
+    groupsEl.appendChild(b);
+  });
+  const cards = A.map(a => {
+    const el = document.createElement('button');
+    el.type = 'button';
+    el.className = 'card';
+    el.innerHTML = `<div class="shot"><canvas class="pix" width="${W}" height="${H}"></canvas></div>
+      <div class="t"><b>${a.title}</b><span class="num">${pad(a.i)}</span></div>
+      <div class="sub"><span>${a.en}</span><span class="mono">${a.durs.length} 帧 · ${(a.total / 1000).toFixed(2)}s</span></div>
+      <div class="trig">${a.state} · ${a.trigger}</div>`;
+    el.addEventListener('click', () => { select(a.key, true); });
+    wallEl.appendChild(el);
+    return { a, el, ctx: el.querySelector('canvas').getContext('2d'), last: -1, vis: true };
+  });
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { const c = cards.find(c => c.el === e.target); if (c) c.vis = e.isIntersecting; }), { rootMargin: '120px' });
+    cards.forEach(c => io.observe(c.el));
+  }
+
+  // ---------------- inspector ----------------
+  const sel = document.getElementById('anim-select');
+  A.forEach(a => { const o = document.createElement('option'); o.value = a.key; o.textContent = `${pad(a.i)} ${a.title}`; sel.appendChild(o); });
+  const stage = document.getElementById('stage');
+  const sctx = document.getElementById('stage-cv').getContext('2d');
+  const dctx = document.getElementById('diff-cv').getContext('2d');
+  const film = document.getElementById('film');
+  const tbar = document.getElementById('tbar');
+  const tracksEl = document.getElementById('tracks');
+  const chartEl = document.querySelector('.chart');
+  const playBtn = document.getElementById('play');
+  let cur = null, t = 0, fi = -1, playing = !reduce, speed = 1, showDiff = false, onion = false;
+  const els = {
+    title: document.getElementById('anim-title'), summary: document.getElementById('anim-summary'),
+    note: document.getElementById('frame-note'), tags: document.getElementById('frame-tags'), props: document.getElementById('frame-props'),
+    fno: document.getElementById('frame-no'), fcount: document.getElementById('fcount'), diff: document.getElementById('diff-count'),
+    state: document.getElementById('state-chip'), tnow: document.getElementById('t-now'), total: document.getElementById('total-ms'),
+    legend: document.getElementById('track-legend'),
+  };
+  playBtn.textContent = playing ? '暂停' : '播放';
+
+  function computeDiff(a) {
+    if (a.diff || !a.img) return;
+    const n = a.durs.length;
+    const cv = document.createElement('canvas');
+    cv.width = W * n; cv.height = H;
+    const c = cv.getContext('2d');
+    c.drawImage(a.img, 0, 0);
+    const px = c.getImageData(0, 0, W * n, H).data;
+    a.diff = [];
+    for (let i = 0; i < n; i++) {
+      const p = (i - 1 + n) % n;
+      const mask = new Uint8Array(W * H);
+      let cnt = 0;
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+        const o1 = (y * W * n + i * W + x) * 4, o2 = (y * W * n + p * W + x) * 4;
+        if (px[o1 + 3] !== px[o2 + 3] || (px[o1 + 3] && (px[o1] !== px[o2] || px[o1 + 1] !== px[o2 + 1] || px[o1 + 2] !== px[o2 + 2]))) { mask[y * W + x] = 1; cnt++; }
+      }
+      a.diff.push({ mask, cnt });
+    }
+  }
+
+  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  function buildTracks(a) {
+    const active = TRACKS.filter(tr => a.meta.some(m => tr.get(m) !== 0));
+    tracksEl.innerHTML = '';
+    const n = a.durs.length;
+    active.forEach(tr => {
+      const row = document.createElement('div');
+      row.className = 'trow';
+      const vals = a.meta.map(tr.get);
+      let d = '';
+      const Y = v => 15 - v * 4.5;
+      vals.forEach((v, i) => {
+        const x0 = a.starts[i] / a.total * 1000, x1 = (a.starts[i] + a.durs[i]) / a.total * 1000;
+        d += (i === 0 ? `M${x0.toFixed(1)} ${Y(v)}` : ` V${Y(v)}`) + ` H${x1.toFixed(1)}`;
+      });
+      let ticks = '';
+      a.starts.forEach((s, i) => { if (i) { const x = (s / a.total * 1000).toFixed(1); ticks += `<line x1="${x}" x2="${x}" y1="2" y2="28" stroke="var(--line)" stroke-width="1" vector-effect="non-scaling-stroke"/>`; } });
+      row.innerHTML = `<span class="lab"><i style="background:var(${tr.c})"></i>${tr.name}</span>
+        <div class="plot"><svg viewBox="0 0 1000 30" preserveAspectRatio="none" aria-hidden="true">${ticks}
+          <line x1="0" x2="1000" y1="15" y2="15" stroke="var(--line-2)" stroke-dasharray="4 4" stroke-width="1" vector-effect="non-scaling-stroke"/>
+          <path d="${d}" fill="none" stroke="var(${tr.c})" stroke-width="2.2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg><div class="ph"></div></div>
+        <span class="val" data-k="${tr.k}">0</span>`;
+      tracksEl.appendChild(row);
+    });
+    els.legend.textContent = active.length
+      ? '虚线是 0。头：+ 往下挤压，− 往上拉伸；呆毛尖端和尾巴：+ 往右；长发、耳鳍、小手：+ 往下。只列出这个动作里动过的层。'
+      : '这个动作里没有图层位移，变化全在表情和道具上。';
+    a.activeTracks = active;
+  }
+
+  function select(key, scroll) {
+    const a = byKey[key];
+    if (!a) return;
+    cur = a;
+    t = 0; fi = -1;
+    sel.value = key;
+    cards.forEach(c => c.el.setAttribute('aria-current', c.a === a ? 'true' : 'false'));
+    els.title.textContent = a.title;
+    els.summary.textContent = a.summary;
+    els.state.textContent = '状态 · ' + a.state;
+    els.total.textContent = `${a.durs.length} 帧 · ${a.total} ms`;
+    computeDiff(a);
+    // film strip
+    film.innerHTML = '';
+    a.filmBtns = a.durs.map((d, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', `第 ${i + 1} 帧，${d} 毫秒`);
+      b.innerHTML = `<canvas class="pix" width="${W}" height="${H}"></canvas><span>${pad(i + 1)}·${d}</span>`;
+      drawFrame(b.querySelector('canvas').getContext('2d'), a, i);
+      b.addEventListener('click', () => { setPlaying(false); goFrame(i); });
+      film.appendChild(b);
+      return b;
+    });
+    // time bar
+    tbar.innerHTML = '';
+    a.segs = a.durs.map((d, i) => {
+      const s = document.createElement('div');
+      s.style.flex = `${d} 0 0`;
+      s.textContent = d / a.total > 0.045 ? pad(i + 1) : '';
+      s.addEventListener('click', () => { setPlaying(false); goFrame(i); });
+      tbar.appendChild(s);
+      return s;
+    });
+    buildTracks(a);
+    renderFrame(0, true);
+    if (scroll) {
+      document.getElementById('frames').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      try { history.replaceState(null, '', '#' + key); } catch (e) {}
+    }
+  }
+
+  function goFrame(i) {
+    const n = cur.durs.length;
+    i = ((i % n) + n) % n;
+    t = cur.starts[i];
+    renderFrame(i, true);
+  }
+
+  function renderFrame(i, force) {
+    const a = cur;
+    const phase = t / a.total;
+    chartEl.style.setProperty('--ph', phase.toFixed(4));
+    els.tnow.textContent = Math.round(t);
+    if (i === fi && !force) return;
+    fi = i;
+    // stage
+    sctx.clearRect(0, 0, W, H);
+    if (onion) {
+      sctx.globalAlpha = 0.28;
+      sctx.drawImage(a.img, ((i - 1 + a.durs.length) % a.durs.length) * W, 0, W, H, 0, 0, W, H);
+      sctx.globalAlpha = 1;
+      sctx.drawImage(a.img, i * W, 0, W, H, 0, 0, W, H);
+    } else {
+      drawFrame(sctx, a, i);
+    }
+    dctx.clearRect(0, 0, W, H);
+    const df = a.diff ? a.diff[i] : null;
+    if (showDiff && df) {
+      const id = dctx.createImageData(W, H);
+      const col = cssVar('--blush') || '#DC4F74';
+      const r = parseInt(col.slice(1, 3), 16), g = parseInt(col.slice(3, 5), 16), b = parseInt(col.slice(5, 7), 16);
+      for (let k = 0; k < W * H; k++) if (df.mask[k]) { id.data[k * 4] = r; id.data[k * 4 + 1] = g; id.data[k * 4 + 2] = b; id.data[k * 4 + 3] = 170; }
+      dctx.putImageData(id, 0, 0);
+    }
+    // text
+    const m = a.meta[i];
+    els.fno.textContent = `FRAME ${pad(i + 1)} · ${a.durs[i]}MS`;
+    els.fcount.textContent = `${pad(i + 1)}/${pad(a.durs.length)}`;
+    els.note.textContent = m.note || '（保持上一拍的姿势）';
+    const tags = [];
+    tags.push(['底图', m.base === 'heart' ? '双手合十笑眼' : m.base === 'lady' ? '双手放胸前' : '握拳']);
+    if (m.base !== 'heart') {
+      tags.push(['眼睛', EYES[m.eyes] || '睁眼']);
+      tags.push(['嘴', m.mouth ? MOUTH[m.mouth] : '原样']);
+      if (m.blush) tags.push(['脸红', '']);
+      tags.push(['手', m.base === 'lady' ? '合在胸前' : (HAND[m.hand] || '拳头')]);
+    }
+    if (m.wear) tags.push(['戴着', WEAR[m.wear]]);
+    if (m.held) tags.push(['手里', `${HELD[m.held[0]]}（${POSE[m.held[1]]}）`]);
+    if (m.puff) tags.push(['头发外鼓', '1 格']);
+    els.tags.innerHTML = tags.map(([k, v]) => `<span class="tag">${k}${v ? `<b>${v}</b>` : ''}</span>`).join('');
+    const props = [...new Set(m.props || [])];
+    els.props.innerHTML = props.length ? props.map(p => `<span class="tag prop">${p}</span>`).join('') : '<span class="tag">没有道具</span>';
+    els.diff.textContent = df ? `这一帧比上一帧改动了 ${df.cnt} 个像素` : '';
+    // tracks
+    (a.activeTracks || []).forEach(tr => {
+      const v = tr.get(m);
+      const el = tracksEl.querySelector(`[data-k="${tr.k}"]`);
+      if (el) el.textContent = v > 0 ? '+' + v : String(v);
+    });
+    a.filmBtns.forEach((b, k) => b.setAttribute('aria-current', k === i ? 'true' : 'false'));
+    a.segs.forEach((s, k) => s.classList.toggle('on', k === i));
+    const btn = a.filmBtns[i];
+    if (btn && playing) {
+      const fl = film.getBoundingClientRect(), br = btn.getBoundingClientRect();
+      if (br.left < fl.left || br.right > fl.right) film.scrollLeft += br.left - fl.left - fl.width / 2 + br.width / 2;
+    }
+  }
+
+  function setPlaying(p) { playing = p; playBtn.textContent = p ? '暂停' : '播放'; }
+  playBtn.addEventListener('click', () => setPlaying(!playing));
+  document.getElementById('step-back').addEventListener('click', () => { setPlaying(false); goFrame(fi - 1); });
+  document.getElementById('step-fwd').addEventListener('click', () => { setPlaying(false); goFrame(fi + 1); });
+  document.getElementById('prev-anim').addEventListener('click', () => { const k = A.indexOf(cur); select(A[(k - 1 + A.length) % A.length].key, false); });
+  document.getElementById('next-anim').addEventListener('click', () => { const k = A.indexOf(cur); select(A[(k + 1) % A.length].key, false); });
+  sel.addEventListener('change', () => select(sel.value, false));
+  function seg(id, fn) {
+    const g = document.getElementById(id);
+    g.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+      g.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+      fn(b.dataset.v);
+    }));
+  }
+  seg('speed', v => { speed = parseFloat(v); });
+  seg('bg', v => { stage.className = stage.className.replace(/bg-\w+/, 'bg-' + v); });
+  function toggle(id, fn) {
+    const b = document.getElementById(id);
+    b.addEventListener('click', () => { const on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(on)); fn(on); });
+  }
+  toggle('tg-diff', on => { showDiff = on; renderFrame(fi, true); });
+  toggle('tg-onion', on => { onion = on; renderFrame(fi, true); });
+  toggle('tg-grid', on => { stage.classList.toggle('show-grid', on); });
+  document.addEventListener('keydown', e => {
+    if (e.target.closest && e.target.closest('select, input, textarea')) return;
+    if (e.key === ' ' && !e.target.closest('button')) { e.preventDefault(); setPlaying(!playing); }
+    else if (e.key === 'ArrowLeft') { setPlaying(false); goFrame(fi - 1); }
+    else if (e.key === 'ArrowRight') { setPlaying(false); goFrame(fi + 1); }
+  });
+
+  // ---------------- rig section ----------------
+  document.getElementById('map-thumb').src = D.layers.lady;
+  document.getElementById('map-heart').src = D.layers.heart;
+  document.getElementById('base-thumb').src = D.bases.lady;
+  document.getElementById('base-heart').src = D.bases.heart;
+  document.getElementById('rules').innerHTML = RULES.map(([k, c, p]) =>
+    `<li><span class="k"><i style="background:var(${c})"></i>${k}</span><p>${p}</p></li>`).join('');
+
+  // ---------------- desk: simulated agent events + mouse reactions ----------------
+  const AGENT = [
+    { code: 'SessionStart', name: '空闲待机', key: 'idle' },
+    { code: 'idle · random', name: '东张西望', key: 'idle-look' },
+    { code: 'idleAnimations', name: '开心喷水', key: 'idle-spout' },
+    { code: 'UserPromptSubmit', name: '收到提问', key: 'thinking' },
+    { code: 'PreToolUse', name: '1 个会话跑工具', key: 'typing' },
+    { code: 'PreToolUse ×2', name: '2 个会话并行', key: 'music' },
+    { code: 'PreToolUse ×3', name: '3+ 个会话施工', key: 'building' },
+    { code: 'SubagentStart ×2', name: '派出分身', key: 'conducting' },
+    { code: 'PostToolUseFailure', name: '工具报错', key: 'error', hold: 1 },
+    { code: 'Stop', name: '任务完成', key: 'happy', hold: 2 },
+    { code: 'PermissionRequest', name: '需要你确认', key: 'notification', hold: 3 },
+    { code: 'PreCompact', name: '上下文清理', key: 'compacting' },
+    { code: 'WorktreeCreate', name: '新建工作区', key: 'carrying', hold: 2 },
+    { code: 'idle 60s', name: '睡着了', key: 'sleeping' },
+    { code: 'mousemove', name: '把她吵醒', key: 'waking', hold: 1 },
+    { code: 'free roam', name: '游来游去', key: 'swim' },
+  ];
+  const MOUSE = [
+    { code: 'click · left', name: '单击左脸', key: 'poke-left', hold: 1, mouse: true },
+    { code: 'click · right', name: '单击右脸', key: 'poke-right', hold: 1, mouse: true },
+    { code: 'click ×4 · rapid', name: '连续点击', key: 'tickle', hold: 1, mouse: true },
+    { code: 'drag', name: '按住拖动', key: 'drag', hold: 3, mouse: true },
+    { code: 'praise', name: '比个赞', key: 'thumbs-up', hold: 1, mouse: true },
+    { code: 'praise · heart', name: '冒爱心', key: 'smile-hearts', hold: 2, mouse: true },
+  ];
+  const DEMO = [
+    ['SessionStart', 2600], ['UserPromptSubmit', 3400], ['PreToolUse', 4700], ['PreToolUse ×2', 3600],
+    ['SubagentStart ×2', 3600], ['PreToolUse ×3', 5000], ['PostToolUseFailure', 3000], ['PermissionRequest', 2700],
+    ['PreCompact', 3500], ['WorktreeCreate', 2300], ['Stop', 3100], ['idleAnimations', 2500], ['idle 60s', 4000],
+    ['mousemove', 1900], ['free roam', 2400], ['idle · random', 3300],
+  ];
+  const deskCv = document.getElementById('desk-cv');
+  const deskCtx = deskCv.getContext('2d');
+  const deskLog = document.getElementById('desk-log');
+  const clickCount = document.getElementById('click-count');
+  const evBtns = {};
+  function mkBtns(list, el) {
+    list.forEach(ev => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ev-btn';
+      b.setAttribute('aria-pressed', 'false');
+      b.innerHTML = `<span class="name">${ev.name}</span><span class="code">${ev.code}</span>`;
+      b.addEventListener('click', () => { setAuto(false); fire(ev); });
+      document.getElementById(el).appendChild(b);
+      evBtns[ev.code] = b;
+    });
+  }
+  mkBtns(AGENT, 'ev-agent');
+  mkBtns(MOUSE, 'ev-mouse');
+  const ALL_EV = AGENT.concat(MOUSE);
+  // st.a: what is on screen; st.base: the persistent state to return to; st.until: when a temporary one ends
+  const st = { a: null, start: 0, base: null, until: 0, dragging: false };
+  const logLines = [];
+  function log(ev, a) {
+    const d = new Date();
+    const hh = pad(d.getHours()), mm = pad(d.getMinutes()), ss = pad(d.getSeconds());
+    logLines.unshift(`${hh}:${mm}:${ss}  <span class="ev">${ev}</span> → <span class="st">${a.state}</span> · ${a.file}.gif`);
+    logLines.length = Math.min(logLines.length, 4);
+    deskLog.innerHTML = logLines.join('\n');
+  }
+  function show(a, now) {
+    st.a = a;
+    st.start = now;
+    document.getElementById('desk-state').textContent = 'state: ' + a.state;
+    document.getElementById('desk-title').textContent = a.title;
+  }
+  function press(code) {
+    Object.values(evBtns).forEach(b => b.setAttribute('aria-pressed', b === evBtns[code] ? 'true' : 'false'));
+  }
+  // play a temporary state `loops` times, then go back to the persistent one
+  function temp(a, loops, now) {
+    if (!st.until) st.base = st.a;
+    if (a.key === 'waking' || (st.base && st.base.key === 'sleeping')) st.base = byKey['idle'];
+    st.until = now + a.total * loops;
+    show(a, now);
+  }
+  function fire(ev) {
+    const now = performance.now();
+    const a = byKey[ev.key];
+    press(ev.code);
+    if (ev.hold) temp(a, ev.hold, now);
+    else { st.base = a; st.until = 0; show(a, now); }
+    log(ev.code, a);
+  }
+
+  // real mouse / touch on the pet: click = poke, rapid clicks = tickle, press and move = drag
+  let down = null, clicks = [];
+  deskCv.addEventListener('pointerdown', e => {
+    down = { x: e.clientX, y: e.clientY, id: e.pointerId };
+    try { deskCv.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  deskCv.addEventListener('pointermove', e => {
+    if (!down || st.dragging) return;
+    if (Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6) {
+      setAuto(false);
+      st.dragging = true;
+      deskCv.classList.add('dragging');
+      if (!st.until) st.base = st.a;
+      st.until = 0;
+      press('drag');
+      show(byKey['drag'], performance.now());
+      log('drag start', byKey['drag']);
+    }
+  });
+  function release(e) {
+    if (!down) return;
+    const wasDrag = st.dragging;
+    down = null;
+    if (wasDrag) {
+      st.dragging = false;
+      deskCv.classList.remove('dragging');
+      const back = st.base && st.base.key !== 'drag' ? st.base : byKey['idle'];
+      show(back, performance.now());
+      press('');
+      log('drag end', back);
+      return;
+    }
+    if (e && e.type === 'pointerup') clickAt(e.clientX);
+  }
+  deskCv.addEventListener('pointerup', release);
+  deskCv.addEventListener('pointercancel', () => { if (st.dragging) release(null); down = null; });
+  deskCv.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const r = deskCv.getBoundingClientRect(); clickAt(r.left + r.width * 0.3); }
+  });
+  function clickAt(x) {
+    setAuto(false);
+    const now = performance.now();
+    clicks = clicks.filter(t => now - t < 1100);
+    clicks.push(now);
+    clickCount.textContent = '×' + clicks.length;
+    clickCount.classList.toggle('on', clicks.length > 1);
+    clearTimeout(clickAt.tm);
+    clickAt.tm = setTimeout(() => clickCount.classList.remove('on'), 900);
+    const cur0 = st.a;
+    if (clicks.length >= 3) {
+      // rapid clicks = tickle; every further click keeps her laughing a little longer
+      const tk = byKey['tickle'];
+      if (cur0 !== tk) { temp(tk, 1, now); log(`click ×${clicks.length} · rapid`, tk); press('click ×4 · rapid'); }
+      else st.until = Math.max(st.until, now + 1100);
+      return;
+    }
+    if (cur0 && (cur0.key === 'sleeping' || (st.base && st.base.key === 'sleeping' && !st.until))) {
+      const w = byKey['waking'];
+      temp(w, 1, now); press('mousemove'); log('click (asleep)', w);
+      return;
+    }
+    const r = deskCv.getBoundingClientRect();
+    const left = (x - r.left) < r.width * 0.5;
+    const a = byKey[left ? 'poke-left' : 'poke-right'];
+    if (cur0 === byKey['tickle']) return;
+    temp(a, 1, now);
+    press(left ? 'click · left' : 'click · right');
+    log(left ? 'click · left' : 'click · right', a);
+  }
+
+  let auto = !reduce, demoIdx = 0, demoNext = 0;
+  const autoBtn = document.getElementById('auto-btn');
+  function setAuto(on) {
+    auto = on;
+    autoBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    if (on) { demoIdx = 0; demoNext = 0; }
+  }
+  autoBtn.addEventListener('click', () => setAuto(!auto));
+  setAuto(auto);
+  function deskTick(now) {
+    if (auto && now >= demoNext && !st.dragging) {
+      const [code, hold] = DEMO[demoIdx % DEMO.length];
+      const ev = ALL_EV.find(e => e.code === code);
+      fire({ ...ev, hold: 0 });
+      demoNext = now + hold;
+      demoIdx++;
+    }
+    if (st.until && now >= st.until && !st.dragging) { st.until = 0; show(st.base || byKey['idle'], now); }
+    const a = st.a;
+    if (a) drawFrame(deskCtx, a, reduce ? 0 : frameAt(a, now - st.start));
+  }
+
+  // ---------------- boot ----------------
+  const t0 = performance.now();
+  Promise.all(A.map(a => loadImg(D.sheets[a.key]).then(im => { a.img = im; }))).then(() => {
+    const beats = document.getElementById('beats');
+    const hp = byKey['happy'];
+    beats.innerHTML = BEATS.map(([i, b, s]) => `<div class="beat"><div class="shot"><canvas class="pix" width="${W}" height="${H}"></canvas></div><b>${b}</b><span>${s}</span></div>`).join('');
+    beats.querySelectorAll('canvas').forEach((cv, k) => drawFrame(cv.getContext('2d'), hp, BEATS[k][0]));
+    const hash = (location.hash || '').slice(1);
+    select(byKey[hash] ? hash : 'idle', false);
+    show(byKey['idle'], performance.now());
+    st.base = byKey['idle'];
+    log('SessionStart', byKey['idle']);
+    if (byKey[hash]) document.getElementById('frames').scrollIntoView();
+    let last = performance.now();
+    function loop(now) {
+      const dt = Math.min(100, now - last);
+      last = now;
+      const wt = now - t0;
+      const idle = byKey['idle'];
+      drawFrame(brandCtx, idle, reduce ? 0 : frameAt(idle, wt));
+      deskTick(now);
+      cards.forEach(c => {
+        if (!c.vis || c.el.hidden) return;
+        const f = reduce ? 0 : frameAt(c.a, wt);
+        if (f !== c.last) { drawFrame(c.ctx, c.a, f); c.last = f; }
+      });
+      if (cur) {
+        if (playing) { t = (t + dt * speed) % cur.total; }
+        renderFrame(frameAt(cur, t), false);
+      }
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  });
+})();
+</script>
+
+</html>

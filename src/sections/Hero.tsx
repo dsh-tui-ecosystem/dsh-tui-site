@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import TerminalDemo from '../components/TerminalDemo'
+import HeroWhaleGirl from '../components/HeroWhaleGirl'
 import CommandLine from '../components/CommandLine'
 import Icon from '../components/Icon'
 import BrandIcon from '../components/BrandIcon'
@@ -96,12 +97,7 @@ export default function Hero() {
 
           <div className="enter flex items-end gap-4 sm:gap-7" style={{ ['--enter-d' as never]: '120ms' }}>
             <div className="parallax-whale relative shrink-0">
-              <img
-                src={lang === 'en' ? '../whale-girl.png' : '/whale-girl.png'}
-                alt={t(strings['hero.whaleAlt'])}
-                className="whale-float h-[96px] w-[96px] sm:h-[168px] sm:w-[168px]"
-                style={{ imageRendering: 'pixelated' }}
-              />
+              <HeroWhaleGirl />
               <span
                 className="pointer-events-none absolute h-1.5 w-1.5"
                 style={{ left: '-8%', top: '8%', background: 'var(--mist-2)', animation: 'twinkle 2.4s ease-in-out infinite' }}

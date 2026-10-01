@@ -223,9 +223,11 @@ export const NAV_LINKS: { href: string; label: Pair }[] = [
   { href: '#guides', label: { zh: '指南', en: 'Guides' } },
 ]
 
-/** 站外目的地，和页内锚点分组渲染，不共用同一节奏。 */
-export const NAV_SECONDARY: { href: string | Pair; label: Pair; external?: boolean }[] = [
+/** 站外目的地，和页内锚点分组渲染，不共用同一节奏。
+ *  wideOnly：这些语言下桌面导航只在 xl 起显示（英文文案更长，lg 档放不下）；移动菜单不受影响。 */
+export const NAV_SECONDARY: { href: string | Pair; label: Pair; external?: boolean; wideOnly?: Lang[] }[] = [
   { href: { zh: '/plugins/', en: '/en/plugins/' }, label: { zh: '插件市场', en: 'Plugins' } },
+  { href: { zh: '/pets/', en: '/en/pets/' }, label: { zh: '桌宠', en: 'Desk pets' }, wideOnly: ['en'] },
   { href: 'https://join.dshtui.com/', label: { zh: '加入生态', en: 'Join the ecosystem' }, external: true },
 ]
 

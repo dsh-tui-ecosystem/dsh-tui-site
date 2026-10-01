@@ -639,6 +639,35 @@ body {
   background-size: 56px 56px;
 }
 
+/* 桌宠预览：精灵画布已按整数倍出图，这里只防浏览器在被 max-width 压缩时插值；
+   桌面版底面是细网格（对应原素材页的“桌面”），终端版跟随终端配色。 */
+.pixel-canvas {
+  image-rendering: pixelated;
+}
+.pet-surface-desk {
+  background-color: var(--panel-2);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 14px 14px;
+  background-position: center;
+}
+.pet-surface-term {
+  background: var(--term-bg);
+}
+/* 终端版是照深色终端画的：白色的云、气泡、眼白放在亮色终端底上会消失。
+   亮色主题下给所有不透明像素描一圈 1px 的硬边，深色主题不需要。 */
+.term-sprite canvas {
+  filter: drop-shadow(1px 0 0 var(--term-sprite-edge)) drop-shadow(-1px 0 0 var(--term-sprite-edge))
+    drop-shadow(0 1px 0 var(--term-sprite-edge)) drop-shadow(0 -1px 0 var(--term-sprite-edge));
+}
+:root {
+  --term-sprite-edge: rgba(54, 83, 214, 0.32);
+}
+:root[data-theme='dark'] .term-sprite canvas {
+  filter: none;
+}
+
 /* kbd chip */
 .kbd {
   font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;

@@ -3,9 +3,24 @@ import EnglishHome from './pages/EnglishHome'
 import GuidePage from './pages/GuidePage'
 import { getGuidePage } from './content/guides'
 import NotFound from './pages/NotFound'
+import type { ComponentType } from 'react'
+import type { Lang } from './i18n'
+import { petsRouteLang } from './lib/petsRoute'
 
-export default function App({ path = '/' }: { path?: string }) {
+interface Props {
+  path?: string
+  /**
+   * 桌宠页带着三套精灵数据，单独拆成一个 chunk，不进首页的主包：
+   * 客户端在 main.tsx 里按路由按需 import 后传进来，服务端渲染时静态传入。
+   */
+  PetsPage?: ComponentType<{ lang: Lang }>
+}
+
+export default function App({ path = '/', PetsPage }: Props) {
   if (path === '/en/') return <EnglishHome />
+
+  const petsLang = petsRouteLang(path)
+  if (petsLang && PetsPage) return <PetsPage lang={petsLang} />
 
   const guide = getGuidePage(path)
   if (guide) return <GuidePage page={guide} />

@@ -34,6 +34,7 @@ dsh-tui
 - [FAQ](https://dshtui.com/faq/): naming, installation, platforms, updates, and troubleshooting
 - [Plugin marketplace](https://dshtui.com/plugins/): curated dsh-TUI and DSH community extensions
 - [English plugin marketplace](https://dshtui.com/en/plugins/): English catalog of community plugins, themes, skills, and TUI extensions
+- [Desk pets](https://dshtui.com/pets/): live preview of the Deepy whale, Deepy terminal edition, and Whale Girl pixel desk-pet animations reacting to agent hook events ([English](https://dshtui.com/en/pets/))
 
 ## Authoritative project links
 
