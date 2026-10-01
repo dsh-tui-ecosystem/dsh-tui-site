@@ -1,4 +1,4 @@
-import PixelWhale from '../components/PixelWhale'
+import DeepyMark from '../components/DeepyMark'
 import Icon from '../components/Icon'
 import { GUIDE_PAGES, type GuidePageData } from '../content/guides'
 
@@ -87,7 +87,7 @@ export default function GuidePage({ page }: { page: GuidePageData }) {
       >
         <div className="mx-auto flex min-h-[56px] max-w-5xl items-center gap-3 px-page py-3 md:min-h-[64px]">
           <a href={homeHref} className="flex shrink-0 items-center gap-2.5" aria-label={isEnglish ? 'dsh-TUI home' : 'dsh-TUI 首页'}>
-            <PixelWhale float={false} className="h-7 w-9" />
+            <DeepyMark className="h-6 w-[37px]" />
             <span className="font-mono2 font-bold text-head"><span className="text-mist">dsh</span>-TUI</span>
           </a>
           <nav aria-label={navLabel} className="ms-auto hidden flex-wrap justify-end gap-x-4 gap-y-2 md:flex">

@@ -668,6 +668,77 @@ body {
   filter: none;
 }
 
+/* 首屏鲸娘头顶的「求个 Star」气泡：像素风的硬边框 + 硬投影 + 朝左下指向她的尾巴 */
+.star-bubble {
+  position: absolute;
+  z-index: 10;
+  left: 70%;
+  top: -16px;
+  white-space: nowrap;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--head);
+  background: var(--panel);
+  border: 2px solid var(--head);
+  box-shadow: 3px 3px 0 var(--mist);
+  transform-origin: 10px 100%;
+  opacity: 0;
+  scale: 0.6;
+  translate: 0 6px;
+  pointer-events: none;
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    scale var(--dur-3) var(--ease-spring),
+    translate var(--dur-3) var(--ease-spring),
+    box-shadow var(--dur-1) var(--ease-out);
+}
+.star-bubble[data-on='true'] {
+  opacity: 1;
+  scale: 1;
+  translate: 0 0;
+  pointer-events: auto;
+}
+.star-bubble:hover {
+  box-shadow: 4px 4px 0 var(--mist);
+}
+.star-bubble::before,
+.star-bubble::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-right-color: transparent;
+  border-right-style: solid;
+  border-top-style: solid;
+}
+.star-bubble::before {
+  left: 6px;
+  bottom: -11px;
+  border-top-width: 9px;
+  border-right-width: 9px;
+  border-top-color: var(--head);
+}
+.star-bubble::after {
+  left: 8px;
+  bottom: -5px;
+  border-top-width: 5px;
+  border-right-width: 5px;
+  border-top-color: var(--panel);
+}
+.star-bubble-star {
+  color: #f2a20c;
+}
+@media (min-width: 640px) {
+  .star-bubble {
+    left: 58%;
+    top: -8px;
+    padding: 4px 10px;
+    font-size: 12.5px;
+  }
+}
+
 /* kbd chip */
 .kbd {
   font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;

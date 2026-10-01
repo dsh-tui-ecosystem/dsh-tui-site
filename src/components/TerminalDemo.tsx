@@ -50,7 +50,7 @@ function BootHeader({ deepy }: { deepy: DeepyState }) {
   return (
     <div className="chunk-in px-4 pt-4 sm:px-5 sm:pt-5">
       <div className="flex items-start gap-4 sm:gap-7">
-        {/* 42×30 网格按 2× / 3× 整数倍放大，像素边缘才干净 */}
+        {/* 42×30 网格按 2× / 3× 整数倍放大，像素边缘才干净；与右侧文字块垂直居中 */}
         <PixelSprite
           sprite={DEEPY_TERMINAL}
           anim={DEEPY_TERMINAL.anims[deepy.key]}
@@ -60,7 +60,7 @@ function BootHeader({ deepy }: { deepy: DeepyState }) {
           fill
           poster
           label={lang === 'en' ? 'Deepy, the dsh-TUI pixel whale' : 'dsh-TUI 像素小鲸鱼 Deepy'}
-          className="term-sprite mt-1 h-[60px] w-[84px] shrink-0 sm:h-[90px] sm:w-[126px]"
+          className="term-sprite h-[60px] w-[84px] shrink-0 self-center sm:h-[90px] sm:w-[126px]"
         />
         <div className="min-w-0">
           <Wordmark />

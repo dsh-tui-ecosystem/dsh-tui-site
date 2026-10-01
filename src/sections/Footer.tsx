@@ -1,4 +1,5 @@
 import PixelWhale from '../components/PixelWhale'
+import DeepyMark from '../components/DeepyMark'
 import CommandLine from '../components/CommandLine'
 import { FOOTER_GROUPS, strings, useLang, useT } from '../i18n'
 
@@ -29,7 +30,7 @@ export default function Footer() {
         <div className="mx-auto grid max-w-6xl gap-10 px-page py-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
           <div>
             <div className="flex items-center gap-2.5">
-              <PixelWhale float={false} className="h-6 w-8" />
+              <DeepyMark className="h-5 w-[30px]" />
               <span className="font-mono2 text-[14px] font-bold text-head">
                 <span className="text-mist">dsh</span>-TUI
               </span>
