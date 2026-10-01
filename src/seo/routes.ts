@@ -7,7 +7,7 @@ export interface SeoRoute {
   description: string
   keywords: string[]
   alternatePath: string
-  kind: 'home' | 'guide'
+  kind: 'home' | 'guide' | 'pets'
 }
 
 const brandKeywords: Record<SiteLocale, string[]> = {
@@ -46,7 +46,33 @@ const guideRoutes: SeoRoute[] = GUIDE_PAGES.map((page) => ({
   kind: 'guide',
 }))
 
-export const SEO_ROUTES = [...homeRoutes, ...guideRoutes]
+const petKeywords: Record<SiteLocale, string[]> = {
+  'zh-CN': ['桌宠', '像素桌宠', 'Deepy', '小鲸鱼', '鲸娘', 'Clawd on Desk', '像素动画'],
+  en: ['desk pet', 'desktop pet', 'pixel art', 'Deepy', 'Whale Girl', 'Clawd on Desk', 'sprite animation'],
+}
+
+const petRoutes: SeoRoute[] = [
+  {
+    path: '/pets/',
+    locale: 'zh-CN',
+    title: '桌宠动态预览：Deepy 小鲸鱼、终端版与鲸娘 | dsh-TUI',
+    description: '在线预览三套像素桌宠：Deepy 小鲸鱼、Deepy 终端版与鲸娘表情集。点击模拟 agent hook 事件，看它们思考、敲代码、报错和庆祝，并逐个查看全部 62 个动作。',
+    keywords: [...brandKeywords['zh-CN'], ...petKeywords['zh-CN']],
+    alternatePath: '/en/pets/',
+    kind: 'pets',
+  },
+  {
+    path: '/en/pets/',
+    locale: 'en',
+    title: 'Desk pets live: Deepy the whale and Whale Girl | dsh-TUI',
+    description: 'Preview three pixel desk pets — Deepy the whale, its terminal edition and the Whale Girl stickers — reacting live to simulated agent hook events, plus all 62 animations.',
+    keywords: [...brandKeywords.en, ...petKeywords.en],
+    alternatePath: '/pets/',
+    kind: 'pets',
+  },
+]
+
+export const SEO_ROUTES = [...homeRoutes, ...guideRoutes, ...petRoutes]
 
 export function getSeoRoute(path: string) {
   return SEO_ROUTES.find((route) => route.path === path) ?? homeRoutes[0]

@@ -8,7 +8,7 @@ const ssrDir = path.join(rootDir, '.ssr')
 const indexPath = path.join(distDir, 'index.html')
 const entryUrl = pathToFileURL(path.join(ssrDir, 'entry-server.js')).href
 
-const [{ render, SEO_ROUTES, GUIDE_PAGES }, template] = await Promise.all([
+const [{ render, SEO_ROUTES, GUIDE_PAGES, PETS }, template] = await Promise.all([
   import(entryUrl),
   readFile(indexPath, 'utf8'),
 ])
@@ -217,6 +217,31 @@ function structuredData(route) {
     // FAQPage rich results were removed by Google in May 2026.
     // Keep visible FAQ on the homepage; emit FAQPage only on /faq/.
     graph.push(softwareNode(route), sourceCodeNode())
+    return { '@context': 'https://schema.org', '@graph': graph }
+  }
+
+  if (route.kind === 'pets') {
+    const isEnglish = route.locale === 'en'
+    const sets = [
+      ['deepy-whale', isEnglish ? 'Deepy the whale' : 'Deepy 小鲸鱼'],
+      ['deepy-terminal', isEnglish ? 'Deepy, terminal edition' : 'Deepy 终端版'],
+      ['whale-girl-emoji', isEnglish ? 'Whale Girl pixel stickers' : '鲸娘像素表情集'],
+    ]
+    graph.push(
+      projectNode(),
+      webPageNode(route, 'CollectionPage'),
+      breadcrumbNode(route, isEnglish ? 'Desk pets' : '桌宠预览'),
+      {
+        '@type': 'ItemList',
+        '@id': `${routeUrl(route.path)}#sets`,
+        numberOfItems: sets.length,
+        itemListElement: sets.map(([slug, name], index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          item: { '@type': 'CreativeWork', name, url: routeUrl(`/pets/${slug}/`), inLanguage: 'zh-CN' },
+        })),
+      },
+    )
     return { '@context': 'https://schema.org', '@graph': graph }
   }
 
@@ -583,6 +608,13 @@ await writeFile(robotsPath, `${robotsWithoutSitemap}\n\nSitemap: ${routeUrl('/si
 
 for (const requiredAsset of ['favicon.svg', 'site.webmanifest', 'llms.txt']) {
   await access(path.join(distDir, requiredAsset))
+}
+
+// 桌宠预览页在浏览器里按需加载精灵表，构建期就要确认每一张都在
+for (const pet of PETS) {
+  for (const anim of pet.anims) {
+    await access(path.join(distDir, 'pets', anim.sheet))
+  }
 }
 
 await rm(ssrDir, { recursive: true, force: true })

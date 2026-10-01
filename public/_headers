@@ -10,6 +10,9 @@
 /shots/*.webp
   Cache-Control: public, max-age=31536000, immutable
 
+/pets/:set/assets/*
+  Cache-Control: public, max-age=604800
+
 /404.html
   X-Robots-Tag: noindex, nofollow
 

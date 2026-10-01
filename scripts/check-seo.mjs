@@ -6,7 +6,10 @@ const expectedRoutes = [
   '/', '/en/',
   '/getting-started/', '/features/', '/commands/', '/shortcuts/', '/architecture/', '/faq/',
   '/en/getting-started/', '/en/features/', '/en/commands/', '/en/shortcuts/', '/en/architecture/', '/en/faq/',
+  '/pets/', '/en/pets/',
 ]
+const petRoutes = new Set(['/pets/', '/en/pets/'])
+const petSets = ['deepy-whale', 'deepy-terminal', 'whale-girl-emoji']
 const DEFAULT_SITE_URL = 'https://dshtui.com/'
 const siteUrl = new URL(process.env.SITE_URL?.trim() || DEFAULT_SITE_URL)
 siteUrl.hash = ''
@@ -69,7 +72,8 @@ for (const route of expectedRoutes) {
   const jsonLd = jsonLdValue(html)
   const types = graphTypes(jsonLd)
   const isEnglish = route.startsWith('/en/')
-  const isGuide = !['/', '/en/'].includes(route)
+  const isPets = petRoutes.has(route)
+  const isGuide = !['/', '/en/'].includes(route) && !isPets
 
   record(Boolean(title && title.length >= 15 && title.length <= 75), `${route}: invalid title`)
   const minimumDescriptionLength = isEnglish ? 50 : 25
@@ -91,7 +95,12 @@ for (const route of expectedRoutes) {
       const aliases = Array.isArray(website?.alternateName) ? website.alternateName.map((item) => item.toLowerCase()) : []
       record(['dshtui', 'dsh-tui', 'dsh tui'].every((alias) => aliases.includes(alias)), '/: WebSite alternateName is incomplete')
     }
-    if (!isGuide) {
+    if (isPets) {
+      record(types.has('CollectionPage'), `${route}: CollectionPage structured data missing`)
+      record(types.has('BreadcrumbList'), `${route}: BreadcrumbList structured data missing`)
+      record(types.has('ItemList'), `${route}: ItemList structured data missing`)
+      record(html.includes('aria-label="Breadcrumb"') || html.includes('aria-label="面包屑导航"'), `${route}: visible breadcrumb missing`)
+    } else if (!isGuide) {
       record(types.has('SoftwareApplication'), `${route}: SoftwareApplication structured data missing`)
       record(types.has('SoftwareSourceCode'), `${route}: SoftwareSourceCode structured data missing`)
     } else {
@@ -123,6 +132,28 @@ for (const reference of localAssetRefs) {
     await access(path.resolve(distDir, reference))
   } catch {
     failures.push(`missing asset: ${reference}`)
+  }
+}
+
+// 桌宠：三套原始页面和它们引用的素材都要在产物里（预览页的精灵表由 prerender 校验）
+for (const slug of petSets) {
+  const pageFile = path.join(distDir, 'pets', slug, 'index.html')
+  let petHtml = ''
+  try {
+    petHtml = await readFile(pageFile, 'utf8')
+  } catch {
+    failures.push(`/pets/${slug}/: missing page`)
+    continue
+  }
+  record(!petHtml.includes(';base64,'), `/pets/${slug}/: inline base64 payloads should live in assets/`)
+  const refs = new Set([...petHtml.matchAll(/assets\/[\w./-]+\.(?:gif|png|zip)/g)].map((match) => match[0]))
+  record(refs.size > 0, `/pets/${slug}/: no asset references found`)
+  for (const reference of refs) {
+    try {
+      await access(path.join(distDir, 'pets', slug, reference))
+    } catch {
+      failures.push(`/pets/${slug}/: missing ${reference}`)
+    }
   }
 }
 
