@@ -15,23 +15,6 @@ const copy = {
   starLabel: { zh: '在 GitHub 上给 dsh-TUI 点个 Star', en: 'Star dsh-TUI on GitHub' },
 }
 
-/** 9×9 像素星星（描边 + 填充 + 高光），和气泡、鲸娘的像素风一致；字符 ★ 在等宽字体里太小 */
-function PixelStar() {
-  return (
-    <svg viewBox="0 0 9 9" className="star-bubble-star" shapeRendering="crispEdges" aria-hidden="true" focusable="false">
-      <path
-        fill="#B86E00"
-        d="M4 0h1v1h-1zM3 1h1v1h-1zM5 1h1v1h-1zM1 2h3v1h-3zM5 2h3v1h-3zM0 3h1v1h-1zM8 3h1v1h-1zM1 4h1v1h-1zM7 4h1v1h-1zM2 5h1v1h-1zM6 5h1v1h-1zM1 6h1v1h-1zM4 6h1v1h-1zM7 6h1v1h-1zM1 7h1v1h-1zM3 7h1v1h-1zM5 7h1v1h-1zM7 7h1v1h-1zM2 8h1v1h-1zM6 8h1v1h-1z"
-      />
-      <path
-        fill="#FFC42E"
-        d="M4 1h1v1h-1zM4 2h1v1h-1zM1 3h2v1h-2zM5 3h3v1h-3zM2 4h1v1h-1zM4 4h3v1h-3zM3 5h3v1h-3zM2 6h2v1h-2zM5 6h2v1h-2zM2 7h1v1h-1zM6 7h1v1h-1z"
-      />
-      <path fill="#FFECA0" d="M3 3h2v1h-2zM3 4h1v1h-1z" />
-    </svg>
-  )
-}
-
 interface Pose {
   key: string
   since: number
@@ -119,7 +102,7 @@ export default function HeroWhaleGirl() {
         className="star-bubble font-mono2"
       >
         {t(copy.star)}
-        <PixelStar />
+        <span className="star-bubble-star" aria-hidden="true">🌟</span>
       </a>
     </div>
   )
