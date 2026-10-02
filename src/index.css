@@ -673,6 +673,9 @@ body {
 .star-bubble {
   position: absolute;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 3px;
   left: 90px;
   top: 26px;
   white-space: nowrap;
@@ -726,7 +729,9 @@ body {
   background: var(--panel);
 }
 .star-bubble-star {
-  color: #f2a20c;
+  flex: none;
+  width: 14px;
+  height: 14px;
 }
 @media (min-width: 640px) {
   .star-bubble {
@@ -735,9 +740,14 @@ body {
     padding: 2px 8px;
     font-size: 12px;
     box-shadow: 3px 3px 0 var(--mist);
+    gap: 4px;
   }
   .star-bubble:hover {
     box-shadow: 4px 4px 0 var(--mist);
+  }
+  .star-bubble-star {
+    width: 18px;
+    height: 18px;
   }
 }
 
