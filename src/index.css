@@ -668,6 +668,90 @@ body {
   filter: none;
 }
 
+/* 首屏鲸娘脸旁的「求个 Star」气泡：像素风的硬边框 + 硬投影，尾巴朝左下指向她。
+   位置贴着她头饰那条水平线、在她右侧、「dsh」字样上方，不高过头顶。 */
+.star-bubble {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  left: 90px;
+  top: 26px;
+  white-space: nowrap;
+  padding: 1px 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--head);
+  background: var(--panel);
+  border: 2px solid var(--head);
+  box-shadow: 2px 2px 0 var(--mist);
+  transform-origin: 0 100%;
+  opacity: 0;
+  scale: 0.6;
+  translate: -4px 4px;
+  pointer-events: none;
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    scale var(--dur-3) var(--ease-spring),
+    translate var(--dur-3) var(--ease-spring),
+    box-shadow var(--dur-1) var(--ease-out);
+}
+.star-bubble[data-on='true'] {
+  opacity: 1;
+  scale: 1;
+  translate: 0 0;
+  pointer-events: auto;
+}
+.star-bubble:hover {
+  box-shadow: 3px 3px 0 var(--mist);
+}
+/* 尾巴：左下角伸出去的小三角，外层描边色、内层底色 */
+.star-bubble::before,
+.star-bubble::after {
+  content: '';
+  position: absolute;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+.star-bubble::before {
+  left: -9px;
+  bottom: -2px;
+  width: 9px;
+  height: 9px;
+  background: var(--head);
+}
+.star-bubble::after {
+  left: -4px;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
+  background: var(--panel);
+}
+.star-bubble-star {
+  flex: none;
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+}
+@media (min-width: 640px) {
+  .star-bubble {
+    left: 150px;
+    top: 48px;
+    padding: 2px 8px;
+    font-size: 12px;
+    box-shadow: 3px 3px 0 var(--mist);
+    gap: 4px;
+  }
+  .star-bubble:hover {
+    box-shadow: 4px 4px 0 var(--mist);
+  }
+  .star-bubble-star {
+    font-size: 17px;
+  }
+}
+
 /* kbd chip */
 .kbd {
   font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;

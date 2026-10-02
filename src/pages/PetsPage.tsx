@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react'
-import PixelWhale from '../components/PixelWhale'
+import DeepyMark from '../components/DeepyMark'
 import PixelSprite from '../components/PixelSprite'
 import Icon from '../components/Icon'
 import { LangProvider, useLang, useT, type Lang } from '../i18n'
@@ -49,7 +49,7 @@ function PetsHeader() {
     >
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-3 px-page md:h-[61px]">
         <a href={p.home} className="flex shrink-0 items-center gap-2.5" aria-label={lang === 'en' ? 'dsh-TUI home' : 'dsh-TUI 首页'}>
-          <PixelWhale float={false} className="h-7 w-9" />
+          <DeepyMark className="h-6 w-[37px]" />
           <span className="font-mono2 whitespace-nowrap text-[15px] font-bold tracking-tight text-head">
             <span className="text-mist">dsh</span>-TUI
           </span>

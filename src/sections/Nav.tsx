@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import PixelWhale from '../components/PixelWhale'
+import DeepyMark from '../components/DeepyMark'
 import Icon from '../components/Icon'
 import BrandIcon from '../components/BrandIcon'
 import { formatStars, useStars } from '../lib/useStars'
@@ -83,7 +83,7 @@ export default function Nav() {
       <span className="scroll-progress" aria-hidden="true" />
       <div className="mx-auto flex h-[61px] max-w-6xl items-center gap-3 px-page">
         <a href="#top" className="flex shrink-0 items-center gap-2.5">
-          <PixelWhale float={false} className="h-7 w-9" />
+          <DeepyMark className="h-6 w-[37px]" />
           <span className="font-mono2 whitespace-nowrap text-[15px] font-bold tracking-tight text-head">
             <span className="text-mist">dsh</span>-TUI
           </span>

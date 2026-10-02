@@ -4,19 +4,26 @@ import { WHALE_GIRL } from '../content/sprites/whale-girl-emoji'
 import { strings, useLang, useT } from '../i18n'
 import { useReducedMotion } from '../lib/useReducedMotion'
 
-/** 待机时偶尔穿插的小动作，以及各自播几遍 */
-const VARIANTS: [key: string, loops: number][] = [
-  ['idle-look', 1],
-  ['idle-spout', 1],
-  ['smile-hearts', 2],
-  ['thumbs-up', 2],
-]
+const REPO = 'https://github.com/ccch1mneyyy/dsh-TUI'
 
-const pokeHint = { zh: '点一下戳她', en: 'Click to poke her' }
+/** 首屏打开后多久冒出「求个 Star」气泡（冒出后一直挂着） */
+const ASK_AFTER_MS = 1600
+
+const copy = {
+  poke: { zh: '点一下戳她', en: 'Click to poke her' },
+  star: { zh: '求个 Star', en: 'Star us' },
+  starLabel: { zh: '在 GitHub 上给 dsh-TUI 点个 Star', en: 'Star dsh-TUI on GitHub' },
+}
+
+interface Pose {
+  key: string
+  since: number
+}
 
 /**
- * 首屏的像素鲸娘（素材见 /pets/whale-girl-emoji/）。
- * 待机眨眼，每隔一阵在一轮待机播完时穿插一个小动作；点左右脸会被戳，连点会被挠痒痒。
+ * 首屏守着页面的像素鲸娘（素材见 /pets/whale-girl-emoji/）。
+ * 常驻待机眨眼；只对三种点击做反应：点左脸、点右脸、连点挠痒痒，播完一遍回到待机。
+ * 开场后在她脸旁冒出「求个 Star」气泡并一直挂着，点了去 GitHub。
  *
  * 版面上占的仍是原来那张 168×168（窄屏 96×96）的位置：画布按 69×66 网格的整数倍
  * （3× / 2×）放大，向外溢出，让她的身子正好落在原图的位置，呆毛和道具溢到框外。
@@ -25,32 +32,29 @@ export default function HeroWhaleGirl() {
   const lang = useLang()
   const t = useT()
   const reduced = useReducedMotion()
-  const [cur, setCur] = useState({ key: 'idle', since: 0, loops: 1 })
+  const [cur, setCur] = useState<Pose>({ key: 'idle', since: 0 })
+  const [bubble, setBubble] = useState(false)
   const [touched, setTouched] = useState(false)
   const clicks = useRef<number[]>([])
   const playing = !reduced || touched
 
+  // 点击反应播完一遍回到待机
   useEffect(() => {
-    if (!playing) return
+    if (cur.key === 'idle') return
     const anim = WHALE_GIRL.anims[cur.key]
-    const now = performance.now()
-    let delay: number
-    let next: () => typeof cur
-    if (cur.key === 'idle') {
-      // 在一轮待机播完的那一刻切换，不在眨眼中途打断
-      const rounds = 1 + Math.floor(Math.random() * 2)
-      delay = rounds * anim.total - ((now - cur.since) % anim.total)
-      next = () => {
-        const [key, loops] = VARIANTS[Math.floor(Math.random() * VARIANTS.length)]
-        return { key, since: performance.now(), loops }
-      }
-    } else {
-      delay = cur.loops * anim.total - (now - cur.since)
-      next = () => ({ key: 'idle', since: performance.now(), loops: 1 })
-    }
-    const id = window.setTimeout(() => setCur(next()), Math.max(0, delay))
+    const id = window.setTimeout(
+      () => setCur({ key: 'idle', since: performance.now() }),
+      Math.max(0, anim.total - (performance.now() - cur.since)),
+    )
     return () => window.clearTimeout(id)
-  }, [cur, playing])
+  }, [cur])
+
+  // 「求个 Star」气泡：开场稍等一下弹出，之后一直挂着；减少动态时一开始就在
+  useEffect(() => {
+    if (reduced) return
+    const id = window.setTimeout(() => setBubble(true), ASK_AFTER_MS)
+    return () => window.clearTimeout(id)
+  }, [reduced])
 
   const poke = (e: MouseEvent<HTMLButtonElement>) => {
     const now = e.timeStamp
@@ -61,29 +65,45 @@ export default function HeroWhaleGirl() {
     const right = e.clientX > 0 && e.clientX - r.left > r.width / 2
     const key = recent.length >= 4 ? 'tickle' : right ? 'poke-right' : 'poke-left'
     setTouched(true)
-    setCur({ key, since: now, loops: 1 })
+    setCur({ key, since: now })
   }
 
+  const showBubble = reduced || bubble
   const base = lang === 'en' ? '../pets/' : './pets/'
   return (
-    <button
-      type="button"
-      onClick={poke}
-      title={t(pokeHint)}
-      aria-label={`${t(strings['hero.whaleAlt'])} · ${t(pokeHint)}`}
-      className="whale-float relative block h-[96px] w-[96px] cursor-pointer sm:h-[168px] sm:w-[168px]"
-    >
-      <PixelSprite
-        sprite={WHALE_GIRL}
-        anim={WHALE_GIRL.anims[cur.key]}
-        since={cur.since}
-        base={base}
-        playing={playing}
-        fill
-        poster
-        label={t(strings['hero.whaleAlt'])}
-        className="pointer-events-none absolute -bottom-[12px] -left-[27px] h-[132px] w-[138px] sm:-bottom-[18px] sm:-left-[28px] sm:h-[198px] sm:w-[207px]"
-      />
-    </button>
+    <div className="whale-float relative h-[96px] w-[96px] sm:h-[168px] sm:w-[168px]">
+      <button
+        type="button"
+        onClick={poke}
+        title={t(copy.poke)}
+        aria-label={`${t(strings['hero.whaleAlt'])} · ${t(copy.poke)}`}
+        className="absolute inset-0 block cursor-pointer"
+      >
+        <PixelSprite
+          sprite={WHALE_GIRL}
+          anim={WHALE_GIRL.anims[cur.key]}
+          since={cur.since}
+          base={base}
+          playing={playing}
+          fill
+          poster
+          label={t(strings['hero.whaleAlt'])}
+          className="pointer-events-none absolute -bottom-[12px] -left-[27px] h-[132px] w-[138px] sm:-bottom-[18px] sm:-left-[28px] sm:h-[198px] sm:w-[207px]"
+        />
+      </button>
+      <a
+        href={REPO}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={t(copy.starLabel)}
+        aria-hidden={!showBubble}
+        tabIndex={showBubble ? 0 : -1}
+        data-on={showBubble}
+        className="star-bubble font-mono2"
+      >
+        {t(copy.star)}
+        <span className="star-bubble-star" aria-hidden="true">⭐️</span>
+      </a>
+    </div>
   )
 }
