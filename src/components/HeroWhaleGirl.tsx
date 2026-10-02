@@ -6,18 +6,12 @@ import { useReducedMotion } from '../lib/useReducedMotion'
 
 const REPO = 'https://github.com/ccch1mneyyy/dsh-TUI'
 
-/** 待机时按顺序穿插的小动作：[动画, 播几遍, 是否冒「求 Star」气泡] */
-const VARIANTS: [key: string, loops: number, ask: boolean][] = [
-  ['thumbs-up', 2, true],
-  ['idle-look', 1, false],
-  ['smile-hearts', 2, false],
-  ['idle-spout', 1, false],
-]
-
-/** 首屏打开后多久先比个赞、冒第一次气泡 */
+/** 首屏打开后多久冒第一次「求个 Star」气泡 */
 const FIRST_ASK_MS = 1600
 /** 气泡停留多久 */
 const BUBBLE_MS = 6000
+/** 之后每隔多久再冒一次 */
+const ASK_EVERY_MS = 30000
 
 const copy = {
   poke: { zh: '点一下戳她', en: 'Click to poke her' },
@@ -28,13 +22,12 @@ const copy = {
 interface Pose {
   key: string
   since: number
-  loops: number
 }
 
 /**
- * 首屏的像素鲸娘（素材见 /pets/whale-girl-emoji/）。
- * 待机眨眼，每隔一阵在一轮待机播完时穿插一个小动作；比赞时头顶冒出「求个 Star」气泡，
- * 点气泡去 GitHub，她会冒爱心。点左右脸会被戳，连点会被挠痒痒。
+ * 首屏守着页面的像素鲸娘（素材见 /pets/whale-girl-emoji/）。
+ * 常驻待机眨眼；只对三种点击做反应：点左脸、点右脸、连点挠痒痒，播完一遍回到待机。
+ * 头顶隔一阵冒「求个 Star」气泡，点了去 GitHub。
  *
  * 版面上占的仍是原来那张 168×168（窄屏 96×96）的位置：画布按 69×66 网格的整数倍
  * （3× / 2×）放大，向外溢出，让她的身子正好落在原图的位置，呆毛和道具溢到框外。
@@ -43,50 +36,34 @@ export default function HeroWhaleGirl() {
   const lang = useLang()
   const t = useT()
   const reduced = useReducedMotion()
-  const [cur, setCur] = useState<Pose>({ key: 'idle', since: 0, loops: 1 })
+  const [cur, setCur] = useState<Pose>({ key: 'idle', since: 0 })
   const [bubble, setBubble] = useState(false)
   const [touched, setTouched] = useState(false)
   const clicks = useRef<number[]>([])
-  const nextVariant = useRef(0)
-  const started = useRef(false)
+  const asked = useRef(false)
   const playing = !reduced || touched
 
-  // 动作编排：待机 ⇄ 小动作
+  // 点击反应播完一遍回到待机
   useEffect(() => {
-    if (!playing) return
+    if (cur.key === 'idle') return
     const anim = WHALE_GIRL.anims[cur.key]
-    const now = performance.now()
-    let delay: number
-    let next: () => Pose
-    if (cur.key === 'idle') {
-      if (!started.current) {
-        delay = FIRST_ASK_MS
-      } else {
-        // 在一轮待机播完的那一刻切换，不在眨眼中途打断
-        const rounds = 1 + Math.floor(Math.random() * 2)
-        delay = rounds * anim.total - ((now - cur.since) % anim.total)
-      }
-      next = () => {
-        started.current = true
-        const [key, loops, ask] = VARIANTS[nextVariant.current % VARIANTS.length]
-        nextVariant.current += 1
-        if (ask) setBubble(true)
-        return { key, since: performance.now(), loops }
-      }
-    } else {
-      delay = cur.loops * anim.total - (now - cur.since)
-      next = () => ({ key: 'idle', since: performance.now(), loops: 1 })
-    }
-    const id = window.setTimeout(() => setCur(next()), Math.max(0, delay))
+    const id = window.setTimeout(
+      () => setCur({ key: 'idle', since: performance.now() }),
+      Math.max(0, anim.total - (performance.now() - cur.since)),
+    )
     return () => window.clearTimeout(id)
-  }, [cur, playing])
+  }, [cur])
 
-  // 气泡停一会儿就收起
+  // 「求个 Star」气泡：开场冒一次，停一会儿收起，之后隔一阵再冒；减少动态时常驻，不用定时
   useEffect(() => {
-    if (!bubble) return
-    const id = window.setTimeout(() => setBubble(false), BUBBLE_MS)
+    if (reduced) return
+    const delay = bubble ? BUBBLE_MS : asked.current ? ASK_EVERY_MS : FIRST_ASK_MS
+    const id = window.setTimeout(() => {
+      asked.current = true
+      setBubble(!bubble)
+    }, delay)
     return () => window.clearTimeout(id)
-  }, [bubble])
+  }, [bubble, reduced])
 
   const poke = (e: MouseEvent<HTMLButtonElement>) => {
     const now = e.timeStamp
@@ -96,20 +73,10 @@ export default function HeroWhaleGirl() {
     const r = e.currentTarget.getBoundingClientRect()
     const right = e.clientX > 0 && e.clientX - r.left > r.width / 2
     const key = recent.length >= 4 ? 'tickle' : right ? 'poke-right' : 'poke-left'
-    started.current = true
     setTouched(true)
-    setCur({ key, since: now, loops: 1 })
+    setCur({ key, since: now })
   }
 
-  // 有人点了 Star 气泡：收起气泡，冒爱心道谢
-  const thank = (e: MouseEvent<HTMLAnchorElement>) => {
-    started.current = true
-    setTouched(true)
-    setBubble(false)
-    setCur({ key: 'smile-hearts', since: e.timeStamp, loops: 2 })
-  }
-
-  // 减少动态时不做定时编排，气泡就一直挂着（没有弹出动画）
   const showBubble = reduced || bubble
   const base = lang === 'en' ? '../pets/' : './pets/'
   return (
@@ -137,7 +104,7 @@ export default function HeroWhaleGirl() {
         href={REPO}
         target="_blank"
         rel="noreferrer"
-        onClick={thank}
+        onClick={() => setBubble(false)}
         aria-label={t(copy.starLabel)}
         aria-hidden={!showBubble}
         tabIndex={showBubble ? 0 : -1}
