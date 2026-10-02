@@ -102,7 +102,7 @@ export default function HeroWhaleGirl() {
         className="star-bubble font-mono2"
       >
         {t(copy.star)}
-        <span className="star-bubble-star" aria-hidden="true">🌟</span>
+        <span className="star-bubble-star" aria-hidden="true">⭐️</span>
       </a>
     </div>
   )
