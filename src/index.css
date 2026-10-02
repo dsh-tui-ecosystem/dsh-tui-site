@@ -668,25 +668,26 @@ body {
   filter: none;
 }
 
-/* 首屏鲸娘头顶的「求个 Star」气泡：像素风的硬边框 + 硬投影 + 朝左下指向她的尾巴 */
+/* 首屏鲸娘脸旁的「求个 Star」气泡：像素风的硬边框 + 硬投影，尾巴朝左下指向她。
+   位置贴着她头饰那条水平线、在她右侧、「dsh」字样上方，不高过头顶。 */
 .star-bubble {
   position: absolute;
   z-index: 10;
-  left: 70%;
-  top: -16px;
+  left: 90px;
+  top: 26px;
   white-space: nowrap;
-  padding: 3px 8px;
-  font-size: 11px;
+  padding: 1px 6px;
+  font-size: 10.5px;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--head);
   background: var(--panel);
   border: 2px solid var(--head);
-  box-shadow: 3px 3px 0 var(--mist);
-  transform-origin: 10px 100%;
+  box-shadow: 2px 2px 0 var(--mist);
+  transform-origin: 0 100%;
   opacity: 0;
   scale: 0.6;
-  translate: 0 6px;
+  translate: -4px 4px;
   pointer-events: none;
   transition:
     opacity var(--dur-2) var(--ease-out),
@@ -701,41 +702,42 @@ body {
   pointer-events: auto;
 }
 .star-bubble:hover {
-  box-shadow: 4px 4px 0 var(--mist);
+  box-shadow: 3px 3px 0 var(--mist);
 }
+/* 尾巴：左下角伸出去的小三角，外层描边色、内层底色 */
 .star-bubble::before,
 .star-bubble::after {
   content: '';
   position: absolute;
-  width: 0;
-  height: 0;
-  border-right-color: transparent;
-  border-right-style: solid;
-  border-top-style: solid;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
 }
 .star-bubble::before {
-  left: 6px;
-  bottom: -11px;
-  border-top-width: 9px;
-  border-right-width: 9px;
-  border-top-color: var(--head);
+  left: -9px;
+  bottom: -2px;
+  width: 9px;
+  height: 9px;
+  background: var(--head);
 }
 .star-bubble::after {
-  left: 8px;
-  bottom: -5px;
-  border-top-width: 5px;
-  border-right-width: 5px;
-  border-top-color: var(--panel);
+  left: -4px;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
+  background: var(--panel);
 }
 .star-bubble-star {
   color: #f2a20c;
 }
 @media (min-width: 640px) {
   .star-bubble {
-    left: 58%;
-    top: -8px;
-    padding: 4px 10px;
-    font-size: 12.5px;
+    left: 150px;
+    top: 48px;
+    padding: 2px 8px;
+    font-size: 12px;
+    box-shadow: 3px 3px 0 var(--mist);
+  }
+  .star-bubble:hover {
+    box-shadow: 4px 4px 0 var(--mist);
   }
 }
 
