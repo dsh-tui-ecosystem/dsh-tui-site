@@ -411,6 +411,24 @@
       "kind": "plugin",
       "featured": false,
       "addedAt": "2026-08-23"
+    },
+    {
+      "name": "dsh-synapse",
+      "displayName": "dsh-synapse",
+      "description": "可视化非线性会话地图：将 DSH 会话、追问与分支组织为交互画布，支持原生 fork 拓扑连线、画布直发新会话、多命名地图书架与跨设备实时同步，具备与 dsh-TUI 状态行（tuiStatus）伴随协同能力。安装：dsh plugin --profile web add github:Suxeca/dsh-synapse",
+      "author": "Suxeca",
+      "repo": "https://github.com/Suxeca/dsh-synapse",
+      "npm": null,
+      "tags": [
+        "画布",
+        "会话地图",
+        "可视化",
+        "分支",
+        "TUI"
+      ],
+      "kind": "plugin",
+      "featured": true,
+      "addedAt": "2026-08-26"
     }
   ]
 }
