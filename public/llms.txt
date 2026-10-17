@@ -51,3 +51,6 @@ dsh-tui
 - Command and file completion with @ file references
 - Chinese and English terminal interfaces
 - Plugin mounting without modifying the DeepSeek Harness core
+- Experimental Agent Teams (/team) with a team dashboard, shared task board and sender-labelled message bubbles
+- Auto review permission preset with a session-scoped risk confirmation
+- Optional Claude and Codex kernels (experimental)

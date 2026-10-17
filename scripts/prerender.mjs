@@ -26,6 +26,9 @@ if (!siteUrl.pathname.endsWith('/')) siteUrl.pathname += '/'
 const REPOSITORY_URL = 'https://github.com/ccch1mneyyy/dsh-TUI'
 const ECOSYSTEM_URL = 'https://github.com/dsh-tui-ecosystem'
 const NPM_URL = 'https://www.npmjs.com/package/@deepseek-harness-tui/dsh-tui'
+
+/** Current npm release; keep in step with the first changelog entry. */
+const RELEASE_VERSION = '0.16.0'
 const BRAND_ALIASES = ['DSHTUI', 'dsh-tui', 'DSH TUI', 'DeepSeek Harness Terminal Interface']
 const BRAND_KEYWORDS = ['dsh-TUI', 'DSHTUI', 'dsh-tui', 'DSH TUI', 'DSH', 'DeepSeek Harness', 'DeepSeek Harness TUI']
 
@@ -115,11 +118,12 @@ function softwareNode(route) {
     url: siteUrl.toString(),
     applicationCategory: 'DeveloperApplication',
     applicationSubCategory: 'Terminal User Interface',
+    softwareVersion: RELEASE_VERSION,
     applicationSuite: 'DeepSeek Harness (DSH)',
     operatingSystem: 'Windows, macOS, Linux',
     inLanguage: route.locale,
     description: route.description,
-    softwareRequirements: 'Node.js ^22.19 or >=24; pnpm 10+; DeepSeek Harness',
+    softwareRequirements: 'Node.js ^22.19 or >=24; pnpm 11+; DeepSeek Harness',
     license: `${REPOSITORY_URL}/blob/main/LICENSE`,
     downloadUrl: NPM_URL,
     installUrl: NPM_URL,

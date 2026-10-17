@@ -29,7 +29,7 @@ const zh: GuidePageData[] = [
       {
         heading: '运行环境要求',
         paragraphs: ['dsh-TUI 是 DeepSeek Harness 的终端界面插件，需要真实终端 TTY。推荐使用支持现代终端能力的 Windows Terminal、iTerm2、kitty、WezTerm、Ghostty 或常见 Linux 终端。'],
-        bullets: ['Node.js ^22.19 或 24 及以上版本', 'pnpm 10 或更高版本', '官方 @deepseek-ai/dsh CLI', '运行模型所需的 DEEPSEEK_API_KEY'],
+        bullets: ['Node.js ^22.19 或 24 及以上版本', 'pnpm 11 或更高版本', '官方 @deepseek-ai/dsh CLI', '运行模型所需的 DEEPSEEK_API_KEY'],
       },
       {
         heading: '整合包安装（新手推荐）',
@@ -146,7 +146,7 @@ const en: GuidePageData[] = [
     description: 'Complete dsh-TUI installation guide covering requirements, npm setup, first launch, session resume, updates, and troubleshooting.',
     intro: 'Everything required to open your first DeepSeek Harness session in the dsh-TUI terminal interface.',
     sections: [
-      { heading: 'Requirements', paragraphs: ['dsh-TUI runs in a real terminal TTY. A modern terminal such as Windows Terminal, iTerm2, kitty, WezTerm, Ghostty, or a common Linux terminal is recommended.'], bullets: ['Node.js ^22.19 or version 24 and newer', 'pnpm 10 or newer', 'The official @deepseek-ai/dsh CLI', 'A DEEPSEEK_API_KEY for model access'] },
+      { heading: 'Requirements', paragraphs: ['dsh-TUI runs in a real terminal TTY. A modern terminal such as Windows Terminal, iTerm2, kitty, WezTerm, Ghostty, or a common Linux terminal is recommended.'], bullets: ['Node.js ^22.19 or version 24 and newer', 'pnpm 11 or newer', 'The official @deepseek-ai/dsh CLI', 'A DEEPSEEK_API_KEY for model access'] },
       { heading: 'Installer bundle (recommended)', paragraphs: ['Prefer not to type commands? Download the bundle from the homepage, extract it, and double-click install.bat (or run sh install.sh on macOS / Linux). The script checks and installs Node.js (winget on Windows), pnpm, the official dsh CLI, and dsh-TUI, then guides you through the DEEPSEEK_API_KEY — just press Enter a few times.'], bullets: ['Direct link: https://dshtui.com (accessible in mainland China)', 'GitHub mirror: dsh-tui-setup.zip in ccch1mneyyy/dsh-TUI Releases', 'Falls back to the npmmirror registry when the npm official source fails'] },
       { heading: 'Install from npm', paragraphs: ['Install the official CLI and the TUI plugin globally. The package provides the dsh-tui command and does not require edits to the DSH core.'], code: 'npm install -g @deepseek-ai/dsh @deepseek-harness-tui/dsh-tui' },
       { heading: 'Start or resume a session', paragraphs: ['The first run initializes the dsh-tui profile automatically. Use --resume to reopen the latest session.'], code: 'dsh-tui\n\n# Resume the latest session\ndsh-tui --resume' },

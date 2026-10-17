@@ -88,8 +88,8 @@ export const strings = {
 
   'install.title': { zh: 'npm 一条命令安装', en: 'One-command npm install' },
   'install.desc': {
-    zh: '前置条件：Node.js ^22.19 或 24 及以上、pnpm 10+、可用的终端 TTY；运行模型需要 DEEPSEEK_API_KEY。dsh CLI 由下面第一步一并装好，不用预先准备。启动后插件会在后台检查 npm 新版本，输入 /update 即可自动更新并重启恢复会话。',
-    en: 'Prerequisites: Node.js ^22.19 or 24+, pnpm 10+, and a working terminal TTY; running models requires DEEPSEEK_API_KEY. Step one below installs the dsh CLI, so you do not need it beforehand. After launch the plugin checks npm for new versions in the background — type /update to auto-update, restart, and resume the session.',
+    zh: '前置条件：Node.js ^22.19 或 24 及以上、pnpm 11+、可用的终端 TTY；运行模型需要 DEEPSEEK_API_KEY。dsh CLI 由下面第一步一并装好，不用预先准备。启动后插件会在后台检查 npm 新版本，输入 /update 即可自动更新并重启恢复会话。',
+    en: 'Prerequisites: Node.js ^22.19 or 24+, pnpm 11+, and a working terminal TTY; running models requires DEEPSEEK_API_KEY. Step one below installs the dsh CLI, so you do not need it beforehand. After launch the plugin checks npm for new versions in the background — type /update to auto-update, restart, and resume the session.',
   },
   'install.alt.label': { zh: '备选 —— 手工加入 dsh 配置档', en: 'Alternative — add to a dsh profile manually' },
   'install.alt.or': { zh: '或', en: 'or' },
@@ -354,7 +354,7 @@ export const INSTALL_STEPS: { no: string; title: Pair; cmd: string; note: Pair }
     no: '2',
     title: { zh: '启动', en: 'Launch' },
     cmd: 'dsh-tui',
-    note: { zh: '首次运行自动初始化 dsh-tui profile（需 pnpm 10+）。', en: 'First run auto-initializes the dsh-tui profile (requires pnpm 10+).' },
+    note: { zh: '首次运行自动初始化 dsh-tui profile（需 pnpm 11+）。', en: 'First run auto-initializes the dsh-tui profile (requires pnpm 11+).' },
   },
   {
     no: '3',
@@ -369,6 +369,9 @@ export const SHORTCUT_KEYS: { keys: string[]; times?: number; desc: Pair; hi?: b
   { keys: ['Ctrl+C'], desc: { zh: '中断当前回合；空闲时连按两次退出', en: 'Interrupt the current turn; press twice while idle to quit' } },
   { keys: ['Esc'], times: 2, desc: { zh: '空输入双击 = 时间回溯（rewind / fork）', en: 'Double-tap on empty input = time travel (rewind / fork)' }, hi: true },
   { keys: ['Ctrl+O'], desc: { zh: '展开 / 收起详情：思考全文、工具参数与输出', en: 'Expand / collapse details: full thinking, tool params and output' } },
+  { keys: ['Ctrl+A'], desc: { zh: '代理 / 团队仪表盘（团队模式下查看成员、任务板）', en: 'Agents / team dashboard (members and task board in team mode)' } },
+  { keys: ['Ctrl+B'], desc: { zh: '侧栏分栏（面板、轨迹、工作目录）', en: 'Side panel (panels, trajectory, working directory)' } },
+  { keys: ['Ctrl+T'], desc: { zh: '轨迹 / Trace 查看器', en: 'Trace viewer' } },
   { keys: ['Ctrl+Shift+E'], desc: { zh: '全屏草稿编辑器（行号 + 滚轮）', en: 'Fullscreen draft editor (line numbers + wheel)' } },
   { keys: ['Ctrl+R'], desc: { zh: '历史消息搜索', en: 'Search message history' } },
   { keys: ['/'], desc: { zh: '会话内全文搜索，n / N 跳转', en: 'Full-text search within the session, n / N to jump between matches' } },
@@ -385,18 +388,63 @@ export const SHORTCUT_MOUSE: { k: Pair; v: Pair }[] = [
 ]
 
 export const COMMAND_GROUPS: { name: Pair; en: string; cmds: string[] }[] = [
-  { name: { zh: '会话', en: 'Session' }, en: 'session', cmds: ['/new', '/resume', '/rename', '/clear', '/compact', '/export', '/trace', '/agentview', '/recap'] },
+  { name: { zh: '会话', en: 'Session' }, en: 'session', cmds: ['/new', '/resume', '/rename', '/clear', '/compact', '/export', '/trace', '/agentview', '/recap', '/btw', '/kernel', '/channel', '/dsh', '/claude', '/codex', '/team'] },
   { name: { zh: '状态', en: 'Status' }, en: 'status', cmds: ['/status', '/cost', '/doctor', '/config', '/init', '/balance', '/jobs'] },
   { name: { zh: '模型', en: 'Model' }, en: 'model', cmds: ['/model', '/thinking', '/tokens', '/theme', '/lang', '/provider'] },
   { name: { zh: '账号 / 策略', en: 'Account / Policy' }, en: 'account', cmds: ['/login', '/logout', '/permissions', '/permission', '/add-dir', '/hooks', '/mcp', '/memory'] },
-  { name: { zh: '技能', en: 'Skills' }, en: 'skills', cmds: ['/skills', '/audit', '/bug', '/review', '/practice', '/pr_comments', '/release-notes', '/vuln-check'] },
-  { name: { zh: '其它', en: 'Misc' }, en: 'misc', cmds: ['/agents', '/update', '/settings', '/restart', '/reload', '/color', '/vim', '/terminal-setup', '/connect', '/help', '/exit'] },
+  { name: { zh: '技能', en: 'Skills' }, en: 'skills', cmds: ['/skills', '/dsh-tui-guide', '/audit', '/bug', '/review', '/practice', '/pr_comments', '/release-notes', '/vuln-check'] },
+  { name: { zh: '其它', en: 'Misc' }, en: 'misc', cmds: ['/agents', '/plugin', '/update', '/settings', '/restart', '/reload', '/color', '/vim', '/terminal-setup', '/connect', '/help', '/exit'] },
   { name: { zh: '注册表', en: 'Registry' }, en: 'registry', cmds: ['/plan', '/goal'] },
 ]
 
 /** 更新动态条目。事实来源：仓库 git 提交记录 + npm 发布时间（详见调研记录），
  *  日期为 npm UTC 发布日。 */
 export const CHANGELOG_ENTRIES: { version: string; date: string; title: Pair; desc: Pair }[] = [
+  {
+    version: 'v0.16.0',
+    date: '2026-10-17',
+    title: { zh: 'Agent Teams、Auto review 与 DSH 0.2.1', en: 'Agent Teams, Auto review & DSH 0.2.1' },
+    desc: {
+      zh: '实验性 Agent Teams 上线：/team 开关、Ctrl+A 团队仪表盘、成员消息气泡与只读任务板；Auto review 权限预设带会话级风险确认，且不会成为下一会话的默认；主适配线升到 DSH 0.2.1-rc.2，Release 继续附带一键安装包与各平台便携包。',
+      en: 'Experimental Agent Teams lands: /team toggle, Ctrl+A team dashboard, member message bubbles and a read-only task board; the Auto review permission preset adds a session-scoped risk confirmation and never becomes the next session default; the primary line moves to DSH 0.2.1-rc.2, with the one-click installer and portable bundles in every release.',
+    },
+  },
+  {
+    version: 'v0.15.0',
+    date: '2026-10-13',
+    title: { zh: '独立入口、原生光标与模型/侧问改版', en: 'Standalone entry, native cursor & model/BTW redesign' },
+    desc: {
+      zh: 'dsh-tui 拥有自己的入口与组装根；/plugins 正式改为 /plugin（无弃用别名），TUI 设置迁到 ~/.dsh-tui/settings.json；/model 同页选模型与推理档位，原生光标动画、任务完成通知、/btw 侧问面板与跨内核会话预加载一并到位。',
+      en: 'dsh-tui gets its own entry and composition root; /plugins becomes /plugin with no alias, TUI settings move to ~/.dsh-tui/settings.json; /model picks model and reasoning effort on one page, alongside native cursor animation, task-completion notifications, the /btw side panel and cross-kernel session preloading.',
+    },
+  },
+  {
+    version: 'v0.14.0',
+    date: '2026-10-07',
+    title: { zh: '多内核（Claude / Codex）与 Agent 工作台', en: 'Multi-kernel (Claude / Codex) & Agent workspace' },
+    desc: {
+      zh: '同一套界面可把会话跑在 DSH、Claude 或 Codex 上：/kernel 选择、/channel 渠道档案、非 DSH 权限入口；新增 Agent 团队工作台、/btw 常驻侧线程、/trace 与任务观测、重做的 Markdown 渲染。Claude 与 Codex 仍标为实验性。',
+      en: 'The same UI can run a session on DSH, Claude or Codex: /kernel selection, /channel profiles and a non-DSH permission entry; plus an Agent workspace, a persistent /btw side thread, /trace and task observability, and a reworked Markdown renderer. Claude and Codex remain experimental.',
+    },
+  },
+  {
+    version: 'v0.13.0',
+    date: '2026-10-04',
+    title: { zh: '侧栏大改版、桌面宠物与主题实时预览', en: 'Side-panel overhaul, desk pets & live theme preview' },
+    desc: {
+      zh: '侧栏新增信息、轨迹、工作目录面板，标签可点击、悬停并一键全屏；宠物可拖动互动，启动页有吉祥物；主题选择器实时预览；后台任务卡成组折叠、Ctrl+Z 词级撤销、输入历史按项目隔离，并修正缓存计价与鼠标上报。',
+      en: 'The side panel gains info, trajectory and working-directory panels with clickable, hoverable tabs and fullscreen; draggable desk pets and a launchpad mascot; live theme preview; grouped background-task cards, word-level Ctrl+Z undo, per-project input history, and fixes for cache pricing and mouse reports.',
+    },
+  },
+  {
+    version: 'v0.12.0',
+    date: '2026-09-30',
+    title: { zh: '内置账号登录、实时任务面板与随包 AI 手册', en: 'Built-in account login, live jobs panel & bundled AI guide' },
+    desc: {
+      zh: 'ChatGPT/Codex、Claude、Grok 订阅登录收进标准 profile，DeepSeek 浏览器授权与 /model 的 deepseek-account 路由可用；/jobs 实时显示进度与输出；随包 AI 手册支持 /dsh-tui-guide；适配 DSH 0.2.0-rc.2。',
+      en: 'ChatGPT/Codex, Claude and Grok subscription login move into the standard profile, with DeepSeek browser auth and the deepseek-account route in /model; /jobs shows live progress and output; the bundled AI guide answers /dsh-tui-guide; DSH 0.2.0-rc.2 support.',
+    },
+  },
   {
     version: 'v0.11.2',
     date: '2026-09-29',
@@ -564,8 +612,8 @@ export const FAQ_ITEMS: { question: Pair; answer: Pair }[] = [
   {
     question: { zh: '如何安装 dsh-TUI？', en: 'How do I install dsh-TUI?' },
     answer: {
-      zh: '准备 Node.js ^22.19 或 24 及以上版本与 pnpm 10+，全局安装官方 dsh CLI 和 dsh-TUI 插件，然后运行 dsh-tui 即可启动。运行模型还需要配置 DEEPSEEK_API_KEY。',
-      en: 'Get Node.js ^22.19 or version 24+ and pnpm 10+, globally install the official dsh CLI and the dsh-TUI plugin, then run dsh-tui to start. Running models also requires a configured DEEPSEEK_API_KEY.',
+      zh: '准备 Node.js ^22.19 或 24 及以上版本与 pnpm 11+，全局安装官方 dsh CLI 和 dsh-TUI 插件，然后运行 dsh-tui 即可启动。运行模型还需要配置 DEEPSEEK_API_KEY。',
+      en: 'Get Node.js ^22.19 or version 24+ and pnpm 11+, globally install the official dsh CLI and the dsh-TUI plugin, then run dsh-tui to start. Running models also requires a configured DEEPSEEK_API_KEY.',
     },
   },
   {
