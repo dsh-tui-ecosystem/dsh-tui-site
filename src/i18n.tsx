@@ -401,6 +401,15 @@ export const COMMAND_GROUPS: { name: Pair; en: string; cmds: string[] }[] = [
  *  日期为 npm UTC 发布日。 */
 export const CHANGELOG_ENTRIES: { version: string; date: string; title: Pair; desc: Pair }[] = [
   {
+    version: 'v0.16.1',
+    date: '2026-10-17',
+    title: { zh: '独立入口启动回归修复与更新瘦身', en: 'Standalone-entry startup regression fix & leaner updates' },
+    desc: {
+      zh: '修复 0.16.0 在装了第三方 bundle 的 profile 上独立入口启动失败：根守卫的延迟顺序恢复，DSH 基础行可以正常注册根能力；更新时只保留当前平台的 Claude Agent SDK 包，不再把其他平台的约 1.6GB 包拉进 profile。',
+      en: 'Fixes the standalone entry failing to start on a 0.16.0 profile with a third-party bundle by restoring the root-guard deferral order, so DSH base rows can use their root capabilities again; updates now keep only the current platform\'s Claude Agent SDK bundle instead of pulling ~1.6 GB of foreign bundles into the profile.',
+    },
+  },
+  {
     version: 'v0.16.0',
     date: '2026-10-17',
     title: { zh: 'Agent Teams、Auto review 与 DSH 0.2.1', en: 'Agent Teams, Auto review & DSH 0.2.1' },
