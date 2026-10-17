@@ -88,10 +88,12 @@ const zh: GuidePageData[] = [
     description: 'dsh-TUI 斜杠命令参考，涵盖会话、模型、状态、账号策略、技能、MCP、Goals 与开发辅助命令。',
     intro: '在输入框键入 / 即可打开命令菜单。所有本地命令都通过 DeepSeek Harness 官方服务或插件注册表执行。',
     sections: [
-      { heading: '会话管理', paragraphs: ['/new 创建新会话，/resume 恢复历史会话，/rename 重命名，/clear 清理显示，/compact 压缩上下文，/export 导出 Markdown，/trace 查看轨迹时间线。'] },
-      { heading: '状态与模型', paragraphs: ['/status、/cost、/doctor 和 /config 用于查看会话、token、环境与配置；/model、/thinking、/tokens、/theme 和 /lang 控制模型及界面行为。'] },
-      { heading: '账号、策略与扩展', paragraphs: ['/login、/logout、/permissions、/add-dir、/hooks、/mcp 和 /memory 提供凭证状态、权限边界、目录范围及扩展连接信息。'] },
-      { heading: '技能与开发辅助', paragraphs: ['/audit、/bug、/review、/practice、/pr_comments、/release-notes 和 /vuln-check 连接相应技能；/agents、/update、/terminal-setup、/help 与 /exit 负责代理、更新和终端生命周期。'] },
+      { heading: '会话管理', paragraphs: ['/new 创建新会话，/resume 恢复历史会话，/rename 重命名，/clear 清理显示，/compact 压缩上下文，/export 导出 Markdown，/trace 查看轨迹时间线，/btw 打开常驻侧问线程。'] },
+      { heading: '内核、团队与侧问', paragraphs: ['/kernel 切换 DSH / Claude / Codex 内核，/dsh、/claude、/codex 直接进入目标内核；/channel 管理渠道档案；/team 开关实验性 Agent Teams；/btw 的上下文范围可在设置里调整。'] },
+      { heading: '状态与模型', paragraphs: ['/status、/cost、/doctor 和 /config 用于查看会话、token、环境与配置；/model、/thinking、/tokens、/theme、/lang 和 /provider 控制模型及界面行为；/jobs 查看后台任务。'] },
+      { heading: '账号、策略与扩展', paragraphs: ['/login、/logout、/permissions、/add-dir、/hooks、/mcp 和 /memory 提供凭证状态、权限边界、目录范围及扩展连接信息；/plugin 管理插件安装、启停与卸载。'] },
+      { heading: '技能与开发辅助', paragraphs: ['/audit、/bug、/review、/practice、/pr_comments、/release-notes 和 /vuln-check 连接相应技能；/dsh-tui-guide 随包 AI 手册；/agents、/update、/terminal-setup、/help 与 /exit 负责代理、更新和终端生命周期。'] },
+      { heading: '注册表与目标', paragraphs: ['/plan 与 /goal 来自 DSH 命令注册表插件，随插件自动并入命令菜单；/goal 支持长期目标与预算。'] },
     ],
   },
   {
@@ -103,7 +105,7 @@ const zh: GuidePageData[] = [
     intro: '快捷键围绕终端肌肉记忆设计。支持扩展键盘协议的终端可在 macOS 上同时使用 Command 组合键。',
     sections: [
       { heading: '输入与执行', bullets: ['Enter 发送，Shift+Enter 换行', 'Ctrl+C 中断当前回合，空闲时连续按两次退出', 'Tab 补全命令与 @ 文件路径', 'Ctrl+V 粘贴文本或文件路径'] },
-      { heading: '浏览与会话', bullets: ['Ctrl+O 展开或收起思考、工具参数和输出', 'Ctrl+R 搜索历史消息', '/ 进入会话全文搜索，n / N 跳转', '空输入时双击 Esc 发起时间回溯'] },
+      { heading: '浏览与会话', bullets: ['Ctrl+O 展开或收起思考、工具参数和输出', 'Ctrl+A 打开代理 / 团队仪表盘', 'Ctrl+B 切换侧栏分栏', 'Ctrl+T 打开轨迹查看器', 'Ctrl+Shift+E 打开全屏草稿编辑器', 'Ctrl+R 搜索历史消息', '/ 进入会话全文搜索，n / N 跳转', '空输入时双击 Esc 发起时间回溯'] },
       { heading: '鼠标与选择', paragraphs: ['全屏模式支持滚轮浏览、拖拽选择、双击选词和三击选行。选区可以通过 OSC 52 或系统剪贴板工具复制。'] },
       { heading: '终端兼容性', paragraphs: ['iTerm2、kitty、WezTerm、Ghostty 和 tmux 等终端可提供更完整的扩展键盘支持。macOS Terminal.app 会消费部分 Command 快捷键，此时继续使用 Ctrl 组合键。'] },
     ],
@@ -169,10 +171,12 @@ const en: GuidePageData[] = [
     description: 'Reference for dsh-TUI session, model, status, policy, skills, MCP, Goals, and developer slash commands.',
     intro: 'Type / in the prompt to open the command menu. Local commands use official DeepSeek Harness services or plugin registries.',
     sections: [
-      { heading: 'Session commands', paragraphs: ['/new creates a session; /resume reopens one; /rename changes its label; /clear resets the display; /compact reduces context; /export writes Markdown; and /trace opens the activity timeline.'] },
-      { heading: 'Status and model commands', paragraphs: ['/status, /cost, /doctor, and /config inspect the session and environment. /model, /thinking, /tokens, /theme, and /lang control model and interface behavior.'] },
-      { heading: 'Accounts, policy, and extensions', paragraphs: ['/login, /logout, /permissions, /add-dir, /hooks, /mcp, and /memory describe credentials, boundaries, working directories, and extensions.'] },
-      { heading: 'Skills and utilities', paragraphs: ['/audit, /bug, /review, /practice, /pr_comments, /release-notes, and /vuln-check connect specialized skills. /agents, /update, /terminal-setup, /help, and /exit manage the runtime.'] },
+      { heading: 'Session commands', paragraphs: ['/new creates a session; /resume reopens one; /rename changes its label; /clear resets the display; /compact reduces context; /export writes Markdown; /trace opens the activity timeline; and /btw opens a persistent side thread.'] },
+      { heading: 'Kernels, teams, and side threads', paragraphs: ['/kernel switches between DSH, Claude, and Codex; /dsh, /claude, and /codex enter a target kernel directly; /channel manages channel profiles; /team toggles experimental Agent Teams; and /btw context turns are configurable in settings.'] },
+      { heading: 'Status and model commands', paragraphs: ['/status, /cost, /doctor, and /config inspect the session and environment. /model, /thinking, /tokens, /theme, /lang, and /provider control model and interface behavior; /jobs shows background tasks.'] },
+      { heading: 'Accounts, policy, and extensions', paragraphs: ['/login, /logout, /permissions, /add-dir, /hooks, /mcp, and /memory describe credentials, boundaries, working directories, and extensions; /plugin manages plugin install, enable/disable, and removal.'] },
+      { heading: 'Skills and utilities', paragraphs: ['/audit, /bug, /review, /practice, /pr_comments, /release-notes, and /vuln-check connect specialized skills. /dsh-tui-guide is the bundled AI manual; /agents, /update, /terminal-setup, /help, and /exit manage the runtime.'] },
+      { heading: 'Registry and goals', paragraphs: ['/plan and /goal come from the DSH command-registry plugin and merge into the menu automatically; /goal supports long-running goals and budgets.'] },
     ],
   },
   {
@@ -181,6 +185,7 @@ const en: GuidePageData[] = [
     intro: 'The keybindings follow common terminal habits. Terminals with extended keyboard protocols can also expose Command shortcuts on macOS.',
     sections: [
       { heading: 'Input and execution', bullets: ['Enter sends; Shift+Enter inserts a newline', 'Ctrl+C interrupts; press twice while idle to exit', 'Tab completes commands and @ file paths', 'Ctrl+V pastes text or file paths'] },
+      { heading: 'Browsing and sessions', bullets: ['Ctrl+O expands or collapses thinking, tool params, and output', 'Ctrl+A opens the agents / team dashboard', 'Ctrl+B toggles the side panel', 'Ctrl+T opens the trace viewer', 'Ctrl+Shift+E opens the fullscreen draft editor', 'Ctrl+R searches message history', '/ searches within the session; n / N jump between matches', 'Double-tap Esc on empty input starts a rewind'] },
       { heading: 'Navigation and sessions', bullets: ['Ctrl+O expands thinking and tool details', 'Ctrl+R searches prompt history', '/ opens full-session search; n and N navigate matches', 'Double-tap Escape on an empty prompt to rewind'] },
       { heading: 'Mouse selection', paragraphs: ['Fullscreen mode supports wheel scrolling, drag selection, double-click word selection, and triple-click line selection. OSC 52 or native clipboard tools copy the selection.'] },
       { heading: 'Terminal compatibility', paragraphs: ['iTerm2, kitty, WezTerm, Ghostty, and tmux provide the most complete extended-keyboard experience. Terminal.app consumes some Command shortcuts, so use Ctrl there.'] },
