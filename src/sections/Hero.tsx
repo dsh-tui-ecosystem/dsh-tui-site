@@ -191,7 +191,7 @@ export default function Hero() {
               </span>
             ))}
           </div>
-          <div className="enter font-mono2 mt-2.5 text-[11.5px] text-faint" style={{ ['--enter-d' as never]: '500ms' }}>Node ^22.19 / ≥24 · pnpm 10+</div>
+          <div className="enter font-mono2 mt-2.5 text-[11.5px] text-faint" style={{ ['--enter-d' as never]: '500ms' }}>Node ^22.19 / ≥24 · pnpm 11+</div>
         </div>
 
         {/* right: live terminal。enter-r 负责入场，terminal-tilt 负责指针倾斜，
