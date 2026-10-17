@@ -28,7 +28,7 @@ const ECOSYSTEM_URL = 'https://github.com/dsh-tui-ecosystem'
 const NPM_URL = 'https://www.npmjs.com/package/@deepseek-harness-tui/dsh-tui'
 
 /** Current npm release; keep in step with the first changelog entry. */
-const RELEASE_VERSION = '0.16.0'
+const RELEASE_VERSION = '0.16.1'
 const BRAND_ALIASES = ['DSHTUI', 'dsh-tui', 'DSH TUI', 'DeepSeek Harness Terminal Interface']
 const BRAND_KEYWORDS = ['dsh-TUI', 'DSHTUI', 'dsh-tui', 'DSH TUI', 'DSH', 'DeepSeek Harness', 'DeepSeek Harness TUI']
 
