@@ -1,7 +1,31 @@
 {
   "$schema": "plugins 收录列表 · 作者提 PR 或经在线提交审批后更新；网站构建/运行时直接读取本文件",
-  "updatedAt": "2026-08-23",
+  "updatedAt": "2026-10-24",
   "plugins": [
+    {
+      "name": "dsh-tui-antigravity",
+      "displayName": "Antigravity Provider（开发预览）",
+      "description": "为 dsh-TUI 的 DSH 后端提供原生 Antigravity 模型与终端 OAuth 手动回调，保留 DSH 工具执行；基于 dsh-llm-antigravity。离线测试通过，尚未真实账号端到端验收，未发布 npm。",
+      "author": "lide4144",
+      "repo": "https://github.com/lide4144/dsh-tui-antigravity",
+      "npm": null,
+      "tags": ["TUI", "模型提供方", "Antigravity", "OAuth", "开发预览"],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-10-24"
+    },
+    {
+      "name": "dsh-tui-quota",
+      "displayName": "Quota Footer（开发预览）",
+      "description": "通过原生底栏字段和 /quota 展示当前模型额度或 API 余额；支持 Antigravity、DeepSeek API 和 Moonshot API。明确区分未知、过期缓存与查询限流；17 项模拟测试通过，未实机验收，未发布 npm。",
+      "author": "lide4144",
+      "repo": "https://github.com/lide4144/dsh-tui-quota",
+      "npm": null,
+      "tags": ["TUI", "状态栏", "额度", "开发预览"],
+      "kind": "plugin",
+      "featured": false,
+      "addedAt": "2026-10-24"
+    },
     {
       "name": "dsh-tui",
       "displayName": "dsh-TUI",
